@@ -21,22 +21,9 @@ const schema: Record<string, unknown>[] = [
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'What is Globle Capitals?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Globle Capitals is a variant where the mystery answer is a capital city. You guess capital cities and the distance between them guides you to the answer.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'How do you play Globle Capitals?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Type any capital city. Each guess appears on the globe coloured by how close it is to the mystery capital — hotter is closer — until you find it.',
-        },
-      },
+      { '@type': 'Question', name: 'What is Globle Capitals?', acceptedAnswer: { '@type': 'Answer', text: 'Globle Capitals is a variant where the mystery answer is a capital city. You guess capital cities and the distance between them guides you to the answer.' } },
+      { '@type': 'Question', name: 'How do you play Globle Capitals?', acceptedAnswer: { '@type': 'Answer', text: 'Type any capital city. Each guess appears on the globe coloured by how close it is to the mystery capital — hotter is closer — until you find it.' } },
+      { '@type': 'Question', name: 'Is Globle Capitals harder than the country game?', acceptedAnswer: { '@type': 'Answer', text: 'Usually yes. Capitals are single points rather than large countries, so distances are sharper and you need to know where each capital actually sits.' } },
     ],
   },
 ];
@@ -58,25 +45,182 @@ const schema: Record<string, unknown>[] = [
     <p>
       <strong>Globle Capitals is a tougher twist on Globle where the mystery answer is a capital
       city instead of a country.</strong> You type capital cities, and each guess lights up on the
-      globe as a marker coloured by how far it sits from the target capital — hotter means closer.
-      It tests not just where countries are, but where their capitals actually lie.
+      globe as a marker coloured by how far it sits from the target capital — the hotter the
+      colour, the closer you are. It is the same satisfying distance-hunting mechanic that makes
+      Globle addictive, but applied to single points on the map rather than whole nations.
+    </p>
+    <p>
+      The result is a sharper, more demanding game. Guessing a country gives you a big target to aim
+      at; guessing a capital tests whether you actually know where that city sits. If you have
+      mastered <a href="/">Globle Unlimited</a> and want a real challenge, Capitals is the natural
+      next step — and like the rest of the site, it is free and unlimited.
     </p>
 
     <h2>How to Play Globle Capitals</h2>
+    <p>The loop is quick to learn and hard to put down:</p>
     <ol>
       <li><strong>Type any capital city</strong> (for example, Paris or Tokyo) and press Enter.</li>
-      <li><strong>Read the marker colour.</strong> Pale yellow is far from the mystery capital;
-        deep red is very close.</li>
-      <li><strong>Use the distance</strong> to the closest capital so far to steer your next guess.</li>
-      <li><strong>Find the capital</strong> in as few guesses as possible — then play again.</li>
+      <li><strong>Read the marker colour.</strong> Pale yellow means your guess is far from the
+        mystery capital; deep red means it is very close.</li>
+      <li><strong>Use the distance</strong> to the closest capital so far to steer your next guess
+        in the right direction.</li>
+      <li><strong>Find the capital</strong> in as few guesses as possible — then play again with a
+        new mystery city.</li>
     </ol>
+    <p>
+      New to the whole idea? Our <a href="/how-to-play">how-to-play guide</a> explains how the
+      colour heatmap works in detail; it carries over directly to Capitals.
+    </p>
+
+    <h2>How Distance &amp; Colour Work</h2>
+    <p>
+      Every guess is scored by the real great-circle distance between your capital and the mystery
+      capital. That distance is mapped to a colour: cool and pale when you are far, warm and red
+      when you are near. Because capitals are points rather than sprawling countries, the colour
+      changes more sharply as you close in — a guess in the right city&rsquo;s neighbourhood lights
+      up hot fast, while a guess on the wrong continent stays stubbornly cold. Read the markers
+      together with the kilometre distance and you can triangulate the answer in a handful of moves.
+    </p>
 
     <h2>Capitals vs Countries</h2>
     <p>
-      Country borders are large targets; capitals are single points, so distances are sharper and
-      the game rewards precise geographic knowledge. If you enjoy <a href="/">Globle Unlimited</a>,
-      Capitals is the natural next challenge. New here? Start with the
-      <a href="/how-to-play">how-to-play guide</a> to learn how the colour heatmap works.
+      The two games share a globe and a scoring idea but reward different knowledge:
+    </p>
+    <table class="cmp">
+      <thead><tr><th>Aspect</th><th>Globle (countries)</th><th>Globle Capitals</th></tr></thead>
+      <tbody>
+        <tr><td>Target</td><td>A whole country</td><td><strong>A single city</strong></td></tr>
+        <tr><td>Target size</td><td>Large</td><td>A point</td></tr>
+        <tr><td>Difficulty</td><td>Approachable</td><td><strong>Tougher</strong></td></tr>
+        <tr><td>Tests</td><td>Where countries are</td><td>Where capitals are</td></tr>
+      </tbody>
+    </table>
+    <p>
+      If you enjoy <a href="/">Globle Unlimited</a> and the <a href="/daily">daily challenge</a>,
+      Capitals adds a layer of precision that geography buffs love.
+    </p>
+
+    <h2>Why Globle Capitals Is Harder</h2>
+    <p>
+      Capitals are tricky for two reasons. First, a city is a single point, so a guess that is
+      &ldquo;close&rdquo; in country terms can still be hundreds of kilometres from the target
+      capital. Second, capitals are not always where you expect. Many countries put their capital
+      somewhere other than their biggest or most famous city, which trips up even strong players.
+      A few classic surprises:
+    </p>
+    <ul>
+      <li><strong>Australia</strong> — Canberra, not Sydney or Melbourne.</li>
+      <li><strong>United States</strong> — Washington, D.C., not New York.</li>
+      <li><strong>Brazil</strong> — Brasília, not Rio de Janeiro or São Paulo.</li>
+      <li><strong>Canada</strong> — Ottawa, not Toronto.</li>
+      <li><strong>Turkey</strong> — Ankara, not Istanbul.</li>
+      <li><strong>South Africa</strong> — it has three capitals; Pretoria is the administrative one.</li>
+      <li><strong>Kazakhstan</strong> — Astana, not Almaty.</li>
+      <li><strong>Nigeria</strong> — Abuja, not Lagos.</li>
+    </ul>
+    <p>
+      Knowing these &ldquo;gotcha&rdquo; capitals is half the battle. The other half is geographic
+      instinct, which you build by playing.
+    </p>
+
+    <h2>Tips for Globle Capitals</h2>
+    <ul>
+      <li><strong>Open with capitals on different continents</strong> (say, London and Canberra) to
+        triangulate the target&rsquo;s region quickly.</li>
+      <li><strong>Lean on the distance number.</strong> With point targets, the kilometre reading is
+        even more useful than in the country game.</li>
+      <li><strong>Remember the surprises.</strong> When a country&rsquo;s capital is not its biggest
+        city, that knowledge wins rounds.</li>
+      <li><strong>Think on the sphere.</strong> Rotate the globe so trans-ocean and polar distances
+        do not fool you.</li>
+    </ul>
+    <p>
+      Want more strategy? Our <a href="/blog/globle-tips-strategy">Globle tips guide</a> applies to
+      Capitals too, and the <a href="/blog/hardest-countries-to-guess">hardest countries</a> article
+      overlaps with the hardest capitals.
+    </p>
+
+    <h2>A Region-by-Region Look at Tricky Capitals</h2>
+    <p>
+      Some parts of the world are full of capitals that catch players out. In <strong>Oceania</strong>,
+      Australia&rsquo;s Canberra and New Zealand&rsquo;s Wellington are both quieter than their
+      famous rivals. Across <strong>the Americas</strong>, the administrative capital is often not
+      the megacity: Washington over New York, Ottawa over Toronto, Brasília over São Paulo, and
+      Sucre sharing duties with La Paz in Bolivia. In <strong>Africa</strong>, planned or
+      administrative capitals like Abuja (Nigeria), Dodoma (Tanzania) and Yamoussoukro
+      (C&ocirc;te d&rsquo;Ivoire) replaced the better-known coastal cities. In <strong>Asia</strong>,
+      Ankara, Astana, Naypyidaw and Islamabad all sit apart from their countries&rsquo; largest
+      hubs. Learning these regional patterns turns Globle Capitals from guesswork into knowledge.
+    </p>
+
+    <h2>Capitals That Have Moved</h2>
+    <p>
+      Capitals are not fixed forever, and a few well-known moves still trip players up. Kazakhstan
+      shifted its capital from Almaty to a purpose-built city now called Astana. Myanmar moved from
+      Yangon to the planned city of Naypyidaw. Nigeria relocated from Lagos to Abuja, and Brazil
+      famously built Brasília inland to replace Rio de Janeiro. These deliberate, often newly built
+      capitals are exactly the kind of answer that feels &ldquo;wrong&rdquo; until you know it — and
+      once you do, it becomes an easy point in Globle Capitals.
+    </p>
+
+    <h2>Learn Capitals the Fun Way</h2>
+    <p>
+      Rote memorisation of capitals is dull and rarely sticks. Playing for them does the opposite.
+      Every round of Globle Capitals attaches a capital to a real location on the globe and a real
+      distance from cities you already know, so the knowledge lands in context rather than as a flat
+      list. Miss Canberra once and watch it light up far from Sydney, and you will remember it for
+      good. That is why a few unhurried rounds beat an evening of flashcards: you are not just
+      naming capitals, you are placing them, which is what the game actually rewards.
+    </p>
+
+    <h2>Great Prep for Geography Quizzes</h2>
+    <p>
+      If you are studying for a geography bee, a pub quiz, or just want to stop blanking on capitals,
+      Globle Capitals is excellent practice. It drills the two things quizzes test most: which city
+      is a country&rsquo;s capital, and roughly where it sits. Because rounds are unlimited and free,
+      you can do focused sessions whenever you have a few minutes. Pair it with the country game on
+      <a href="/">Globle Unlimited</a> and the <a href="/daily">daily challenge</a> for a complete
+      geography workout.
+    </p>
+
+    <h2>Capitals vs Largest Cities</h2>
+    <p>
+      The single biggest source of confusion in Globle Capitals is the gap between a country&rsquo;s
+      capital and its largest or most famous city. We instinctively reach for the place we hear about
+      most — New York, Sydney, Istanbul, Lagos, Rio — but the capital is frequently somewhere
+      quieter and more central. Many governments deliberately chose or built a capital away from the
+      dominant commercial city to balance power, ease congestion, or develop a new region. Once you
+      start expecting that pattern, you stop falling for it: when a country&rsquo;s most famous city
+      springs to mind, pause and ask whether it is actually the capital before you guess.
+    </p>
+
+    <h2>How Many Capitals Are There to Guess?</h2>
+    <p>
+      There are roughly 195 widely recognised sovereign countries, and Globle Capitals draws its
+      mystery answer from their capital cities. That is a big but learnable set — far smaller than
+      the number of cities in the world, and full of repeating patterns once you group capitals by
+      region. Play enough rounds and the list stops feeling intimidating: you start to recognise that
+      a hot marker in the Gulf points to a handful of candidates, that East Africa clusters several
+      capitals close together, and that the Pacific&rsquo;s capitals are scattered across vast
+      distances. The game turns a long list into a map you actually remember.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details><summary>What is Globle Capitals?</summary><p>A variant where the mystery answer is a capital city. You guess capitals and the distance between them guides you in.</p></details>
+      <details><summary>How do you play?</summary><p>Type any capital city. Each guess appears on the globe coloured by how close it is — hotter is closer — until you find the mystery capital.</p></details>
+      <details><summary>Is it harder than the country game?</summary><p>Usually yes. Capitals are single points, so distances are sharper and you need to know where each capital actually sits.</p></details>
+      <details><summary>Is Globle Capitals free?</summary><p>Yes — free and unlimited in your browser, no sign-up required.</p></details>
+    </div>
+
+    <h2>Ready to Test Your Capitals?</h2>
+    <p>
+      Globle Capitals rewards exactly the knowledge most people wish they had: a confident sense of
+      where every capital sits. The best way to build it is to play, miss, and learn — round after
+      unlimited round, with no pressure and no cost. Start a game above, guess your first capital,
+      and let the colours guide you in. When you want to switch things up, the country game on
+      <a href="/">Globle Unlimited</a>, the shared <a href="/daily">daily challenge</a>, and the
+      pressure-free <a href="/practice">practice mode</a> are all a click away.
     </p>
 
     <p class="cta-row"><a href="/" class="btn btn-ghost">Play Globle Unlimited</a></p>
@@ -90,6 +234,18 @@ const schema: Record<string, unknown>[] = [
   .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
   .rise { animation-delay: var(--d, 0ms); }
   .content { margin-top: var(--space-16); text-align: left; }
-  .content ol { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+  .content ol, .content ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
   .cta-row { margin-top: var(--space-8); }
+
+  .cmp { width: 100%; border-collapse: collapse; margin: var(--space-6) 0; font-size: var(--fs-small); }
+  .cmp th, .cmp td { border: 1px solid var(--line); padding: var(--space-2) var(--space-3); text-align: left; }
+  .cmp th { background: var(--bg-panel); color: var(--accent); }
+  .cmp td { color: var(--text-dim); }
+  .cmp strong { color: var(--text); }
+  .cmp a { color: var(--accent); }
+
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+  .faq details { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+  .faq summary { cursor: pointer; color: var(--text); font-weight: 600; }
+  .faq p { margin-top: var(--space-2); }
 </style>

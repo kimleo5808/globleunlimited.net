@@ -17,6 +17,15 @@ const schema: Record<string, unknown>[] = [
     operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'Does practice mode affect my streak?', acceptedAnswer: { '@type': 'Answer', text: 'No. Practice mode is completely separate from the daily challenge, so nothing you do here affects your daily streak.' } },
+      { '@type': 'Question', name: 'How many times can I play practice mode?', acceptedAnswer: { '@type': 'Answer', text: 'As many as you like. Practice mode is unlimited — a new random mystery country starts every time you finish a round.' } },
+      { '@type': 'Question', name: 'Is Globle practice mode free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes, it is completely free to play in your browser with no sign-up required.' } },
+    ],
+  },
 ];
 ---
 
@@ -32,26 +41,177 @@ const schema: Record<string, unknown>[] = [
   </section>
 
   <article class="prose content">
-    <h2>What Is Practice Mode?</h2>
+    <h2>What Is Globle Practice Mode?</h2>
     <p>
-      <strong>Practice mode is a relaxed, unlimited way to play Globle without affecting your
-      streak.</strong> Each round picks a new random mystery country, so you can experiment with
-      opening guesses and learn the map at your own pace.
+      <strong>Globle practice mode is a relaxed, unlimited way to play Globle without affecting your
+      streak or stats.</strong> Every round picks a new random mystery country, and you guess
+      countries on the 3D globe using the colour heatmap to home in on the answer. The difference
+      from the daily game is simple but important: here, nothing is on the line. There is no streak
+      to protect, no score to defend, and no waiting until tomorrow. That makes practice mode the
+      ideal place to experiment, make mistakes, and genuinely learn the world map.
+    </p>
+    <p>
+      If the regular game sometimes feels high-stakes — you do not want to break a long daily streak
+      with a sloppy guess — practice mode removes that anxiety entirely. Think of it as the driving
+      range before the round of golf: a calm space to groove your technique so that when the
+      <a href="/daily">daily challenge</a> comes around, you are sharp.
     </p>
 
-    <h2>How It Differs from Daily &amp; Unlimited</h2>
+    <h2>How to Use Practice Mode</h2>
+    <p>Getting value out of practice mode takes only a minute to learn:</p>
+    <ol>
+      <li><strong>Type any country</strong> and press Enter to make your first guess.</li>
+      <li><strong>Read the colour</strong> on the globe — pale yellow is far from the mystery
+        country, deep red is close.</li>
+      <li><strong>Use the distance reading</strong> to the closest country so far to steer your next
+        guess.</li>
+      <li><strong>Solve it,</strong> then immediately start a new round to keep the momentum going.</li>
+    </ol>
     <p>
-      Like <a href="/">Globle Unlimited</a>, practice rounds never run out. Unlike the
-      <a href="/daily">daily challenge</a>, nothing here counts toward your streak or stats —
-      it&rsquo;s a pressure-free sandbox to get better.
+      Because rounds are unlimited, you can run ten in the time it would take to wait a day for one
+      daily puzzle. New to the rules? Start with our <a href="/how-to-play">how-to-play guide</a>,
+      then come back here to drill.
+    </p>
+
+    <h2>Practice vs Daily vs Unlimited</h2>
+    <p>
+      Globle has a few ways to play, and it helps to know which fits the moment. Here is how
+      practice mode compares:
+    </p>
+    <table class="cmp">
+      <thead><tr><th>Mode</th><th>Rounds</th><th>Affects streak?</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/practice">Practice</a></td><td>Unlimited</td><td><strong>No</strong></td><td>Pressure-free training</td></tr>
+        <tr><td><a href="/daily">Daily</a></td><td>One per day</td><td>Yes</td><td>The shared challenge</td></tr>
+        <tr><td><a href="/">Unlimited</a></td><td>Unlimited</td><td>Tracks best score</td><td>Endless play</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Practice and <a href="/">Globle Unlimited</a> both give you endless rounds; the difference is
+      that practice mode deliberately keeps things stat-free so you can take risks and try unusual
+      opening guesses without worrying about your numbers.
     </p>
 
     <h2>Why Practice Improves Your Score</h2>
     <p>
-      Repetition builds an instinct for which countries border which, and which opening guesses
-      cover the most ground. A few practice rounds a day will steadily lower how many guesses you
-      need on the real daily Globle.
+      The skill that wins Globle is an instinct for where every country sits and what borders what.
+      That instinct is built through repetition, and practice mode is repetition on demand. Each
+      round you play quietly reinforces a mental map: you start to remember that Kazakhstan is
+      enormous and central, that the Gulf states cluster tightly, that the Balkans are a maze of
+      small neighbours. After a week of regular practice, countries that once felt obscure become
+      familiar landmarks, and your average guess count drops.
     </p>
+    <p>
+      Practice also lets you test strategy safely. You can try opening with Brazil one round and
+      Algeria the next, and see which gives you a cleaner read on the answer. You can deliberately
+      hunt tiny island nations to learn where they hide. None of it costs you a streak, so you are
+      free to learn from every mistake.
+    </p>
+
+    <h2>What to Practise</h2>
+    <p>
+      Random play helps, but targeted drills help more. Here are a few worth running in practice
+      mode:
+    </p>
+    <ul>
+      <li><strong>Opening guesses.</strong> Pick two or three large, central countries and use them
+        as your standard openers until reading their colours becomes second nature.</li>
+      <li><strong>Tight clusters.</strong> Spend rounds deliberately guessing in the Balkans, the
+        Caucasus, the Horn of Africa and Southeast Asia, where countries pack together.</li>
+      <li><strong>Small nations.</strong> Learn the micro-states and island countries that are easy
+        to forget — they win and lose rounds more than anything else.</li>
+      <li><strong>Triangulation.</strong> Practise bracketing the answer with one warm and one cool
+        guess, then closing the gap in two or three moves.</li>
+    </ul>
+
+    <h2>A Practice Routine That Works</h2>
+    <p>
+      You do not need a complicated plan. A simple five-minute routine pays off fast: play three to
+      five practice rounds, and on each one, force yourself to think before guessing rather than
+      typing the first country that comes to mind. After each solve, take a second to note where the
+      answer was and which countries border it. Over a couple of weeks, this light, consistent
+      practice will sharpen your geography more than a single marathon session ever could.
+    </p>
+    <p>
+      When you feel ready, test yourself against the shared <a href="/daily">daily Globle</a> to see
+      how much your average has improved, then come back to practice mode to keep climbing.
+    </p>
+
+    <h2>Tips to Get the Most from Practice</h2>
+    <ul>
+      <li><strong>Slow down.</strong> Practice is the place to think, not to rush. Deliberate
+        guesses build better instincts than fast ones.</li>
+      <li><strong>Trust the kilometre reading.</strong> When colours look similar, the distance
+        number breaks the tie and teaches you real proximity.</li>
+      <li><strong>Rotate the globe.</strong> Judge distances on the sphere, not on a flat map, so you
+        learn how the poles and oceans connect.</li>
+      <li><strong>Review your misses.</strong> The countries that surprise you are exactly the ones
+        worth remembering.</li>
+    </ul>
+
+    <h2>Practice Mode for Students and Teachers</h2>
+    <p>
+      Practice mode doubles as a genuinely useful study tool. For students learning world geography,
+      a few minutes of pressure-free rounds turns memorisation into play: instead of staring at a
+      static map, you actively recall where each country sits and get instant feedback on how close
+      you were. Teachers and parents like it because there is nothing to set up, no account to
+      create, and no way to &ldquo;lose&rdquo; — every guess is a small lesson. Because the game runs
+      in any browser, it works just as well on a classroom tablet as on a phone at home. Used a few
+      times a week, practice mode quietly builds the kind of map fluency that sticks, the same way
+      regular reading builds vocabulary.
+    </p>
+
+    <h2>The Mindset That Makes Practice Work</h2>
+    <p>
+      The biggest difference between players who improve quickly and those who plateau is not talent
+      — it is attitude toward mistakes. In practice mode, a wrong guess is information, not a
+      failure. The country that surprises you, the cluster you keep misjudging, the capital you can
+      never place: those are exactly the things worth learning, and practice mode hands them to you
+      for free. Approach each round with curiosity rather than a need to win, and your geography will
+      improve faster than if you treated every guess as life-or-death. That is the whole reason
+      practice mode exists separately from the daily challenge: to give you a space where being wrong
+      is genuinely useful.
+    </p>
+
+    <h2>Common Beginner Mistakes</h2>
+    <p>
+      New players tend to lose guesses in the same few ways, and practice mode is the perfect place
+      to unlearn them. The most common is chasing a single warm country for too long instead of
+      testing its neighbours to pin down the exact answer. Another is ignoring the kilometre reading
+      and going purely on colour, which is coarser. Beginners also forget small nations and island
+      countries, then run out of ideas when the heat spikes around a cluster of them. Finally, many
+      players think in flat-map terms and misjudge how close, say, eastern Russia is to Alaska.
+      Spend a few practice rounds consciously avoiding each of these and they will fade fast.
+    </p>
+
+    <h2>Turning Practice into Daily Wins</h2>
+    <p>
+      Practice is the means; the <a href="/daily">daily Globle</a> is where you see the payoff. A
+      good rhythm is to warm up with two or three practice rounds, then play the day&rsquo;s shared
+      challenge while your geography is fresh. Over a couple of weeks you will notice your average
+      guess count falling and your daily streak getting easier to protect. When you want to keep
+      going after the daily, <a href="/">Globle Unlimited</a> is always there for endless rounds,
+      and you can watch your best scores climb on the <a href="/stats">stats page</a>.
+    </p>
+
+    <h2>Play Anywhere, on Any Device</h2>
+    <p>
+      Practice mode runs entirely in your browser, so there is nothing to install and nothing to
+      keep updated. On a desktop you drag the globe with your mouse and scroll to zoom; on a phone
+      or tablet you swipe to spin it and pinch to zoom in on a crowded region. Because it loads fast
+      and stays light, you can fit a round into any spare minute — a coffee break, a bus ride, a gap
+      between classes — and your progress is saved privately in your own browser so nothing is ever
+      lost. That convenience is what makes practice mode easy to do little and often, which is
+      exactly how geography knowledge sticks.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details><summary>Does practice mode affect my streak?</summary><p>No. Practice mode is separate from the daily challenge, so nothing here affects your daily streak.</p></details>
+      <details><summary>How many times can I play?</summary><p>As many as you like — practice mode is unlimited, with a new random country every round.</p></details>
+      <details><summary>Is practice mode free?</summary><p>Yes, completely free in your browser with no sign-up.</p></details>
+      <details><summary>Will practising help my daily score?</summary><p>Yes. Repetition builds the geographic instinct that lowers your guess count on the daily Globle.</p></details>
+    </div>
 
     <p class="cta-row"><a href="/daily" class="btn btn-ghost">Try the Daily Challenge</a></p>
   </article>
@@ -63,6 +223,19 @@ const schema: Record<string, unknown>[] = [
   .hero-title { font-size: var(--fs-display); }
   .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
   .rise { animation-delay: var(--d, 0ms); }
-  .content { margin-top: var(--space-16); }
+  .content { margin-top: var(--space-16); text-align: left; }
+  .content ol, .content ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
   .cta-row { margin-top: var(--space-8); }
+
+  .cmp { width: 100%; border-collapse: collapse; margin: var(--space-6) 0; font-size: var(--fs-small); }
+  .cmp th, .cmp td { border: 1px solid var(--line); padding: var(--space-2) var(--space-3); text-align: left; }
+  .cmp th { background: var(--bg-panel); color: var(--accent); }
+  .cmp td { color: var(--text-dim); }
+  .cmp strong { color: var(--text); }
+  .cmp a { color: var(--accent); }
+
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+  .faq details { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+  .faq summary { cursor: pointer; color: var(--text); font-weight: 600; }
+  .faq p { margin-top: var(--space-2); }
 </style>

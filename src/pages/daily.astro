@@ -21,22 +21,9 @@ const schema: Record<string, unknown>[] = [
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
-      {
-        '@type': 'Question',
-        name: 'When does the daily Globle reset?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'A new daily mystery country unlocks every day at 00:00 UTC, so players worldwide solve the same country on the same date.',
-        },
-      },
-      {
-        '@type': 'Question',
-        name: 'Is everyone’s daily country the same?',
-        acceptedAnswer: {
-          '@type': 'Answer',
-          text: 'Yes. The daily Globle uses a shared date seed, so the mystery country is identical for every player on a given day.',
-        },
-      },
+      { '@type': 'Question', name: 'When does the daily Globle reset?', acceptedAnswer: { '@type': 'Answer', text: 'A new daily mystery country unlocks every day at 00:00 UTC, so players worldwide solve the same country on the same date.' } },
+      { '@type': 'Question', name: 'Is everyone’s daily country the same?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. The daily Globle uses a shared date seed, so the mystery country is identical for every player on a given day.' } },
+      { '@type': 'Question', name: 'What happens if I miss a day?', acceptedAnswer: { '@type': 'Answer', text: 'Your daily streak resets if you skip a day. You can keep playing unlimited rounds any time without affecting the streak.' } },
     ],
   },
 ];
@@ -57,21 +44,170 @@ const schema: Record<string, unknown>[] = [
     <h2>What&rsquo;s Today&rsquo;s Globle?</h2>
     <p>
       <strong>The daily Globle gives every player one shared mystery country each day.</strong>
-      Guess countries on the 3D globe and use the colour heatmap — hotter means closer — to
-      home in on the answer in as few guesses as possible. Solve it to extend your daily streak.
+      Your goal is to find it in as few guesses as possible. You type countries on the 3D globe, and
+      each guess is shaded by how close it sits to the answer — pale yellow when it is far away,
+      deep red when you are nearly on top of it. Solve today&rsquo;s country to extend your daily
+      streak, then come back tomorrow for a fresh one.
+    </p>
+    <p>
+      Because the answer is the same for everyone on a given date, the daily Globle is the version
+      people compare and share. It is the classic ritual: a single, satisfying puzzle to crack each
+      morning. If one a day is not enough, <a href="/">Globle Unlimited</a> lets you keep playing
+      endlessly.
     </p>
 
     <h2>How the Daily Mystery Country Works</h2>
     <p>
-      A new country unlocks every day at <strong>00:00 UTC</strong>. Because the daily Globle is
-      generated from a shared date seed, the mystery country is the same for everyone on a given
-      date — perfect for comparing scores with friends.
+      A new country unlocks every day at <strong>00:00 UTC</strong>. The daily Globle is generated
+      from a shared date seed, which means the mystery country is identical for every player around
+      the world on the same date — there is no randomness between players. That is what makes
+      comparing scores fair: if your friend solved today&rsquo;s Globle in four guesses and you took
+      six, you were both hunting the exact same country.
+    </p>
+    <p>
+      Once you solve the daily, it stays solved for the rest of the day; you cannot reroll it for a
+      new answer. That is by design — the daily challenge is meant to be a single shared puzzle. When
+      you want more, switch to <a href="/practice">practice</a> or
+      <a href="/">unlimited</a> mode.
+    </p>
+
+    <h2>Keeping Your Daily Streak</h2>
+    <p>
+      Your <strong>streak</strong> counts how many days in a row you have solved the daily Globle.
+      Solve today and it ticks up; miss a day and it resets to zero. Streaks are the simplest way to
+      build a daily habit, and they make the game stickier — once you are on a run of ten or twenty,
+      you will not want to break it. You can always warm up in
+      <a href="/practice">practice mode</a> first so your streak day goes smoothly. Track your
+      current and best streak any time on the <a href="/stats">stats page</a>.
     </p>
 
     <h2>Daily vs Unlimited Globle</h2>
     <p>
-      Prefer not to wait for tomorrow? <a href="/">Globle Unlimited</a> lets you play endless
-      rounds back-to-back with a new random country every time — no daily limit, no waiting.
+      Both versions use the same globe and the same colour heatmap; the difference is rhythm and
+      purpose:
+    </p>
+    <table class="cmp">
+      <thead><tr><th>Feature</th><th>Daily Globle</th><th>Globle Unlimited</th></tr></thead>
+      <tbody>
+        <tr><td>Rounds per day</td><td>One</td><td><strong>Unlimited</strong></td></tr>
+        <tr><td>Answer</td><td>Shared by everyone</td><td>New random each round</td></tr>
+        <tr><td>Streak</td><td>Daily streak</td><td>Best-score tracking</td></tr>
+        <tr><td>Best for</td><td>A shared daily ritual</td><td>Practising the map</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Prefer not to wait for tomorrow? <a href="/">Globle Unlimited</a> gives you endless rounds
+      with a new mystery country every time — no daily limit, no waiting.
+    </p>
+
+    <h2>Tips for Today&rsquo;s Daily Globle</h2>
+    <p>
+      Because you only get one shot at the daily, a little strategy goes a long way. The fastest
+      route to a low score is a strong opening guess followed by careful triangulation:
+    </p>
+    <ul>
+      <li><strong>Open with a large, central country</strong> like Kazakhstan, Brazil, Algeria or
+        China to get a clear first read on the answer&rsquo;s region.</li>
+      <li><strong>Probe a second continent</strong> next so you triangulate quickly instead of
+        wandering.</li>
+      <li><strong>Trust the kilometre reading</strong> when two guesses look equally warm.</li>
+      <li><strong>Watch for small nations</strong> when the heat spikes around a tight cluster.</li>
+    </ul>
+    <p>
+      For the full playbook, read our <a href="/blog/globle-tips-strategy">Globle strategy guide</a>.
+      Stuck after several tries? You can check the <a href="/answer">Globle answer for today</a> —
+      but try to solve it yourself first.
+    </p>
+
+    <h2>Share Your Score</h2>
+    <p>
+      Half the fun of the daily Globle is comparing it. When you solve today&rsquo;s country, share
+      how many guesses it took and challenge friends to beat you. Since everyone plays the same
+      answer, it is a fair, friendly contest — and a great reason to come back tomorrow.
+    </p>
+
+    <h2>Why a Daily Puzzle Is So Satisfying</h2>
+    <p>
+      There is a reason daily puzzles have become a daily ritual for millions of people. A single,
+      well-made challenge each day gives you a clear start and finish, a small sense of
+      accomplishment, and a natural reason to return tomorrow — without the bottomless feeling of a
+      game that never ends. The daily Globle fits that mould perfectly: it takes a couple of minutes,
+      it is the same for everyone, and it leaves you wanting one more. The shared answer turns a
+      solo puzzle into a quiet global event, where you and thousands of strangers all hunt the same
+      mystery country on the same morning.
+    </p>
+
+    <h2>Building a Daily Globle Habit</h2>
+    <p>
+      Habits stick best when they attach to something you already do. Many players fold the daily
+      Globle into their morning coffee, their commute, or a study break, so it becomes an automatic
+      part of the day rather than another thing to remember. The streak counter helps: once you have
+      a run going, the small reluctance to break it is often enough to keep you coming back. If you
+      are worried about losing a streak on a hard day, warm up first in
+      <a href="/practice">practice mode</a> so your geography is sharp before you commit to the
+      day&rsquo;s answer. The goal is not to grind — it is to enjoy a short, reliable mental workout
+      every day.
+    </p>
+
+    <h2>Reading Today&rsquo;s Globle Like a Pro</h2>
+    <p>
+      Strong daily players think like surveyors. They open with a large, central country to get a
+      first bearing, then immediately test a second region to bracket the answer between a warm
+      guess and a cool one. From there it is a process of elimination: each new guess tightens the
+      box around the mystery country until only one candidate remains. The kilometre reading does a
+      lot of the heavy lifting — when it drops sharply after a guess, you are moving the right way;
+      when it climbs, you back off and try the opposite direction. The colours tell you the
+      neighbourhood; the number tells you how warm you really are. Combine the two and the daily
+      Globle rarely takes more than five or six guesses.
+    </p>
+
+    <h2>Daily Globle for Geography Learning</h2>
+    <p>
+      Because the answer is the same for everyone, the daily Globle is a great shared learning tool.
+      Families and classmates can compare scores, discuss where the mystery country was, and learn a
+      little about it together. Over weeks, the daily habit quietly teaches you the world map — not
+      through rote memorisation, but through the simple act of reasoning your way to a new country
+      every day. If a single daily puzzle leaves you hungry to learn more, the
+      <a href="/blog">blog</a> digs into strategy and geography in depth.
+    </p>
+
+    <h2>What Counts as a Good Daily Score</h2>
+    <p>
+      Globle scores how many guesses it took you to find the day&rsquo;s country, and lower is
+      better. Most players land somewhere between five and eight guesses on a typical day, so solving
+      in five or fewer is a genuinely strong result, and a three-guess day is something to brag
+      about. Difficulty varies with the answer: a large, well-connected country in the middle of a
+      continent is easier to corner than a remote island nation, where even close guesses read as
+      far away. Do not judge yourself on a single hard day — track your average over a week instead,
+      and watch it fall as your map knowledge grows.
+    </p>
+
+    <h2>Daily Globle and the Rise of Daily Word Games</h2>
+    <p>
+      The daily Globle sits in a wave of once-a-day browser puzzles that turned millions of people
+      into daily players. The appeal is consistent: one fresh challenge, shared by everyone, that
+      respects your time and rewards you with a small daily win. Globle&rsquo;s twist is geography
+      instead of vocabulary — you are decoding the world map rather than a hidden word — but the
+      satisfying loop is the same. If you enjoy the daily ritual but sometimes want to keep playing
+      past your one puzzle, that is exactly what <a href="/">Globle Unlimited</a> and
+      <a href="/practice">practice mode</a> are for.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details><summary>When does the daily Globle reset?</summary><p>A new mystery country unlocks every day at 00:00 UTC, so the whole world plays the same country on the same date.</p></details>
+      <details><summary>Is everyone&rsquo;s daily country the same?</summary><p>Yes. A shared date seed means the mystery country is identical for every player on a given day.</p></details>
+      <details><summary>What if I miss a day?</summary><p>Your daily streak resets if you skip a day. You can still play unlimited rounds anytime without affecting it.</p></details>
+      <details><summary>Can I replay today&rsquo;s daily?</summary><p>No — the daily is one puzzle per day. For more rounds, use practice or unlimited mode.</p></details>
+    </div>
+
+    <h2>Play Today&rsquo;s Daily Globle</h2>
+    <p>
+      The day&rsquo;s mystery country is waiting at the top of this page. Take your time, open with a
+      strong guess, follow the colours, and see if you can solve today&rsquo;s Globle in fewer tries
+      than yesterday. Solve it to extend your streak, then come back tomorrow for a fresh challenge.
+      And if one puzzle a day is never quite enough, <a href="/">Globle Unlimited</a> and
+      <a href="/practice">practice mode</a> are always ready whenever you want to keep playing.
     </p>
 
     <p class="cta-row"><a href="/" class="btn btn-ghost">Play Globle Unlimited</a></p>
@@ -84,6 +220,18 @@ const schema: Record<string, unknown>[] = [
   .hero-title { font-size: var(--fs-display); }
   .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
   .rise { animation-delay: var(--d, 0ms); }
-  .content { margin-top: var(--space-16); }
+  .content { margin-top: var(--space-16); text-align: left; }
+  .content ol, .content ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
   .cta-row { margin-top: var(--space-8); }
+
+  .cmp { width: 100%; border-collapse: collapse; margin: var(--space-6) 0; font-size: var(--fs-small); }
+  .cmp th, .cmp td { border: 1px solid var(--line); padding: var(--space-2) var(--space-3); text-align: left; }
+  .cmp th { background: var(--bg-panel); color: var(--accent); }
+  .cmp td { color: var(--text-dim); }
+  .cmp strong { color: var(--text); }
+
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+  .faq details { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+  .faq summary { cursor: pointer; color: var(--text); font-weight: 600; }
+  .faq p { margin-top: var(--space-2); }
 </style>
