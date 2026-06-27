@@ -1,5 +1,6 @@
 // Client-side controller wiring globe.gl to the GameEngine + DOM.
 import Globe from 'globe.gl';
+import * as THREE from 'three';
 import { GameEngine, dateSeed } from '../../lib/game/engine';
 import { flag, countriesDataset } from '../../lib/game/countries';
 import { capitalsDataset } from '../../lib/game/capitals';
@@ -16,8 +17,7 @@ import { formatDistance, getUnit, SETTINGS_EVENT } from '../../lib/settings';
 import type { Guessable, Dataset, Guess, GameMode } from '../../lib/game/types';
 
 const LAND_BASE = 'rgba(232, 217, 181, 0.18)'; // unguessed land tint
-const TEXTURE = '/assets/textures/earth-blue-marble.jpg';
-const BUMP = '/assets/textures/earth-topology.png';
+const TEXTURE = '/assets/textures/earth-day-4k.jpg'; // vivid daytime satellite map
 const GEO_URL = '/assets/data/world.geo.json';
 
 type GeoFeature = { properties: { name: string; cca2: string } };
@@ -107,10 +107,9 @@ export function initGlobeGame(root: HTMLElement) {
   const globe = new Globe(els.globeMount)
     .backgroundColor('rgba(0,0,0,0)')
     .showAtmosphere(true)
-    .atmosphereColor('#8Fbfe0')
-    .atmosphereAltitude(0.18)
+    .atmosphereColor('#cfe6ff')
+    .atmosphereAltitude(0.22)
     .globeImageUrl(TEXTURE)
-    .bumpImageUrl(BUMP)
     .polygonAltitude(0.008)
     .polygonCapColor((f) => capColor(f as GeoFeature))
     .polygonSideColor(() => 'rgba(0,0,0,0.10)')
@@ -142,6 +141,16 @@ export function initGlobeGame(root: HTMLElement) {
   controls.minDistance = 180;
   controls.maxDistance = 520;
   controls.addEventListener('start', () => (controls.autoRotate = false));
+
+  // Bright, even lighting so the whole globe stays vivid (no dark night side).
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.3);
+  keyLight.position.set(1, 0.6, 1);
+  globe.lights([new THREE.AmbientLight(0xffffff, 2.7), keyLight]);
+
+  // Slightly richer texture rendering.
+  const mat = globe.globeMaterial() as THREE.MeshPhongMaterial;
+  mat.shininess = 6;
+  mat.specular = new THREE.Color(0x111418);
 
   function fitSize() {
     const w = els.globeMount.clientWidth;

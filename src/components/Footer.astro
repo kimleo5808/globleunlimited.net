@@ -6,7 +6,8 @@ const year = 2026; // build-time constant; bump on release
 <footer class="site-footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <img src="/assets/svg/logo.svg" alt="Globle Unlimited" width="200" height="38" />
+      <img src="/assets/svg/logo.svg" alt="Globle Unlimited" width="200" height="38" class="logo-dark" />
+      <img src="/assets/svg/logo-light.svg" alt="Globle Unlimited" width="200" height="38" class="logo-light" />
       <p class="footer-tagline">{SITE.tagline}.</p>
       <p class="footer-source">
         Map data: <a href="https://www.naturalearthdata.com/" rel="nofollow noopener" target="_blank">Natural Earth</a>
@@ -49,6 +50,9 @@ const year = 2026; // build-time constant; bump on release
     gap: var(--space-8);
   }
   .footer-brand img { height: 36px; width: auto; margin-bottom: var(--space-3); }
+  .footer-brand .logo-light { display: none; }
+  :global(html[data-theme='light']) .footer-brand .logo-dark { display: none; }
+  :global(html[data-theme='light']) .footer-brand .logo-light { display: block; }
   .footer-tagline { color: var(--text-dim); margin-bottom: var(--space-2); }
   .footer-source { font-size: var(--fs-small); color: var(--text-mute); }
   .footer-source a { color: var(--text-dim); }
