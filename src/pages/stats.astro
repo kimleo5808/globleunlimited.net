@@ -32,6 +32,17 @@ const description =
         <h3 class="dist-title">Guess distribution</h3>
         <div class="dist" data-dist="unlimited"></div>
       </section>
+
+      <section class="card stat-card">
+        <h2>🏛️ Capitals</h2>
+        <dl class="grid">
+          <div><dt>Wins</dt><dd class="mono" data-s="capitals.wins">0</dd></div>
+          <div><dt>Played</dt><dd class="mono" data-s="capitals.played">0</dd></div>
+          <div><dt>Best guesses</dt><dd class="mono" data-s="capitals.bestGuesses">—</dd></div>
+        </dl>
+        <h3 class="dist-title">Guess distribution</h3>
+        <div class="dist" data-dist="capitals"></div>
+      </section>
     </div>
 
     <p class="cta-row rise" style="--d:240ms"><a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a></p>
@@ -47,7 +58,7 @@ const description =
     if (el) el.textContent = value == null ? '—' : String(value);
   }
 
-  (['daily', 'unlimited'] as GameMode[]).forEach((mode) => {
+  (['daily', 'unlimited', 'capitals'] as GameMode[]).forEach((mode) => {
     const s = getStats(mode);
     set(`${mode}.currentStreak`, s.currentStreak);
     set(`${mode}.maxStreak`, s.maxStreak);
@@ -56,12 +67,13 @@ const description =
     set(`${mode}.bestGuesses`, s.bestGuesses);
   });
 
-  // Distribution bars for unlimited
-  const dist = getStats('unlimited').distribution;
+  // Distribution bars
   const keys = ['1', '2', '3', '4', '5', '6', '7+'];
-  const max = Math.max(1, ...keys.map((k) => dist[k] ?? 0));
-  const host = document.querySelector('[data-dist="unlimited"]');
-  if (host) {
+  function renderDist(mode: GameMode) {
+    const dist = getStats(mode).distribution;
+    const max = Math.max(1, ...keys.map((k) => dist[k] ?? 0));
+    const host = document.querySelector(`[data-dist="${mode}"]`);
+    if (!host) return;
     host.innerHTML = keys
       .map((k) => {
         const n = dist[k] ?? 0;
@@ -70,15 +82,17 @@ const description =
       })
       .join('');
   }
+  renderDist('unlimited');
+  renderDist('capitals');
 </script>
 
 <style>
-  .stats-wrap { padding-block: var(--space-12); max-width: 860px; }
+  .stats-wrap { padding-block: var(--space-12); max-width: 1040px; }
   .stats-wrap h1 { font-size: var(--fs-h1); }
   .sub { color: var(--text-dim); margin-top: var(--space-2); }
   .rise { animation: rise var(--dur) var(--ease) both; animation-delay: var(--d, 0ms); }
 
-  .stat-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-top: var(--space-8); }
+  .stat-blocks { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-6); margin-top: var(--space-8); }
   .stat-card { padding: var(--space-6); }
   .stat-card h2 { font-size: var(--fs-h3); margin-bottom: var(--space-4); }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
