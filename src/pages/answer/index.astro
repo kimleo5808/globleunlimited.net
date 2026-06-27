@@ -3,17 +3,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { answerForDate, shiftISO } from '../../lib/game/daily';
 import { flag } from '../../lib/game/countries';
 import { hintFor, prettyDate } from '../../lib/game/hint';
+import { SITE } from '../../lib/site';
 
 const buildToday = new Date().toISOString().slice(0, 10);
 const country = answerForDate(buildToday);
 const hint = hintFor(country);
 const nice = prettyDate(buildToday);
 
-// Archive: previous 14 days
-const archive = Array.from({ length: 14 }, (_, i) => {
-  const date = shiftISO(buildToday, -(i + 1));
-  return { date, nice: prettyDate(date), country: answerForDate(date) };
-});
+// Archive: every past day back to launch (grows over time, never before launch).
+const archive: Array<{ date: string; nice: string; country: ReturnType<typeof answerForDate> }> = [];
+let ad = shiftISO(buildToday, -1);
+while (ad >= SITE.launchDate && archive.length < 90) {
+  archive.push({ date: ad, nice: prettyDate(ad), country: answerForDate(ad) });
+  ad = shiftISO(ad, -1);
+}
 
 const title = "Globle Answer Today – Today's Mystery Country";
 const description =
@@ -69,14 +72,20 @@ const schema: Record<string, unknown>[] = [
     </p>
 
     <h2>Past Globle Answers</h2>
-    <ul class="archive">
-      {archive.map((a) => (
-        <li>
-          <a href={`/answer/${a.date}`}>{a.nice}</a>
-          <span class="muted">{flag(a.country.cca2)} {a.country.name}</span>
-        </li>
-      ))}
-    </ul>
+    {
+      archive.length ? (
+        <ul class="archive">
+          {archive.map((a) => (
+            <li>
+              <a href={`/answer/${a.date}`}>{a.nice}</a>
+              <span class="muted">{flag(a.country.cca2)} {a.country.name}</span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>The archive grows every day. Check back tomorrow to browse past Globle answers.</p>
+      )
+    }
 
     <h2>Frequently Asked Questions</h2>
     <div class="faq">

@@ -3,24 +3,32 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { answerForDate, shiftISO } from '../../lib/game/daily';
 import { flag } from '../../lib/game/countries';
 import { hintFor, prettyDate } from '../../lib/game/hint';
+import { SITE } from '../../lib/site';
 
 export function getStaticPaths() {
-  // Deterministic window around the build date: 45 days back, 7 forward.
+  // Archive runs from launch date up to the build date — no pre-launch
+  // backfill and no future dates (which would spoil upcoming dailies).
   const today = new Date().toISOString().slice(0, 10);
   const paths = [];
-  for (let i = -45; i <= 7; i++) {
-    const date = shiftISO(today, i);
-    paths.push({ params: { date } });
+  let d = SITE.launchDate;
+  let guard = 0;
+  while (d <= today && guard < 4000) {
+    paths.push({ params: { date: d } });
+    d = shiftISO(d, 1);
+    guard++;
   }
   return paths;
 }
 
+const today = new Date().toISOString().slice(0, 10);
 const { date } = Astro.params as { date: string };
 const country = answerForDate(date);
 const hint = hintFor(country);
 const nice = prettyDate(date);
 const prev = shiftISO(date, -1);
 const next = shiftISO(date, 1);
+const hasPrev = prev >= SITE.launchDate; // earlier than launch doesn't exist
+const hasNext = next <= today; // future dates aren't generated yet
 
 const title = `Globle Answer for ${nice} – Today's Mystery Country`;
 const description = `The Globle answer for ${nice} is revealed here, with a hint first. See the mystery country, its region and facts, plus past and upcoming answers.`;
@@ -67,8 +75,8 @@ const schema: Record<string, unknown>[] = [
     </details>
 
     <nav class="pager">
-      <a class="btn btn-ghost" href={`/answer/${prev}`}>← {prettyDate(prev)}</a>
-      <a class="btn btn-ghost" href={`/answer/${next}`}>{prettyDate(next)} →</a>
+      {hasPrev ? <a class="btn btn-ghost" href={`/answer/${prev}`}>← {prettyDate(prev)}</a> : <span></span>}
+      {hasNext ? <a class="btn btn-ghost" href={`/answer/${next}`}>{prettyDate(next)} →</a> : <span></span>}
     </nav>
 
     <p class="cta-row"><a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a></p>

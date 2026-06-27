@@ -17,6 +17,9 @@ export const SITE = {
   /** Default meta keywords (overridable per page). */
   keywords:
     'globle unlimited, globle, globle game, country guessing game, geography game, mystery country, guess the country, 3d globe game',
+  /** Site launch date (ISO). The answer archive starts here and grows forward —
+   *  never backfilled before launch, never pre-generating future (spoiler) dates. */
+  launchDate: '2026-06-27',
 } as const;
 
 export const MODES = [

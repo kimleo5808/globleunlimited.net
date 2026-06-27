@@ -1,0 +1,25 @@
+name: Daily rebuild
+
+# Rebuilds the site once a day so the answer archive grows (a new
+# /answer/{date} page is generated for each day that passes) and the
+# "today" answer pages stay current.
+
+on:
+  schedule:
+    - cron: '5 0 * * *' # 00:05 UTC daily, just after the new daily unlocks
+  workflow_dispatch: {} # allow manual runs from the Actions tab
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Cloudflare Pages deploy
+        run: |
+          if [ -z "${CF_DEPLOY_HOOK}" ]; then
+            echo "::error::CF_DEPLOY_HOOK secret is not set. Add it in repo Settings → Secrets → Actions."
+            exit 1
+          fi
+          curl -fsSL -X POST "${CF_DEPLOY_HOOK}"
+          echo "Triggered Cloudflare Pages rebuild."
+        env:
+          CF_DEPLOY_HOOK: ${{ secrets.CF_DEPLOY_HOOK }}
