@@ -1,5 +1,5 @@
-import type { Country, Guess, GameMode } from './types';
-import { COUNTRIES, findCountry, randomCountry, normalize } from './countries';
+import type { Guessable, Dataset, Guess, GameMode } from './types';
+import { COUNTRIES, countriesDataset, normalize } from './countries';
 import { haversine } from './distance';
 import { heatColor } from './color';
 import { mulberry32, dateSeed } from './daily';
@@ -13,20 +13,22 @@ export type GuessOutcome =
 
 export class GameEngine {
   readonly mode: GameMode;
-  target!: Country;
+  target!: Guessable;
   guesses: Guess[] = [];
   won = false;
 
   private rng: () => number;
+  private dataset: Dataset;
 
-  constructor(mode: GameMode = 'unlimited', seed?: number) {
+  constructor(mode: GameMode = 'unlimited', seed?: number, dataset: Dataset = countriesDataset) {
     this.mode = mode;
+    this.dataset = dataset;
     this.rng = seed === undefined ? Math.random : mulberry32(seed);
     this.pickTarget();
   }
 
   private pickTarget() {
-    this.target = randomCountry(this.rng);
+    this.target = this.dataset.random(this.rng);
     this.guesses = [];
     this.won = false;
   }
@@ -37,15 +39,15 @@ export class GameEngine {
     this.pickTarget();
   }
 
-  /** True if this country has already been guessed. */
-  private alreadyGuessed(c: Country): boolean {
+  /** True if this item has already been guessed. */
+  private alreadyGuessed(c: Guessable): boolean {
     return this.guesses.some((g) => g.country.name === c.name);
   }
 
   /** Submit a typed guess. */
   guess(input: string): GuessOutcome {
     if (this.won) return { status: 'invalid' };
-    const country = findCountry(input);
+    const country = this.dataset.find(input);
     if (!country) return { status: 'invalid' };
 
     const distanceKm = haversine(country.lat, country.lng, this.target.lat, this.target.lng);

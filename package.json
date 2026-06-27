@@ -11,7 +11,8 @@
     "astro": "astro",
     "check": "astro check",
     "build:maps": "node scripts/build-maps.mjs scripts/data assets/svg",
-    "build:data": "node scripts/build-countries.mjs scripts/data src/data public/assets/data"
+    "build:data": "node scripts/build-countries.mjs scripts/data src/data public/assets/data",
+    "build:capitals": "node scripts/build-capitals.mjs scripts/data/ne_places.json src/data"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",

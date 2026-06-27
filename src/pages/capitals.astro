@@ -1,11 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import GlobeGame from '../components/game/GlobeGame.astro';
 
 const title = 'Globle Capitals – Guess the Capital City Game';
 const description =
-  'Globle Capitals: guess the mystery capital city on a 3D globe. A tougher twist on Globle Unlimited for geography buffs. Coming soon.';
+  'Play Globle Capitals: guess the mystery capital city on a 3D globe with unlimited rounds. A tougher twist on Globle Unlimited for geography buffs.';
 
 const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Globle Capitals',
+    genre: 'Geography puzzle',
+    gamePlatform: 'Web browser',
+    applicationCategory: 'Game',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
   {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -15,7 +26,15 @@ const schema: Record<string, unknown>[] = [
         name: 'What is Globle Capitals?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Globle Capitals is a variant where the mystery answer is a capital city instead of a country. You guess capital cities and the distance between them guides you to the answer.',
+          text: 'Globle Capitals is a variant where the mystery answer is a capital city. You guess capital cities and the distance between them guides you to the answer.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How do you play Globle Capitals?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Type any capital city. Each guess appears on the globe coloured by how close it is to the mystery capital — hotter is closer — until you find it.',
         },
       },
     ],
@@ -28,13 +47,9 @@ const schema: Record<string, unknown>[] = [
     <div class="container hero-inner">
       <h1 class="hero-title rise" style="--d:0ms">Globle Capitals</h1>
       <p class="hero-sub rise" style="--d:80ms">
-        Guess the mystery <strong>capital city</strong> on the globe — coming soon.
+        Guess the mystery <strong>capital city</strong> — unlimited rounds.
       </p>
-      <div class="soon card rise" style="--d:160ms">
-        <p class="soon-emoji">🏛️</p>
-        <p>Globle Capitals is in the works. In the meantime, sharpen your geography on the country game.</p>
-        <a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a>
-      </div>
+      <GlobeGame mode="capitals" />
     </div>
   </section>
 
@@ -42,31 +57,39 @@ const schema: Record<string, unknown>[] = [
     <h2>What Is Globle Capitals?</h2>
     <p>
       <strong>Globle Capitals is a tougher twist on Globle where the mystery answer is a capital
-      city rather than a country.</strong> You type capital cities, and each guess reveals how far
-      it sits from the target capital — testing not just where countries are, but where their
-      capitals actually lie.
+      city instead of a country.</strong> You type capital cities, and each guess lights up on the
+      globe as a marker coloured by how far it sits from the target capital — hotter means closer.
+      It tests not just where countries are, but where their capitals actually lie.
     </p>
 
-    <h2>How It Will Differ from Countries</h2>
+    <h2>How to Play Globle Capitals</h2>
+    <ol>
+      <li><strong>Type any capital city</strong> (for example, Paris or Tokyo) and press Enter.</li>
+      <li><strong>Read the marker colour.</strong> Pale yellow is far from the mystery capital;
+        deep red is very close.</li>
+      <li><strong>Use the distance</strong> to the closest capital so far to steer your next guess.</li>
+      <li><strong>Find the capital</strong> in as few guesses as possible — then play again.</li>
+    </ol>
+
+    <h2>Capitals vs Countries</h2>
     <p>
       Country borders are large targets; capitals are single points, so distances are sharper and
-      the game rewards precise geographic knowledge. If you enjoy
-      <a href="/">Globle Unlimited</a>, Capitals will be the next challenge.
+      the game rewards precise geographic knowledge. If you enjoy <a href="/">Globle Unlimited</a>,
+      Capitals is the natural next challenge. New here? Start with the
+      <a href="/how-to-play">how-to-play guide</a> to learn how the colour heatmap works.
     </p>
 
-    <p class="cta-row"><a href="/how-to-play" class="btn btn-ghost">Learn how Globle works</a></p>
+    <p class="cta-row"><a href="/" class="btn btn-ghost">Play Globle Unlimited</a></p>
   </article>
 </BaseLayout>
 
 <style>
   .hero { padding-block: var(--space-12) var(--space-8); }
-  .hero-inner { text-align: center; max-width: 760px; margin-inline: auto; }
+  .hero-inner { text-align: center; max-width: 760px; }
   .hero-title { font-size: var(--fs-display); }
   .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
   .rise { animation-delay: var(--d, 0ms); }
-  .soon { max-width: 460px; margin: var(--space-8) auto 0; padding: var(--space-8); text-align: center; }
-  .soon p { margin-bottom: var(--space-4); }
-  .soon-emoji { font-size: 2.5rem; }
-  .content { margin-top: var(--space-16); }
+  .content { margin-top: var(--space-16); text-align: left; }
+  .content ol { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
   .cta-row { margin-top: var(--space-8); }
 </style>

@@ -1,7 +1,8 @@
 // Client-side controller wiring globe.gl to the GameEngine + DOM.
 import Globe from 'globe.gl';
 import { GameEngine, dateSeed } from '../../lib/game/engine';
-import { suggest, flag, findCountry } from '../../lib/game/countries';
+import { flag, countriesDataset } from '../../lib/game/countries';
+import { capitalsDataset } from '../../lib/game/capitals';
 import {
   recordWin,
   getStats,
@@ -11,7 +12,7 @@ import {
   todayISO,
   isYesterday,
 } from '../../lib/game/stats';
-import type { Country, Guess, GameMode } from '../../lib/game/types';
+import type { Guessable, Dataset, Guess, GameMode } from '../../lib/game/types';
 
 const LAND_BASE = 'rgba(232, 217, 181, 0.18)'; // unguessed land tint
 const TEXTURE = '/assets/textures/earth-blue-marble.jpg';
@@ -73,9 +74,20 @@ export function initGlobeGame(root: HTMLElement) {
     live: $('[data-live]'),
   };
 
+  const isCapitals = mode === 'capitals';
+  const dataset: Dataset = isCapitals ? capitalsDataset : countriesDataset;
+
+  if (isCapitals) {
+    els.input.placeholder = 'Enter capital city…';
+    els.input.setAttribute('aria-label', 'Enter capital city name');
+    els.globeMount.setAttribute('aria-label', 'Interactive globe showing your guessed capitals');
+  }
+
   // Daily mode: seed the engine so the whole world shares today's country.
   const engine =
-    mode === 'daily' ? new GameEngine('daily', dateSeed(today)) : new GameEngine(mode);
+    mode === 'daily'
+      ? new GameEngine('daily', dateSeed(today))
+      : new GameEngine(mode, undefined, dataset);
 
   // Daily shows the streak; "Play Again" becomes "Play Unlimited".
   if (mode === 'daily') {
@@ -84,7 +96,9 @@ export function initGlobeGame(root: HTMLElement) {
     els.playAgain.hidden = true;
     els.dailyCta.hidden = false;
   }
-  const colorByName = new Map<string, string>(); // guessed country -> heat colour
+  const colorByName = new Map<string, string>(); // guessed country -> heat colour (countries mode)
+  // Guessed capital markers (capitals mode)
+  const points: Array<{ lat: number; lng: number; color: string; label: string }> = [];
   let features: GeoFeature[] = [];
   const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -99,12 +113,24 @@ export function initGlobeGame(root: HTMLElement) {
     .polygonAltitude(0.008)
     .polygonCapColor((f) => capColor(f as GeoFeature))
     .polygonSideColor(() => 'rgba(0,0,0,0.10)')
-    .polygonStrokeColor(() => 'rgba(11,22,34,0.55)');
+    .polygonStrokeColor(() => (isCapitals ? 'rgba(244,201,93,0.35)' : 'rgba(11,22,34,0.55)'))
+    .pointsData([])
+    .pointLat('lat')
+    .pointLng('lng')
+    .pointColor('color')
+    .pointAltitude(0.013)
+    .pointRadius(0.6)
+    .pointLabel('label');
 
   function capColor(f: GeoFeature): string {
+    if (isCapitals) return 'rgba(232, 217, 181, 0.10)'; // faint land; markers carry the colour
     const name = f.properties.name;
     if (engine.won && name === engine.target.name) return '#2E9E4F';
     return colorByName.get(name) ?? LAND_BASE;
+  }
+
+  function refreshPoints() {
+    globe.pointsData([...points]);
   }
 
   // controls: auto-rotate when idle, zoom on
@@ -153,7 +179,7 @@ export function initGlobeGame(root: HTMLElement) {
     globe.polygonCapColor((f) => capColor(f as GeoFeature));
   }
 
-  function focusCountry(c: Country) {
+  function focusCountry(c: Guessable) {
     globe.pointOfView({ lat: c.lat, lng: c.lng, altitude: 1.9 }, prefersReduced ? 0 : 700);
   }
 
@@ -195,7 +221,8 @@ export function initGlobeGame(root: HTMLElement) {
     const out = engine.guess(value);
 
     if (out.status === 'invalid') {
-      flashError(findCountry(value) ? 'Game over — press Play Again.' : 'Not a recognized country');
+      const known = dataset.find(value);
+      flashError(known ? 'Game over — press Play Again.' : isCapitals ? 'Not a recognized capital' : 'Not a recognized country');
       return;
     }
     if (out.status === 'duplicate') {
@@ -203,12 +230,22 @@ export function initGlobeGame(root: HTMLElement) {
       return;
     }
 
-    colorByName.set(out.guess.country.name, out.guess.color);
+    if (isCapitals) {
+      points.push({
+        lat: out.guess.country.lat,
+        lng: out.guess.country.lng,
+        color: out.guess.color,
+        label: out.guess.country.name,
+      });
+      refreshPoints();
+    } else {
+      colorByName.set(out.guess.country.name, out.guess.color);
+      refreshGlobe();
+    }
     clearError();
     els.input.value = '';
     closeSuggest();
     addRow(out.guess);
-    refreshGlobe();
     renderInfo();
     focusCountry(out.guess.country);
     announce(`${out.guess.country.name}, ${out.guess.correct ? 'correct' : km(out.guess.distanceKm) + ' away'}`);
@@ -257,6 +294,8 @@ export function initGlobeGame(root: HTMLElement) {
   els.playAgain.addEventListener('click', () => {
     engine.reset();
     colorByName.clear();
+    points.length = 0;
+    refreshPoints();
     els.list.innerHTML = '';
     els.modal.hidden = true;
     clearError();
@@ -268,7 +307,8 @@ export function initGlobeGame(root: HTMLElement) {
   });
 
   els.shareBtn.addEventListener('click', async () => {
-    const text = `I found the mystery country in ${engine.guessCount} guesses on Globle Unlimited! https://globleunlimited.net`;
+    const noun = isCapitals ? 'mystery capital' : 'mystery country';
+    const text = `I found the ${noun} in ${engine.guessCount} guesses on Globle Unlimited! https://globleunlimited.net`;
     try {
       if (navigator.share) await navigator.share({ text });
       else {
@@ -293,7 +333,7 @@ export function initGlobeGame(root: HTMLElement) {
   let activeIdx = -1;
   els.input.addEventListener('input', () => {
     activeIdx = -1;
-    renderSuggest(suggest(els.input.value));
+    renderSuggest(dataset.suggest(els.input.value));
   });
   els.input.addEventListener('keydown', (e) => {
     const items = [...els.suggestBox.querySelectorAll('.suggest-item')] as HTMLElement[];
@@ -306,7 +346,7 @@ export function initGlobeGame(root: HTMLElement) {
   });
   els.input.addEventListener('blur', () => setTimeout(closeSuggest, 120));
 
-  function renderSuggest(list: Country[]) {
+  function renderSuggest(list: Guessable[]) {
     if (!list.length) return closeSuggest();
     els.suggestBox.innerHTML = list
       .map((c) => `<button type="button" class="suggest-item" data-name="${c.name}">${flag(c.cca2)} ${c.name}</button>`)

@@ -1,4 +1,4 @@
-import type { Country } from './types';
+import type { Country, Dataset } from './types';
 import data from '../../data/countries.json';
 
 export const COUNTRIES: Country[] = data as Country[];
@@ -55,3 +55,11 @@ export function flag(cca2: string): string {
 export function randomCountry(rng: () => number = Math.random): Country {
   return COUNTRIES[Math.floor(rng() * COUNTRIES.length)];
 }
+
+/** Countries as a pluggable Dataset for the game engine. */
+export const countriesDataset: Dataset = {
+  all: COUNTRIES,
+  find: findCountry,
+  suggest,
+  random: randomCountry,
+};
