@@ -18,9 +18,10 @@ const STOPS: Array<[number, number, number]> = [
 const clamp01 = (n: number) => Math.max(0, Math.min(1, n));
 const hex2 = (n: number) => Math.round(n).toString(16).padStart(2, '0');
 
-/** Interpolated heat colour (#rrggbb) for a distance in km. */
+/** Interpolated heat colour (#rrggbb) for a distance in km.
+ *  0 km maps to the hottest red — the green WIN_COLOR is reserved for the
+ *  correct guess only (a non-answer neighbour can also be 0 km away). */
 export function heatColor(distanceKm: number): string {
-  if (distanceKm <= 0) return WIN_COLOR;
   const t = clamp01(distanceKm / MAX_DISTANCE_KM);
   const span = STOPS.length - 1;
   const pos = t * span;

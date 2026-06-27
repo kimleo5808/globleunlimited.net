@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { GameEngine, dateSeed } from '../../lib/game/engine';
 import { flag, countriesDataset } from '../../lib/game/countries';
 import { capitalsDataset } from '../../lib/game/capitals';
+import { haversine } from '../../lib/game/distance';
 import {
   recordWin,
   getStats,
@@ -82,13 +83,16 @@ export function initGlobeGame(root: HTMLElement) {
     els.input.placeholder = 'Enter capital city…';
     els.input.setAttribute('aria-label', 'Enter capital city name');
     els.globeMount.setAttribute('aria-label', 'Interactive globe showing your guessed capitals');
+    const borderLabel = root.querySelector('[data-border-label]');
+    if (borderLabel) borderLabel.textContent = 'Distance'; // capitals are points, not borders
   }
 
   // Daily mode: seed the engine so the whole world shares today's country.
+  // Countries use real border-to-border distance; capitals use point distance.
   const engine =
     mode === 'daily'
-      ? new GameEngine('daily', dateSeed(today))
-      : new GameEngine(mode, undefined, dataset);
+      ? new GameEngine('daily', dateSeed(today), countriesDataset, borderDistanceKm)
+      : new GameEngine(mode, undefined, dataset, isCapitals ? undefined : borderDistanceKm);
 
   // Daily shows the streak; "Play Again" becomes "Play Unlimited".
   if (mode === 'daily') {
@@ -102,6 +106,49 @@ export function initGlobeGame(root: HTMLElement) {
   const points: Array<{ lat: number; lng: number; color: string; label: string }> = [];
   let features: GeoFeature[] = [];
   const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Country boundary points (flattened [lat,lng,...]) for real border-to-border distance.
+  const polyByName = new Map<string, Float64Array>();
+  const FAR_KM = 3500; // beyond this, centroid distance is close enough for colouring
+
+  /** Border-to-border distance (km) between two countries; falls back to centroid. */
+  function borderDistanceKm(a: Guessable, b: Guessable): number {
+    const c = haversine(a.lat, a.lng, b.lat, b.lng);
+    if (c > FAR_KM) return c;
+    const pa = polyByName.get(a.name);
+    const pb = polyByName.get(b.name);
+    if (!pa || !pb) return c;
+    let min = c;
+    for (let i = 0; i < pa.length; i += 2) {
+      const la = pa[i], lo = pa[i + 1];
+      for (let j = 0; j < pb.length; j += 2) {
+        const d = haversine(la, lo, pb[j], pb[j + 1]);
+        if (d < min) {
+          min = d;
+          if (min < 10) return min;
+        }
+      }
+    }
+    return min;
+  }
+
+  /** Flatten a GeoJSON geometry to [lat,lng,...], downsampled to ~400 points. */
+  function flattenGeometry(geom: any): Float64Array {
+    const pts: number[] = [];
+    const polys = geom.type === 'MultiPolygon' ? geom.coordinates : [geom.coordinates];
+    for (const poly of polys) {
+      for (const ring of poly) {
+        for (const [lng, lat] of ring) pts.push(lat, lng);
+      }
+    }
+    const maxPts = 400;
+    const total = pts.length / 2;
+    if (total <= maxPts) return Float64Array.from(pts);
+    const stride = Math.ceil(total / maxPts);
+    const out: number[] = [];
+    for (let i = 0; i < total; i += stride) out.push(pts[i * 2], pts[i * 2 + 1]);
+    return Float64Array.from(out);
+  }
 
   // ---- Globe ----
   const globe = new Globe(els.globeMount)
@@ -167,6 +214,12 @@ export function initGlobeGame(root: HTMLElement) {
     .then((fc) => {
       features = fc.features;
       globe.polygonsData(features);
+      // Index boundary points for border-distance (countries modes only).
+      if (!isCapitals) {
+        for (const f of features) {
+          polyByName.set((f as any).properties.name, flattenGeometry((f as any).geometry));
+        }
+      }
       els.hint?.remove();
       els.input.disabled = false;
       (els.form.querySelector('button') as HTMLButtonElement).disabled = false;

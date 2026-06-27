@@ -1,7 +1,7 @@
 import type { Guessable, Dataset, Guess, GameMode } from './types';
 import { COUNTRIES, countriesDataset, normalize } from './countries';
 import { haversine } from './distance';
-import { heatColor } from './color';
+import { heatColor, WIN_COLOR } from './color';
 import { mulberry32, dateSeed } from './daily';
 
 export { dateSeed };
@@ -19,10 +19,19 @@ export class GameEngine {
 
   private rng: () => number;
   private dataset: Dataset;
+  /** Distance (km) between a guess and the target. Defaults to centroid haversine;
+   *  countries mode injects a border-to-border distance for fidelity. */
+  private distanceFn: (a: Guessable, b: Guessable) => number;
 
-  constructor(mode: GameMode = 'unlimited', seed?: number, dataset: Dataset = countriesDataset) {
+  constructor(
+    mode: GameMode = 'unlimited',
+    seed?: number,
+    dataset: Dataset = countriesDataset,
+    distanceFn?: (a: Guessable, b: Guessable) => number,
+  ) {
     this.mode = mode;
     this.dataset = dataset;
+    this.distanceFn = distanceFn ?? ((a, b) => haversine(a.lat, a.lng, b.lat, b.lng));
     this.rng = seed === undefined ? Math.random : mulberry32(seed);
     this.pickTarget();
   }
@@ -50,12 +59,12 @@ export class GameEngine {
     const country = this.dataset.find(input);
     if (!country) return { status: 'invalid' };
 
-    const distanceKm = haversine(country.lat, country.lng, this.target.lat, this.target.lng);
+    const distanceKm = this.distanceFn(country, this.target);
     const correct = country.name === this.target.name;
     const guess: Guess = {
       country,
       distanceKm,
-      color: heatColor(distanceKm),
+      color: correct ? WIN_COLOR : heatColor(distanceKm),
       correct,
     };
 
