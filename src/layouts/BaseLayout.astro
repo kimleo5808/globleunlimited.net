@@ -42,13 +42,13 @@ const ogImageUrl = new URL(ogImage, SITE.url).href;
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
 
-    <!-- Apply saved theme before paint to avoid a flash -->
+    <!-- Apply saved theme before paint to avoid a flash (light is the default) -->
     <script is:inline>
       try {
         var t = localStorage.getItem('globle:theme');
-        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t === 'dark' ? 'dark' : 'light';
       } catch (e) {
-        document.documentElement.dataset.theme = 'dark';
+        document.documentElement.dataset.theme = 'light';
       }
     </script>
 

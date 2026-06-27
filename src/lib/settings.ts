@@ -24,7 +24,7 @@ export function setUnit(u: Unit) {
 }
 
 export function getTheme(): Theme {
-  return safeGet(THEME_KEY) === 'light' ? 'light' : 'dark';
+  return safeGet(THEME_KEY) === 'dark' ? 'dark' : 'light';
 }
 export function applyTheme(t: Theme) {
   document.documentElement.dataset.theme = t;
