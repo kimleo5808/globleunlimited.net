@@ -41,6 +41,16 @@ const ogImageUrl = new URL(ogImage, SITE.url).href;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/assets/svg/logo.svg" type="image/svg+xml" />
 
+    <!-- Apply saved theme before paint to avoid a flash -->
+    <script is:inline>
+      try {
+        var t = localStorage.getItem('globle:theme');
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+      } catch (e) {
+        document.documentElement.dataset.theme = 'dark';
+      }
+    </script>
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />

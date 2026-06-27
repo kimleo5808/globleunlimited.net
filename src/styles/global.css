@@ -19,7 +19,7 @@ body {
   color: var(--text);
   background-color: var(--bg-deep);
   background-image:
-    radial-gradient(120% 90% at 70% 0%, #15304d 0%, var(--bg-deep) 60%);
+    radial-gradient(120% 90% at 70% 0%, var(--bg-glow) 0%, var(--bg-deep) 60%);
   background-attachment: fixed;
   min-height: 100dvh;
   position: relative;
@@ -54,6 +54,10 @@ body::after {
   opacity: .03;
   mix-blend-mode: overlay;
 }
+
+/* Light theme: drop the starfield (looks wrong on parchment), keep faint grain */
+html[data-theme='light'] body::before { display: none; }
+html[data-theme='light'] body::after { opacity: .025; mix-blend-mode: multiply; }
 
 /* keep content above atmosphere */
 #app, main, header, footer { position: relative; z-index: 1; }

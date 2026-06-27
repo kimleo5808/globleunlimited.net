@@ -22,14 +22,77 @@ const path = Astro.url.pathname;
       }
       <a href="/how-to-play" class="mode-link learn">How to Play</a>
       <a href="/stats" class:list={['mode-link', 'icon', { active: path === '/stats' }]} aria-label="Your stats" title="Your stats">📊</a>
+      <button type="button" class="mode-link icon" data-settings-open aria-label="Settings" title="Settings" aria-haspopup="dialog">⚙️</button>
     </nav>
   </div>
 </header>
 
+<!-- Settings panel -->
+<div class="settings-overlay" data-settings-overlay hidden>
+  <div class="settings-panel card" role="dialog" aria-modal="true" aria-label="Settings">
+    <div class="settings-head">
+      <h2>Settings</h2>
+      <button type="button" class="settings-close" data-settings-close aria-label="Close settings">✕</button>
+    </div>
+
+    <div class="setting">
+      <span class="setting-label">Theme</span>
+      <div class="seg" role="group" aria-label="Theme">
+        <button type="button" class="seg-btn" data-theme-set="dark">Dark</button>
+        <button type="button" class="seg-btn" data-theme-set="light">Light</button>
+      </div>
+    </div>
+
+    <div class="setting">
+      <span class="setting-label">Distance unit</span>
+      <div class="seg" role="group" aria-label="Distance unit">
+        <button type="button" class="seg-btn" data-unit-set="km">Kilometres</button>
+        <button type="button" class="seg-btn" data-unit-set="mi">Miles</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { getUnit, setUnit, getTheme, setTheme } from '../lib/settings';
+
+  const overlay = document.querySelector<HTMLElement>('[data-settings-overlay]');
+  const openBtn = document.querySelector<HTMLButtonElement>('[data-settings-open]');
+  const closeBtn = document.querySelector<HTMLButtonElement>('[data-settings-close]');
+
+  function syncActive() {
+    const theme = getTheme();
+    const unit = getUnit();
+    document.querySelectorAll<HTMLButtonElement>('[data-theme-set]').forEach((b) =>
+      b.classList.toggle('active', b.dataset.themeSet === theme),
+    );
+    document.querySelectorAll<HTMLButtonElement>('[data-unit-set]').forEach((b) =>
+      b.classList.toggle('active', b.dataset.unitSet === unit),
+    );
+  }
+
+  function open() { overlay?.removeAttribute('hidden'); syncActive(); }
+  function close() { overlay?.setAttribute('hidden', ''); }
+
+  openBtn?.addEventListener('click', open);
+  closeBtn?.addEventListener('click', close);
+  overlay?.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+  document.querySelectorAll<HTMLButtonElement>('[data-theme-set]').forEach((b) =>
+    b.addEventListener('click', () => { setTheme(b.dataset.themeSet as 'dark' | 'light'); syncActive(); }),
+  );
+  document.querySelectorAll<HTMLButtonElement>('[data-unit-set]').forEach((b) =>
+    b.addEventListener('click', () => { setUnit(b.dataset.unitSet as 'km' | 'mi'); syncActive(); }),
+  );
+
+  syncActive();
+</script>
+
 <style>
   .site-header {
     border-bottom: 1px solid var(--line);
-    background: rgba(11, 22, 34, 0.6);
+    background: var(--chrome-bg);
     backdrop-filter: blur(8px);
     position: sticky;
     top: 0;
@@ -60,9 +123,40 @@ const path = Astro.url.pathname;
   .mode-link:hover { color: var(--text); background: var(--bg-panel-2); }
   .mode-link.active { color: var(--accent); background: var(--accent-dim); }
   .mode-link.learn { border: 1px solid var(--line); }
+  .mode-link.icon { font-size: 1rem; line-height: 1; }
+  button.mode-link { background: transparent; border: 0; cursor: pointer; }
 
   @media (max-width: 560px) {
     .brand-logo { height: 30px; }
     .mode-link { padding: var(--space-1) var(--space-2); }
   }
+
+  /* ---- Settings panel ---- */
+  .settings-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    display: grid; place-items: center;
+    background: rgba(11, 22, 34, 0.7);
+    backdrop-filter: blur(4px);
+    padding: var(--space-4);
+  }
+  .settings-overlay[hidden] { display: none; }
+  .settings-panel { width: 100%; max-width: 380px; padding: var(--space-6); }
+  .settings-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-6); }
+  .settings-head h2 { font-size: var(--fs-h3); }
+  .settings-close { background: transparent; border: 0; color: var(--text-dim); cursor: pointer; font-size: 1.1rem; }
+  .settings-close:hover { color: var(--accent); }
+
+  .setting { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-3); }
+  .setting + .setting { border-top: 1px solid var(--line); }
+  .setting-label { color: var(--text-dim); font-size: var(--fs-small); }
+
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius-pill); overflow: hidden; }
+  .seg-btn {
+    background: transparent; border: 0; cursor: pointer;
+    padding: var(--space-2) var(--space-3);
+    color: var(--text-dim); font-size: var(--fs-small); font-weight: 600;
+    transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+  }
+  .seg-btn:hover { color: var(--text); }
+  .seg-btn.active { background: var(--accent); color: var(--bg-deep); }
 </style>

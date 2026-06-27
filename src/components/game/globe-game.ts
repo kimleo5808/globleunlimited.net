@@ -12,6 +12,7 @@ import {
   todayISO,
   isYesterday,
 } from '../../lib/game/stats';
+import { formatDistance, getUnit, SETTINGS_EVENT } from '../../lib/settings';
 import type { Guessable, Dataset, Guess, GameMode } from '../../lib/game/types';
 
 const LAND_BASE = 'rgba(232, 217, 181, 0.18)'; // unguessed land tint
@@ -173,7 +174,7 @@ export function initGlobeGame(root: HTMLElement) {
     });
 
   // ---- Rendering helpers ----
-  const km = (n: number) => `${Math.round(n).toLocaleString('en-US')} km`;
+  const km = (n: number) => formatDistance(n);
 
   function refreshGlobe() {
     globe.polygonCapColor((f) => capColor(f as GeoFeature));
@@ -188,9 +189,21 @@ export function initGlobeGame(root: HTMLElement) {
     els.closestVal.innerHTML = closest
       ? `${flag(closest.country.cca2)} ${closest.country.name}`
       : '—';
-    els.borderVal.textContent = closest ? km(closest.distanceKm) : '— km';
+    els.borderVal.textContent = closest ? km(closest.distanceKm) : `— ${getUnit()}`;
     els.guessVal.textContent = String(engine.guessCount);
   }
+
+  /** Rebuild the whole guess list (used after a unit change). */
+  function renderList() {
+    els.list.innerHTML = '';
+    engine.guesses.forEach((g) => addRow(g)); // prepend each → newest on top
+  }
+
+  // Re-render distances when the user switches km/mi.
+  window.addEventListener(SETTINGS_EVENT, () => {
+    renderList();
+    renderInfo();
+  });
 
   function addRow(g: Guess, prepend = true) {
     const row = document.createElement('li');

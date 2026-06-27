@@ -36,6 +36,10 @@
   --shadow-panel: 0 8px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.04);
   --danger: #E06A5A;
 
+  /* ---- Atmosphere / chrome (theme-swappable) ---- */
+  --bg-glow:   #15304d;                 /* top radial glow behind content */
+  --chrome-bg: rgba(11, 22, 34, 0.6);   /* header / footer translucent bg */
+
   /* ---- Typography ---- */
   --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
   --font-body:    'Hanken Grotesk Variable', system-ui, -apple-system, sans-serif;
@@ -77,4 +81,29 @@
   --dur-fast: 0.18s;
   --dur:      0.35s;
   --dur-slow: 0.7s;
+}
+
+/* ==========================================================================
+   Light theme — warm "parchment / old map" palette. Game heat colours,
+   globe sea/land and win/danger stay shared from :root.
+   ========================================================================== */
+html[data-theme='light'] {
+  --bg-deep:    #ECE3CF;
+  --bg-panel:   #FBF6EA;
+  --bg-panel-2: #EFE5CF;
+
+  --text:      #21303D;
+  --text-dim:  #4E5E6B;
+  --text-mute: #897A5C;
+
+  --accent:     #A8730E;
+  --accent-dim: rgba(168, 115, 14, 0.14);
+  --grid:       rgba(168, 115, 14, 0.18);
+  --line:       rgba(33, 48, 61, 0.16);
+
+  --shadow-glow:  0 0 60px rgba(168, 115, 14, 0.16);
+  --shadow-panel: 0 8px 24px rgba(90, 70, 25, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+
+  --bg-glow:   #FBF3DD;
+  --chrome-bg: rgba(251, 246, 234, 0.72);
 }
