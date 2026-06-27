@@ -14,6 +14,9 @@ export const SITE = {
   legalUpdated: 'June 27, 2026',
   /** Governing law for the Terms of Service. */
   jurisdiction: 'the United States',
+  /** Default meta keywords (overridable per page). */
+  keywords:
+    'globle unlimited, globle, globle game, country guessing game, geography game, mystery country, guess the country, 3d globe game',
 } as const;
 
 export const MODES = [

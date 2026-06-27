@@ -15,6 +15,10 @@ interface Props {
   /** Path-only canonical, e.g. "/how-to-play". Defaults to current URL. */
   path?: string;
   ogImage?: string;
+  /** Comma-separated meta keywords for this page. */
+  keywords?: string;
+  /** Robots directive. */
+  robots?: string;
   /** Any number of JSON-LD objects to inject. */
   schema?: Record<string, unknown>[];
   /** Hide site chrome (used by full-bleed game pages if needed). */
@@ -26,6 +30,8 @@ const {
   description = SITE.description,
   path,
   ogImage = SITE.ogImage,
+  keywords = SITE.keywords,
+  robots = 'index, follow',
   schema = [],
   bare = false,
 } = Astro.props;
@@ -39,8 +45,11 @@ const ogImageUrl = new URL(ogImage, SITE.url).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- Apply saved theme before paint to avoid a flash (light is the default) -->
     <script is:inline>
@@ -54,7 +63,11 @@ const ogImageUrl = new URL(ogImage, SITE.url).href;
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content={robots} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="en" href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -85,6 +98,15 @@ const ogImageUrl = new URL(ogImage, SITE.url).href;
         />
       ))
     }
+
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-XW8L3WFYLE"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-XW8L3WFYLE');
+    </script>
   </head>
   <body>
     {!bare && <Header />}

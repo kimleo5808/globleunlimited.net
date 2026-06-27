@@ -1,3 +1,7 @@
 # Cloudflare Pages redirects
 # Canonical host (www -> apex) handled at DNS/Pages level.
+
+# Serve the Astro sitemap index at the conventional /sitemap.xml path.
+/sitemap.xml  /sitemap-index.xml  200
+
 # Add game/content redirects here as routes evolve.
