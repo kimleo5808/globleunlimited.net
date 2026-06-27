@@ -55,9 +55,22 @@ body::after {
   mix-blend-mode: overlay;
 }
 
-/* Light theme: drop the starfield (looks wrong on parchment), keep faint grain */
-html[data-theme='light'] body::before { display: none; }
-html[data-theme='light'] body::after { opacity: .025; mix-blend-mode: multiply; }
+/* ---- Light theme: a clear sky with soft clouds (globe floats in it) ---- */
+html[data-theme='light'] body {
+  /* vertical sky gradient: blue up top fading to pale green-white near the horizon */
+  background-image: linear-gradient(180deg, #BFE4F6 0%, #D4ECF6 42%, #E9F4E8 100%);
+}
+html[data-theme='light'] body::before {
+  /* repurpose the star layer as soft white clouds framing the edges */
+  background-image:
+    radial-gradient(55% 30% at 12% 6%,  rgba(255,255,255,0.95), transparent 62%),
+    radial-gradient(50% 28% at 82% 10%, rgba(255,255,255,0.88), transparent 62%),
+    radial-gradient(75% 34% at 50% 102%, rgba(255,255,255,0.95), transparent 58%),
+    radial-gradient(42% 24% at 92% 88%, rgba(255,255,255,0.85), transparent 62%),
+    radial-gradient(40% 22% at 6% 82%,  rgba(255,255,255,0.85), transparent 62%);
+  opacity: 1;
+}
+html[data-theme='light'] body::after { opacity: .02; mix-blend-mode: multiply; }
 
 /* keep content above atmosphere */
 #app, main, header, footer { position: relative; z-index: 1; }

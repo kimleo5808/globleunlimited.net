@@ -84,26 +84,26 @@
 }
 
 /* ==========================================================================
-   Light theme — warm "parchment / old map" palette. Game heat colours,
-   globe sea/land and win/danger stay shared from :root.
+   Light theme — soft "sky blue" palette (globe floats in a clear sky).
+   Game heat colours, globe sea/land and win/danger stay shared from :root.
    ========================================================================== */
 html[data-theme='light'] {
-  --bg-deep:    #ECE3CF;
-  --bg-panel:   #FBF6EA;
-  --bg-panel-2: #EFE5CF;
+  --bg-deep:    #E6F3FC;
+  --bg-panel:   #F4FAFE;
+  --bg-panel-2: #E0EFFA;
 
-  --text:      #21303D;
-  --text-dim:  #4E5E6B;
-  --text-mute: #897A5C;
+  --text:      #15303F;
+  --text-dim:  #426074;
+  --text-mute: #7C97A8;
 
-  --accent:     #A8730E;
-  --accent-dim: rgba(168, 115, 14, 0.14);
-  --grid:       rgba(168, 115, 14, 0.18);
-  --line:       rgba(33, 48, 61, 0.16);
+  --accent:     #B07A10;
+  --accent-dim: rgba(176, 122, 16, 0.14);
+  --grid:       rgba(27, 70, 95, 0.14);
+  --line:       rgba(27, 70, 95, 0.16);
 
-  --shadow-glow:  0 0 60px rgba(168, 115, 14, 0.16);
-  --shadow-panel: 0 8px 24px rgba(90, 70, 25, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  --shadow-glow:  0 0 60px rgba(130, 190, 230, 0.30);
+  --shadow-panel: 0 8px 24px rgba(40, 90, 130, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.65);
 
-  --bg-glow:   #FBF3DD;
-  --chrome-bg: rgba(251, 246, 234, 0.72);
+  --bg-glow:   #C7E6F8;
+  --chrome-bg: rgba(244, 250, 254, 0.72);
 }
