@@ -1,0 +1,20 @@
+# build output
+dist/
+.output/
+
+# dependencies
+node_modules/
+
+# astro
+.astro/
+
+# generated map data cache
+scripts/data/
+
+# logs & env
+*.log
+.env
+.env.production
+.DS_Store
+Thumbs.db
+.gstack/

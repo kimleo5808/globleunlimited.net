@@ -1,0 +1,188 @@
+---
+// Interactive Globle game island. Hydrates client-side.
+import type { GameMode } from '../../lib/game/types';
+interface Props {
+  /** Game mode drives the round logic. Defaults to unlimited. */
+  mode?: GameMode;
+}
+const { mode = 'unlimited' } = Astro.props;
+---
+
+<div class="game" data-game data-mode={mode}>
+  <!-- Guess input + autocomplete -->
+  <form class="guess-form rise" style="--d:160ms" data-guess-form autocomplete="off">
+    <div class="guess-field">
+      <input
+        type="text"
+        class="guess-input"
+        data-guess-input
+        placeholder="Enter country name…"
+        aria-label="Enter country name"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        disabled
+      />
+      <div class="suggest" data-suggest hidden role="listbox" aria-label="Country suggestions"></div>
+    </div>
+    <button type="submit" class="btn btn-primary" disabled>Enter</button>
+  </form>
+
+  <!-- Globe -->
+  <div class="globe-stage rise" style="--d:240ms">
+    <div class="globe-mount" data-globe role="img" aria-label="Interactive globe showing your guesses">
+      <span class="globe-hint mono" data-globe-hint>Loading globe…</span>
+    </div>
+  </div>
+
+  <!-- Info bar -->
+  <div class="info-bar rise" style="--d:320ms">
+    <div class="info-cell">
+      <span class="info-label mono">Closest</span>
+      <span class="info-value" data-closest>—</span>
+    </div>
+    <div class="info-cell">
+      <span class="info-label mono">Closest border</span>
+      <span class="info-value mono" data-border>— km</span>
+    </div>
+    <div class="info-cell">
+      <span class="info-label mono">Guesses</span>
+      <span class="info-value mono" data-guesscount>0</span>
+    </div>
+    <div class="info-cell" data-streak-cell hidden>
+      <span class="info-label mono">Streak</span>
+      <span class="info-value mono" data-streak>0</span>
+    </div>
+  </div>
+
+  <!-- Guess list -->
+  <ul class="guess-list" data-list aria-label="Your guesses"></ul>
+
+  <!-- A11y live region -->
+  <p class="sr-only" aria-live="polite" data-live></p>
+
+  <!-- Win modal -->
+  <div class="modal-overlay" data-modal hidden>
+    <div class="modal card" role="dialog" aria-modal="true" aria-label="You found it">
+      <div class="modal-emoji">🎉</div>
+      <h2 class="modal-title">You found it!</h2>
+      <p class="modal-line">
+        The mystery country was <strong data-modal-country></strong>.
+      </p>
+      <p class="modal-line">
+        Solved in <strong class="mono" data-modal-guesses>0</strong> guesses.
+      </p>
+      <p class="modal-line modal-extra" data-modal-extra hidden></p>
+      <div class="modal-actions">
+        <button class="btn btn-primary" data-play-again>▶ Play Again</button>
+        <a class="btn btn-primary" href="/" data-daily-cta hidden>▶ Play Unlimited</a>
+        <button class="btn btn-ghost" data-share>Share</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initGlobeGame } from './globe-game';
+  const root = document.querySelector<HTMLElement>('[data-game]');
+  if (root) initGlobeGame(root);
+</script>
+
+<style>
+  .game { display: flex; flex-direction: column; align-items: center; }
+
+  /* Input + autocomplete */
+  .guess-form { display: flex; gap: var(--space-2); justify-content: center; margin-top: var(--space-6); width: 100%; }
+  .guess-field { position: relative; width: min(360px, 70vw); }
+  .guess-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    color: var(--text);
+  }
+  .guess-input::placeholder { color: var(--text-mute); }
+  .guess-input[aria-invalid='true'] { border-color: var(--danger); }
+  .guess-input:disabled { opacity: 0.5; }
+
+  .suggest {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0; right: 0;
+    z-index: 30;
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-panel);
+    overflow: hidden;
+    text-align: left;
+  }
+  /* dynamically created via innerHTML — must be :global() so styles apply */
+  .game :global(.suggest-item) {
+    display: block; width: 100%; text-align: left;
+    padding: var(--space-2) var(--space-4);
+    background: transparent; border: 0; cursor: pointer;
+    color: var(--text); font-size: var(--fs-small);
+  }
+  .game :global(.suggest-item:hover), .game :global(.suggest-item.active) { background: var(--bg-panel-2); color: var(--accent); }
+  .game :global(.suggest-error) { padding: var(--space-2) var(--space-4); color: var(--danger); font-size: var(--fs-small); }
+
+  /* Globe */
+  .globe-stage { display: grid; place-items: center; margin-top: var(--space-8); width: 100%; }
+  .globe-mount {
+    width: min(460px, 84vw);
+    aspect-ratio: 1;
+    display: grid; place-items: center;
+    filter: drop-shadow(var(--shadow-glow));
+    cursor: grab;
+  }
+  .globe-mount:active { cursor: grabbing; }
+  .globe-mount :global(canvas) { border-radius: 50%; }
+  .globe-hint { color: var(--text-dim); font-size: var(--fs-small); }
+
+  /* Info bar */
+  .info-bar { display: flex; justify-content: center; gap: var(--space-8); margin-top: var(--space-6); flex-wrap: wrap; }
+  .info-cell { display: flex; flex-direction: column; gap: 2px; align-items: center; }
+  .info-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mute); }
+  .info-value { font-size: var(--fs-data); color: var(--text); }
+
+  /* Guess list */
+  .guess-list { list-style: none; padding: 0; margin: var(--space-6) 0 0; width: min(420px, 90vw); display: flex; flex-direction: column; gap: var(--space-1); }
+  .game :global(.guess-row) {
+    display: grid;
+    grid-template-columns: 16px 24px 1fr auto;
+    align-items: center; gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    animation: rise var(--dur) var(--ease) both;
+  }
+  .game :global(.guess-row.is-correct) { border-color: var(--win); box-shadow: 0 0 0 1px var(--win); }
+  .game :global(.swatch) { width: 16px; height: 16px; border-radius: 4px; }
+  .game :global(.g-name) { color: var(--text); }
+  .game :global(.g-dist) { color: var(--text-dim); font-size: var(--fs-small); }
+
+  /* Modal */
+  .modal-overlay[hidden] { display: none; }
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    display: grid; place-items: center;
+    background: rgba(11, 22, 34, 0.7);
+    backdrop-filter: blur(4px);
+    padding: var(--space-4);
+    animation: rise var(--dur-fast) var(--ease) both;
+  }
+  .modal { max-width: 380px; width: 100%; padding: var(--space-8); text-align: center; }
+  .modal-emoji { font-size: 2.5rem; }
+  .modal-title { margin-top: var(--space-2); }
+  .modal-line { color: var(--text-dim); margin-top: var(--space-2); }
+  .modal-extra { color: var(--accent); font-family: var(--font-mono); font-size: var(--fs-small); }
+  .modal-extra[hidden] { display: none; }
+  .modal-actions { display: flex; gap: var(--space-3); justify-content: center; margin-top: var(--space-6); }
+
+  @media (max-width: 560px) {
+    .info-bar { gap: var(--space-6); }
+  }
+</style>

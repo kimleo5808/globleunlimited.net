@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const title = 'Globle Blog – Tips, Strategy & Geography Games';
+const description =
+  'The Globle Unlimited blog: strategy guides, the hardest countries to guess, and the best geography games like Globle. Get better and play smarter.';
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+
+<BaseLayout title={title} description={description} path="/blog">
+  <section class="prose page">
+    <p class="crumb"><a href="/">Home</a> › Blog</p>
+    <h1>Globle Blog</h1>
+    <p class="lede">
+      Strategy guides, geography deep-dives and the best games like Globle. Read up, then put it to
+      work in <a href="/">Globle Unlimited</a>.
+    </p>
+
+    <ul class="posts">
+      {posts.map((p) => (
+        <li class="post card">
+          <a href={`/blog/${p.id}/`} class="post-link">
+            <h2>{p.data.title}</h2>
+            <p class="post-desc">{p.data.description}</p>
+            <p class="post-meta mono">{fmt(p.data.date)}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .page { padding-block: var(--space-12); }
+  .crumb { font-size: var(--fs-small); color: var(--text-mute); margin-bottom: var(--space-4); }
+  .crumb a { color: var(--text-dim); }
+  h1 { font-size: var(--fs-h1); margin-bottom: var(--space-4); }
+  .lede { font-size: 1.1rem; margin-bottom: var(--space-8); }
+  .posts { list-style: none; padding: 0; display: flex; flex-direction: column; gap: var(--space-4); }
+  .post { transition: border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+  .post:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .post-link { display: block; padding: var(--space-6); }
+  .post h2 { font-size: var(--fs-h3); color: var(--text); }
+  .post-desc { margin-top: var(--space-2); }
+  .post-meta { margin-top: var(--space-3); color: var(--text-mute); font-size: var(--fs-small); }
+</style>

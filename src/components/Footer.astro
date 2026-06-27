@@ -1,0 +1,83 @@
+---
+import { FOOTER_LINKS, DISCLAIMER, SITE } from '../lib/site';
+const year = 2026; // build-time constant; bump on release
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img src="/assets/svg/logo.svg" alt="Globle Unlimited" width="200" height="38" />
+      <p class="footer-tagline">{SITE.tagline}.</p>
+      <p class="footer-source">
+        Map data: <a href="https://www.naturalearthdata.com/" rel="nofollow noopener" target="_blank">Natural Earth</a>
+        · Imagery: <a href="https://visibleearth.nasa.gov/" rel="nofollow noopener" target="_blank">NASA Visible Earth</a>
+      </p>
+    </div>
+
+    <nav class="footer-col" aria-label="Play">
+      <h2 class="footer-h">Play</h2>
+      {FOOTER_LINKS.play.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <nav class="footer-col" aria-label="Learn">
+      <h2 class="footer-h">Learn</h2>
+      {FOOTER_LINKS.learn.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <nav class="footer-col" aria-label="About">
+      <h2 class="footer-h">About</h2>
+      {FOOTER_LINKS.about.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+  </div>
+
+  <div class="container footer-bottom">
+    <p class="disclaimer">{DISCLAIMER}</p>
+    <p class="copyright">© {year} {SITE.domain}</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--line);
+    margin-top: var(--space-16);
+    padding-block: var(--space-12) var(--space-8);
+    background: rgba(11, 22, 34, 0.5);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: var(--space-8);
+  }
+  .footer-brand img { height: 36px; width: auto; margin-bottom: var(--space-3); }
+  .footer-tagline { color: var(--text-dim); margin-bottom: var(--space-2); }
+  .footer-source { font-size: var(--fs-small); color: var(--text-mute); }
+  .footer-source a { color: var(--text-dim); }
+  .footer-col { display: flex; flex-direction: column; gap: var(--space-2); }
+  .footer-h {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: var(--space-1);
+  }
+  .footer-col a { font-size: var(--fs-small); color: var(--text-dim); }
+  .footer-col a:hover { color: var(--accent); }
+
+  .footer-bottom {
+    margin-top: var(--space-12);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+  .disclaimer { font-size: 0.8rem; color: var(--text-mute); max-width: 60ch; }
+  .copyright { font-size: 0.8rem; color: var(--text-mute); font-family: var(--font-mono); }
+
+  @media (max-width: 760px) {
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+</style>

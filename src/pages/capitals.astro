@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Globle Capitals – Guess the Capital City Game';
+const description =
+  'Globle Capitals: guess the mystery capital city on a 3D globe. A tougher twist on Globle Unlimited for geography buffs. Coming soon.';
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What is Globle Capitals?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Globle Capitals is a variant where the mystery answer is a capital city instead of a country. You guess capital cities and the distance between them guides you to the answer.',
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/capitals" schema={schema}>
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-title rise" style="--d:0ms">Globle Capitals</h1>
+      <p class="hero-sub rise" style="--d:80ms">
+        Guess the mystery <strong>capital city</strong> on the globe — coming soon.
+      </p>
+      <div class="soon card rise" style="--d:160ms">
+        <p class="soon-emoji">🏛️</p>
+        <p>Globle Capitals is in the works. In the meantime, sharpen your geography on the country game.</p>
+        <a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a>
+      </div>
+    </div>
+  </section>
+
+  <article class="prose content">
+    <h2>What Is Globle Capitals?</h2>
+    <p>
+      <strong>Globle Capitals is a tougher twist on Globle where the mystery answer is a capital
+      city rather than a country.</strong> You type capital cities, and each guess reveals how far
+      it sits from the target capital — testing not just where countries are, but where their
+      capitals actually lie.
+    </p>
+
+    <h2>How It Will Differ from Countries</h2>
+    <p>
+      Country borders are large targets; capitals are single points, so distances are sharper and
+      the game rewards precise geographic knowledge. If you enjoy
+      <a href="/">Globle Unlimited</a>, Capitals will be the next challenge.
+    </p>
+
+    <p class="cta-row"><a href="/how-to-play" class="btn btn-ghost">Learn how Globle works</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-block: var(--space-12) var(--space-8); }
+  .hero-inner { text-align: center; max-width: 760px; margin-inline: auto; }
+  .hero-title { font-size: var(--fs-display); }
+  .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
+  .rise { animation-delay: var(--d, 0ms); }
+  .soon { max-width: 460px; margin: var(--space-8) auto 0; padding: var(--space-8); text-align: center; }
+  .soon p { margin-bottom: var(--space-4); }
+  .soon-emoji { font-size: 2.5rem; }
+  .content { margin-top: var(--space-16); }
+  .cta-row { margin-top: var(--space-8); }
+</style>

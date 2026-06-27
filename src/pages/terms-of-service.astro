@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, DISCLAIMER } from '../lib/site';
+
+const title = 'Terms of Service – Globle Unlimited';
+const description =
+  'The terms governing your use of Globle Unlimited: acceptable use, intellectual property, disclaimers, limitation of liability, and governing law.';
+
+const schema: Record<string, unknown>[] = [
+  { '@context': 'https://schema.org', '@type': 'WebPage', name: title, url: SITE.url + '/terms-of-service' },
+];
+---
+
+<BaseLayout title={title} description={description} path="/terms-of-service" schema={schema}>
+  <article class="prose legal">
+    <p class="crumb"><a href="/">Home</a> › Terms of Service</p>
+    <h1>Terms of Service</h1>
+    <p class="updated mono">Last updated: {SITE.legalUpdated}</p>
+
+    <p class="lede">
+      These Terms of Service (&ldquo;Terms&rdquo;) govern your access to and use of
+      {SITE.name} at {SITE.domain} (the &ldquo;Service&rdquo;). By using the Service, you agree to
+      these Terms. Please read them carefully. If you do not agree, please do not use the Service.
+    </p>
+
+    <h2>1. Acceptance of terms</h2>
+    <p>
+      By accessing or using the Service, you confirm that you can form a binding contract and that
+      you accept these Terms and our <a href="/privacy-policy">Privacy Policy</a>, which is
+      incorporated here by reference. If you are using the Service on behalf of an organisation, you
+      represent that you are authorised to accept these Terms on its behalf. These Terms apply to
+      every visitor and user of the Service.
+    </p>
+
+    <h2>2. Eligibility</h2>
+    <p>
+      You must be able to form a legally binding contract to use the Service. The Service is
+      intended for a general audience and is not directed at children under 13. If you are a minor
+      in your jurisdiction, you may use the Service only with the involvement of a parent or
+      guardian. By using the Service, you represent that you meet these requirements and that your
+      use complies with all laws that apply to you.
+    </p>
+
+    <h2>3. The Service</h2>
+    <p>
+      Globle Unlimited is a free, browser-based geography game. We may add, change, or remove
+      features at any time. We may also limit, suspend, or discontinue the Service, in whole or in
+      part, without notice. The Service is provided for personal, non-commercial entertainment and
+      educational use. We do not guarantee that the Service will always be available or that it will
+      be free of interruptions, delays, or errors.
+    </p>
+
+    <h2>4. Licence to use</h2>
+    <p>
+      Subject to these Terms, we grant you a limited, non-exclusive, non-transferable, revocable
+      licence to access and use the Service for your own personal, non-commercial purposes. This
+      licence does not allow you to resell, redistribute, frame, mirror, or commercially exploit the
+      Service or its content. All rights not expressly granted to you are reserved by us.
+    </p>
+
+    <h2>5. Acceptable use</h2>
+    <p>You agree not to:</p>
+    <ul>
+      <li>Use the Service in any way that violates applicable law or regulation.</li>
+      <li>Attempt to gain unauthorised access to the Service, its servers, or related systems.</li>
+      <li>Interfere with or disrupt the integrity or performance of the Service, including by
+        scraping, overloading, or deploying automated tools beyond normal gameplay.</li>
+      <li>Copy, modify, or create derivative works of the Service except as expressly permitted.</li>
+      <li>Remove or obscure any proprietary notices, or misrepresent your affiliation with us.</li>
+      <li>Use the Service to transmit malware or to engage in any fraudulent or harmful activity.</li>
+    </ul>
+    <p>
+      We may investigate and take appropriate action against anyone who, in our sole discretion,
+      violates this section, including blocking access to the Service.
+    </p>
+
+    <h2>6. Intellectual property</h2>
+    <p>
+      The Service&rsquo;s design, code, text, graphics and original assets are owned by us or our
+      licensors and are protected by intellectual-property laws. Map data is provided by
+      <a href="https://www.naturalearthdata.com/" rel="nofollow noopener" target="_blank">Natural Earth</a>
+      (public domain) and globe imagery is based on
+      <a href="https://visibleearth.nasa.gov/" rel="nofollow noopener" target="_blank">NASA Visible Earth</a>
+      (public domain); these are used in accordance with their terms. All other trademarks and
+      brand names are the property of their respective owners.
+    </p>
+
+    <h2>7. Trademark and independence notice</h2>
+    <p>
+      {DISCLAIMER} This Service is an independent, fan-made project. Any references to the original
+      game are nominative and do not imply any endorsement, sponsorship, or affiliation. If you are
+      a rights holder and have a concern, please <a href="/contact">contact us</a>.
+    </p>
+
+    <h2>8. Your feedback</h2>
+    <p>
+      If you send us ideas, suggestions, or feedback about the Service, you grant us a perpetual,
+      irrevocable, worldwide, royalty-free licence to use and incorporate that feedback for any
+      purpose, without any obligation or compensation to you. We value your input and may use it to
+      improve the Service.
+    </p>
+
+    <h2>9. Accuracy of game content</h2>
+    <p>
+      The Service is for entertainment and educational purposes. While we strive for geographic
+      accuracy using trusted open data, borders, place names, distances, and daily answers may
+      contain errors or simplifications and should not be relied upon for navigation, legal,
+      academic, or other authoritative purposes.
+    </p>
+
+    <h2>10. Third-party links and advertising</h2>
+    <p>
+      The Service may contain links to third-party websites and may display third-party advertising,
+      including through Google AdSense. We do not control and are not responsible for third-party
+      content, products, or practices. Your dealings with third parties, including advertisers, are
+      solely between you and them. See our <a href="/privacy-policy">Privacy Policy</a> for how
+      advertising data is handled.
+    </p>
+
+    <h2>11. Disclaimer of warranties</h2>
+    <p>
+      The Service is provided on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis,
+      without warranties of any kind, whether express or implied, including warranties of
+      merchantability, fitness for a particular purpose, accuracy, and non-infringement. We do not
+      warrant that the Service will be uninterrupted, error-free, or that geographic data and
+      answers are free from inaccuracies. You use the Service at your own risk.
+    </p>
+
+    <h2>12. Limitation of liability</h2>
+    <p>
+      To the fullest extent permitted by law, we will not be liable for any indirect, incidental,
+      special, consequential, or punitive damages, or any loss of data, profits, or goodwill,
+      arising from your use of or inability to use the Service. Our total liability for any claim
+      relating to the Service will not exceed one hundred U.S. dollars (US$100). Some jurisdictions
+      do not allow certain limitations, so some of the above may not apply to you.
+    </p>
+
+    <h2>13. Indemnification</h2>
+    <p>
+      You agree to indemnify and hold us harmless from any claims, damages, liabilities, and
+      expenses (including reasonable legal fees) arising from your misuse of the Service or your
+      violation of these Terms or any applicable law.
+    </p>
+
+    <h2>14. Termination</h2>
+    <p>
+      We may suspend or terminate your access to the Service at any time, with or without cause or
+      notice. You may stop using the Service at any time. Provisions that by their nature should
+      survive termination (including intellectual property, disclaimers, limitation of liability,
+      and indemnification) will survive.
+    </p>
+
+    <h2>15. Changes to these Terms</h2>
+    <p>
+      We may update these Terms from time to time. When we do, we will revise the &ldquo;Last
+      updated&rdquo; date above. Your continued use of the Service after changes take effect
+      constitutes acceptance of the revised Terms. We encourage you to review this page
+      periodically.
+    </p>
+
+    <h2>16. Governing law and disputes</h2>
+    <p>
+      These Terms are governed by and construed in accordance with the laws of {SITE.jurisdiction},
+      without regard to its conflict-of-laws principles. You agree to the exclusive jurisdiction of
+      the courts located in {SITE.jurisdiction} for any dispute arising out of these Terms or the
+      Service, to the extent permitted by applicable law.
+    </p>
+
+    <h2>17. General provisions</h2>
+    <p>
+      <strong>Severability:</strong> if any provision of these Terms is held invalid, the remaining
+      provisions will continue in full effect.
+      <strong>Entire agreement:</strong> these Terms and the Privacy Policy are the entire agreement
+      between you and us regarding the Service.
+      <strong>No waiver:</strong> our failure to enforce any right or provision is not a waiver of
+      that right.
+      <strong>Assignment:</strong> you may not assign these Terms without our consent; we may assign
+      them freely.
+      <strong>Force majeure:</strong> we are not liable for delays or failures caused by events
+      beyond our reasonable control.
+    </p>
+
+    <h2>18. Contact</h2>
+    <p>
+      Questions about these Terms? Email
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or visit our
+      <a href="/contact">contact page</a>.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal { padding-block: var(--space-12); }
+  .crumb { font-size: var(--fs-small); color: var(--text-mute); margin-bottom: var(--space-4); }
+  .crumb a { color: var(--text-dim); }
+  h1 { font-size: var(--fs-h1); margin-bottom: var(--space-2); }
+  .updated { color: var(--text-mute); font-size: var(--fs-small); margin-bottom: var(--space-6); }
+  .lede { font-size: 1.05rem; }
+  .legal ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+  .legal a { color: var(--accent); }
+</style>

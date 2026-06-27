@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://globleunlimited.net/sitemap-index.xml

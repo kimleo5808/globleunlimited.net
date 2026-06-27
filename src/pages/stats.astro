@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Your Globle Stats – Streaks & Best Scores';
+const description =
+  'See your Globle stats: daily streak, best guess count, games played and your guess distribution. Stored privately in your browser.';
+---
+
+<BaseLayout title={title} description={description} path="/stats">
+  <section class="container stats-wrap">
+    <h1 class="rise">Your Stats</h1>
+    <p class="sub rise" style="--d:80ms">Saved privately in your browser — nothing leaves your device.</p>
+
+    <div class="stat-blocks rise" style="--d:160ms">
+      <section class="card stat-card">
+        <h2>🔥 Daily</h2>
+        <dl class="grid">
+          <div><dt>Current streak</dt><dd class="mono" data-s="daily.currentStreak">0</dd></div>
+          <div><dt>Max streak</dt><dd class="mono" data-s="daily.maxStreak">0</dd></div>
+          <div><dt>Played</dt><dd class="mono" data-s="daily.played">0</dd></div>
+          <div><dt>Best guesses</dt><dd class="mono" data-s="daily.bestGuesses">—</dd></div>
+        </dl>
+      </section>
+
+      <section class="card stat-card">
+        <h2>♾️ Unlimited</h2>
+        <dl class="grid">
+          <div><dt>Wins</dt><dd class="mono" data-s="unlimited.wins">0</dd></div>
+          <div><dt>Played</dt><dd class="mono" data-s="unlimited.played">0</dd></div>
+          <div><dt>Best guesses</dt><dd class="mono" data-s="unlimited.bestGuesses">—</dd></div>
+        </dl>
+        <h3 class="dist-title">Guess distribution</h3>
+        <div class="dist" data-dist="unlimited"></div>
+      </section>
+    </div>
+
+    <p class="cta-row rise" style="--d:240ms"><a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a></p>
+  </section>
+</BaseLayout>
+
+<script>
+  import { getStats } from '../lib/game/stats';
+  import type { GameMode } from '../lib/game/types';
+
+  function set(path: string, value: string | number | null) {
+    const el = document.querySelector(`[data-s="${path}"]`);
+    if (el) el.textContent = value == null ? '—' : String(value);
+  }
+
+  (['daily', 'unlimited'] as GameMode[]).forEach((mode) => {
+    const s = getStats(mode);
+    set(`${mode}.currentStreak`, s.currentStreak);
+    set(`${mode}.maxStreak`, s.maxStreak);
+    set(`${mode}.played`, s.played);
+    set(`${mode}.wins`, s.wins);
+    set(`${mode}.bestGuesses`, s.bestGuesses);
+  });
+
+  // Distribution bars for unlimited
+  const dist = getStats('unlimited').distribution;
+  const keys = ['1', '2', '3', '4', '5', '6', '7+'];
+  const max = Math.max(1, ...keys.map((k) => dist[k] ?? 0));
+  const host = document.querySelector('[data-dist="unlimited"]');
+  if (host) {
+    host.innerHTML = keys
+      .map((k) => {
+        const n = dist[k] ?? 0;
+        const pct = Math.round((n / max) * 100);
+        return `<div class="dist-row"><span class="dist-k mono">${k}</span><span class="dist-bar" style="width:${Math.max(6, pct)}%">${n || ''}</span></div>`;
+      })
+      .join('');
+  }
+</script>
+
+<style>
+  .stats-wrap { padding-block: var(--space-12); max-width: 860px; }
+  .stats-wrap h1 { font-size: var(--fs-h1); }
+  .sub { color: var(--text-dim); margin-top: var(--space-2); }
+  .rise { animation: rise var(--dur) var(--ease) both; animation-delay: var(--d, 0ms); }
+
+  .stat-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); margin-top: var(--space-8); }
+  .stat-card { padding: var(--space-6); }
+  .stat-card h2 { font-size: var(--fs-h3); margin-bottom: var(--space-4); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  .grid dt { font-size: var(--fs-small); color: var(--text-mute); }
+  .grid dd { font-size: 1.6rem; color: var(--accent); }
+
+  .dist-title { font-size: var(--fs-small); color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; margin: var(--space-6) 0 var(--space-3); }
+  .dist { display: flex; flex-direction: column; gap: var(--space-2); }
+  .dist :global(.dist-row) { display: grid; grid-template-columns: 24px 1fr; align-items: center; gap: var(--space-2); }
+  .dist :global(.dist-k) { color: var(--text-dim); font-size: var(--fs-small); }
+  .dist :global(.dist-bar) {
+    background: var(--accent); color: var(--bg-deep); font-weight: 700;
+    font-size: var(--fs-small); padding: 2px var(--space-2);
+    border-radius: var(--radius-sm); text-align: right; min-width: 18px;
+  }
+
+  .cta-row { margin-top: var(--space-8); }
+
+  @media (max-width: 640px) {
+    .stat-blocks { grid-template-columns: 1fr; }
+  }
+</style>

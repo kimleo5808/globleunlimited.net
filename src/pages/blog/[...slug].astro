@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { SITE } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const url = `${SITE.url}/blog/${post.id}`;
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.date.toISOString(),
+    dateModified: (post.data.updated ?? post.data.date).toISOString(),
+    author: { '@type': 'Organization', name: post.data.author },
+    publisher: { '@type': 'Organization', name: SITE.name },
+    mainEntityOfPage: url,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url + '/' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: SITE.url + '/blog' },
+      { '@type': 'ListItem', position: 3, name: post.data.title, item: url },
+    ],
+  },
+];
+---
+
+<BaseLayout title={`${post.data.title} | Globle Unlimited`} description={post.data.description} path={`/blog/${post.id}`} schema={schema}>
+  <article class="prose page">
+    <p class="crumb"><a href="/">Home</a> › <a href="/blog">Blog</a> › {post.data.title}</p>
+    <h1>{post.data.title}</h1>
+    <p class="byline mono">By {post.data.author} · {fmt(post.data.date)}</p>
+
+    <div class="post-body">
+      <Content />
+    </div>
+
+    <hr />
+    <p class="cta-row"><a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a></p>
+    <p><a href="/blog">← Back to all posts</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .page { padding-block: var(--space-12); }
+  .crumb { font-size: var(--fs-small); color: var(--text-mute); margin-bottom: var(--space-4); }
+  .crumb a { color: var(--text-dim); }
+  h1 { font-size: var(--fs-h1); margin-bottom: var(--space-2); }
+  .byline { color: var(--text-mute); font-size: var(--fs-small); margin-bottom: var(--space-8); }
+
+  .post-body :global(h2) { font-family: var(--font-display); font-size: var(--fs-h2); margin-top: var(--space-12); margin-bottom: var(--space-4); padding-left: var(--space-4); border-left: 3px solid var(--accent); }
+  .post-body :global(h3) { font-size: var(--fs-h3); color: var(--text); margin-top: var(--space-8); margin-bottom: var(--space-2); }
+  .post-body :global(p) { color: var(--text-dim); margin-bottom: var(--space-4); }
+  .post-body :global(ul), .post-body :global(ol) { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+  .post-body :global(a) { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  .post-body :global(strong) { color: var(--text); }
+  .post-body :global(table) { width: 100%; border-collapse: collapse; margin: var(--space-6) 0; font-size: var(--fs-small); }
+  .post-body :global(th), .post-body :global(td) { border: 1px solid var(--line); padding: var(--space-2) var(--space-3); text-align: left; }
+  .post-body :global(th) { background: var(--bg-panel); color: var(--accent); }
+  .post-body :global(td) { color: var(--text-dim); }
+
+  hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-12) 0 var(--space-6); }
+  .cta-row { margin-bottom: var(--space-4); }
+</style>

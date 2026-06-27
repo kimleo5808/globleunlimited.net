@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, DISCLAIMER } from '../lib/site';
+
+const title = 'About Globle Unlimited – Our Geography Game Mission';
+const description =
+  'Meet the team behind Globle Unlimited. Why we built an unlimited, free country-guessing globe game and the open map data that powers it.';
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'About Globle Unlimited',
+    url: SITE.url + '/about',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE.name,
+    url: SITE.url,
+    email: SITE.email,
+    description: SITE.description,
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/about" schema={schema}>
+  <article class="prose legal">
+    <p class="crumb"><a href="/">Home</a> › About</p>
+    <h1>About Globle Unlimited</h1>
+
+    <p class="lede">
+      <strong>Globle Unlimited is a free, browser-based geography game where you guess a hidden
+      mystery country on a 3D globe — for as many rounds as you like.</strong> We built it for
+      everyone who finished the daily Globle and immediately wanted to play again.
+    </p>
+
+    <h2>Why we built Globle Unlimited</h2>
+    <p>
+      The original Globle is a brilliant daily ritual, but a daily game gives you exactly one puzzle
+      and then asks you to wait until tomorrow. For people learning the world map — students,
+      travellers, trivia fans, or anyone who just loves geography — one round a day is not enough.
+      We wanted a version you could keep playing: round after round, country after country, until
+      the map lives in your head. That is the whole idea behind the unlimited mode.
+    </p>
+    <p>
+      Everything on the site is designed around that goal. The interactive globe uses real
+      satellite imagery so the world looks like the world. Guesses are scored by genuine
+      great-circle distance, not a rough approximation. And the
+      <a href="/blog">strategy guides</a> exist to help you actually improve, not just play.
+    </p>
+
+    <h2>Who makes it</h2>
+    <p>
+      Globle Unlimited is built and maintained by a small, independent team of geography and
+      web-game enthusiasts. We are players first: we test every change against real rounds, tune
+      the difficulty by feel, and read the feedback that lands in our inbox. We are not a large
+      studio, which means the game stays focused, fast, and free of clutter.
+    </p>
+
+    <h2>The data behind the game</h2>
+    <p>
+      Accuracy matters in a geography game, so we use trusted, openly licensed sources:
+    </p>
+    <ul>
+      <li><strong>Country borders</strong> come from
+        <a href="https://www.naturalearthdata.com/" rel="nofollow noopener" target="_blank">Natural Earth</a>,
+        a public-domain map dataset maintained by the cartographic community.</li>
+      <li><strong>Globe imagery</strong> is based on NASA&rsquo;s
+        <a href="https://visibleearth.nasa.gov/" rel="nofollow noopener" target="_blank">Visible Earth / Blue Marble</a>,
+        also in the public domain.</li>
+      <li><strong>Country metadata</strong> (names, regions and coordinates) is derived from open
+        datasets and refined for gameplay.</li>
+    </ul>
+    <p>
+      Distances are calculated using the haversine formula on each country&rsquo;s centre point, so
+      the colour you see reflects real geographic proximity.
+    </p>
+
+    <h2>Our relationship to the official Globle</h2>
+    <p>
+      We love the original game, and we want to be completely clear about who we are.
+      {DISCLAIMER} We are a fan-made tribute and an independent project. All trademarks belong to
+      their respective owners.
+    </p>
+
+    <h2>How the game works</h2>
+    <p>
+      When a round starts, the game selects a mystery country. Each time you guess, we measure the
+      great-circle distance between your guess and the answer and translate it into a colour: pale
+      yellow when you are far away, deepening through orange to red as you close in. The
+      <a href="/daily">daily challenge</a> uses a shared date seed so the whole world hunts the same
+      country, while <a href="/practice">practice mode</a> lets you warm up without affecting your
+      streak. If you ever want to see how the scoring and colours fit together, our
+      <a href="/how-to-play">how-to-play guide</a> walks through it step by step.
+    </p>
+
+    <h2>What we value</h2>
+    <ul>
+      <li><strong>Fast and free.</strong> The game should load instantly and never ask for money or
+        an account to play.</li>
+      <li><strong>Accurate.</strong> Borders, distances and answers come from trusted open data, not
+        guesswork.</li>
+      <li><strong>Private.</strong> Your progress stays on your device. We collect as little as
+        possible.</li>
+      <li><strong>Honest.</strong> We say plainly that we are an independent project, and we credit
+        every data source we use.</li>
+    </ul>
+
+    <h2>Accessibility</h2>
+    <p>
+      We want everyone to be able to play. Guess results show the distance in kilometres alongside
+      the colour, so the game is playable without relying on colour alone. We support keyboard
+      input, respect your system&rsquo;s reduced-motion setting, and announce guess results to
+      screen readers. If you hit an accessibility barrier, please tell us — it helps us fix it.
+    </p>
+
+    <h2>What&rsquo;s next</h2>
+    <p>
+      We are actively improving Globle Unlimited. A dedicated <a href="/capitals">Capitals mode</a>
+      is in development, and we are always refining difficulty, performance and the strategy content
+      on our <a href="/blog">blog</a>. The best way to shape what comes next is to play and tell us
+      what you think.
+    </p>
+
+    <h2>Free, private, and player-friendly</h2>
+    <p>
+      The game is free to play and requires no account. Your stats and streaks are stored privately
+      in your own browser — not on our servers. You can read exactly what we do and do not collect
+      in our <a href="/privacy-policy">Privacy Policy</a>, and the rules of use in our
+      <a href="/terms-of-service">Terms of Service</a>.
+    </p>
+
+    <h2>Get in touch</h2>
+    <p>
+      Found a bug, have a feature idea, or just want to say hello? We genuinely read everything.
+      Email us at <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or use the
+      <a href="/contact">contact page</a>. Then go play a few rounds of
+      <a href="/">Globle Unlimited</a> — that is the best way to tell us what works.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal { padding-block: var(--space-12); }
+  .crumb { font-size: var(--fs-small); color: var(--text-mute); margin-bottom: var(--space-4); }
+  .crumb a { color: var(--text-dim); }
+  h1 { font-size: var(--fs-h1); margin-bottom: var(--space-4); }
+  .lede { font-size: 1.1rem; }
+  .legal ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+  .legal a { color: var(--accent); }
+</style>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 200" width="760" height="200" font-family="'Space Mono', monospace">
+  <defs>
+    <linearGradient id="heat" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"    stop-color="#FFEDA0"/>
+      <stop offset="0.35" stop-color="#FEB24C"/>
+      <stop offset="0.6"  stop-color="#E8743B"/>
+      <stop offset="0.82" stop-color="#C42D1C"/>
+      <stop offset="1"    stop-color="#8B0000"/>
+    </linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#13243A"/>
+      <stop offset="1" stop-color="#0B1622"/>
+    </linearGradient>
+  </defs>
+  <rect width="760" height="200" rx="14" fill="url(#bg)"/>
+  <text x="32" y="44" fill="#EAF2F8" font-size="22" font-family="'Fraunces', serif" font-weight="600">Distance → Colour Heatmap</text>
+  <text x="32" y="68" fill="#9DB2C6" font-size="13">The hotter the colour, the closer your guess is to the mystery country.</text>
+
+  <rect x="32" y="92" width="696" height="34" rx="8" fill="url(#heat)" stroke="rgba(244,201,93,.25)"/>
+  <!-- ticks -->
+  <g fill="#0B1622" font-size="12" font-weight="700" text-anchor="middle">
+    <text x="70"  y="114">FAR</text>
+    <text x="690" y="114" fill="#FFEDA0">NEAR</text>
+  </g>
+  <!-- markers -->
+  <g font-size="12" text-anchor="middle">
+    <line x1="120" y1="126" x2="120" y2="150" stroke="#FEB24C" stroke-width="2"/>
+    <text x="120" y="170" fill="#FEB24C">France</text>
+    <line x1="320" y1="126" x2="320" y2="150" stroke="#E8743B" stroke-width="2"/>
+    <text x="320" y="170" fill="#E8743B">Nepal</text>
+    <line x1="500" y1="126" x2="500" y2="150" stroke="#C42D1C" stroke-width="2"/>
+    <text x="500" y="170" fill="#C42D1C">Mongolia</text>
+    <line x1="660" y1="126" x2="660" y2="150" stroke="#8B0000" stroke-width="2"/>
+    <text x="660" y="170" fill="#E06A5A">S. Korea</text>
+  </g>
+</svg>

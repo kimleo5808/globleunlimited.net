@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GlobeGame from '../components/game/GlobeGame.astro';
+import { SITE } from '../lib/site';
+
+const title = 'Globle Unlimited – Play the Endless Country Guessing Game';
+const description =
+  'Play Globle Unlimited free: guess the mystery country on a 3D globe with unlimited rounds. No daily wait—new game every time. Start now!';
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Globle Unlimited',
+    url: SITE.url,
+    genre: 'Geography puzzle',
+    gamePlatform: 'Web browser',
+    applicationCategory: 'Game',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Is Globle Unlimited free to play?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. Globle Unlimited is completely free to play in your browser, with no sign-up required.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How is Globle Unlimited different from the daily Globle game?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'The daily Globle gives you one mystery country per day. Globle Unlimited lets you play endless rounds back-to-back with a new random country every time—no daily wait.',
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/" schema={schema}>
+  <!-- ===== HERO / GAME ===== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-title rise" style="--d:0ms">Globle Unlimited</h1>
+      <p class="hero-sub rise" style="--d:80ms">
+        Guess the mystery country — <strong>unlimited rounds, no daily wait.</strong>
+      </p>
+
+      <GlobeGame />
+    </div>
+  </section>
+
+  <!-- ===== EDUCATIONAL CONTENT (skeleton) ===== -->
+  <article class="prose content">
+    <h2>What Is Globle Unlimited?</h2>
+    <p>
+      <strong>Globle Unlimited is a free browser game where you guess a hidden mystery
+      country on a 3D globe, with unlimited rounds and no daily limit.</strong> Each guess
+      lights up on the globe with a colour showing how close you are — the hotter the
+      colour, the nearer the mystery country.
+    </p>
+
+    <h2>How Guesses Are Scored</h2>
+    <p>
+      The closer your guess sits to the mystery country, the hotter (redder) it appears.
+      Distant guesses stay pale and cold.
+    </p>
+    <figure class="figure card">
+      <img src="/assets/svg/heat-scale.svg" alt="Distance to colour heatmap: far guesses are pale yellow, near guesses are deep red" loading="lazy" />
+    </figure>
+
+    <h2>How to Play</h2>
+    <figure class="figure card">
+      <img src="/assets/svg/how-to-play.svg" alt="If the mystery country is Japan, France is far and pale while South Korea is near and deep red" loading="lazy" />
+    </figure>
+
+    <p class="cta-row">
+      <a href="/how-to-play" class="btn btn-ghost">Read the full guide</a>
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-block: var(--space-12) var(--space-8); }
+  .hero-inner { text-align: center; max-width: 760px; }
+  .hero-title { font-size: var(--fs-display); letter-spacing: 0.01em; }
+  .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
+
+  .rise { animation-delay: var(--d, 0ms); }
+
+  .content { margin-top: var(--space-16); }
+  .figure { padding: var(--space-3); margin-block: var(--space-4); }
+  .figure img { width: 100%; height: auto; border-radius: var(--radius-sm); }
+  .cta-row { margin-top: var(--space-8); }
+</style>

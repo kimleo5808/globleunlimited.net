@@ -1,0 +1,68 @@
+---
+import { MODES } from '../lib/site';
+const path = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="brand" aria-label="Globle Unlimited — home">
+      <img src="/assets/svg/logo.svg" alt="" width="210" height="40" class="brand-logo" />
+    </a>
+
+    <nav class="modes" aria-label="Game modes">
+      {
+        MODES.map((m) => (
+          <a
+            href={m.href}
+            class:list={['mode-link', { active: path === m.href }]}
+          >
+            {m.label}
+          </a>
+        ))
+      }
+      <a href="/how-to-play" class="mode-link learn">How to Play</a>
+      <a href="/stats" class:list={['mode-link', 'icon', { active: path === '/stats' }]} aria-label="Your stats" title="Your stats">📊</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--line);
+    background: rgba(11, 22, 34, 0.6);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    height: 64px;
+  }
+  .brand-logo { height: 38px; width: auto; }
+  .modes {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+  .mode-link {
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-pill);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--text-dim);
+    transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+  }
+  .mode-link:hover { color: var(--text); background: var(--bg-panel-2); }
+  .mode-link.active { color: var(--accent); background: var(--accent-dim); }
+  .mode-link.learn { border: 1px solid var(--line); }
+
+  @media (max-width: 560px) {
+    .brand-logo { height: 30px; }
+    .mode-link { padding: var(--space-1) var(--space-2); }
+  }
+</style>

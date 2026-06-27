@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GlobeGame from '../components/game/GlobeGame.astro';
+
+const title = "Daily Globle – Today's Mystery Country Challenge";
+const description =
+  'Play today’s daily Globle: one mystery country, same for everyone. Compare scores and keep your streak. Want more? Try Globle Unlimited.';
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Daily Globle',
+    genre: 'Geography puzzle',
+    gamePlatform: 'Web browser',
+    applicationCategory: 'Game',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'When does the daily Globle reset?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'A new daily mystery country unlocks every day at 00:00 UTC, so players worldwide solve the same country on the same date.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Is everyone’s daily country the same?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. The daily Globle uses a shared date seed, so the mystery country is identical for every player on a given day.',
+        },
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/daily" schema={schema}>
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-title rise" style="--d:0ms">Daily Globle Challenge</h1>
+      <p class="hero-sub rise" style="--d:80ms">
+        One mystery country a day — <strong>same for everyone, keep your streak.</strong>
+      </p>
+      <GlobeGame mode="daily" />
+    </div>
+  </section>
+
+  <article class="prose content">
+    <h2>What&rsquo;s Today&rsquo;s Globle?</h2>
+    <p>
+      <strong>The daily Globle gives every player one shared mystery country each day.</strong>
+      Guess countries on the 3D globe and use the colour heatmap — hotter means closer — to
+      home in on the answer in as few guesses as possible. Solve it to extend your daily streak.
+    </p>
+
+    <h2>How the Daily Mystery Country Works</h2>
+    <p>
+      A new country unlocks every day at <strong>00:00 UTC</strong>. Because the daily Globle is
+      generated from a shared date seed, the mystery country is the same for everyone on a given
+      date — perfect for comparing scores with friends.
+    </p>
+
+    <h2>Daily vs Unlimited Globle</h2>
+    <p>
+      Prefer not to wait for tomorrow? <a href="/">Globle Unlimited</a> lets you play endless
+      rounds back-to-back with a new random country every time — no daily limit, no waiting.
+    </p>
+
+    <p class="cta-row"><a href="/" class="btn btn-ghost">Play Globle Unlimited</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-block: var(--space-12) var(--space-8); }
+  .hero-inner { text-align: center; max-width: 760px; }
+  .hero-title { font-size: var(--fs-display); }
+  .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
+  .rise { animation-delay: var(--d, 0ms); }
+  .content { margin-top: var(--space-16); }
+  .cta-row { margin-top: var(--space-8); }
+</style>

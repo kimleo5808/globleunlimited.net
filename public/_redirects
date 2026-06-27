@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects
+# Canonical host (www -> apex) handled at DNS/Pages level.
+# Add game/content redirects here as routes evolve.

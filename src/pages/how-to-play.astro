@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'How to Play Globle – Rules, Colors & Strategy Guide';
+const description =
+  'Learn how to play Globle and Globle Unlimited: the rules, how the color heatmap works, and pro strategies to guess the country in fewer tries.';
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to Play Globle Unlimited',
+    description:
+      'A step-by-step guide to playing Globle Unlimited, the country-guessing globe game.',
+    step: [
+      { '@type': 'HowToStep', name: 'Make a guess', text: 'Type the name of any country and press Enter.' },
+      { '@type': 'HowToStep', name: 'Read the colour', text: 'Your guess lights up on the 3D globe. The hotter (redder) the colour, the closer it is to the mystery country.' },
+      { '@type': 'HowToStep', name: 'Use the distance', text: 'Check the closest country and closest-border distance to narrow your search.' },
+      { '@type': 'HowToStep', name: 'Close in', text: 'Keep guessing toward the hottest colours until you find the mystery country.' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'Is there a time limit in Globle?', acceptedAnswer: { '@type': 'Answer', text: 'No. Globle has no timer. You can take as long as you like and make as many guesses as you need to find the mystery country.' } },
+      { '@type': 'Question', name: 'What counts as a correct guess?', acceptedAnswer: { '@type': 'Answer', text: 'You win when you type the exact mystery country. Spelling variants and common aliases (like USA for the United States) are accepted.' } },
+      { '@type': 'Question', name: 'How does the colour work in Globle?', acceptedAnswer: { '@type': 'Answer', text: 'Each guessed country is shaded by its distance to the mystery country. Pale yellow means far away; deep red means very close.' } },
+      { '@type': 'Question', name: 'Does Globle work on mobile?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. You can drag to rotate and pinch to zoom the globe on any phone or tablet, and play directly in the browser.' } },
+    ],
+  },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://globleunlimited.net/' },
+    { '@type': 'ListItem', position: 2, name: 'How to Play', item: 'https://globleunlimited.net/how-to-play' },
+  ]},
+];
+---
+
+<BaseLayout title={title} description={description} path="/how-to-play" schema={schema}>
+  <article class="prose page">
+    <p class="crumb"><a href="/">Home</a> › How to Play</p>
+    <h1>How to Play Globle Unlimited</h1>
+    <p class="lede">
+      <strong>Globle is a country-guessing game played on a 3D globe.</strong> Every round hides
+      one mystery country, and your job is to find it in as few guesses as possible using nothing
+      but geography and a colour-coded distance heatmap. This guide covers the rules, how the
+      colours work, and the strategies that cut your guess count.
+    </p>
+
+    <p class="cta-row"><a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a></p>
+
+    <h2>The Goal of Globle</h2>
+    <p>
+      <strong>The goal is to identify the hidden mystery country using the fewest guesses.</strong>
+      There is no time limit and no penalty for guessing, so the only score that matters is how
+      efficiently you close in. In Globle Unlimited you can do this over and over with a new random
+      country every round; in the <a href="/daily">daily challenge</a> everyone hunts the same
+      country on the same day.
+    </p>
+
+    <h2>Step-by-Step: How to Play</h2>
+    <ol>
+      <li><strong>Type any country</strong> into the box and press Enter to make your first guess.</li>
+      <li><strong>Watch it light up</strong> on the globe. The colour tells you how close that
+        country is to the mystery country.</li>
+      <li><strong>Read the distance.</strong> The panel shows your closest country so far and the
+        distance to the mystery country&rsquo;s border, in kilometres.</li>
+      <li><strong>Guess toward the heat.</strong> Pick your next country in the direction of the
+        hottest colours you&rsquo;ve revealed.</li>
+      <li><strong>Find it.</strong> When you guess the exact country, it flashes green and the
+        round is solved.</li>
+    </ol>
+    <figure class="figure card">
+      <img src="/assets/svg/how-to-play.svg" alt="If the mystery country is Japan, France is far and pale while South Korea is near and deep red" loading="lazy" />
+    </figure>
+
+    <h2>Understanding the Colour Heatmap</h2>
+    <p>
+      The heatmap is the heart of Globle. <strong>Each guess is shaded by how far its centre sits
+      from the mystery country&rsquo;s centre.</strong> The scale runs from pale yellow for the
+      most distant guesses to deep red for guesses that are almost on top of the answer.
+    </p>
+    <figure class="figure card">
+      <img src="/assets/svg/heat-scale.svg" alt="Distance to colour heatmap: far guesses are pale yellow, near guesses are deep red" loading="lazy" />
+    </figure>
+    <p>
+      Treat colour as a compass, not a coordinate. A deep-red country tells you the answer is in
+      its neighbourhood; a pale-yellow one tells you to look on the other side of the map. By
+      sandwiching the answer between warm and cool guesses, you triangulate the mystery country
+      quickly.
+    </p>
+
+    <h2>Reading &ldquo;Closest&rdquo; &amp; &ldquo;Closest Border&rdquo;</h2>
+    <p>
+      Below the globe, Globle shows your <strong>closest country</strong> so far and the
+      <strong>closest-border distance</strong> in kilometres. That number is your single best
+      progress signal: when it drops sharply after a guess, you are moving the right way; when it
+      climbs, back off and try the opposite direction. Use it together with the colours rather than
+      on its own.
+    </p>
+
+    <h2>Best Opening Guess Strategy</h2>
+    <p>
+      A strong first guess covers as much of the map as possible. <strong>Large, central countries
+      make the best openers</strong> because they sit near many others and give you a clear heat
+      reading no matter where the answer hides. Good choices include:
+    </p>
+    <ul>
+      <li><strong>Kazakhstan</strong> &mdash; huge and central to Eurasia.</li>
+      <li><strong>Algeria or Sudan</strong> &mdash; anchor the African landmass.</li>
+      <li><strong>Brazil</strong> &mdash; dominates South America.</li>
+      <li><strong>China or India</strong> &mdash; cover dense, populous Asia.</li>
+    </ul>
+    <p>
+      Open with one country from a couple of different continents and the heat colours will point
+      you to the right region within two or three guesses. For a deeper playbook, read our
+      <a href="/blog/globle-tips-strategy">Globle tips and strategy guide</a>.
+    </p>
+
+    <h2>Common Mistakes to Avoid</h2>
+    <ul>
+      <li><strong>Chasing one warm country too long.</strong> A red guess narrows the region, but
+        you still need to test its neighbours to find the exact answer.</li>
+      <li><strong>Ignoring the distance number.</strong> Colour is coarse; the kilometre reading is
+        precise. Use both.</li>
+      <li><strong>Forgetting small nations.</strong> The answer can be a tiny country tucked beside
+        a big one, so zoom in when the heat gets hot.</li>
+    </ul>
+
+    <h2>Globle Unlimited vs the Daily Globle</h2>
+    <p>
+      If you enjoy practising, <a href="/">Globle Unlimited</a> gives you endless rounds with no
+      waiting. When you want the shared challenge, the <a href="/daily">daily Globle</a> hides one
+      country for everyone each day, and a <a href="/practice">practice mode</a> lets you warm up
+      without touching your streak. Stuck on today&rsquo;s puzzle? Check the
+      <a href="/answer">Globle answer for today</a>.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details><summary>Is there a time limit in Globle?</summary><p>No. There is no timer &mdash; take as long as you like and guess as many times as you need.</p></details>
+      <details><summary>What counts as a correct guess?</summary><p>You win when you type the exact mystery country. Common spellings and aliases (like USA for the United States) are accepted.</p></details>
+      <details><summary>How does the colour work?</summary><p>Each guessed country is shaded by its distance to the mystery country: pale yellow is far, deep red is very close.</p></details>
+      <details><summary>Does Globle work on mobile?</summary><p>Yes. Drag to rotate and pinch to zoom the globe on any phone or tablet, right in the browser.</p></details>
+    </div>
+
+    <p class="cta-row"><a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .page { padding-block: var(--space-12); }
+  .crumb { font-size: var(--fs-small); color: var(--text-mute); margin-bottom: var(--space-4); }
+  .crumb a { color: var(--text-dim); }
+  h1 { font-size: var(--fs-h1); margin-bottom: var(--space-4); }
+  .lede { font-size: 1.1rem; }
+  .prose ol, .prose ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+  .figure { padding: var(--space-3); margin-block: var(--space-6); }
+  .figure img { width: 100%; height: auto; border-radius: var(--radius-sm); }
+  .cta-row { margin-block: var(--space-8); }
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+  .faq details { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+  .faq summary { cursor: pointer; color: var(--text); font-weight: 600; }
+  .faq p { margin-top: var(--space-2); }
+</style>

@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { answerForDate, shiftISO } from '../../lib/game/daily';
+import { flag } from '../../lib/game/countries';
+import { hintFor, prettyDate } from '../../lib/game/hint';
+
+const buildToday = new Date().toISOString().slice(0, 10);
+const country = answerForDate(buildToday);
+const hint = hintFor(country);
+const nice = prettyDate(buildToday);
+
+// Archive: previous 14 days
+const archive = Array.from({ length: 14 }, (_, i) => {
+  const date = shiftISO(buildToday, -(i + 1));
+  return { date, nice: prettyDate(date), country: answerForDate(date) };
+});
+
+const title = "Globle Answer Today – Today's Mystery Country";
+const description =
+  'Stuck on today’s Globle? Get today’s Globle answer plus a past answers archive. Hint first, full reveal below. Updated daily.';
+
+const schema: Record<string, unknown>[] = [
+  { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [
+    { '@type': 'Question', name: 'What time does the Globle answer update?', acceptedAnswer: { '@type': 'Answer', text: 'A new daily mystery country unlocks at 00:00 UTC, so the answer here refreshes once per day.' } },
+    { '@type': 'Question', name: 'Why show a hint instead of the answer right away?', acceptedAnswer: { '@type': 'Answer', text: 'The hint lets you nudge yourself toward the solution without spoiling it. The full answer is one tap away if you need it.' } },
+  ]},
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://globleunlimited.net/' },
+    { '@type': 'ListItem', position: 2, name: 'Answers', item: 'https://globleunlimited.net/answer' },
+  ]},
+];
+---
+
+<BaseLayout title={title} description={description} path="/answer" schema={schema}>
+  <article class="prose page">
+    <p class="crumb"><a href="/">Home</a> › Answers</p>
+    <h1>Globle Answer Today</h1>
+
+    <p class="lede">
+      Want to solve it yourself first? <a href="/">Play Globle Unlimited</a> before you peek. The
+      hint for <strong data-nice>{nice}</strong> is below, and the full answer is hidden until you
+      open it.
+    </p>
+
+    <h2>Today&rsquo;s Hint</h2>
+    <ul class="hint">
+      <li><strong>Region:</strong> <span data-h-region>{hint.region}</span></li>
+      <li><strong>Starts with:</strong> <span data-h-start>{hint.startsWith}</span></li>
+      <li><strong>Letters:</strong> <span data-h-letters>{hint.letters}</span></li>
+      <li><strong>Hemisphere:</strong> <span data-h-hemi>{hint.hemisphere}</span></li>
+    </ul>
+
+    <h2>Today&rsquo;s Answer</h2>
+    <details class="reveal">
+      <summary>Tap to reveal today&rsquo;s answer</summary>
+      <p class="answer">
+        <strong>The Globle answer for <span data-nice>{nice}</span> is
+        <span data-answer>{flag(country.cca2)} {country.name}</span>.</strong>
+      </p>
+    </details>
+
+    <h2>How to Find the Answer Faster</h2>
+    <p>
+      The quickest way to solve Globle is a strong opening guess followed by colour triangulation.
+      Read our <a href="/how-to-play">how-to-play guide</a> and
+      <a href="/blog/globle-tips-strategy">strategy tips</a> to cut your guess count, or jump
+      straight into <a href="/">unlimited practice</a>.
+    </p>
+
+    <h2>Past Globle Answers</h2>
+    <ul class="archive">
+      {archive.map((a) => (
+        <li>
+          <a href={`/answer/${a.date}`}>{a.nice}</a>
+          <span class="muted">{flag(a.country.cca2)} {a.country.name}</span>
+        </li>
+      ))}
+    </ul>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details><summary>What time does the Globle answer update?</summary><p>A new mystery country unlocks at 00:00 UTC, so this page refreshes once per day.</p></details>
+      <details><summary>Why a hint instead of the answer?</summary><p>The hint nudges you toward the solution without spoiling it. The full answer is one tap away.</p></details>
+    </div>
+
+    <p class="cta-row"><a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a></p>
+  </article>
+</BaseLayout>
+
+<script>
+  // Correct the answer to the visitor's actual UTC date (static HTML is built once).
+  import { answerForDate } from '../../lib/game/daily';
+  import { flag } from '../../lib/game/countries';
+  import { hintFor, prettyDate } from '../../lib/game/hint';
+
+  const today = new Date().toISOString().slice(0, 10);
+  const c = answerForDate(today);
+  const h = hintFor(c);
+  const set = (sel: string, val: string) => {
+    document.querySelectorAll(sel).forEach((el) => (el.textContent = val));
+  };
+  set('[data-nice]', prettyDate(today));
+  set('[data-h-region]', h.region);
+  set('[data-h-start]', h.startsWith);
+  set('[data-h-letters]', String(h.letters));
+  set('[data-h-hemi]', h.hemisphere);
+  set('[data-answer]', `${flag(c.cca2)} ${c.name}`);
+</script>
+
+<style>
+  .page { padding-block: var(--space-12); }
+  .crumb { font-size: var(--fs-small); color: var(--text-mute); margin-bottom: var(--space-4); }
+  .crumb a { color: var(--text-dim); }
+  h1 { font-size: var(--fs-h1); margin-bottom: var(--space-4); }
+  .lede { font-size: 1.05rem; }
+  .hint { color: var(--text-dim); padding-left: var(--space-6); margin: var(--space-3) 0; display: flex; flex-direction: column; gap: var(--space-1); }
+  .reveal { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-4); }
+  .reveal summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+  .answer { font-size: 1.15rem; margin-top: var(--space-3); color: var(--text); }
+  .archive { list-style: none; padding: 0; margin: var(--space-4) 0; display: flex; flex-direction: column; gap: var(--space-1); }
+  .archive li { display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-2) var(--space-3); background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+  .archive .muted { color: var(--text-mute); font-size: var(--fs-small); }
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+  .faq details { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+  .faq summary { cursor: pointer; color: var(--text); font-weight: 600; }
+  .faq p { margin-top: var(--space-2); }
+  .cta-row { margin-block: var(--space-8) var(--space-3); }
+</style>

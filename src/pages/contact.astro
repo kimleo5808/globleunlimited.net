@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
+
+const title = 'Contact Globle Unlimited – Get in Touch';
+const description =
+  'Contact the Globle Unlimited team. Report a bug, suggest a feature, or ask a question. We read every message.';
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: title,
+    url: SITE.url + '/contact',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: SITE.name,
+    url: SITE.url,
+    email: SITE.email,
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/contact" schema={schema}>
+  <article class="prose legal">
+    <p class="crumb"><a href="/">Home</a> › Contact</p>
+    <h1>Contact Us</h1>
+
+    <p class="lede">
+      Have a bug to report, a feature idea, or just want to say hello? We read every message and
+      reply as soon as we can.
+    </p>
+
+    <div class="contact-card card">
+      <p class="contact-label mono">Email us</p>
+      <a class="contact-email" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+    </div>
+
+    <h2>What to get in touch about</h2>
+    <ul>
+      <li><strong>Bug reports</strong> — something broken or a country that didn&rsquo;t match?
+        Tell us your browser and what happened.</li>
+      <li><strong>Feature ideas</strong> — new modes, settings, or improvements you&rsquo;d love.</li>
+      <li><strong>Feedback</strong> — what you enjoy, what frustrates you, what would make you
+        play more.</li>
+      <li><strong>Privacy questions</strong> — see our <a href="/privacy-policy">Privacy Policy</a>
+        or email us to exercise your data rights.</li>
+    </ul>
+
+    <h2>Send a message</h2>
+    <p>The form below opens your email app with the details pre-filled.</p>
+    <form class="contact-form" data-contact-form>
+      <label>
+        <span>Your name</span>
+        <input type="text" name="name" autocomplete="name" required />
+      </label>
+      <label>
+        <span>Subject</span>
+        <input type="text" name="subject" required />
+      </label>
+      <label>
+        <span>Message</span>
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <button type="submit" class="btn btn-primary">Open in email app</button>
+    </form>
+
+    <p class="note">
+      Prefer to play? Jump back into <a href="/">Globle Unlimited</a> or check your
+      <a href="/stats">stats</a>.
+    </p>
+  </article>
+</BaseLayout>
+
+<script is:inline define:vars={{ email: SITE.email }}>
+  const form = document.querySelector('[data-contact-form]');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const name = String(data.get('name') || '');
+    const subject = String(data.get('subject') || '');
+    const message = String(data.get('message') || '');
+    const body = `From: ${name}\n\n${message}`;
+    window.location.href =
+      `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>
+
+<style>
+  .legal { padding-block: var(--space-12); }
+  .crumb { font-size: var(--fs-small); color: var(--text-mute); margin-bottom: var(--space-4); }
+  .crumb a { color: var(--text-dim); }
+  h1 { font-size: var(--fs-h1); margin-bottom: var(--space-4); }
+  .lede { font-size: 1.1rem; }
+  .legal a { color: var(--accent); }
+  .legal ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+
+  .contact-card { padding: var(--space-6); text-align: center; margin: var(--space-6) 0; }
+  .contact-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-mute); }
+  .contact-email { display: inline-block; margin-top: var(--space-2); font-size: 1.4rem; font-family: var(--font-mono); color: var(--accent); }
+
+  .contact-form { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-4); max-width: 520px; }
+  .contact-form label { display: flex; flex-direction: column; gap: var(--space-2); }
+  .contact-form span { font-size: var(--fs-small); color: var(--text-dim); }
+  .contact-form input, .contact-form textarea {
+    background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm);
+    padding: var(--space-3) var(--space-4); color: var(--text); font-family: var(--font-body);
+  }
+  .contact-form input:focus-visible, .contact-form textarea:focus-visible { border-color: var(--accent); }
+  .contact-form button { align-self: flex-start; }
+  .note { margin-top: var(--space-8); color: var(--text-dim); }
+</style>

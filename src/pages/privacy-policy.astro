@@ -1,0 +1,208 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
+
+const title = 'Privacy Policy – Globle Unlimited';
+const description =
+  'How Globle Unlimited handles your data: local browser storage, analytics, advertising cookies, your GDPR/CCPA rights, and children’s privacy.';
+
+const schema: Record<string, unknown>[] = [
+  { '@context': 'https://schema.org', '@type': 'WebPage', name: title, url: SITE.url + '/privacy-policy' },
+];
+---
+
+<BaseLayout title={title} description={description} path="/privacy-policy" schema={schema}>
+  <article class="prose legal">
+    <p class="crumb"><a href="/">Home</a> › Privacy Policy</p>
+    <h1>Privacy Policy</h1>
+    <p class="updated mono">Last updated: {SITE.legalUpdated}</p>
+
+    <p class="lede">
+      This Privacy Policy explains what information {SITE.name} ({SITE.domain}, &ldquo;we&rdquo;,
+      &ldquo;us&rdquo;) collects when you use our website and games, how we use it, and the choices
+      you have. We keep data collection to a minimum: the game runs in your browser and does not
+      require an account.
+    </p>
+
+    <h2>1. Information we collect</h2>
+    <h3>Information stored in your browser</h3>
+    <p>
+      Globle Unlimited saves your game progress — including your guesses, streaks, best scores and
+      daily completion status — in your browser&rsquo;s <strong>local storage</strong>. This data
+      lives on your device only. We do not transmit it to our servers, and we cannot read it. You
+      can clear it at any time through your browser settings.
+    </p>
+    <h3>Information collected automatically</h3>
+    <p>
+      Like most websites, our hosting and analytics providers automatically receive certain
+      technical information when you visit, such as your IP address, browser type, device type,
+      referring page, and the pages you view. This information is used to operate the site, keep it
+      secure, and understand aggregate usage. We do not use it to personally identify you.
+    </p>
+    <h3>Information you send us</h3>
+    <p>
+      If you email us or use our <a href="/contact">contact page</a>, we receive the information you
+      choose to share (such as your email address and message) so we can respond. We use it only
+      for that purpose.
+    </p>
+
+    <h2>2. Cookies and similar technologies</h2>
+    <p>
+      A cookie is a small file stored on your device. We and our service providers use cookies and
+      similar technologies (including local storage) for these purposes:
+    </p>
+    <ul>
+      <li><strong>Essential:</strong> to make the game function and remember your progress.</li>
+      <li><strong>Analytics:</strong> to understand, in aggregate, how the site is used so we can
+        improve it.</li>
+      <li><strong>Advertising:</strong> if and when we display ads, to serve and measure them (see
+        the next section).</li>
+    </ul>
+    <p>
+      You can control or delete cookies through your browser settings. Blocking some cookies may
+      affect how the site works.
+    </p>
+
+    <h2>3. Advertising</h2>
+    <p>
+      We may display advertising on this site, including through <strong>Google AdSense</strong>.
+      When ads are enabled, third-party vendors, including Google, may use cookies to serve ads
+      based on your prior visits to this and other websites.
+    </p>
+    <ul>
+      <li>Google&rsquo;s use of advertising cookies enables it and its partners to serve ads to you
+        based on your visit to our site and/or other sites on the Internet.</li>
+      <li>You may opt out of personalised advertising by visiting
+        <a href="https://www.google.com/settings/ads" rel="nofollow noopener" target="_blank">Google Ads Settings</a>.</li>
+      <li>You can opt out of some third-party vendors&rsquo; use of cookies for personalised
+        advertising at
+        <a href="https://www.aboutads.info/choices/" rel="nofollow noopener" target="_blank">aboutads.info/choices</a>
+        or
+        <a href="https://www.youronlinechoices.eu/" rel="nofollow noopener" target="_blank">youronlinechoices.eu</a>.</li>
+    </ul>
+    <p>
+      For more information about how Google uses data when you use our site, see
+      <a href="https://policies.google.com/technologies/partner-sites" rel="nofollow noopener" target="_blank">Google&rsquo;s privacy &amp; terms</a>.
+    </p>
+
+    <h2>4. Analytics</h2>
+    <p>
+      We use privacy-respecting analytics (such as Cloudflare Web Analytics) to measure traffic in
+      aggregate. These tools help us see which pages are popular and how the site performs, without
+      building advertising profiles of individual visitors.
+    </p>
+
+    <h2>5. How we use information</h2>
+    <ul>
+      <li>To provide, operate and maintain the game and website.</li>
+      <li>To improve gameplay, content and performance.</li>
+      <li>To respond to your messages and support requests.</li>
+      <li>To display and measure advertising, where applicable.</li>
+      <li>To keep the site secure and prevent abuse.</li>
+    </ul>
+
+    <h2>6. Legal bases (EEA/UK users)</h2>
+    <p>
+      Where the GDPR applies, we process data on the following bases: our <strong>legitimate
+      interests</strong> in operating and improving the site; your <strong>consent</strong> for
+      non-essential cookies and personalised advertising; and compliance with
+      <strong>legal obligations</strong>. You may withdraw consent at any time.
+    </p>
+
+    <h2>7. Your rights and choices</h2>
+    <p>
+      Depending on where you live, you may have the right to access, correct, delete, or restrict
+      the processing of your personal data, to object to processing, and to data portability.
+      Residents of the EEA/UK have these rights under the GDPR; California residents have rights
+      under the CCPA/CPRA, including the right to know, delete, and opt out of the &ldquo;sale&rdquo;
+      or &ldquo;sharing&rdquo; of personal information. We do not sell personal information for
+      money. To exercise any right, email us at
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+    </p>
+
+    <h2>8. Children&rsquo;s privacy</h2>
+    <p>
+      Our site is intended for a general audience and is not directed at children under 13. We do
+      not knowingly collect personal information from children under 13 (or the equivalent minimum
+      age in your jurisdiction). When ads are served, we configure them appropriately for a general
+      audience. If you believe a child has provided us with personal information, please contact us
+      and we will delete it.
+    </p>
+
+    <h2>9. Data retention</h2>
+    <p>
+      Game progress remains in your browser until you clear it. Server logs and aggregate analytics
+      are retained only as long as needed for the purposes described above. Messages you send us are
+      kept as long as necessary to handle your request.
+    </p>
+
+    <h2>10. Data security</h2>
+    <p>
+      We take reasonable technical and organisational measures to protect information, including
+      serving the site over HTTPS. No method of transmission or storage is completely secure, so we
+      cannot guarantee absolute security.
+    </p>
+
+    <h2>11. Third-party links</h2>
+    <p>
+      Our site links to third-party websites (for example, our data sources and advertising
+      partners). We are not responsible for the privacy practices of those sites. We encourage you
+      to read their privacy policies.
+    </p>
+
+    <h2>12. International visitors</h2>
+    <p>
+      We operate online and may process information in countries other than your own. By using the
+      site, you understand that your information may be processed in those locations.
+    </p>
+
+    <h2>13. Managing cookies in your browser</h2>
+    <p>
+      Most browsers let you view, block, and delete cookies through their settings. You can usually
+      find these controls under &ldquo;Privacy&rdquo; or &ldquo;Cookies&rdquo; in Chrome, Firefox,
+      Safari, or Edge. You can also browse in a private/incognito window, which clears cookies and
+      local storage when you close it. Because Globle Unlimited stores your game progress in local
+      storage, clearing site data will reset your streaks and stats.
+    </p>
+
+    <h2>14. Do Not Track</h2>
+    <p>
+      Some browsers offer a &ldquo;Do Not Track&rdquo; (DNT) signal. There is no industry-wide
+      standard for how sites should respond to DNT, so we do not currently respond to DNT signals.
+      You can still control advertising cookies using the opt-out tools listed in the Advertising
+      section above.
+    </p>
+
+    <h2>15. Aggregated and de-identified data</h2>
+    <p>
+      We may create aggregated or de-identified data from usage information (for example, total
+      visits or popular pages). This data does not identify you, and we may use and share it for
+      analytics, reporting, and improving the Service. We will not attempt to re-identify such data.
+    </p>
+
+    <h2>16. Changes to this policy</h2>
+    <p>
+      We may update this Privacy Policy from time to time. When we do, we will revise the
+      &ldquo;Last updated&rdquo; date above. Significant changes will be reflected on this page.
+    </p>
+
+    <h2>17. Contact us</h2>
+    <p>
+      Questions about this policy or your data? Email
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or visit our
+      <a href="/contact">contact page</a>.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal { padding-block: var(--space-12); }
+  .crumb { font-size: var(--fs-small); color: var(--text-mute); margin-bottom: var(--space-4); }
+  .crumb a { color: var(--text-dim); }
+  h1 { font-size: var(--fs-h1); margin-bottom: var(--space-2); }
+  .updated { color: var(--text-mute); font-size: var(--fs-small); margin-bottom: var(--space-6); }
+  .lede { font-size: 1.05rem; }
+  .legal h3 { font-size: 1.05rem; color: var(--text); margin-top: var(--space-6); margin-bottom: var(--space-2); }
+  .legal ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+  .legal a { color: var(--accent); }
+</style>

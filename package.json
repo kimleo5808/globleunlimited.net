@@ -1,0 +1,32 @@
+{
+  "name": "globleunlimited",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Globle Unlimited — endless country-guessing globe game",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "build:maps": "node scripts/build-maps.mjs scripts/data assets/svg",
+    "build:data": "node scripts/build-countries.mjs scripts/data src/data public/assets/data"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@fontsource-variable/fraunces": "^5.1.0",
+    "@fontsource-variable/hanken-grotesk": "^5.1.0",
+    "@fontsource/space-mono": "^5.1.0",
+    "astro": "^5.2.5",
+    "globe.gl": "^2.46.1",
+    "three": "^0.185.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "d3-geo": "^3.1.1",
+    "topojson-client": "^3.1.0",
+    "typescript": "^5.7.3",
+    "world-countries": "^5.1.0"
+  }
+}

@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { answerForDate, shiftISO } from '../../lib/game/daily';
+import { flag } from '../../lib/game/countries';
+import { hintFor, prettyDate } from '../../lib/game/hint';
+
+export function getStaticPaths() {
+  // Deterministic window around the build date: 45 days back, 7 forward.
+  const today = new Date().toISOString().slice(0, 10);
+  const paths = [];
+  for (let i = -45; i <= 7; i++) {
+    const date = shiftISO(today, i);
+    paths.push({ params: { date } });
+  }
+  return paths;
+}
+
+const { date } = Astro.params as { date: string };
+const country = answerForDate(date);
+const hint = hintFor(country);
+const nice = prettyDate(date);
+const prev = shiftISO(date, -1);
+const next = shiftISO(date, 1);
+
+const title = `Globle Answer for ${nice} – Today's Mystery Country`;
+const description = `The Globle answer for ${nice} is revealed here, with a hint first. See the mystery country, its region and facts, plus past and upcoming answers.`;
+
+const schema: Record<string, unknown>[] = [
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://globleunlimited.net/' },
+    { '@type': 'ListItem', position: 2, name: 'Answers', item: 'https://globleunlimited.net/answer' },
+    { '@type': 'ListItem', position: 3, name: nice, item: `https://globleunlimited.net/answer/${date}` },
+  ]},
+];
+---
+
+<BaseLayout title={title} description={description} path={`/answer/${date}`} schema={schema}>
+  <article class="prose page">
+    <p class="crumb"><a href="/">Home</a> › <a href="/answer">Answers</a> › {nice}</p>
+    <h1>Globle Answer for {nice}</h1>
+
+    <p class="lede">
+      Trying to solve it yourself first? <a href="/">Play Globle Unlimited</a> or come back once
+      you&rsquo;ve made your guesses. The hint is below; the full answer is hidden until you open it.
+    </p>
+
+    <h2>Hint</h2>
+    <ul class="hint">
+      <li><strong>Region:</strong> {hint.region}</li>
+      <li><strong>Starts with:</strong> {hint.startsWith}</li>
+      <li><strong>Letters:</strong> {hint.letters}</li>
+      <li><strong>Hemisphere:</strong> {hint.hemisphere}</li>
+    </ul>
+
+    <h2>Answer</h2>
+    <details class="reveal">
+      <summary>Tap to reveal the answer</summary>
+      <p class="answer">
+        <strong>The Globle answer for {nice} is {flag(country.cca2)} {country.name}.</strong>
+      </p>
+      <ul class="facts">
+        <li><strong>Country:</strong> {country.name}</li>
+        <li><strong>Region:</strong> {country.region}{country.subregion ? ` (${country.subregion})` : ''}</li>
+        <li><strong>Hemisphere:</strong> {hint.hemisphere}</li>
+      </ul>
+    </details>
+
+    <nav class="pager">
+      <a class="btn btn-ghost" href={`/answer/${prev}`}>← {prettyDate(prev)}</a>
+      <a class="btn btn-ghost" href={`/answer/${next}`}>{prettyDate(next)} →</a>
+    </nav>
+
+    <p class="cta-row"><a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a></p>
+    <p><a href="/answer">See all Globle answers →</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .page { padding-block: var(--space-12); }
+  .crumb { font-size: var(--fs-small); color: var(--text-mute); margin-bottom: var(--space-4); }
+  .crumb a { color: var(--text-dim); }
+  h1 { font-size: var(--fs-h1); margin-bottom: var(--space-4); }
+  .lede { font-size: 1.05rem; }
+  .hint, .facts { color: var(--text-dim); padding-left: var(--space-6); margin: var(--space-3) 0; display: flex; flex-direction: column; gap: var(--space-1); }
+  .reveal { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-4); }
+  .reveal summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+  .answer { font-size: 1.15rem; margin-top: var(--space-3); color: var(--text); }
+  .pager { display: flex; justify-content: space-between; gap: var(--space-3); margin: var(--space-8) 0; flex-wrap: wrap; }
+  .cta-row { margin-block: var(--space-6) var(--space-3); }
+</style>

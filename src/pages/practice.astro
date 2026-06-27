@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GlobeGame from '../components/game/GlobeGame.astro';
+
+const title = 'Globle Practice Mode – Train Without Limits';
+const description =
+  'Practice Globle as much as you want—no streak pressure, no daily limit. Sharpen your geography before the daily challenge. Play free.';
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Globle Practice',
+    genre: 'Geography puzzle',
+    gamePlatform: 'Web browser',
+    applicationCategory: 'Game',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/practice" schema={schema}>
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-title rise" style="--d:0ms">Globle Practice Mode</h1>
+      <p class="hero-sub rise" style="--d:80ms">
+        Endless rounds, <strong>no streak pressure</strong> — just train your geography.
+      </p>
+      <GlobeGame mode="practice" />
+    </div>
+  </section>
+
+  <article class="prose content">
+    <h2>What Is Practice Mode?</h2>
+    <p>
+      <strong>Practice mode is a relaxed, unlimited way to play Globle without affecting your
+      streak.</strong> Each round picks a new random mystery country, so you can experiment with
+      opening guesses and learn the map at your own pace.
+    </p>
+
+    <h2>How It Differs from Daily &amp; Unlimited</h2>
+    <p>
+      Like <a href="/">Globle Unlimited</a>, practice rounds never run out. Unlike the
+      <a href="/daily">daily challenge</a>, nothing here counts toward your streak or stats —
+      it&rsquo;s a pressure-free sandbox to get better.
+    </p>
+
+    <h2>Why Practice Improves Your Score</h2>
+    <p>
+      Repetition builds an instinct for which countries border which, and which opening guesses
+      cover the most ground. A few practice rounds a day will steadily lower how many guesses you
+      need on the real daily Globle.
+    </p>
+
+    <p class="cta-row"><a href="/daily" class="btn btn-ghost">Try the Daily Challenge</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-block: var(--space-12) var(--space-8); }
+  .hero-inner { text-align: center; max-width: 760px; }
+  .hero-title { font-size: var(--fs-display); }
+  .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
+  .rise { animation-delay: var(--d, 0ms); }
+  .content { margin-top: var(--space-16); }
+  .cta-row { margin-top: var(--space-8); }
+</style>

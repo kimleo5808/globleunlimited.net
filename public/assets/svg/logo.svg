@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80" width="420" height="80" font-family="'Fraunces', Georgia, serif">
+  <defs>
+    <radialGradient id="lg-ocean" cx="38%" cy="35%" r="75%">
+      <stop offset="0" stop-color="#2C84BE"/>
+      <stop offset="1" stop-color="#143E5C"/>
+    </radialGradient>
+  </defs>
+  <!-- globe mark -->
+  <g transform="translate(40 40)">
+    <circle r="30" fill="url(#lg-ocean)" stroke="#F4C95D" stroke-width="1.5"/>
+    <g clip-path="url(#lc)">
+      <path d="M-18 -10 q8 -8 18 -2 q6 4 2 12 q-6 8 -16 4 q-10 -6 -4 -14z" fill="#E8D9B5"/>
+      <path d="M2 8 q10 -3 14 6 q3 8 -6 12 q-12 5 -16 -6 q-2 -8 8 -12z" fill="#E8D9B5"/>
+    </g>
+    <g stroke="rgba(244,201,93,.4)" fill="none" stroke-width="0.8">
+      <ellipse rx="11" ry="30"/><ellipse rx="22" ry="30"/>
+      <line x1="-30" y1="0" x2="30" y2="0"/>
+      <ellipse rx="30" ry="11"/><ellipse rx="30" ry="22"/>
+    </g>
+    <clipPath id="lc"><circle r="30"/></clipPath>
+  </g>
+  <!-- wordmark -->
+  <text x="86" y="38" fill="#EAF2F8" font-size="30" font-weight="600" letter-spacing="1">GLOBLE</text>
+  <text x="86" y="62" fill="#F4C95D" font-size="15" font-weight="500" letter-spacing="6" font-family="'Space Mono', monospace">UNLIMITED</text>
+</svg>
