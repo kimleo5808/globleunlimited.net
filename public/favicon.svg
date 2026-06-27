@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <radialGradient id="fav-ocean" cx="38%" cy="34%" r="75%">
+      <stop offset="0" stop-color="#2C9BE0"/>
+      <stop offset="1" stop-color="#1463A0"/>
+    </radialGradient>
+    <clipPath id="fav-clip"><circle cx="32" cy="32" r="29"/></clipPath>
+  </defs>
+
+  <!-- ocean disc + gold rim -->
+  <circle cx="32" cy="32" r="29" fill="url(#fav-ocean)" stroke="#F4C95D" stroke-width="3"/>
+
+  <!-- bold landmasses (read clearly at 16px) -->
+  <g clip-path="url(#fav-clip)" fill="#3FA15A">
+    <path d="M14 16 q10 -6 18 0 q7 5 2 13 q-6 8 -16 5 q-12 -5 -4 -23z"/>
+    <path d="M34 30 q11 -3 15 8 q3 10 -8 15 q-13 5 -17 -8 q-3 -12 10 -15z"/>
+    <path d="M10 36 q7 1 8 10 q1 8 -8 9 q-9 -1 -7 -11 q1 -9 7 -8z"/>
+  </g>
+
+  <!-- subtle meridians -->
+  <g clip-path="url(#fav-clip)" stroke="rgba(255,255,255,.35)" fill="none" stroke-width="1.4">
+    <ellipse cx="32" cy="32" rx="13" ry="29"/>
+    <line x1="3" y1="32" x2="61" y2="32"/>
+  </g>
+</svg>

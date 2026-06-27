@@ -158,7 +158,8 @@ export function initGlobeGame(root: HTMLElement) {
   }
   fitSize();
   new ResizeObserver(fitSize).observe(els.globeMount);
-  globe.pointOfView({ lat: 20, lng: 0, altitude: 2.4 }, 0);
+  const HOME_ALTITUDE = 1.85; // lower = globe fills more of the frame
+  globe.pointOfView({ lat: 20, lng: 0, altitude: HOME_ALTITUDE }, 0);
 
   // load polygons
   fetch(GEO_URL)
@@ -323,7 +324,7 @@ export function initGlobeGame(root: HTMLElement) {
     clearError();
     renderInfo();
     refreshGlobe();
-    globe.pointOfView({ lat: 20, lng: 0, altitude: 2.4 }, prefersReduced ? 0 : 700);
+    globe.pointOfView({ lat: 20, lng: 0, altitude: HOME_ALTITUDE }, prefersReduced ? 0 : 700);
     if (!prefersReduced) controls.autoRotate = true;
     els.input.focus();
   });
