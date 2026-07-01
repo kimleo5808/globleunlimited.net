@@ -22,8 +22,8 @@ function mainlandCentroid(geometry) {
   return geoCentroid(best);
 }
 import { createRequire } from 'node:module';
-const require = createRequire(import.meta.url);
-const worldCountries = require('world-countries');
+const requireCjs = createRequire(import.meta.url);
+const worldCountries = requireCjs('world-countries');
 
 const DATA_DIR = process.argv[2] || 'scripts/data';
 const OUT_DIR = process.argv[3] || 'src/data';          // small, bundled (import)

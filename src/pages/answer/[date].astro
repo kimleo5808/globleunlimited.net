@@ -10,7 +10,7 @@ export function getStaticPaths() {
   // backfill and no future dates (which would spoil upcoming dailies).
   const today = new Date().toISOString().slice(0, 10);
   const paths = [];
-  let d = SITE.launchDate;
+  let d: string = SITE.launchDate;
   let guard = 0;
   while (d <= today && guard < 4000) {
     paths.push({ params: { date: d } });
