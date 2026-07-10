@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" width="720" height="300" font-family="'Hanken Grotesk', system-ui, sans-serif">
+  <defs>
+    <linearGradient id="ca-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#13243A"/><stop offset="1" stop-color="#0B1622"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="720" height="300" rx="14" fill="url(#ca-bg)"/>
+  <text x="36" y="44" fill="#EAF2F8" font-size="22" font-family="'Fraunces', Georgia, serif" font-weight="600">Read the colours after every guess</text>
+
+  <!-- mini clue table: header + one animated row -->
+  <g font-family="'Space Mono', monospace" font-size="15">
+    <!-- headers -->
+    <g fill="#5E7891" font-size="12" font-family="'Hanken Grotesk', sans-serif">
+      <text x="60"  y="92">Country</text>
+      <text x="230" y="92" text-anchor="middle">Continent</text>
+      <text x="360" y="92" text-anchor="middle">Area</text>
+      <text x="470" y="92" text-anchor="middle">Borders</text>
+      <text x="590" y="92" text-anchor="middle">Landlocked</text>
+    </g>
+
+    <!-- row cells -->
+    <g>
+      <rect x="40" y="104" width="150" height="40" rx="6" fill="#13243A" stroke="#2b3f57"/>
+      <text x="54" y="129" fill="#EAF2F8" font-family="'Hanken Grotesk', sans-serif" font-size="14">🇧🇷 Brazil</text>
+
+      <rect x="196" y="104" width="120" height="40" rx="6" fill="#2E9E4F"><animate attributeName="opacity" values="0.2;1" dur="0.4s" begin="0.3s" fill="freeze"/></rect>
+      <text x="256" y="129" fill="#fff" text-anchor="middle">S. America</text>
+
+      <rect x="322" y="104" width="96" height="40" rx="6" fill="#FEB24C"><animate attributeName="opacity" values="0.2;1" dur="0.4s" begin="0.6s" fill="freeze"/></rect>
+      <text x="360" y="129" fill="#0B1622" text-anchor="middle">8.5M ↓</text>
+
+      <rect x="424" y="104" width="96" height="40" rx="6" fill="#8B0000"><animate attributeName="opacity" values="0.2;1" dur="0.4s" begin="0.9s" fill="freeze"/></rect>
+      <text x="472" y="129" fill="#EAF2F8" text-anchor="middle">10 ↓</text>
+
+      <rect x="526" y="104" width="150" height="40" rx="6" fill="#2E9E4F"><animate attributeName="opacity" values="0.2;1" dur="0.4s" begin="1.2s" fill="freeze"/></rect>
+      <text x="601" y="129" fill="#fff" text-anchor="middle">No</text>
+    </g>
+  </g>
+
+  <!-- legend -->
+  <g font-family="'Hanken Grotesk', sans-serif" font-size="14" fill="#9DB2C6">
+    <rect x="40"  y="196" width="22" height="22" rx="5" fill="#2E9E4F"/>
+    <text x="72"  y="212">Match — this attribute is exactly right</text>
+    <rect x="40"  y="230" width="22" height="22" rx="5" fill="#FEB24C"/>
+    <text x="72"  y="246">Close — getting warm</text>
+    <rect x="40"  y="264" width="22" height="22" rx="5" fill="#8B0000"/>
+    <text x="72"  y="280" fill="#9DB2C6">Far — off the mark</text>
+    <text x="440" y="212" fill="#F4C95D" font-family="'Space Mono', monospace">↑ / ↓</text>
+    <text x="490" y="212">answer is higher / lower</text>
+  </g>
+</svg>

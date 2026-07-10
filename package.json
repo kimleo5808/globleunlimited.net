@@ -12,7 +12,10 @@
     "check": "astro check",
     "build:maps": "node scripts/build-maps.mjs scripts/data assets/svg",
     "build:data": "node scripts/build-countries.mjs scripts/data src/data public/assets/data",
-    "build:capitals": "node scripts/build-capitals.mjs scripts/data/ne_places.json src/data"
+    "build:capitals": "node scripts/build-capitals.mjs scripts/data/ne_places.json src/data",
+    "build:silhouettes": "node scripts/build-silhouettes.mjs public/assets/data/world.geo.json public/assets/data/silhouettes.json",
+    "build:flags": "node scripts/build-flags.mjs",
+    "build:states": "node scripts/build-states.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
@@ -29,6 +32,7 @@
     "d3-geo": "^3.1.1",
     "topojson-client": "^3.1.0",
     "typescript": "^5.7.3",
+    "us-atlas": "^3.0.1",
     "world-countries": "^5.1.0"
   }
 }

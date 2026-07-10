@@ -76,6 +76,10 @@ for (const f of features) {
     lng: +lng.toFixed(4),
     region: meta?.region ?? '',
     subregion: meta?.subregion ?? '',
+    // Clue attributes for the Countryle-style /clues mode (all from world-countries).
+    area: meta?.area ?? 0,
+    borders: meta?.borders?.length ?? 0,
+    landlocked: meta?.landlocked ?? false,
     aliases: [...aliasSet].filter(Boolean),
   });
 

@@ -25,6 +25,12 @@ export interface Country {
   region?: string;
   /** Subregion, e.g. "Eastern Asia"; '' when unknown. */
   subregion?: string;
+  /** Land area in km² (from world-countries); 0 when unknown. */
+  area?: number;
+  /** Number of bordering countries; 0 for islands / unknown. */
+  borders?: number;
+  /** True if the country has no coastline. */
+  landlocked?: boolean;
   aliases: string[];
 }
 
@@ -37,9 +43,14 @@ export interface Guess {
   color: string;
   /** True when this guess is the mystery country. */
   correct: boolean;
+  /** Great-circle bearing (deg, 0 = N) from this guess toward the target.
+   *  Set by clue-based modes (silhouette); undefined elsewhere. */
+  bearing?: number;
+  /** Closeness as a 0–100 % score. Set by clue-based modes; undefined elsewhere. */
+  proximity?: number;
 }
 
-export type GameMode = 'unlimited' | 'daily' | 'practice' | 'capitals';
+export type GameMode = 'unlimited' | 'daily' | 'practice' | 'capitals' | 'silhouette' | 'flags' | 'clues' | 'states';
 
 export interface Capital {
   /** Capital city name. */
