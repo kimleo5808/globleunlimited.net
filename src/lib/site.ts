@@ -22,17 +22,8 @@ export const SITE = {
   launchDate: '2026-06-27',
 } as const;
 
-export const MODES = [
-  { href: '/daily', label: 'Daily' },
-  { href: '/silhouette', label: 'Worldle' },
-  { href: '/flags', label: 'Flags' },
-  { href: '/clues', label: 'Clues' },
-  { href: '/states', label: 'States' },
-  { href: '/practice', label: 'Practice' },
-  { href: '/capitals', label: 'Capitals' },
-] as const;
-
-/** Every playable mode — single source of truth for the /unlimited hub cards. */
+/** Every playable mode — single source of truth for the /unlimited hub cards
+ *  and the header "Games" dropdown (via FOOTER_LINKS.play). */
 export const GAME_MODES = [
   { href: '/', key: 'globe', name: 'Globle Unlimited', blurb: 'Guess the country on a 3D globe — it glows warmer as you close in.' },
   { href: '/silhouette', key: 'shape', name: 'Worldle Unlimited', blurb: 'Name the country from its silhouette alone, with distance and direction clues.' },
