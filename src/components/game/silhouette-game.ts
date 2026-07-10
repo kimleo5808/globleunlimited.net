@@ -39,6 +39,7 @@ export function initSilhouetteGame(root: HTMLElement) {
     suggestBox: $('[data-suggest]'),
     pips: $('[data-pips]'),
     pipCount: $('[data-pipcount]'),
+    clueTip: root.querySelector('[data-clue-tip]'),
     list: $('[data-list]'),
     live: $('[data-live]'),
     modal: $('[data-modal]'),
@@ -126,6 +127,7 @@ export function initSilhouetteGame(root: HTMLElement) {
     clearError();
     els.input.value = '';
     closeSuggest();
+    els.clueTip?.setAttribute('hidden', ''); // hint has served its purpose
     addRow(g);
     renderPips();
     announce(
@@ -170,6 +172,7 @@ export function initSilhouetteGame(root: HTMLElement) {
     clearError();
     els.input.disabled = false;
     (els.form.querySelector('button') as HTMLButtonElement).disabled = false;
+    els.clueTip?.removeAttribute('hidden');
     renderSilhouette(engine.target.name);
     renderPips();
     els.input.focus();

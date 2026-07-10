@@ -12,6 +12,11 @@
   --globe-sea:  #1E5F8C;
   --land:       #E8D9B5;
 
+  /* ---- Silhouette (Worldle / Statele) — high-contrast solid shape ----
+     Dark theme: warm parchment on a deep panel. Overridden for light below. */
+  --silhouette-fill:   #E8D9B5;
+  --silhouette-stroke: #F4C95D;
+
   /* ---- Distance heat scale (core gameplay semantics) ---- */
   --heat-0: #FFEDA0;   /* farthest / cold  */
   --heat-1: #FEB24C;
@@ -106,4 +111,9 @@ html[data-theme='light'] {
 
   --bg-glow:   #C7E6F8;
   --chrome-bg: rgba(244, 250, 254, 0.72);
+
+  /* Light theme: a pale parchment shape would vanish on the near-white card,
+     so the silhouette becomes a bold deep-ink solid for instant recognition. */
+  --silhouette-fill:   #1B3D4E;
+  --silhouette-stroke: #0C2531;
 }

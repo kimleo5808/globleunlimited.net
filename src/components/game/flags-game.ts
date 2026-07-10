@@ -26,6 +26,7 @@ export function initFlagsGame(root: HTMLElement) {
     suggestBox: $('[data-suggest]'),
     pips: $('[data-pips]'),
     pipCount: $('[data-pipcount]'),
+    clueTip: root.querySelector('[data-clue-tip]'),
     list: $('[data-list]'),
     live: $('[data-live]'),
     modal: $('[data-modal]'),
@@ -132,6 +133,7 @@ export function initFlagsGame(root: HTMLElement) {
     clearError();
     els.input.value = '';
     closeSuggest();
+    els.clueTip?.setAttribute('hidden', '');
     addRow(g);
     renderPips();
     if (!out.won) revealNext(engine.guessCount); // one tile per wrong guess
@@ -178,6 +180,7 @@ export function initFlagsGame(root: HTMLElement) {
     clearError();
     els.input.disabled = false;
     (els.form.querySelector('button') as HTMLButtonElement).disabled = false;
+    els.clueTip?.removeAttribute('hidden');
     loadFlag(engine.target.cca2);
     renderPips();
     els.input.focus();
