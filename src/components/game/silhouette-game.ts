@@ -6,7 +6,8 @@ import { flag, countriesDataset } from '../../lib/game/countries';
 import { statesDataset } from '../../lib/game/states';
 import { bearing, compassArrow, compassName, proximityPct } from '../../lib/game/direction';
 import { recordWin } from '../../lib/game/stats';
-import { formatDistance, SETTINGS_EVENT } from '../../lib/settings';
+import { formatDistance, getUnit, SETTINGS_EVENT } from '../../lib/settings';
+import type { Unit } from '../../lib/settings';
 import type { Guessable, Guess, GameMode, Dataset } from '../../lib/game/types';
 
 const MAX_GUESSES = 6;
@@ -24,6 +25,7 @@ export function initSilhouetteGame(root: HTMLElement) {
     sharePath: root.dataset.sharePath || '/silhouette',
     statsMode: (root.dataset.statsMode || 'silhouette') as GameMode,
     maxKm: Number(root.dataset.maxKm) || 20000,
+    unitDefault: (root.dataset.unitDefault || 'km') as Unit,
   };
   const dataset: Dataset = variant === 'states' ? statesDataset : countriesDataset;
   /** Leading icon for a guessed item: flag emoji for countries, code pill for states. */
@@ -56,7 +58,9 @@ export function initSilhouetteGame(root: HTMLElement) {
   const engine = new GameEngine('silhouette', undefined, dataset);
   let silhouettes: SilhouetteMap = {};
   let over = false;
-  const km = (n: number) => formatDistance(n);
+  // Respect an explicit unit choice; otherwise fall back to the page default
+  // (/states defaults to miles for its US audience).
+  const km = (n: number) => formatDistance(n, getUnit(cfg.unitDefault));
 
   // ---- Silhouette rendering ----
   function renderSilhouette(name: string) {

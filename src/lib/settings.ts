@@ -15,8 +15,13 @@ const safeSet = (k: string, v: string) => {
   try { localStorage.setItem(k, v); } catch { /* private mode */ }
 };
 
-export function getUnit(): Unit {
-  return safeGet(UNIT_KEY) === 'mi' ? 'mi' : 'km';
+/** Stored unit preference, or `fallback` when the user has never chosen one.
+ *  (Lets US-centric pages like /states default to miles without overriding a
+ *  preference the user has explicitly set.) */
+export function getUnit(fallback: Unit = 'km'): Unit {
+  const stored = safeGet(UNIT_KEY);
+  if (stored === 'mi' || stored === 'km') return stored;
+  return fallback;
 }
 export function setUnit(u: Unit) {
   safeSet(UNIT_KEY, u);

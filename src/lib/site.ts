@@ -37,7 +37,6 @@ export const GAME_MODES = [
 export const FOOTER_LINKS = {
   play: [
     { href: '/', label: 'Globle Unlimited' },
-    { href: '/unlimited', label: 'All Unlimited Games' },
     { href: '/daily', label: 'Daily Globle' },
     { href: '/silhouette', label: 'Worldle Unlimited' },
     { href: '/flags', label: 'Flagle Unlimited' },
@@ -45,6 +44,7 @@ export const FOOTER_LINKS = {
     { href: '/states', label: 'Statele Unlimited' },
     { href: '/practice', label: 'Practice Mode' },
     { href: '/capitals', label: 'Globle Capitals' },
+    { href: '/unlimited', label: 'All Unlimited Games' },
   ],
   learn: [
     { href: '/how-to-play', label: 'How to Play' },

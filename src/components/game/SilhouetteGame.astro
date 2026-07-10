@@ -12,12 +12,12 @@ const cfg =
     ? {
         noun: 'state', placeholder: 'Enter state name or abbreviation…', ariaInput: 'Enter state name',
         ariaImg: 'Silhouette of the mystery US state', silUrl: '/assets/data/us-states.silhouettes.json',
-        shareName: 'Statele Unlimited', sharePath: '/states', statsMode: 'states', maxKm: 6000,
+        shareName: 'Statele Unlimited', sharePath: '/states', statsMode: 'states', maxKm: 6000, unitDefault: 'mi',
       }
     : {
         noun: 'country', placeholder: 'Enter country name…', ariaInput: 'Enter country name',
         ariaImg: 'Silhouette of the mystery country', silUrl: '/assets/data/silhouettes.json',
-        shareName: 'Worldle Unlimited', sharePath: '/silhouette', statsMode: 'silhouette', maxKm: 20000,
+        shareName: 'Worldle Unlimited', sharePath: '/silhouette', statsMode: 'silhouette', maxKm: 20000, unitDefault: 'km',
       };
 ---
 
@@ -31,6 +31,7 @@ const cfg =
   data-share-path={cfg.sharePath}
   data-stats-mode={cfg.statsMode}
   data-max-km={cfg.maxKm}
+  data-unit-default={cfg.unitDefault}
 >
   <!-- Silhouette card -->
   <div class="sil-stage rise" style="--d:120ms">
