@@ -24,19 +24,40 @@ export const SITE = {
 
 export const MODES = [
   { href: '/daily', label: 'Daily' },
+  { href: '/silhouette', label: 'Worldle' },
+  { href: '/flags', label: 'Flags' },
+  { href: '/clues', label: 'Clues' },
+  { href: '/states', label: 'States' },
   { href: '/practice', label: 'Practice' },
   { href: '/capitals', label: 'Capitals' },
+] as const;
+
+/** Every playable mode — single source of truth for the /unlimited hub cards. */
+export const GAME_MODES = [
+  { href: '/', key: 'globe', name: 'Globle Unlimited', blurb: 'Guess the country on a 3D globe — it glows warmer as you close in.' },
+  { href: '/silhouette', key: 'shape', name: 'Worldle Unlimited', blurb: 'Name the country from its silhouette alone, with distance and direction clues.' },
+  { href: '/flags', key: 'flag', name: 'Flagle Unlimited', blurb: 'Guess the country from its flag, revealed one tile at a time.' },
+  { href: '/clues', key: 'clue', name: 'Countryle Unlimited', blurb: 'Deduce the country from six attribute clues — no map required.' },
+  { href: '/states', key: 'usstates', name: 'Statele Unlimited', blurb: 'Guess the US state from its outline — all 50 states.' },
+  { href: '/capitals', key: 'capital', name: 'Globle Capitals', blurb: 'Find the mystery capital city on the interactive globe.' },
+  { href: '/practice', key: 'practice', name: 'Practice Mode', blurb: 'Relaxed, unlimited rounds with no streak pressure.' },
 ] as const;
 
 export const FOOTER_LINKS = {
   play: [
     { href: '/', label: 'Globle Unlimited' },
+    { href: '/unlimited', label: 'All Unlimited Games' },
     { href: '/daily', label: 'Daily Globle' },
+    { href: '/silhouette', label: 'Worldle Unlimited' },
+    { href: '/flags', label: 'Flagle Unlimited' },
+    { href: '/clues', label: 'Countryle Unlimited' },
+    { href: '/states', label: 'Statele Unlimited' },
     { href: '/practice', label: 'Practice Mode' },
     { href: '/capitals', label: 'Globle Capitals' },
   ],
   learn: [
     { href: '/how-to-play', label: 'How to Play' },
+    { href: '/globle-vs-worldle', label: 'Globle vs Worldle' },
     { href: '/answer', label: "Today's Answer" },
     { href: '/blog', label: 'Blog' },
   ],

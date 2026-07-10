@@ -1,6 +1,11 @@
 ---
-import { MODES } from '../lib/site';
-const path = Astro.url.pathname;
+import { FOOTER_LINKS } from '../lib/site';
+// Normalize away the directory-format trailing slash so "/silhouette/" matches "/silhouette".
+const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+// All playable modes live in the single-source play list; the header collapses
+// them into one "Games" dropdown so the top bar stays uncluttered.
+const games = FOOTER_LINKS.play;
+const inGames = games.some((g) => g.href === path);
 ---
 
 <header class="site-header">
@@ -10,18 +15,28 @@ const path = Astro.url.pathname;
       <img src="/assets/svg/logo-light.svg" alt="Globle Unlimited" width="210" height="40" class="brand-logo logo-light" />
     </a>
 
-    <nav class="modes" aria-label="Game modes">
-      {
-        MODES.map((m) => (
-          <a
-            href={m.href}
-            class:list={['mode-link', { active: path === m.href }]}
-          >
-            {m.label}
-          </a>
-        ))
-      }
-      <a href="/how-to-play" class="mode-link learn">How to Play</a>
+    <nav class="modes" aria-label="Main">
+      <div class="games-menu" data-games>
+        <button
+          type="button"
+          class:list={['mode-link', 'games-toggle', { active: inGames }]}
+          data-games-toggle
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Games <span class="caret" aria-hidden="true">▾</span>
+        </button>
+        <div class="games-panel" data-games-panel hidden role="menu" aria-label="Game modes">
+          {
+            games.map((g) => (
+              <a href={g.href} role="menuitem" class:list={['games-item', { active: path === g.href }]}>
+                {g.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+      <a href="/how-to-play" class:list={['mode-link', 'learn', { active: path === '/how-to-play' }]}>How to Play</a>
       <a href="/stats" class:list={['mode-link', 'icon', { active: path === '/stats' }]} aria-label="Your stats" title="Your stats">📊</a>
       <button type="button" class="mode-link icon" data-settings-open aria-label="Settings" title="Settings" aria-haspopup="dialog">⚙️</button>
     </nav>
@@ -56,6 +71,29 @@ const path = Astro.url.pathname;
 
 <script>
   import { getUnit, setUnit, getTheme, setTheme } from '../lib/settings';
+
+  // ---- Games dropdown ----
+  const gamesWrap = document.querySelector<HTMLElement>('[data-games]');
+  const gamesToggle = document.querySelector<HTMLButtonElement>('[data-games-toggle]');
+  const gamesPanel = document.querySelector<HTMLElement>('[data-games-panel]');
+
+  function closeGames() {
+    gamesPanel?.setAttribute('hidden', '');
+    gamesToggle?.setAttribute('aria-expanded', 'false');
+  }
+  function toggleGames() {
+    const open = gamesToggle?.getAttribute('aria-expanded') === 'true';
+    if (open) closeGames();
+    else {
+      gamesPanel?.removeAttribute('hidden');
+      gamesToggle?.setAttribute('aria-expanded', 'true');
+    }
+  }
+  gamesToggle?.addEventListener('click', (e) => { e.stopPropagation(); toggleGames(); });
+  document.addEventListener('click', (e) => {
+    if (gamesWrap && !gamesWrap.contains(e.target as Node)) closeGames();
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeGames(); });
 
   const overlay = document.querySelector<HTMLElement>('[data-settings-overlay]');
   const openBtn = document.querySelector<HTMLButtonElement>('[data-settings-open]');
@@ -130,9 +168,44 @@ const path = Astro.url.pathname;
   .mode-link.icon { font-size: 1rem; line-height: 1; }
   button.mode-link { background: transparent; border: 0; cursor: pointer; }
 
+  /* ---- Games dropdown ---- */
+  .games-menu { position: relative; }
+  .games-toggle { display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--line); }
+  .games-toggle .caret { font-size: 0.7em; transition: transform var(--dur-fast) var(--ease); }
+  .games-toggle[aria-expanded='true'] .caret { transform: rotate(180deg); }
+  .games-toggle[aria-expanded='true'] { color: var(--accent); background: var(--accent-dim); }
+  .games-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 60;
+    min-width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--space-2);
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-panel);
+  }
+  .games-panel[hidden] { display: none; }
+  .games-item {
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--text-dim);
+    white-space: nowrap;
+    transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+  }
+  .games-item:hover { color: var(--text); background: var(--bg-panel-2); }
+  .games-item.active { color: var(--accent); background: var(--accent-dim); }
+
   @media (max-width: 560px) {
     .brand-logo { height: 30px; }
     .mode-link { padding: var(--space-1) var(--space-2); }
+    .games-panel { min-width: 200px; }
   }
 
   /* ---- Settings panel ---- */
