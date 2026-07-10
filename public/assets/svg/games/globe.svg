@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="400" height="250">
+  <defs>
+    <linearGradient id="g-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#15304d"/><stop offset="1" stop-color="#0B1622"/></linearGradient>
+    <radialGradient id="g-ocean" cx="40%" cy="34%" r="78%"><stop offset="0" stop-color="#2C84BE"/><stop offset="0.7" stop-color="#1E5F8C"/><stop offset="1" stop-color="#143E5C"/></radialGradient>
+    <radialGradient id="g-halo" cx="50%" cy="50%" r="50%"><stop offset="0.58" stop-color="#F4C95D" stop-opacity="0"/><stop offset="0.85" stop-color="#F4C95D" stop-opacity=".3"/><stop offset="1" stop-color="#F4C95D" stop-opacity="0"/></radialGradient>
+    <clipPath id="g-sphere"><circle cx="200" cy="125" r="88"/></clipPath>
+    <filter id="g-hot" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="400" height="250" fill="url(#g-bg)"/>
+  <g fill="#EAF2F8"><circle cx="40" cy="44" r="1.4" opacity=".6"/><circle cx="352" cy="58" r="1.1" opacity=".5"/><circle cx="66" cy="204" r="1.3" opacity=".55"/><circle cx="336" cy="198" r="1.4" opacity=".5"/><circle cx="300" cy="30" r="1" opacity=".45"/></g>
+  <circle cx="200" cy="125" r="122" fill="url(#g-halo)"/>
+  <circle cx="200" cy="125" r="88" fill="url(#g-ocean)" stroke="rgba(244,201,93,.5)" stroke-width="2"/>
+  <g clip-path="url(#g-sphere)">
+    <g fill="none" stroke="rgba(244,201,93,.18)" stroke-width="1">
+      <ellipse cx="200" cy="125" rx="30" ry="88"/><ellipse cx="200" cy="125" rx="60" ry="88"/>
+      <line x1="112" y1="125" x2="288" y2="125"/><line x1="122" y1="92" x2="278" y2="92"/><line x1="122" y1="158" x2="278" y2="158"/>
+    </g>
+    <g fill="#E8D9B5" fill-opacity=".96" stroke="#caa86f" stroke-width=".6">
+      <path d="M158 66 q34 -10 58 8 q12 22 -10 36 q-28 8 -44 -10 q-14 -20 -4 -34 Z"/>
+      <path d="M236 150 q22 2 24 26 q-8 20 -28 12 q-10 -24 4 -38 Z"/>
+    </g>
+    <path d="M150 128 q36 -6 48 22 q6 30 -22 46 q-30 4 -40 -24 q-6 -34 14 -44 Z" fill="#B22222" stroke="#F4C95D" stroke-width="1.2" filter="url(#g-hot)"/>
+  </g>
+</svg>

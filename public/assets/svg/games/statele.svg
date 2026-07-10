@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="400" height="250">
+  <defs>
+    <linearGradient id="s-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#15304d"/><stop offset="1" stop-color="#0B1622"/></linearGradient>
+    <pattern id="s-grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="rgba(244,201,93,.12)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="250" fill="url(#s-bg)"/>
+  <rect width="400" height="250" fill="url(#s-grid)"/>
+
+  <!-- simplified contiguous US silhouette -->
+  <path d="M82,96 L150,86 L250,84 L296,90 L300,74 L310,86 L316,108 L300,120 L308,133 L300,143 L296,172 L286,146 L258,149 L210,152 L190,152 L186,174 L170,152 L120,152 L92,141 L72,120 L79,104 Z"
+    fill="#E8D9B5" stroke="#F4C95D" stroke-width="3" stroke-linejoin="round" paint-order="stroke"
+    transform="translate(6,8)"/>
+
+  <!-- star marker -->
+  <g transform="translate(196,128)">
+    <path d="M0,-13 L3.8,-4 L13,-4 L5.5,2 L8.5,11 L0,5.5 L-8.5,11 L-5.5,2 L-13,-4 L-3.8,-4 Z" fill="#C42D1C" stroke="#0B1622" stroke-width="1"/>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="400" height="250" font-family="'Space Mono', ui-monospace, monospace">
+  <defs>
+    <linearGradient id="w-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#15304d"/><stop offset="1" stop-color="#0B1622"/></linearGradient>
+    <pattern id="w-grid" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0H0V26" fill="none" stroke="rgba(244,201,93,.12)" stroke-width="1"/>
+    </pattern>
+    <marker id="w-ah" markerWidth="10" markerHeight="10" refX="5.5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#F4C95D"/></marker>
+  </defs>
+  <rect width="400" height="250" fill="url(#w-bg)"/>
+  <rect width="400" height="250" fill="url(#w-grid)"/>
+  <!-- real Italy silhouette (from the game's own data) -->
+  <g transform="translate(44,44) scale(0.52)">
+    <path d="M109.446,24.069L120.802,27.947L122.953,22.728L141.365,18L145.531,27.486L172.276,34.526L170.193,47.825L174.695,59.2L159.845,55.312L144.658,64.788L145.666,77.91L143.381,85.383L149.496,98.681L167.035,111.734L176.443,132.875L197.207,153.227L211.789,153.099L216.358,158.613L211.117,163.602L227.849,172.609L241.558,180.064L257.551,192.883L259.5,197.479L256.006,206.18L245.657,194.789L229.395,190.767L221.6,206.55L235.04,215.531L232.822,228.122L225.027,229.542L215.082,249.946L207.287,251.789L207.354,244.526L211.184,231.731L215.216,226.619L207.959,212.665L202.247,200.412L194.519,197.355L189.009,186.777L176.98,182.319L168.916,172.358L155.073,170.761L140.491,159.502L123.423,143.169L110.722,128.566L104.943,103.117L95.67,100.131L80.483,91.538L71.882,95.069L61.063,107.103L53.335,108.983L55.485,97.756L45.338,94.452L40.5,74.159L47.018,66.092L41.508,56.081L42.247,48.507L50.311,54.225L59.316,52.956L69.799,43.861L73.024,48.143L81.894,47.278L85.926,36.361L99.769,39.796L107.967,35.215ZM190.084,246.214L204.263,244.164L197.543,262.766L200.298,270.033L196.401,282L182.087,273.24L172.612,270.706L146.606,258.782L149.16,246.615L171,248.783ZM77.123,179.521L86.464,171.854L97.619,189.355L94.998,221.533L86.531,219.983L78.938,228L71.882,221.655L71.143,192.344L66.842,178.266Z"
+      fill="#E8D9B5" stroke="#F4C95D" stroke-width="3" stroke-linejoin="round" paint-order="stroke"/>
+  </g>
+  <!-- clue readout -->
+  <text x="250" y="120" fill="#F4C95D" font-size="12" letter-spacing=".08em">DISTANCE</text>
+  <text x="250" y="146" fill="#EAF2F8" font-size="22">1,240 km</text>
+  <line x1="252" y1="170" x2="300" y2="170" stroke="#9DB2C6" stroke-width="2" stroke-dasharray="6 5"/>
+  <line x1="300" y1="182" x2="332" y2="150" stroke="#F4C95D" stroke-width="3" stroke-linecap="round" marker-end="url(#w-ah)"/>
+</svg>

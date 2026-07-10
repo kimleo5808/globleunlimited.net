@@ -25,13 +25,13 @@ export const SITE = {
 /** Every playable mode — single source of truth for the /unlimited hub cards
  *  and the header "Games" dropdown (via FOOTER_LINKS.play). */
 export const GAME_MODES = [
-  { href: '/', key: 'globe', name: 'Globle Unlimited', blurb: 'Guess the country on a 3D globe — it glows warmer as you close in.' },
-  { href: '/silhouette', key: 'shape', name: 'Worldle Unlimited', blurb: 'Name the country from its silhouette alone, with distance and direction clues.' },
-  { href: '/flags', key: 'flag', name: 'Flagle Unlimited', blurb: 'Guess the country from its flag, revealed one tile at a time.' },
-  { href: '/clues', key: 'clue', name: 'Countryle Unlimited', blurb: 'Deduce the country from six attribute clues — no map required.' },
-  { href: '/states', key: 'usstates', name: 'Statele Unlimited', blurb: 'Guess the US state from its outline — all 50 states.' },
-  { href: '/capitals', key: 'capital', name: 'Globle Capitals', blurb: 'Find the mystery capital city on the interactive globe.' },
-  { href: '/practice', key: 'practice', name: 'Practice Mode', blurb: 'Relaxed, unlimited rounds with no streak pressure.' },
+  { href: '/', key: 'globe', name: 'Globle Unlimited', img: '/assets/svg/games/globe.svg', blurb: 'Guess the country on a 3D globe — it glows warmer as you close in.' },
+  { href: '/silhouette', key: 'shape', name: 'Worldle Unlimited', img: '/assets/svg/games/worldle.svg', blurb: 'Name the country from its silhouette alone, with distance and direction clues.' },
+  { href: '/flags', key: 'flag', name: 'Flagle Unlimited', img: '/assets/svg/games/flagle.svg', blurb: 'Guess the country from its flag, revealed one tile at a time.' },
+  { href: '/clues', key: 'clue', name: 'Countryle Unlimited', img: '/assets/svg/games/countryle.svg', blurb: 'Deduce the country from six attribute clues — no map required.' },
+  { href: '/states', key: 'usstates', name: 'Statele Unlimited', img: '/assets/svg/games/statele.svg', blurb: 'Guess the US state from its outline — all 50 states.' },
+  { href: '/capitals', key: 'capital', name: 'Globle Capitals', img: '/assets/svg/games/capitals.svg', blurb: 'Find the mystery capital city on the interactive globe.' },
+  { href: '/practice', key: 'practice', name: 'Practice Mode', img: '/assets/svg/games/practice.svg', blurb: 'Relaxed, unlimited rounds with no streak pressure.' },
 ] as const;
 
 export const FOOTER_LINKS = {

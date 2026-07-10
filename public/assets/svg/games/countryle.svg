@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="400" height="250" font-family="'Space Mono', ui-monospace, monospace">
+  <defs>
+    <linearGradient id="cl-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#15304d"/><stop offset="1" stop-color="#0B1622"/></linearGradient>
+  </defs>
+  <rect width="400" height="250" fill="url(#cl-bg)"/>
+
+  <!-- header labels -->
+  <g fill="#5E7891" font-size="11" font-family="'Hanken Grotesk', system-ui, sans-serif" text-anchor="middle">
+    <text x="92" y="96">Country</text>
+    <text x="190" y="96">Continent</text>
+    <text x="270" y="96">Area</text>
+    <text x="335" y="96">Borders</text>
+  </g>
+
+  <!-- clue row -->
+  <g>
+    <rect x="42" y="106" width="100" height="44" rx="7" fill="#13243A" stroke="#2b3f57"/>
+    <rect x="150" y="106" width="80" height="44" rx="7" fill="#2E9E4F"/>
+    <rect x="238" y="106" width="66" height="44" rx="7" fill="#FEB24C"/>
+    <rect x="312" y="106" width="46" height="44" rx="7" fill="#8B0000"/>
+  </g>
+  <g text-anchor="middle">
+    <rect x="54" y="122" width="16" height="11" rx="1.5" fill="#2E9E4F"/>
+    <text x="104" y="132" fill="#EAF2F8" font-size="13" font-family="'Hanken Grotesk', system-ui, sans-serif">Brazil</text>
+    <text x="190" y="132" fill="#fff" font-size="13">S.Amer</text>
+    <text x="271" y="132" fill="#0B1622" font-size="14">8.5M<tspan dx="2">↓</tspan></text>
+    <text x="335" y="132" fill="#EAF2F8" font-size="14">10<tspan dx="2">↓</tspan></text>
+  </g>
+
+  <!-- second, dimmer row to imply a table -->
+  <g opacity=".45">
+    <rect x="42" y="160" width="100" height="30" rx="6" fill="#13243A" stroke="#2b3f57"/>
+    <rect x="150" y="160" width="80" height="30" rx="6" fill="#8B0000"/>
+    <rect x="238" y="160" width="66" height="30" rx="6" fill="#FEB24C"/>
+    <rect x="312" y="160" width="46" height="30" rx="6" fill="#2E9E4F"/>
+  </g>
+</svg>
