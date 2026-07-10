@@ -40,7 +40,7 @@
 
   <!-- First-run hint: preview the clue system -->
   <p class="clue-tip rise" style="--d:340ms" data-clue-tip>
-    Each wrong guess reveals <strong>one flag tile</strong>, plus <strong>distance</strong> &amp; a <strong>direction arrow</strong>.
+    You start with one tile — each wrong guess <strong>reveals another</strong>, plus <strong>distance</strong> &amp; a <strong>direction arrow</strong>.
   </p>
 
   <!-- Guess list -->
@@ -99,20 +99,18 @@
   }
   .fgame :global(.flag-tile) {
     position: relative;
-    background: var(--bg-panel-2);
-    border: 0.5px solid var(--line);
+    display: grid; place-items: center;
+    background: var(--flag-cover);
+    border: 0.5px solid rgba(0, 0, 0, 0.15);
     transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
     transform-style: preserve-3d;
   }
-  /* faint instrument grid on covered tiles */
+  /* "hidden" affordance so a covered tile reads as a concealed flag, not a blank box */
   .fgame :global(.flag-tile)::after {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-    background-size: 16px 16px;
-    opacity: 0.6;
+    content: '?';
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--flag-cover-mark);
   }
   .fgame :global(.flag-tile.revealed) { opacity: 0; transform: rotateY(90deg); }
   @media (prefers-reduced-motion: reduce) {

@@ -61,12 +61,14 @@ export function initFlagsGame(root: HTMLElement) {
   function loadFlag(cca2: string) {
     els.img.src = flagUrl(cca2);
     els.img.alt = '';
-    buildTiles(); // all covered
+    buildTiles(); // all covered…
+    tileEls[REVEAL_ORDER[0]]?.classList.add('revealed'); // …then show one tile up front
   }
 
-  /** Uncover the next tile in REVEAL_ORDER based on how many wrong guesses so far. */
+  /** Uncover the next tile. One tile is already shown at the start, so the Nth
+   *  wrong guess uncovers REVEAL_ORDER[N]. */
   function revealNext(wrongCount: number) {
-    const idx = REVEAL_ORDER[wrongCount - 1];
+    const idx = REVEAL_ORDER[wrongCount];
     if (idx != null) tileEls[idx]?.classList.add('revealed');
   }
 

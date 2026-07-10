@@ -17,6 +17,10 @@
   --silhouette-fill:   #E8D9B5;
   --silhouette-stroke: #F4C95D;
 
+  /* ---- Flag cover (Flagle) — a covered tile must read as "hidden flag" ---- */
+  --flag-cover:      #24405C;
+  --flag-cover-mark: rgba(244, 201, 93, 0.30);
+
   /* ---- Distance heat scale (core gameplay semantics) ---- */
   --heat-0: #FFEDA0;   /* farthest / cold  */
   --heat-1: #FEB24C;
@@ -116,4 +120,8 @@ html[data-theme='light'] {
      so the silhouette becomes a bold deep-ink solid for instant recognition. */
   --silhouette-fill:   #1B3D4E;
   --silhouette-stroke: #0C2531;
+
+  /* Covered flag tiles need to be a bold dark solid on the near-white card. */
+  --flag-cover:      #2C4B63;
+  --flag-cover-mark: rgba(255, 255, 255, 0.38);
 }
