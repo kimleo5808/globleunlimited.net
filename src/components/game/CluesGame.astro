@@ -1,0 +1,162 @@
+---
+// Interactive Countryle-style clue game island. Hydrates client-side.
+// Deduce the mystery country from six attribute clues. No map.
+---
+
+<div class="cgame" data-cgame>
+  <!-- Guess input + autocomplete -->
+  <form class="guess-form rise" style="--d:120ms" data-guess-form autocomplete="off">
+    <div class="guess-field">
+      <input
+        type="text"
+        class="guess-input"
+        data-guess-input
+        placeholder="Enter country name…"
+        aria-label="Enter country name"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        disabled
+      />
+      <div class="suggest" data-suggest hidden role="listbox" aria-label="Country suggestions"></div>
+    </div>
+    <button type="submit" class="btn btn-primary" disabled>Guess</button>
+  </form>
+
+  <!-- Progress pips -->
+  <div class="pips rise" style="--d:200ms">
+    <div class="pip-row" data-pips aria-hidden="true"></div>
+    <span class="pip-count mono" data-pipcount>GUESSES 0 / 7</span>
+  </div>
+
+  <!-- Clue table -->
+  <div class="table-wrap rise" style="--d:280ms">
+    <table class="clue-table">
+      <thead>
+        <tr>
+          <th scope="col">Country</th>
+          <th scope="col">Continent</th>
+          <th scope="col">Hemi</th>
+          <th scope="col">Dir</th>
+          <th scope="col">Area km²</th>
+          <th scope="col">Borders</th>
+          <th scope="col">Landlocked</th>
+        </tr>
+      </thead>
+      <tbody data-rows></tbody>
+    </table>
+    <p class="table-empty" data-empty>Your guesses and their clues appear here.</p>
+  </div>
+
+  <!-- A11y live region -->
+  <p class="sr-only" aria-live="polite" data-live></p>
+
+  <!-- End modal -->
+  <div class="modal-overlay" data-modal hidden>
+    <div class="modal card" role="dialog" aria-modal="true" aria-label="Round over">
+      <div class="modal-emoji" data-modal-emoji>🎉</div>
+      <h2 class="modal-title" data-modal-title>You found it!</h2>
+      <p class="modal-line">The answer was <strong data-modal-country></strong>.</p>
+      <p class="modal-line" data-modal-guesses-line>Solved in <strong class="mono" data-modal-guesses>0</strong> guesses.</p>
+      <p class="modal-line modal-extra" data-modal-extra hidden></p>
+      <div class="modal-actions">
+        <button class="btn btn-primary" data-play-again>▶ Play Again</button>
+        <button class="btn btn-ghost" data-share>Share</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initCluesGame } from './clues-game';
+  const root = document.querySelector<HTMLElement>('[data-cgame]');
+  if (root) initCluesGame(root);
+</script>
+
+<style>
+  .cgame { display: flex; flex-direction: column; align-items: center; }
+
+  /* Input + autocomplete (shared look) */
+  .guess-form { display: flex; gap: var(--space-2); justify-content: center; margin-top: var(--space-4); width: 100%; }
+  .guess-field { position: relative; width: min(360px, 70vw); }
+  .guess-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    color: var(--text);
+  }
+  .guess-input::placeholder { color: var(--text-mute); }
+  .guess-input[aria-invalid='true'] { border-color: var(--danger); }
+  .guess-input:disabled { opacity: 0.5; }
+
+  .suggest {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 30;
+    background: var(--bg-panel); border: 1px solid var(--line);
+    border-radius: var(--radius-sm); box-shadow: var(--shadow-panel);
+    overflow: hidden; text-align: left;
+  }
+  .cgame :global(.suggest-item) {
+    display: block; width: 100%; text-align: left;
+    padding: var(--space-2) var(--space-4);
+    background: transparent; border: 0; cursor: pointer;
+    color: var(--text); font-size: var(--fs-small);
+  }
+  .cgame :global(.suggest-item:hover), .cgame :global(.suggest-item.active) { background: var(--bg-panel-2); color: var(--accent); }
+  .cgame :global(.suggest-error) { padding: var(--space-2) var(--space-4); color: var(--danger); font-size: var(--fs-small); }
+
+  /* Progress pips */
+  .pips { display: flex; align-items: center; gap: var(--space-3); margin-top: var(--space-5); }
+  .pip-row { display: flex; gap: var(--space-2); }
+  .cgame :global(.pip) {
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 1.5px solid var(--text-mute); background: transparent;
+    transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  }
+  .pip-count { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mute); }
+
+  /* Clue table */
+  .table-wrap { width: min(680px, 96vw); margin-top: var(--space-6); overflow-x: auto; }
+  .clue-table { width: 100%; border-collapse: separate; border-spacing: 3px; font-size: var(--fs-small); }
+  .clue-table th {
+    color: var(--text-mute); font-size: 0.68rem; letter-spacing: 0.05em; text-transform: uppercase;
+    font-weight: 600; padding: var(--space-2); text-align: center; white-space: nowrap;
+  }
+  .clue-table th:first-child { text-align: left; }
+  .cgame :global(.clue-table td) {
+    padding: var(--space-2) var(--space-2);
+    text-align: center; border-radius: var(--radius-sm);
+    font-family: var(--font-mono); font-size: 0.8rem; white-space: nowrap;
+  }
+  .cgame :global(.c-country) {
+    text-align: left; background: var(--bg-panel); color: var(--text);
+    font-family: var(--font-body); font-weight: 600;
+    display: flex; align-items: center; gap: 6px; min-width: 8ch;
+  }
+  .cgame :global(.cell-match) { background: var(--win); color: #fff; }
+  .cgame :global(.cell-close) { background: var(--heat-1); color: #0B1622; }
+  .cgame :global(.cell-far)   { background: var(--heat-4); color: #EAF2F8; }
+  .cgame :global(.cell-info)  { background: var(--bg-panel); color: var(--accent); font-size: 1rem; }
+  .cgame :global(.c-hint) { opacity: 0.85; }
+  .cgame :global(.clue-row) { animation: rise var(--dur) var(--ease) both; }
+  .cgame :global(.clue-row.is-correct .c-country) { box-shadow: 0 0 0 1px var(--win); }
+
+  .table-empty { color: var(--text-mute); font-size: var(--fs-small); text-align: center; margin-top: var(--space-4); }
+  .table-empty[hidden] { display: none; }
+
+  /* Modal */
+  .modal-overlay[hidden] { display: none; }
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 100; display: grid; place-items: center;
+    background: rgba(11, 22, 34, 0.7); backdrop-filter: blur(4px);
+    padding: var(--space-4); animation: rise var(--dur-fast) var(--ease) both;
+  }
+  .modal { max-width: 380px; width: 100%; padding: var(--space-8); text-align: center; }
+  .modal-emoji { font-size: 2.5rem; }
+  .modal-title { margin-top: var(--space-2); }
+  .modal-line { color: var(--text-dim); margin-top: var(--space-2); }
+  .modal-extra { color: var(--accent); font-family: var(--font-mono); font-size: var(--fs-small); }
+  .modal-extra[hidden] { display: none; }
+  .modal-actions { display: flex; gap: var(--space-3); justify-content: center; margin-top: var(--space-6); }
+</style>

@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SilhouetteGame from '../components/game/SilhouetteGame.astro';
+
+const title = 'Statele Unlimited – Guess the US State by Shape';
+const description =
+  'Play Statele Unlimited free: guess the US state from its outline with distance & direction clues. All 50 states, endless rounds, no daily limit.';
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Statele Unlimited',
+    genre: 'Geography puzzle',
+    gamePlatform: 'Web browser',
+    applicationCategory: 'Game',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to play Statele Unlimited',
+    step: [
+      { '@type': 'HowToStep', name: 'Read the shape', text: 'Look at the black silhouette of the mystery US state.' },
+      { '@type': 'HowToStep', name: 'Type a state', text: 'Enter any state name or its two-letter code and press Guess.' },
+      { '@type': 'HowToStep', name: 'Read the clues', text: 'Use the distance, direction arrow and proximity percentage to narrow it down.' },
+      { '@type': 'HowToStep', name: 'Solve it', text: 'Identify the state within six guesses, then play another round instantly.' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'Is Statele Unlimited free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Statele Unlimited is completely free to play in your browser, with no sign-up required.' } },
+      { '@type': 'Question', name: 'How is Statele Unlimited different from the daily Statele?', acceptedAnswer: { '@type': 'Answer', text: 'The daily game gives you one state a day; Statele Unlimited lets you play endless rounds back-to-back with no daily wait.' } },
+      { '@type': 'Question', name: 'How many guesses do I get?', acceptedAnswer: { '@type': 'Answer', text: 'Six guesses, with distance, direction and proximity clues after each. All 50 states are in the pool.' } },
+      { '@type': 'Question', name: 'Can I type state abbreviations?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Type the full state name or its two-letter code, like CA or NY.' } },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/states" schema={schema}>
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-title rise" style="--d:0ms">Statele Unlimited</h1>
+      <p class="hero-sub rise" style="--d:80ms">
+        Guess the US state from its outline alone — all 50 states, <strong>unlimited rounds</strong>, no daily wait.
+      </p>
+      <SilhouetteGame variant="states" />
+    </div>
+  </section>
+
+  <article class="prose content">
+    <h2>What Is Statele Unlimited?</h2>
+    <p>
+      <strong>Statele Unlimited is the endless version of the US-state guessing game — identify the state from
+      its outline alone, with no daily limit.</strong> Every round shows the black silhouette of one American
+      state, and your job is to name it in six guesses. After each guess you get three clues: how far your guess
+      is from the answer, which direction to look, and a proximity score. Because it is <em>unlimited</em>, the
+      next round starts the instant one ends — there is no once-a-day cap and nothing to wait for.
+    </p>
+    <p>
+      If you have ever wanted to finally learn all fifty state shapes, this is the fastest way to do it. You can
+      play ten rounds in the time it takes to wait a day for a single daily puzzle, and every round drills the
+      outlines until they become instantly recognisable.
+    </p>
+
+    <h2>How to Play Statele Unlimited</h2>
+    <p>Statele Unlimited takes seconds to learn:</p>
+    <ol>
+      <li><strong>Look at the silhouette.</strong> A black outline of the mystery state appears at the top.</li>
+      <li><strong>Type any state</strong> — the full name or its two-letter code like TX or NY — and press Guess.</li>
+      <li><strong>Read the three clues</strong> — distance, direction arrow and proximity percentage — then guess again.</li>
+      <li><strong>Name it within six guesses,</strong> then hit Play Again to start a fresh state immediately.</li>
+    </ol>
+    <p>
+      New to this style of game? Our <a href="/how-to-play">how-to-play guide</a> explains the clue system, which
+      works the same across every mode on the site.
+    </p>
+
+    <h2>Reading the Clues</h2>
+    <p>
+      Statele Unlimited turns three small clues into a confident answer. Here is what each one tells you:
+    </p>
+    <figure class="figure">
+      <img src="/assets/svg/clue-legend.svg" alt="Diagram of the three clues: distance in miles, a compass direction arrow, and a proximity percentage shown as coloured squares" width="720" height="280" loading="lazy" />
+    </figure>
+    <ul>
+      <li><strong>Distance</strong> is how far your guessed state is from the mystery state. A small number means
+        you are almost on it.</li>
+      <li><strong>Direction</strong> is a compass arrow pointing from your guess toward the answer — if you guess
+        Texas and the arrow points north-east, the answer is up and to the right.</li>
+      <li><strong>Proximity</strong> is a percentage that hits 100% only when you find the exact state, so a jump
+        from 50% to 85% tells you your last guess was a big improvement.</li>
+    </ul>
+    <p>
+      Distances are shown in miles or kilometres depending on your settings — handy for US players who think in
+      miles. Read together, the clues let you triangulate: one guess plus its arrow points to the right region,
+      and a second guess in that direction usually seals it.
+    </p>
+
+    <h2>Learn All 50 US States by Shape</h2>
+    <p>
+      The real payoff of Statele Unlimited is that it teaches every state outline without feeling like study.
+      Some shapes are unmistakable once you know them: Florida's long panhandle and peninsula, Michigan's mitten,
+      the near-perfect rectangles of Colorado and Wyoming, the boot of Louisiana, the long tail of the Oklahoma
+      panhandle. Others are easy to confuse — the compact New England states, or the stack of squarish states
+      across the Mountain West — and those are exactly the ones repeated rounds fix in your memory. Group them by
+      region as you play: New England is a tight cluster in the north-east, the big rectangular states sit in the
+      west, and the Deep South has its own familiar run of shapes along the Gulf.
+    </p>
+
+    <h2>Statele vs Worldle: States vs Countries</h2>
+    <p>
+      Statele Unlimited is the US cousin of <a href="/silhouette">Worldle Unlimited</a>. They play identically —
+      a silhouette plus distance, direction and proximity — but one uses the 50 states and the other uses the
+      world's countries.
+    </p>
+    <table class="cmp">
+      <thead><tr><th>Game</th><th>You identify</th><th>Pool</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/states">Statele Unlimited</a></td><td>US states</td><td>50 states</td><td>US geography</td></tr>
+        <tr><td><a href="/silhouette">Worldle Unlimited</a></td><td>Countries</td><td>~195 countries</td><td>World geography</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Master the states here, then take the same shape-reading skill worldwide in
+      <a href="/silhouette">Worldle Unlimited</a>, or browse every mode on the
+      <a href="/unlimited">unlimited geography games</a> hub.
+    </p>
+
+    <h2>Tips to Guess States Faster</h2>
+    <p>A few habits will quickly cut your guess count:</p>
+    <ul>
+      <li><strong>Learn the unmistakable shapes first.</strong> Florida, Michigan, California, Texas and the
+        rectangular western states are giveaways — the outline names the state before you need a clue.</li>
+      <li><strong>Open with a big, central state.</strong> Guessing something like Kansas or Missouri early gives
+        you a clean distance and direction reading to work from.</li>
+      <li><strong>Follow the arrow by region.</strong> Treat the direction arrow as pointing toward the north-east,
+        south, or west of the country and step your next guess that way.</li>
+      <li><strong>Use abbreviations to guess faster.</strong> Typing CA or NY is quicker than the full name once
+        you are racing your best score.</li>
+    </ul>
+    <p>
+      Our general <a href="/blog/globle-tips-strategy">strategy guide</a> has more ideas that carry over from the
+      country games.
+    </p>
+
+    <h2>A Study Tool for Students &amp; Teachers</h2>
+    <p>
+      Learning the fifty states is a staple of American classrooms, and Statele Unlimited makes it genuinely fun.
+      Instead of staring at a labelled map, students actively recall a state from its shape and get instant
+      feedback on how close they were. There is nothing to install and no account to create, so teachers can put
+      a round on the projector and solve it together, or set it as a five-minute warm-up. Because rounds are
+      endless and free, it fits homework, a sub day, or a quiet moment at home equally well — and used a couple of
+      times a week, it builds the kind of map fluency that sticks far better than a worksheet.
+    </p>
+
+    <h2>Why Endless Rounds Beat One a Day</h2>
+    <p>
+      Recognising state shapes is a memory skill, and memory is built through repetition. A single daily puzzle
+      simply does not give you enough reps to improve quickly — unlimited rounds do. In the time it takes to wait
+      a day for one state, you can play a dozen, see a dozen outlines, and correct a dozen mistakes. That volume
+      is what turns hesitation into instant recognition, and it lets you drill a weakness on purpose: keep playing
+      until the Mountain West, or the small New England states, stop tripping you up.
+    </p>
+
+    <h2>Play Anywhere, on Any Device</h2>
+    <p>
+      Statele Unlimited runs entirely in your browser, with nothing to install and nothing to update. On a
+      desktop you type and read the clues at a glance; on a phone the silhouette and input stack neatly for
+      one-handed play. Because the page stays light — there is no heavy 3D engine on this mode — a round fits into
+      any spare minute, and your stats are saved privately on your own device. That convenience makes it easy to
+      play a little and often, which is exactly how state shapes stick.
+    </p>
+
+    <h2>Common State Shapes That Trip People Up</h2>
+    <p>
+      Part of the fun of Statele Unlimited is finally telling apart the states that look alike. The squarish
+      Mountain West — Colorado, Wyoming, Utah and their neighbours — fools almost everyone at first, and the
+      direction arrow is what separates them. The small New England states cluster so tightly that shape alone is
+      not enough; distance is the tie-breaker there. Several states have look-alike rectangles or gentle
+      trapezoids that only reveal themselves once you notice a nick in a border or the angle of a corner. The
+      Dakotas, the Carolinas and the Virginias each come as a pair that is easy to flip. Once you have seen these
+      look-alikes a few times, the outline plus a single distance-and-direction clue is enough to name them with
+      confidence.
+    </p>
+
+    <h2>Track Your Best Score</h2>
+    <p>
+      Statele Unlimited keeps a private record of your play, stored locally in your own browser. After each win it
+      shows your best-ever guess count and how many rounds you have played, so you can watch your average fall as
+      you learn the shapes. There is no leaderboard and no login — the numbers are just for you, a quiet nudge to
+      beat your last run. It makes a great personal challenge: see how many states in a row you can name in one or
+      two guesses. Over a couple of weeks of short sessions, most players go from recognising a handful of states
+      to naming nearly all fifty on sight — a genuinely useful skill for school, trivia nights and travel alike.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details><summary>Is Statele Unlimited free?</summary><p>Yes — completely free in your browser with no sign-up. Prefer countries? Try <a href="/silhouette">Worldle Unlimited</a>.</p></details>
+      <details><summary>Do I need an account or download?</summary><p>No. Everything runs in your browser and your progress is saved locally on your device.</p></details>
+      <details><summary>How is it different from the daily Statele?</summary><p>The <a href="/daily">daily game</a> gives one state a day; Statele Unlimited lets you play endless rounds back-to-back.</p></details>
+      <details><summary>How many guesses do I get?</summary><p>Six per round, each followed by a distance, direction arrow and proximity percentage. All 50 states are in the pool.</p></details>
+      <details><summary>Can I type state abbreviations?</summary><p>Yes — type the full name or the two-letter code like CA or NY. See <a href="/how-to-play">how to play</a>.</p></details>
+      <details><summary>Is Statele good for learning US geography?</summary><p>Yes; repeated play builds instant recognition of all 50 state shapes and where they sit.</p></details>
+    </div>
+
+    <h2>More Ways to Play</h2>
+    <p>
+      Statele Unlimited is one of several endless modes on Globle Unlimited. Try
+      <a href="/silhouette">Worldle Unlimited</a> to guess countries by shape, <a href="/">Globle Unlimited</a>
+      for the 3D globe, or <a href="/flags">Flagle Unlimited</a> to guess by flag. Browse the whole collection
+      any time on the <a href="/unlimited">unlimited geography games</a> hub, where you can jump between every
+      mode in a single click.
+    </p>
+    <p class="cta-row"><a href="/silhouette" class="btn btn-ghost">Play Worldle Unlimited</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-block: var(--space-12) var(--space-8); }
+  .hero-inner { text-align: center; max-width: 760px; }
+  .hero-title { font-size: var(--fs-display); }
+  .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
+  .rise { animation-delay: var(--d, 0ms); }
+  .content { margin-top: var(--space-16); text-align: left; }
+  .content ol, .content ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+  .cta-row { margin-top: var(--space-8); }
+
+  .figure { margin: var(--space-6) 0; }
+  .figure img { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); }
+
+  .cmp { width: 100%; border-collapse: collapse; margin: var(--space-6) 0; font-size: var(--fs-small); }
+  .cmp th, .cmp td { border: 1px solid var(--line); padding: var(--space-2) var(--space-3); text-align: left; }
+  .cmp th { background: var(--bg-panel); color: var(--accent); }
+  .cmp td { color: var(--text-dim); }
+  .cmp a { color: var(--accent); }
+
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+  .faq details { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+  .faq summary { cursor: pointer; color: var(--text); font-weight: 600; }
+  .faq p { margin-top: var(--space-2); }
+</style>

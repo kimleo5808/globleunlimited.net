@@ -1,0 +1,200 @@
+---
+// Interactive Flagle-style flag game island. Hydrates client-side.
+// A national flag revealed one tile at a time + distance / direction clues.
+---
+
+<div class="fgame" data-fgame>
+  <!-- Flag reveal grid -->
+  <div class="flag-stage rise" style="--d:120ms">
+    <div class="flag-card" data-flag role="img" aria-label="Partially revealed flag of the mystery country">
+      <img class="flag-img" data-flag-img alt="" />
+      <div class="flag-tiles" data-tiles aria-hidden="true"></div>
+      <span class="flag-hint mono" data-flag-hint>Loading…</span>
+    </div>
+  </div>
+
+  <!-- Guess input + autocomplete -->
+  <form class="guess-form rise" style="--d:200ms" data-guess-form autocomplete="off">
+    <div class="guess-field">
+      <input
+        type="text"
+        class="guess-input"
+        data-guess-input
+        placeholder="Enter country name…"
+        aria-label="Enter country name"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        disabled
+      />
+      <div class="suggest" data-suggest hidden role="listbox" aria-label="Country suggestions"></div>
+    </div>
+    <button type="submit" class="btn btn-primary" disabled>Guess</button>
+  </form>
+
+  <!-- Progress pips -->
+  <div class="pips rise" style="--d:280ms">
+    <div class="pip-row" data-pips aria-hidden="true"></div>
+    <span class="pip-count mono" data-pipcount>GUESSES 0 / 6</span>
+  </div>
+
+  <!-- Guess list -->
+  <ul class="guess-list" data-list aria-label="Your guesses"></ul>
+
+  <!-- A11y live region -->
+  <p class="sr-only" aria-live="polite" data-live></p>
+
+  <!-- End modal (win or reveal) -->
+  <div class="modal-overlay" data-modal hidden>
+    <div class="modal card" role="dialog" aria-modal="true" aria-label="Round over">
+      <div class="modal-emoji" data-modal-emoji>🎉</div>
+      <h2 class="modal-title" data-modal-title>You found it!</h2>
+      <p class="modal-line">
+        The answer was <strong data-modal-country></strong>.
+      </p>
+      <p class="modal-line" data-modal-guesses-line>
+        Solved in <strong class="mono" data-modal-guesses>0</strong> guesses.
+      </p>
+      <p class="modal-line modal-extra" data-modal-extra hidden></p>
+      <div class="modal-actions">
+        <button class="btn btn-primary" data-play-again>▶ Play Again</button>
+        <button class="btn btn-ghost" data-share>Share</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initFlagsGame } from './flags-game';
+  const root = document.querySelector<HTMLElement>('[data-fgame]');
+  if (root) initFlagsGame(root);
+</script>
+
+<style>
+  .fgame { display: flex; flex-direction: column; align-items: center; }
+
+  /* ---- Flag reveal grid ---- */
+  .flag-stage { display: grid; place-items: center; width: 100%; margin-top: var(--space-4); }
+  .flag-card {
+    position: relative;
+    width: min(360px, 82vw);
+    aspect-ratio: 3 / 2;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-glow);
+    overflow: hidden;
+    background: var(--bg-panel);
+  }
+  .flag-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .flag-tiles {
+    position: absolute; inset: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+  .fgame :global(.flag-tile) {
+    position: relative;
+    background: var(--bg-panel-2);
+    border: 0.5px solid var(--line);
+    transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+    transform-style: preserve-3d;
+  }
+  /* faint instrument grid on covered tiles */
+  .fgame :global(.flag-tile)::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 16px 16px;
+    opacity: 0.6;
+  }
+  .fgame :global(.flag-tile.revealed) { opacity: 0; transform: rotateY(90deg); }
+  @media (prefers-reduced-motion: reduce) {
+    .fgame :global(.flag-tile) { transition: none; }
+    .fgame :global(.flag-tile.revealed) { transform: none; }
+  }
+  .flag-hint { position: absolute; inset: 0; display: grid; place-items: center; z-index: 2; color: var(--text-dim); font-size: var(--fs-small); }
+
+  /* ---- Input + autocomplete (shared look) ---- */
+  .guess-form { display: flex; gap: var(--space-2); justify-content: center; margin-top: var(--space-6); width: 100%; }
+  .guess-field { position: relative; width: min(360px, 70vw); }
+  .guess-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    color: var(--text);
+  }
+  .guess-input::placeholder { color: var(--text-mute); }
+  .guess-input[aria-invalid='true'] { border-color: var(--danger); }
+  .guess-input:disabled { opacity: 0.5; }
+
+  .suggest {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0; right: 0;
+    z-index: 30;
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-panel);
+    overflow: hidden;
+    text-align: left;
+  }
+  .fgame :global(.suggest-item) {
+    display: block; width: 100%; text-align: left;
+    padding: var(--space-2) var(--space-4);
+    background: transparent; border: 0; cursor: pointer;
+    color: var(--text); font-size: var(--fs-small);
+  }
+  .fgame :global(.suggest-item:hover), .fgame :global(.suggest-item.active) { background: var(--bg-panel-2); color: var(--accent); }
+  .fgame :global(.suggest-error) { padding: var(--space-2) var(--space-4); color: var(--danger); font-size: var(--fs-small); }
+
+  /* ---- Progress pips ---- */
+  .pips { display: flex; align-items: center; gap: var(--space-3); margin-top: var(--space-5); }
+  .pip-row { display: flex; gap: var(--space-2); }
+  .fgame :global(.pip) {
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 1.5px solid var(--text-mute);
+    background: transparent;
+    transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  }
+  .pip-count { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-mute); }
+
+  /* ---- Guess list ---- */
+  .guess-list { list-style: none; padding: 0; margin: var(--space-6) 0 0; width: min(420px, 92vw); display: flex; flex-direction: column; gap: var(--space-1); }
+  .fgame :global(.guess-row) {
+    display: grid;
+    grid-template-columns: 24px 1fr auto auto;
+    align-items: center; gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    animation: rise var(--dur) var(--ease) both;
+  }
+  .fgame :global(.guess-row.is-correct) { border-color: var(--win); box-shadow: 0 0 0 1px var(--win); }
+  .fgame :global(.g-name) { color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .fgame :global(.g-dist) { color: var(--text-dim); font-size: var(--fs-small); }
+  .fgame :global(.g-arrow) { color: var(--accent); font-size: 1.05rem; line-height: 1; width: 1.2em; text-align: center; }
+
+  /* ---- Modal ---- */
+  .modal-overlay[hidden] { display: none; }
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    display: grid; place-items: center;
+    background: rgba(11, 22, 34, 0.7);
+    backdrop-filter: blur(4px);
+    padding: var(--space-4);
+    animation: rise var(--dur-fast) var(--ease) both;
+  }
+  .modal { max-width: 380px; width: 100%; padding: var(--space-8); text-align: center; }
+  .modal-emoji { font-size: 2.5rem; }
+  .modal-title { margin-top: var(--space-2); }
+  .modal-line { color: var(--text-dim); margin-top: var(--space-2); }
+  .modal-extra { color: var(--accent); font-family: var(--font-mono); font-size: var(--fs-small); }
+  .modal-extra[hidden] { display: none; }
+  .modal-actions { display: flex; gap: var(--space-3); justify-content: center; margin-top: var(--space-6); }
+</style>

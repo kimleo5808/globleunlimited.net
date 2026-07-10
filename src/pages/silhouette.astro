@@ -1,0 +1,248 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SilhouetteGame from '../components/game/SilhouetteGame.astro';
+
+const title = 'Worldle Unlimited – Guess the Country by Its Shape';
+const description =
+  'Play Worldle Unlimited free: guess the mystery country from its silhouette with distance, direction & proximity clues. No daily limit—endless rounds.';
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Worldle Unlimited',
+    genre: 'Geography puzzle',
+    gamePlatform: 'Web browser',
+    applicationCategory: 'Game',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to play Worldle Unlimited',
+    step: [
+      { '@type': 'HowToStep', name: 'Read the shape', text: 'Look at the black silhouette of the mystery country.' },
+      { '@type': 'HowToStep', name: 'Type a country', text: 'Enter any country name and press Guess.' },
+      { '@type': 'HowToStep', name: 'Read the clues', text: 'Use the distance, direction arrow and proximity percentage to narrow it down.' },
+      { '@type': 'HowToStep', name: 'Solve it', text: 'Identify the country within six guesses, then play another round instantly.' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'Is Worldle Unlimited free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Worldle Unlimited is completely free to play in your browser, with no sign-up required.' } },
+      { '@type': 'Question', name: 'How is Worldle Unlimited different from the daily Worldle?', acceptedAnswer: { '@type': 'Answer', text: 'The daily game gives you one puzzle a day; Worldle Unlimited lets you play endless rounds back-to-back with no daily wait.' } },
+      { '@type': 'Question', name: 'What do the colored squares mean?', acceptedAnswer: { '@type': 'Answer', text: 'They show proximity: green means very close to the answer, yellow is mid-range, and black is far away.' } },
+      { '@type': 'Question', name: 'How many guesses do I get?', acceptedAnswer: { '@type': 'Answer', text: 'Six guesses per round, with a distance, direction arrow and proximity percentage after each one.' } },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/silhouette" schema={schema}>
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-title rise" style="--d:0ms">Worldle Unlimited</h1>
+      <p class="hero-sub rise" style="--d:80ms">
+        Guess the mystery country from its outline alone — <strong>unlimited rounds</strong>, no daily wait.
+      </p>
+      <SilhouetteGame />
+    </div>
+  </section>
+
+  <article class="prose content">
+    <h2>What Is Worldle Unlimited?</h2>
+    <p>
+      <strong>Worldle Unlimited is the endless version of the country-silhouette guessing game — identify
+      the mystery country from its outline alone, with no daily limit.</strong> Every round shows you the
+      black silhouette of one country, and your job is to name it in six guesses. After each guess you get
+      three clues: how far your guess is from the answer, which direction to look, and a proximity score.
+      The twist that makes this <em>unlimited</em> Worldle is simple but important — when a round ends, the
+      next one starts instantly. There is no once-a-day cap and nothing to wait for.
+    </p>
+    <p>
+      If you already enjoy the daily shape puzzle but finish it in under a minute and want more, this is the
+      version for you. Because rounds are endless, Worldle Unlimited is the fastest way to train your eye for
+      country shapes — you can play ten rounds in the time it takes to wait a day for a single daily puzzle.
+    </p>
+
+    <h2>How to Play Worldle Unlimited</h2>
+    <p>Worldle Unlimited takes seconds to learn:</p>
+    <ol>
+      <li><strong>Look at the silhouette.</strong> A black outline of the mystery country appears at the top.</li>
+      <li><strong>Type any country</strong> and press Guess. Autocomplete helps you spell it.</li>
+      <li><strong>Read the three clues</strong> — distance, direction arrow and proximity percentage — then guess again.</li>
+      <li><strong>Name it within six guesses,</strong> then hit Play Again to start a fresh round immediately.</li>
+    </ol>
+    <p>
+      New to the format? Our <a href="/how-to-play">how-to-play guide</a> walks through the rules and the
+      colour clues in more detail, and the same country pool powers every mode on the site.
+    </p>
+
+    <h2>Reading the Clues: Distance, Direction &amp; Proximity</h2>
+    <p>
+      The whole game is about turning three small clues into a confident answer. Here is exactly what each
+      one tells you:
+    </p>
+    <figure class="figure">
+      <img src="/assets/svg/clue-legend.svg" alt="Diagram of the three Worldle clues: distance in kilometres, a compass direction arrow, and a proximity percentage shown as coloured squares" width="720" height="280" loading="lazy" />
+    </figure>
+    <ul>
+      <li><strong>Distance</strong> is the great-circle distance from your guess to the mystery country. A small
+        number means you are almost on top of the answer.</li>
+      <li><strong>Direction</strong> is a compass arrow pointing from your guess toward the target. If you guess
+        Egypt and the arrow points north-east, the answer lies up and to the right.</li>
+      <li><strong>Proximity</strong> is a percentage from 0% to 100%. It reaches 100% only when you find the
+        exact country, so a jump from 40% to 85% tells you your last guess was a big improvement.</li>
+    </ul>
+    <p>
+      Read together, these clues let you triangulate. One warm guess plus its direction arrow usually points
+      you to the right region; a second guess in that direction confirms it.
+    </p>
+
+    <h2>Worldle vs Globle: Shape vs Distance</h2>
+    <p>
+      Worldle and <a href="/">Globle Unlimited</a> are cousins built on the same country pool, but they test
+      different skills. Here is how they compare:
+    </p>
+    <table class="cmp">
+      <thead><tr><th>Game</th><th>What you see</th><th>Clues</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/silhouette">Worldle Unlimited</a></td><td>A flat silhouette</td><td>Distance, direction, proximity</td><td>Shape recognition</td></tr>
+        <tr><td><a href="/">Globle Unlimited</a></td><td>A 3D globe</td><td>Distance + heat colour</td><td>Building a mental map</td></tr>
+      </tbody>
+    </table>
+    <p>
+      If you know your country outlines, Worldle is fast and satisfying. If you would rather reason purely by
+      location, the heat-map globe in <a href="/">Globle Unlimited</a> is the better fit. Most players enjoy
+      switching between the two.
+    </p>
+
+    <h2>Worldle Unlimited vs the Daily Worldle</h2>
+    <p>
+      The daily version is a single shared puzzle: everyone gets the same country, once per day. That is great
+      for a quick streak, but it is over in a minute. Worldle Unlimited removes the cap entirely. Every round
+      picks a fresh random country, so you can keep playing as long as you like — perfect for practice, for a
+      longer sitting, or for those days when one puzzle simply is not enough. When you want the shared challenge
+      back, the <a href="/daily">daily Globle</a> is always there.
+    </p>
+
+    <h2>Tips to Guess the Country in Fewer Tries</h2>
+    <p>A few habits will quickly cut your average guess count:</p>
+    <ul>
+      <li><strong>Learn the distinctive shapes.</strong> Italy's boot, Chile's ribbon, Norway's jagged coast and
+        island nations are giveaways — the outline often names the country before you need a single clue.</li>
+      <li><strong>Open with a big, central country.</strong> Guessing a large nation early gives you a clean
+        distance and direction reading to work from.</li>
+      <li><strong>Follow the arrow.</strong> Treat the direction arrow as a compass and step your next guess in
+        that direction rather than jumping randomly across the map.</li>
+      <li><strong>Watch the proximity jumps.</strong> A big percentage increase means you are heading the right
+        way; a drop means backtrack.</li>
+    </ul>
+    <p>
+      Want to go deeper? Our <a href="/blog/globle-tips-strategy">strategy guide</a> and our breakdown of the
+      <a href="/blog/hardest-countries-to-guess">hardest countries to guess</a> both transfer directly to
+      Worldle Unlimited.
+    </p>
+
+    <h2>Why Learning Country Shapes Pays Off</h2>
+    <p>
+      The skill Worldle Unlimited quietly builds is shape memory, and it is more useful than it first looks.
+      Once you can recognise a silhouette on sight, that knowledge carries over to every other geography game,
+      to maps in the news, and to travel. A country's outline is a fingerprint: the long tail of Chile, the
+      diamond of India, the mitten of Michigan-like Italy, the scattered arc of Indonesia. The more silhouettes
+      you learn, the fewer clues you need — many rounds end on the very first guess because the shape simply
+      gives the answer away. That is the moment the game becomes genuinely fast, and unlimited rounds are what
+      get you there, because recognition is built through repetition, not through a single puzzle a day.
+    </p>
+
+    <h2>A Five-Minute Practice Routine</h2>
+    <p>
+      You do not need a complicated plan to improve. A short, consistent routine works better than a rare
+      marathon. Play three to five rounds and, on each one, force yourself to name the region from the shape
+      before you type anything. Make your first guess a large, well-known country so the distance and direction
+      clues are easy to read, then step toward the arrow rather than guessing at random. After each solve, take
+      a second to notice which country it was and what it borders. Do this a few times a week and your average
+      guess count will fall noticeably within a fortnight — and shapes that once looked identical will start to
+      feel obvious.
+    </p>
+
+    <h2>Common Mistakes to Avoid</h2>
+    <p>
+      New players tend to lose guesses in the same handful of ways, and unlimited practice is the perfect place
+      to unlearn them. The most common is ignoring the direction arrow and guessing scattered countries instead
+      of stepping steadily toward the target. Another is forgetting island nations and micro-states, which have
+      some of the most distinctive outlines of all. Beginners also tend to fixate on one warm guess without
+      testing its neighbours, and they often misjudge how the map wraps — a shape near the edge of your mental
+      map can still be close to somewhere on the far side. Spend a few rounds consciously avoiding each of these
+      and they fade fast.
+    </p>
+
+    <h2>Worldle Unlimited for Students and Classrooms</h2>
+    <p>
+      Because it is free, quick and needs no account, Worldle Unlimited doubles as a genuinely useful study
+      tool. For students learning world geography, a few unlimited rounds turn rote memorisation into play:
+      instead of staring at a labelled map, you actively recall a country from its outline and get instant
+      feedback on how close you were. Teachers and parents like that there is nothing to set up and no way to
+      truly &ldquo;lose&rdquo; — every guess is a small lesson in where countries sit and what shapes they take.
+      Run as a warm-up a couple of times a week, it builds the same map fluency that repeated reading builds for
+      vocabulary, and it works just as well on a classroom tablet as on a phone at home.
+    </p>
+
+    <h2>Play Anywhere, on Any Device</h2>
+    <p>
+      Worldle Unlimited runs entirely in your browser, so there is nothing to install and nothing to update. On
+      a desktop you type and read the clues at a glance; on a phone or tablet the silhouette and input stack
+      neatly so you can play one-handed. Because the page loads fast and stays light — there is no heavy 3D
+      engine on this mode — you can fit a round into any spare minute, and your stats are saved privately on your
+      own device. That convenience is what makes it easy to play a little and often, which is exactly how shape
+      memory sticks.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details><summary>Is Worldle Unlimited free?</summary><p>Yes — completely free in your browser with no sign-up. Prefer the globe? Try <a href="/">Globle Unlimited</a>.</p></details>
+      <details><summary>Do I need an account to play?</summary><p>No account and no download. Everything runs in your browser and your progress is saved locally on your device.</p></details>
+      <details><summary>How is it different from the daily Worldle?</summary><p>The <a href="/daily">daily game</a> gives one puzzle a day; Worldle Unlimited lets you play endless rounds back-to-back.</p></details>
+      <details><summary>What do the coloured squares mean?</summary><p>They show proximity: green is very close, yellow is mid-range and black is far. See the full rules on <a href="/how-to-play">how to play</a>.</p></details>
+      <details><summary>How many guesses do I get?</summary><p>Six per round, each followed by a distance, a direction arrow and a proximity percentage.</p></details>
+      <details><summary>How do I get better at country shapes?</summary><p>Play often and study distinctive outlines — the <a href="/blog/hardest-countries-to-guess">trickiest countries</a> are worth memorising.</p></details>
+    </div>
+
+    <h2>More Ways to Play</h2>
+    <p>
+      Worldle Unlimited is one of several endless modes on Globle Unlimited. Try
+      <a href="/">Globle Unlimited</a> for the 3D globe, <a href="/capitals">Globle Capitals</a> to guess
+      capital cities, or <a href="/practice">practice mode</a> for pressure-free rounds. You can browse them
+      all on the <a href="/unlimited">unlimited geography games</a> hub.
+    </p>
+    <p class="cta-row"><a href="/" class="btn btn-ghost">Play Globle Unlimited</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-block: var(--space-12) var(--space-8); }
+  .hero-inner { text-align: center; max-width: 760px; }
+  .hero-title { font-size: var(--fs-display); }
+  .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
+  .rise { animation-delay: var(--d, 0ms); }
+  .content { margin-top: var(--space-16); text-align: left; }
+  .content ol, .content ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+  .cta-row { margin-top: var(--space-8); }
+
+  .figure { margin: var(--space-6) 0; }
+  .figure img { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); }
+
+  .cmp { width: 100%; border-collapse: collapse; margin: var(--space-6) 0; font-size: var(--fs-small); }
+  .cmp th, .cmp td { border: 1px solid var(--line); padding: var(--space-2) var(--space-3); text-align: left; }
+  .cmp th { background: var(--bg-panel); color: var(--accent); }
+  .cmp td { color: var(--text-dim); }
+  .cmp a { color: var(--accent); }
+
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+  .faq details { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+  .faq summary { cursor: pointer; color: var(--text); font-weight: 600; }
+  .faq p { margin-top: var(--space-2); }
+</style>

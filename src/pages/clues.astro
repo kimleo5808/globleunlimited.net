@@ -1,0 +1,257 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CluesGame from '../components/game/CluesGame.astro';
+
+const title = 'Countryle Unlimited – Guess the Country by Clues';
+const description =
+  'Play Countryle Unlimited free: deduce the mystery country from clues on continent, area, borders, hemisphere & direction. No daily limit—endless rounds.';
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Countryle Unlimited',
+    genre: 'Geography puzzle',
+    gamePlatform: 'Web browser',
+    applicationCategory: 'Game',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to play Countryle Unlimited',
+    step: [
+      { '@type': 'HowToStep', name: 'Guess a country', text: 'Type any country name and press Guess.' },
+      { '@type': 'HowToStep', name: 'Read the clues', text: 'Each guess is scored across continent, hemisphere, direction, area, borders and landlocked status.' },
+      { '@type': 'HowToStep', name: 'Narrow it down', text: 'Use the green, yellow and red clues plus the up/down arrows to close in on the answer.' },
+      { '@type': 'HowToStep', name: 'Solve it', text: 'Identify the country within seven guesses, then play another round instantly.' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'Is Countryle Unlimited free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Countryle Unlimited is completely free to play in your browser, with no sign-up required.' } },
+      { '@type': 'Question', name: 'How is Countryle Unlimited different from the daily Countryle?', acceptedAnswer: { '@type': 'Answer', text: 'The daily game gives you one puzzle a day; Countryle Unlimited lets you play endless rounds back-to-back with no daily wait.' } },
+      { '@type': 'Question', name: 'How many guesses do I get?', acceptedAnswer: { '@type': 'Answer', text: 'Seven guesses, with clues on continent, hemisphere, direction, area, borders and landlocked status after each one.' } },
+      { '@type': 'Question', name: 'What do the colours and arrows mean?', acceptedAnswer: { '@type': 'Answer', text: 'Green means the clue matches, yellow is close, red is far, and an up or down arrow shows whether the answer is higher or lower on that stat.' } },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/clues" schema={schema}>
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-title rise" style="--d:0ms">Countryle Unlimited</h1>
+      <p class="hero-sub rise" style="--d:80ms">
+        Deduce the mystery country from six kinds of clue — no map, <strong>unlimited rounds</strong>, no daily wait.
+      </p>
+      <CluesGame />
+    </div>
+  </section>
+
+  <article class="prose content">
+    <h2>What Is Countryle Unlimited?</h2>
+    <p>
+      <strong>Countryle Unlimited is the endless, map-free country-guessing game where you deduce the mystery
+      country from clues like continent, area and direction — with no daily limit.</strong> You type any
+      country, and instead of a distance on a globe, you get a row of colour-coded clues: which continent it
+      is on, which hemisphere, which way to look, how its area compares, how many neighbours it has, and
+      whether it is landlocked. Green means a clue matches, yellow means close, red means far. The
+      <em>unlimited</em> part is simple: when a round ends, the next begins instantly, so you can keep deducing
+      as long as you like.
+    </p>
+    <p>
+      This is the pure-logic mode. There is no shape and no globe — just facts and reasoning. If you enjoy
+      narrowing down possibilities like a detective, Countryle Unlimited is the most satisfying of all the
+      modes, and endless rounds let you sharpen that reasoning without waiting for tomorrow.
+    </p>
+
+    <h2>How to Play Countryle Unlimited</h2>
+    <p>Countryle Unlimited is all about reading clues well:</p>
+    <ol>
+      <li><strong>Guess any country</strong> and press Enter. Autocomplete helps you spell it.</li>
+      <li><strong>Read the six clues</strong> in the row — continent, hemisphere, direction, area, borders and
+        landlocked status.</li>
+      <li><strong>Follow the colours and arrows.</strong> Green is a match, yellow is close, red is far; an
+        arrow shows whether the answer is higher or lower on that stat.</li>
+      <li><strong>Deduce the country within seven guesses,</strong> then hit Play Again for a fresh round.</li>
+    </ol>
+    <p>
+      New to the idea? Our <a href="/how-to-play">how-to-play guide</a> covers the basics, and every mode on
+      the site uses the same country pool, so the geography you learn here carries across.
+    </p>
+
+    <h2>Understanding the Clues</h2>
+    <p>
+      The whole game is reading six small clues correctly. Here is what each column tells you:
+    </p>
+    <figure class="figure">
+      <img src="/assets/svg/clue-attributes-legend.svg" alt="Diagram showing a Countryle clue row with green, yellow and red cells for continent, area, borders and landlocked status, plus up and down arrows" width="720" height="300" loading="lazy" />
+    </figure>
+    <ul>
+      <li><strong>Continent</strong> turns green when your guess is on the same continent as the answer.</li>
+      <li><strong>Hemisphere</strong> shows N or S and matches when the answer is in the same half of the globe.</li>
+      <li><strong>Direction</strong> is a compass arrow pointing from your guess toward the mystery country.</li>
+      <li><strong>Area</strong> compares land size; the arrow points up if the answer is larger, down if smaller,
+        and the colour shows how close you are.</li>
+      <li><strong>Borders</strong> compares the number of neighbouring countries — a strong clue for spotting
+        islands and landlocked nations.</li>
+      <li><strong>Landlocked</strong> is a simple yes/no that instantly rules out or rules in whole groups of
+        countries.</li>
+    </ul>
+    <p>
+      Read together, the clues let you triangulate fast. A South-America, large-area, many-borders,
+      not-landlocked country is almost certainly one of a handful — often just Brazil or Argentina.
+    </p>
+
+    <h2>Countryle vs Globle vs Worldle</h2>
+    <p>
+      Countryle Unlimited sits alongside our other endless modes, all built on the same country pool but each
+      testing a different kind of knowledge:
+    </p>
+    <table class="cmp">
+      <thead><tr><th>Game</th><th>Main clue</th><th>Skill tested</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/clues">Countryle Unlimited</a></td><td>Attribute clues</td><td>Deduction &amp; country facts</td></tr>
+        <tr><td><a href="/">Globle Unlimited</a></td><td>Distance + heat colour</td><td>Mental-map building</td></tr>
+        <tr><td><a href="/silhouette">Worldle Unlimited</a></td><td>Silhouette + direction</td><td>Shape recognition</td></tr>
+        <tr><td><a href="/flags">Flagle Unlimited</a></td><td>Flag reveal + distance</td><td>Flag recognition</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Countryle is the odd one out in the best way: it needs no map at all. If you would rather reason with
+      facts than read a globe, this is your mode; if you prefer visuals, try
+      <a href="/silhouette">Worldle Unlimited</a> or <a href="/flags">Flagle Unlimited</a>.
+    </p>
+
+    <h2>Countryle Unlimited vs the Daily Countryle</h2>
+    <p>
+      The daily version gives one shared puzzle per day — good for a quick brain-teaser, but soon over.
+      Countryle Unlimited removes the cap. Every round picks a fresh random country, so you can keep reasoning
+      through as many as you like. That volume is exactly what makes your deduction faster over time. When you
+      want the shared streak back, the <a href="/daily">daily Globle</a> is always there.
+    </p>
+
+    <h2>Strategy: Which Country to Guess First</h2>
+    <p>Because there is no map, your opening guesses matter more than in other modes:</p>
+    <ul>
+      <li><strong>Open with a big, well-known country.</strong> A large nation like Brazil, Russia or Australia
+        immediately fixes the continent, hemisphere and a clear area baseline.</li>
+      <li><strong>Use area as a binary search.</strong> If the arrow says the answer is larger, jump to a bigger
+        country next; if smaller, go smaller. Two or three guesses usually bracket the size.</li>
+      <li><strong>Let borders separate islands from the mainland.</strong> A borders count of zero points to an
+        island nation; a high count points to a central, land-connected country.</li>
+      <li><strong>Trust the landlocked clue.</strong> A single yes or no removes a large slice of the map in one
+        move.</li>
+    </ul>
+    <p>
+      Combine these and you can often solve a round in three or four guesses. Our
+      <a href="/blog/globle-tips-strategy">strategy guide</a> has more ideas that transfer here.
+    </p>
+
+    <h2>A Great Way to Learn Country Facts</h2>
+    <p>
+      Countryle Unlimited teaches the kind of geography that sticks: not just where countries are, but how big
+      they are, who they border, and how they sit on the globe. Every round quietly builds that knowledge. You
+      start to remember that Kazakhstan is enormous and landlocked, that Chile is long and coastal, that the
+      Democratic Republic of the Congo has a striking number of neighbours. Because the feedback is instant and
+      the rounds are endless, these facts move from "I think so" to "I know" far faster than passive study.
+    </p>
+
+    <h2>Why Endless Rounds Beat One a Day</h2>
+    <p>
+      Deduction is a skill you build through reps, and a single daily puzzle simply does not give you enough of
+      them. Unlimited rounds do. In the time it takes to wait a day for one puzzle, you can reason through a
+      dozen, spot your habitual wrong turns, and correct them. That volume is what turns slow, uncertain
+      guessing into confident three-move solves. It also lets you drill on purpose — keep playing until African
+      countries, or the small European states, stop tripping you up.
+    </p>
+
+    <h2>Common Mistakes to Avoid</h2>
+    <p>
+      New players tend to lose guesses in a few predictable ways, and unlimited practice is the place to unlearn
+      them. The most common is ignoring the up and down arrows and re-guessing countries of a similar size
+      instead of jumping decisively larger or smaller. Another is overlooking the landlocked and borders clues,
+      which are some of the most powerful for cutting the field. Beginners also forget that hemisphere is a
+      binary that halves the map instantly. Spend a few rounds consciously using every clue in the row and your
+      guess count will drop quickly.
+    </p>
+
+    <h2>Play Anywhere, on Any Device</h2>
+    <p>
+      Countryle Unlimited is the lightest mode on the site — a pure clue table with no globe or 3D engine — so
+      it loads instantly and runs smoothly on any phone, tablet or laptop. There is nothing to install and no
+      account to create, and your stats are saved privately in your own browser. On a small screen the clue
+      table scrolls sideways so every column stays readable. That lightness makes it easy to play a little and
+      often, which is exactly how geography knowledge sticks.
+    </p>
+
+    <h2>A Classroom-Friendly Brain Teaser</h2>
+    <p>
+      Because it rewards reasoning rather than rote recall, Countryle Unlimited works beautifully as a teaching
+      tool. A single round touches continents, hemispheres, relative size, borders and coastlines all at once,
+      so students practise connecting facts instead of memorising them in isolation. Teachers can put it on a
+      projector and solve a round together, thinking aloud about which clue rules out the most countries.
+      Parents can hand it to a curious kid with nothing to set up and no account to make. And because every
+      guess returns instant, colour-coded feedback, learners see immediately why a deduction was right or wrong
+      — the kind of feedback loop that makes geography actually stick.
+    </p>
+
+    <h2>Track Your Best Score</h2>
+    <p>
+      Countryle Unlimited keeps a private record of your play, stored locally in your own browser. After each
+      win it shows your best-ever guess count and how many rounds you have played, so you can watch your average
+      fall as your deduction sharpens. There is no leaderboard and no login — the numbers are just for you, a
+      quiet nudge to solve the next one in fewer moves. If you would rather chase a shared streak, the
+      <a href="/daily">daily challenge</a> tracks one, and warming up with a few unlimited rounds first is a
+      good way to get sharp before you play it.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details><summary>Is Countryle Unlimited free?</summary><p>Yes — completely free in your browser with no sign-up. Prefer a map? Try <a href="/">Globle Unlimited</a>.</p></details>
+      <details><summary>Do I need an account or download?</summary><p>No. Everything runs in your browser and your progress is saved locally on your device.</p></details>
+      <details><summary>How is it different from the daily Countryle?</summary><p>The <a href="/daily">daily game</a> gives one puzzle a day; Countryle Unlimited lets you play endless rounds back-to-back.</p></details>
+      <details><summary>How many guesses do I get?</summary><p>Seven, each scored across continent, hemisphere, direction, area, borders and landlocked status.</p></details>
+      <details><summary>What do the colours and arrows mean?</summary><p>Green means the clue matches, yellow is close, red is far, and an arrow shows whether the answer is higher or lower on that stat.</p></details>
+      <details><summary>What's a good first guess?</summary><p>A large, well-known country fixes the continent and area range fast — see our <a href="/blog/globle-tips-strategy">strategy guide</a>.</p></details>
+    </div>
+
+    <h2>More Ways to Play</h2>
+    <p>
+      Countryle Unlimited is one of several endless modes on Globle Unlimited. Try
+      <a href="/">Globle Unlimited</a> for the 3D globe, <a href="/silhouette">Worldle Unlimited</a> to guess
+      by shape, or <a href="/flags">Flagle Unlimited</a> to guess by flag. You can browse them all on the
+      <a href="/unlimited">unlimited geography games</a> hub.
+    </p>
+    <p class="cta-row"><a href="/" class="btn btn-ghost">Play Globle Unlimited</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-block: var(--space-12) var(--space-8); }
+  .hero-inner { text-align: center; max-width: 760px; }
+  .hero-title { font-size: var(--fs-display); }
+  .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
+  .rise { animation-delay: var(--d, 0ms); }
+  .content { margin-top: var(--space-16); text-align: left; }
+  .content ol, .content ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+  .cta-row { margin-top: var(--space-8); }
+
+  .figure { margin: var(--space-6) 0; }
+  .figure img { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); }
+
+  .cmp { width: 100%; border-collapse: collapse; margin: var(--space-6) 0; font-size: var(--fs-small); }
+  .cmp th, .cmp td { border: 1px solid var(--line); padding: var(--space-2) var(--space-3); text-align: left; }
+  .cmp th { background: var(--bg-panel); color: var(--accent); }
+  .cmp td { color: var(--text-dim); }
+  .cmp a { color: var(--accent); }
+
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+  .faq details { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+  .faq summary { cursor: pointer; color: var(--text); font-weight: 600; }
+  .faq p { margin-top: var(--space-2); }
+</style>

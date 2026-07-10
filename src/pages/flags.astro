@@ -1,0 +1,254 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FlagsGame from '../components/game/FlagsGame.astro';
+
+const title = 'Flagle Unlimited – Guess the Country Flag Game';
+const description =
+  'Play Flagle Unlimited free: guess the country from its flag, revealed tile by tile with distance & direction clues. No daily limit—endless rounds.';
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Flagle Unlimited',
+    genre: 'Geography puzzle',
+    gamePlatform: 'Web browser',
+    applicationCategory: 'Game',
+    operatingSystem: 'Any',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to play Flagle Unlimited',
+    step: [
+      { '@type': 'HowToStep', name: 'See the covered flag', text: 'A national flag appears split into six covered tiles.' },
+      { '@type': 'HowToStep', name: 'Type a country', text: 'Enter any country name and press Guess.' },
+      { '@type': 'HowToStep', name: 'Reveal and read clues', text: 'Each wrong guess uncovers one tile and shows the distance and direction to the answer.' },
+      { '@type': 'HowToStep', name: 'Solve it', text: 'Identify the country within six guesses, then play another round instantly.' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'Is Flagle Unlimited free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Flagle Unlimited is completely free to play in your browser, with no sign-up required.' } },
+      { '@type': 'Question', name: 'How is Flagle Unlimited different from the daily Flagle?', acceptedAnswer: { '@type': 'Answer', text: 'The daily game gives you one flag a day; Flagle Unlimited lets you play endless rounds back-to-back with no daily wait.' } },
+      { '@type': 'Question', name: 'How many guesses do I get?', acceptedAnswer: { '@type': 'Answer', text: 'Six guesses. Each wrong guess reveals one of the six flag tiles plus a distance and direction clue.' } },
+      { '@type': 'Question', name: 'How is the distance calculated?', acceptedAnswer: { '@type': 'Answer', text: 'It is the great-circle distance between country centers, with an arrow pointing toward the mystery country.' } },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/flags" schema={schema}>
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-title rise" style="--d:0ms">Flagle Unlimited</h1>
+      <p class="hero-sub rise" style="--d:80ms">
+        Guess the country from its flag — revealed one tile at a time, <strong>unlimited rounds</strong>, no daily wait.
+      </p>
+      <FlagsGame />
+    </div>
+  </section>
+
+  <article class="prose content">
+    <h2>What Is Flagle Unlimited?</h2>
+    <p>
+      <strong>Flagle Unlimited is the endless version of the flag-guessing game — identify the country from
+      its flag, revealed one tile per guess, with no daily limit.</strong> Every round hides a national flag
+      behind six tiles. You guess a country, and if you are wrong, one tile lifts to show part of the flag,
+      along with the distance and direction to the real answer. The difference that makes this Flagle
+      <em>unlimited</em> is simple: when a round ends, the next begins instantly. There is no once-a-day cap,
+      so you can keep playing as long as you like.
+    </p>
+    <p>
+      Flags are one of the most shareable geography puzzles for a reason — the reveal is dramatic, and the
+      moment a familiar colour or emblem appears, the answer often clicks. Because rounds are endless, Flagle
+      Unlimited is the quickest way to turn "I sort of know that flag" into instant recognition of every one.
+    </p>
+
+    <h2>How to Play Flagle Unlimited</h2>
+    <p>Flagle Unlimited is quick to pick up:</p>
+    <ol>
+      <li><strong>Look at the covered flag.</strong> The mystery flag starts split into six tiles.</li>
+      <li><strong>Type any country</strong> and press Guess. Autocomplete helps you spell it.</li>
+      <li><strong>Read the clues.</strong> A wrong guess uncovers one tile and shows the distance and a direction arrow toward the answer.</li>
+      <li><strong>Name it within six guesses,</strong> then hit Play Again to start a fresh flag immediately.</li>
+    </ol>
+    <p>
+      New to the format? Our <a href="/how-to-play">how-to-play guide</a> covers the clue system, and every
+      mode on the site draws from the same country pool, so what you learn here carries over.
+    </p>
+
+    <h2>How the Tile Reveal &amp; Clues Work</h2>
+    <p>
+      Flagle Unlimited gives you two kinds of help at once — a little more of the flag, and a geography hint.
+      Here is exactly what happens on every guess:
+    </p>
+    <figure class="figure">
+      <img src="/assets/svg/flag-clue-legend.svg" alt="Diagram showing a flag revealed one tile at a time, plus the distance in kilometres and a compass direction arrow toward the answer" width="720" height="280" loading="lazy" />
+    </figure>
+    <ul>
+      <li><strong>Tile reveal.</strong> Each wrong guess uncovers one of the six tiles, so the flag comes into
+        view piece by piece. A single stripe or symbol is often enough to name the country.</li>
+      <li><strong>Distance.</strong> The great-circle distance from your guess to the mystery country. A small
+        number means you are almost there.</li>
+      <li><strong>Direction.</strong> A compass arrow pointing from your guess toward the answer, so you know
+        which way to move on the map.</li>
+    </ul>
+    <p>
+      The two clue types reinforce each other. If the revealed tile shows a red-and-white stripe and the arrow
+      points toward Asia, you can narrow the field fast.
+    </p>
+
+    <h2>Flagle vs Globle vs Worldle</h2>
+    <p>
+      Flagle Unlimited sits alongside our other endless modes, all built on the same country pool but testing
+      different knowledge:
+    </p>
+    <table class="cmp">
+      <thead><tr><th>Game</th><th>What you identify</th><th>Main clue</th><th>Best for</th></tr></thead>
+      <tbody>
+        <tr><td><a href="/flags">Flagle Unlimited</a></td><td>The flag</td><td>Tile reveal + distance</td><td>Flag recognition</td></tr>
+        <tr><td><a href="/">Globle Unlimited</a></td><td>The country</td><td>Distance + heat colour</td><td>Mental-map building</td></tr>
+        <tr><td><a href="/silhouette">Worldle Unlimited</a></td><td>The country</td><td>Silhouette + direction</td><td>Shape recognition</td></tr>
+      </tbody>
+    </table>
+    <p>
+      If you love flags, start here. If you would rather reason by location, the heat-map globe in
+      <a href="/">Globle Unlimited</a> or the outline in <a href="/silhouette">Worldle Unlimited</a> may suit
+      you better. Many players rotate through all three.
+    </p>
+
+    <h2>Flagle Unlimited vs the Daily Flagle</h2>
+    <p>
+      The daily version is one shared flag per day — great for a quick streak, but over in a minute. Flagle
+      Unlimited removes the cap. Every round picks a fresh random flag, so you can keep going for as long as
+      you like, which is exactly what you want when you are trying to learn the world's flags rather than solve
+      a single puzzle. When you want the shared challenge, the <a href="/daily">daily Globle</a> is always
+      there.
+    </p>
+
+    <h2>Tips to Recognize Flags Faster</h2>
+    <p>A few patterns will speed up your identification dramatically:</p>
+    <ul>
+      <li><strong>Learn flags by colour family.</strong> The pan-African red-yellow-green, the pan-Arab
+        red-white-black-green, and the Nordic cross each point to a whole region at a glance.</li>
+      <li><strong>Spot the emblems.</strong> A central sun, star, crescent, or coat of arms narrows the field
+        quickly, even from a single revealed tile.</li>
+      <li><strong>Use the direction arrow.</strong> Combine the partial flag with the arrow to lock down the
+        continent before you commit.</li>
+      <li><strong>Guess big countries early.</strong> A large opening guess gives you a clean distance reading
+        to work from.</li>
+    </ul>
+    <p>
+      Want more? Our breakdown of the <a href="/blog/hardest-countries-to-guess">hardest countries to guess</a>
+      and our <a href="/blog/globle-tips-strategy">strategy guide</a> both help here too.
+    </p>
+
+    <h2>Learn World Flags While You Play</h2>
+    <p>
+      There are around two hundred national flags, and most people can name only a couple of dozen on sight.
+      Flagle Unlimited closes that gap without feeling like study. Every round you play quietly reinforces the
+      link between a flag and its country: the shade of blue Argentina uses, the exact arrangement of the
+      Southern Cross, the difference between Chad and Romania. Because you get instant feedback and can replay
+      endlessly, the flags that once blurred together start to separate into distinct, memorable images — the
+      same way repeated reading builds vocabulary.
+    </p>
+
+    <h2>Why Endless Rounds Beat One a Day</h2>
+    <p>
+      Flag recognition is a memory skill, and memory is built through repetition. A single daily flag simply
+      does not give you enough reps to improve quickly. Unlimited rounds do. In the time it takes to wait a day
+      for one puzzle, you can play a dozen flags, see a dozen reveals, and correct a dozen mistakes. That volume
+      is what turns hesitation into instant recognition. It also means you can drill a weakness on purpose —
+      keep playing until the African flags, or the Pacific island flags, stop tripping you up.
+    </p>
+
+    <h2>A Study Tool for Students &amp; Teachers</h2>
+    <p>
+      Because it is free, needs no account, and runs in any browser, Flagle Unlimited doubles as a classroom
+      and homework tool. For students, it turns flag memorisation into a game with immediate feedback rather
+      than a list to cram. Teachers and parents like that there is nothing to install and no way to truly lose
+      — every guess is a small lesson in geography and symbolism. Used as a warm-up a couple of times a week,
+      it builds durable recognition that sticks far better than passive review, and it works just as well on a
+      classroom tablet as on a phone at home.
+    </p>
+
+    <h2>Play Anywhere, on Any Device</h2>
+    <p>
+      Flagle Unlimited runs entirely in your browser, with nothing to install and nothing to update. On a
+      desktop you read the tiles and clues at a glance; on a phone the flag grid and input stack neatly for
+      one-handed play. Because the page stays light — there is no heavy 3D engine on this mode — a round fits
+      into any spare minute, and your stats are saved privately on your own device. That convenience is what
+      makes it easy to play a little and often, which is exactly how flag knowledge sticks.
+    </p>
+
+    <h2>Track Your Best Score</h2>
+    <p>
+      Flagle Unlimited keeps a private record of how you are doing, stored locally in your own browser. After
+      each win it shows your best-ever guess count and how many rounds you have played, so you can watch your
+      average drop as your flag knowledge grows. There is no leaderboard and no account — the numbers are just
+      for you, a quiet nudge to beat yesterday's best. If you enjoy chasing a streak instead, the shared
+      <a href="/daily">daily challenge</a> tracks one, and you can always warm up here first with a few
+      unlimited rounds before you take it on.
+    </p>
+
+    <h2>Common Flag Mix-Ups to Watch For</h2>
+    <p>
+      Part of the fun of Flagle Unlimited is learning the flags that fool almost everyone. Chad and Romania are
+      nearly identical vertical blue-yellow-red tricolours, separated only by the exact shade of blue.
+      Indonesia and Monaco are both red-over-white, differing mainly in proportion. Ireland and Côte d'Ivoire
+      are mirror images of the same three colours. Australia, New Zealand, Tuvalu, Cook Islands and several
+      others all share the Union Jack canton and a field of stars. Slovenia, Slovakia and Russia use the same
+      white-blue-red palette in different arrangements. Once you have seen these look-alikes a few times, the
+      distance and direction clues become the tie-breaker — the flags may match, but the countries sit on
+      opposite sides of the world, and the arrow tells you which one you are looking at.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <details><summary>Is Flagle Unlimited free?</summary><p>Yes — completely free in your browser with no sign-up. Prefer the globe? Try <a href="/">Globle Unlimited</a>.</p></details>
+      <details><summary>Do I need an account or download?</summary><p>No. Everything runs in your browser and your progress is saved locally on your device.</p></details>
+      <details><summary>How is it different from the daily Flagle?</summary><p>The <a href="/daily">daily game</a> gives one flag a day; Flagle Unlimited lets you play endless rounds back-to-back.</p></details>
+      <details><summary>How many guesses do I get?</summary><p>Six. Each wrong guess reveals one of the six flag tiles plus a distance and direction clue.</p></details>
+      <details><summary>How is the distance calculated?</summary><p>It is the great-circle distance between country centres, with an arrow pointing toward the answer. See <a href="/how-to-play">how to play</a>.</p></details>
+      <details><summary>How do I get better at flags?</summary><p>Learn flags by colour families and symbols, and use the direction arrow to narrow the region — the <a href="/blog/hardest-countries-to-guess">trickiest countries</a> are worth memorising.</p></details>
+    </div>
+
+    <h2>More Ways to Play</h2>
+    <p>
+      Flagle Unlimited is one of several endless modes on Globle Unlimited. Try
+      <a href="/">Globle Unlimited</a> for the 3D globe, <a href="/silhouette">Worldle Unlimited</a> to guess
+      countries by shape, or <a href="/capitals">Globle Capitals</a> for capital cities. You can browse them
+      all on the <a href="/unlimited">unlimited geography games</a> hub.
+    </p>
+    <p class="cta-row"><a href="/silhouette" class="btn btn-ghost">Play Worldle Unlimited</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-block: var(--space-12) var(--space-8); }
+  .hero-inner { text-align: center; max-width: 760px; }
+  .hero-title { font-size: var(--fs-display); }
+  .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
+  .rise { animation-delay: var(--d, 0ms); }
+  .content { margin-top: var(--space-16); text-align: left; }
+  .content ol, .content ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+  .cta-row { margin-top: var(--space-8); }
+
+  .figure { margin: var(--space-6) 0; }
+  .figure img { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); }
+
+  .cmp { width: 100%; border-collapse: collapse; margin: var(--space-6) 0; font-size: var(--fs-small); }
+  .cmp th, .cmp td { border: 1px solid var(--line); padding: var(--space-2) var(--space-3); text-align: left; }
+  .cmp th { background: var(--bg-panel); color: var(--accent); }
+  .cmp td { color: var(--text-dim); }
+  .cmp a { color: var(--accent); }
+
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+  .faq details { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+  .faq summary { cursor: pointer; color: var(--text); font-weight: 600; }
+  .faq p { margin-top: var(--space-2); }
+</style>
