@@ -279,10 +279,12 @@ const schema: Record<string, unknown>[] = [
   }
   .card:hover .card-cover { transform: scale(1.04); }
   @media (prefers-reduced-motion: reduce) { .card:hover .card-cover { transform: none; } }
-  .card-body { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-5) var(--space-6) var(--space-6); }
+  /* flex:1 lets the body fill the card so the CTA can pin to the bottom,
+     keeping every card's "Play" aligned regardless of blurb length. */
+  .card-body { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-5) var(--space-6) var(--space-6); flex: 1; }
   .card-name { font-family: var(--font-display); font-size: 1.2rem; color: var(--text); }
   .card-blurb { color: var(--text-dim); font-size: var(--fs-small); line-height: var(--lh-body); flex: 1; }
-  .card-cta { color: var(--accent); font-weight: 600; font-size: var(--fs-small); }
+  .card-cta { color: var(--accent); font-weight: 600; font-size: var(--fs-small); align-self: center; margin-top: var(--space-3); }
 
   .content { margin-top: var(--space-16); text-align: left; }
   .content h3 { margin-top: var(--space-6); }
