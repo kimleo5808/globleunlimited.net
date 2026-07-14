@@ -10,6 +10,8 @@ const blog = defineCollection({
     updated: z.coerce.date().optional(),
     author: z.string().default('The Globle Unlimited Team'),
     tags: z.array(z.string()).default([]),
+    cover: z.string().optional(),
+    coverAlt: z.string().optional(),
   }),
 });
 

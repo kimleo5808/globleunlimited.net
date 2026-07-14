@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-label="Annotated stylised outline of Italy showing the three-step scan: overall proportions first, then coastline character, then borders and islands.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,serif" font-size="27" fill="#EAF2F8">The three-second scan</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 1 · read proportions → coastline → borders &amp; islands, in that order</text>
+  <!-- stylised Italy -->
+  <g transform="translate(390,120)">
+    <path d="M60 0 L95 12 L88 45 L102 78 L140 118 L170 132 L166 155 L128 148 L96 118 L74 150 L88 178 L70 192 L52 168 L64 140 L52 96 L30 60 L38 22 Z"
+          fill="#13243A" stroke="#F4C95D" stroke-width="3"/>
+    <ellipse cx="30" cy="215" rx="28" ry="15" fill="#13243A" stroke="#F4C95D" stroke-width="2.5" transform="rotate(-20 30 215)"/>
+    <ellipse cx="122" cy="222" rx="22" ry="13" fill="#13243A" stroke="#F4C95D" stroke-width="2.5"/>
+    <!-- bounding box: aspect ratio -->
+    <rect x="-12" y="-14" width="212" height="252" fill="none" stroke="#FEB24C" stroke-dasharray="6 6" stroke-width="1.5"/>
+  </g>
+  <!-- annotations -->
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="16">
+    <g>
+      <circle cx="140" cy="160" r="17" fill="#FFEDA0"/>
+      <text x="140" y="166" text-anchor="middle" fill="#0E1C2E" font-weight="bold">1</text>
+      <text x="60" y="205" fill="#EAF2F8">Proportions:</text>
+      <text x="60" y="228" fill="#9DB2C6">tall &amp; slanted —</text>
+      <text x="60" y="251" fill="#9DB2C6">not a compact blob</text>
+      <path d="M170 175 C240 175 300 140 372 120" stroke="#FEB24C" fill="none" stroke-dasharray="2 5"/>
+    </g>
+    <g>
+      <circle cx="140" cy="320" r="17" fill="#FEB24C"/>
+      <text x="140" y="326" text-anchor="middle" fill="#0E1C2E" font-weight="bold">2</text>
+      <text x="60" y="365" fill="#EAF2F8">Coastline:</text>
+      <text x="60" y="388" fill="#9DB2C6">one long smooth heel</text>
+      <text x="60" y="411" fill="#9DB2C6">+ a sharp toe = boot</text>
+      <path d="M170 335 C280 360 360 330 448 300" stroke="#FEB24C" fill="none" stroke-dasharray="2 5"/>
+    </g>
+    <g>
+      <circle cx="800" cy="200" r="17" fill="#E8743B"/>
+      <text x="800" y="206" text-anchor="middle" fill="#0E1C2E" font-weight="bold">3</text>
+      <text x="720" y="245" fill="#EAF2F8">Islands:</text>
+      <text x="720" y="268" fill="#9DB2C6">two big ones off the</text>
+      <text x="720" y="291" fill="#9DB2C6">toe — Sicily, Sardinia</text>
+      <path d="M780 300 C700 340 620 350 545 340" stroke="#E8743B" fill="none" stroke-dasharray="2 5"/>
+    </g>
+  </g>
+  <text x="50" y="516" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#5E7891">Outlines stylised for illustration · drill the real shapes in Silhouette mode</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Cover: the hardest countries to guess in Globle — tiny islands scattered on a dark ocean under a magnifying glass">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#15304d"/><stop offset="100%" stop-color="#0B1622"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g stroke="#F4C95D" stroke-opacity="0.07" fill="none">
+    <path d="M0 105H1200M0 210H1200M0 315H1200M0 420H1200M0 525H1200"/>
+    <path d="M150 0V630M300 0V630M450 0V630M600 0V630M750 0V630M900 0V630M1050 0V630"/>
+  </g>
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#F4C95D" stroke-opacity="0.35"/>
+  <rect x="32" y="32" width="1136" height="566" fill="none" stroke="#F4C95D" stroke-opacity="0.15"/>
+  <!-- scattered tiny islands -->
+  <g fill="#1B3350" stroke="#F4C95D" stroke-width="1.5">
+    <ellipse cx="180" cy="200" rx="14" ry="7" transform="rotate(20 180 200)"/>
+    <ellipse cx="265" cy="290" rx="9" ry="5"/>
+    <circle cx="345" cy="215" r="5"/>
+    <ellipse cx="240" cy="410" rx="12" ry="6" transform="rotate(-15 240 410)"/>
+    <circle cx="150" cy="330" r="4"/>
+    <ellipse cx="380" cy="360" rx="7" ry="4"/>
+    <circle cx="320" cy="460" r="6"/>
+    <circle cx="420" cy="280" r="3.5"/>
+    <ellipse cx="140" cy="480" rx="8" ry="4"/>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">
+    <text x="200" y="188">?</text><text x="282" y="280">?</text><text x="356" y="205">?</text>
+    <text x="258" y="398">?</text><text x="334" y="450">?</text>
+  </g>
+  <!-- magnifier -->
+  <g transform="translate(300,320)">
+    <circle r="86" fill="none" stroke="#F4C95D" stroke-width="4"/>
+    <circle r="86" fill="#F4C95D" fill-opacity="0.06"/>
+    <path d="M62 62 L128 128" stroke="#F4C95D" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <text x="580" y="220" font-family="'Space Mono',ui-monospace,monospace" font-size="20" letter-spacing="5" fill="#F4C95D">RANKED LIST</text>
+  <text x="580" y="292" font-family="Georgia,'Times New Roman',serif" font-size="60" fill="#EAF2F8">The 15 Hardest</text>
+  <text x="580" y="362" font-family="Georgia,'Times New Roman',serif" font-size="60" fill="#EAF2F8">Countries to Guess</text>
+  <text x="580" y="428" font-family="Georgia,'Times New Roman',serif" font-size="44" font-style="italic" fill="#F4C95D">in Globle</text>
+  <text x="580" y="486" font-family="'Space Mono',ui-monospace,monospace" font-size="19" fill="#9DB2C6">tiny islands · isolated states · confusing clusters</text>
+  <g stroke="#F4C95D" stroke-opacity="0.6">
+    <path d="M24 54V24H54M1146 24H1176V54M1176 576V606H1146M54 606H24V576" fill="none" stroke-width="2"/>
+  </g>
+</svg>

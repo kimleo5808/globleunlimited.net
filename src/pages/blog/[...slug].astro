@@ -43,7 +43,21 @@ const schema: Record<string, unknown>[] = [
   <article class="prose page">
     <p class="crumb"><a href="/">Home</a> › <a href="/blog">Blog</a> › {post.data.title}</p>
     <h1>{post.data.title}</h1>
-    <p class="byline mono">By {post.data.author} · {fmt(post.data.date)}</p>
+    <p class="byline mono">
+      By {post.data.author} · {fmt(post.data.date)}
+      {post.data.updated && <> · Updated {fmt(post.data.updated)}</>}
+    </p>
+
+    {post.data.cover && (
+      <img
+        class="cover"
+        src={post.data.cover}
+        alt={post.data.coverAlt ?? post.data.title}
+        width="1200"
+        height="630"
+        fetchpriority="high"
+      />
+    )}
 
     <div class="post-body">
       <Content />
@@ -61,6 +75,25 @@ const schema: Record<string, unknown>[] = [
   .crumb a { color: var(--text-dim); }
   h1 { font-size: var(--fs-h1); margin-bottom: var(--space-2); }
   .byline { color: var(--text-mute); font-size: var(--fs-small); margin-bottom: var(--space-8); }
+
+  .cover { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg-panel); margin-bottom: var(--space-8); }
+
+  /* Atlas plates: body illustrations framed with a gold hairline */
+  .post-body :global(img) { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg-panel); margin: var(--space-6) auto var(--space-2); }
+  /* Figcaption convention: an emphasized line immediately following a plate */
+  .post-body :global(img + em) { display: block; text-align: center; color: var(--text-mute); font-size: var(--fs-small); font-style: normal; margin-top: var(--space-2); margin-bottom: var(--space-6); }
+
+  /* Margin notes: blockquotes as atlas callouts */
+  .post-body :global(blockquote) { margin: var(--space-6) 0; padding: var(--space-4) var(--space-5); background: var(--accent-dim); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+  .post-body :global(blockquote p) { margin-bottom: 0; color: var(--text-dim); }
+  .post-body :global(blockquote p + p) { margin-top: var(--space-2); }
+
+  /* Inline FAQ: details/summary panels matching the answer pages */
+  .post-body :global(details) { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); margin: var(--space-2) 0; }
+  .post-body :global(summary) { cursor: pointer; color: var(--text); font-weight: 600; }
+  .post-body :global(details p) { margin: var(--space-2) 0 0; }
+
+  .post-body :global(tr:hover td) { background: var(--accent-dim); }
 
   .post-body :global(h2) { font-family: var(--font-display); font-size: var(--fs-h2); margin-top: var(--space-12); margin-bottom: var(--space-4); padding-left: var(--space-4); border-left: 3px solid var(--accent); }
   .post-body :global(h3) { font-size: var(--fs-h3); color: var(--text); margin-top: var(--space-8); margin-bottom: var(--space-2); }

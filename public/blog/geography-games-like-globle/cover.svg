@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Cover: 12 geography games like Globle — a shelf of game cards with globe, flag and outline motifs">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#15304d"/><stop offset="100%" stop-color="#0B1622"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g stroke="#F4C95D" stroke-opacity="0.07" fill="none">
+    <path d="M0 105H1200M0 210H1200M0 315H1200M0 420H1200M0 525H1200"/>
+    <path d="M150 0V630M300 0V630M450 0V630M600 0V630M750 0V630M900 0V630M1050 0V630"/>
+  </g>
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#F4C95D" stroke-opacity="0.35"/>
+  <rect x="32" y="32" width="1136" height="566" fill="none" stroke="#F4C95D" stroke-opacity="0.15"/>
+  <!-- three game cards fanned -->
+  <g transform="translate(120,160) rotate(-7)">
+    <rect width="200" height="270" rx="14" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.6" stroke-width="2"/>
+    <circle cx="100" cy="105" r="58" fill="#1B3350" stroke="#F4C95D" stroke-width="2"/>
+    <ellipse cx="100" cy="105" rx="58" ry="22" fill="none" stroke="#F4C95D" stroke-opacity="0.5"/>
+    <ellipse cx="100" cy="105" rx="22" ry="58" fill="none" stroke="#F4C95D" stroke-opacity="0.5"/>
+    <text x="100" y="215" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">GLOBE</text>
+  </g>
+  <g transform="translate(280,140) rotate(2)">
+    <rect width="200" height="270" rx="14" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.7" stroke-width="2"/>
+    <g transform="translate(45,55)">
+      <rect width="110" height="74" fill="#169B62"/>
+      <rect x="36.7" width="36.7" height="74" fill="#EAF2F8"/>
+      <rect x="73.3" width="36.7" height="74" fill="#FF883E"/>
+      <rect width="110" height="74" fill="none" stroke="#0B1622" stroke-width="2"/>
+    </g>
+    <text x="100" y="215" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">FLAGS</text>
+  </g>
+  <g transform="translate(440,165) rotate(9)">
+    <rect width="200" height="270" rx="14" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.6" stroke-width="2"/>
+    <path d="M75 55 L98 65 L92 90 L108 118 L122 138 L112 150 L92 132 L80 152 L68 140 L76 112 L62 82 Z" fill="#1B3350" stroke="#F4C95D" stroke-width="2"/>
+    <text x="100" y="215" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">OUTLINES</text>
+  </g>
+  <text x="720" y="220" font-family="'Space Mono',ui-monospace,monospace" font-size="20" letter-spacing="5" fill="#F4C95D">ROUNDUP</text>
+  <text x="720" y="292" font-family="Georgia,'Times New Roman',serif" font-size="60" fill="#EAF2F8">12 Geography</text>
+  <text x="720" y="362" font-family="Georgia,'Times New Roman',serif" font-size="60" fill="#EAF2F8">Games Like</text>
+  <text x="720" y="432" font-family="Georgia,'Times New Roman',serif" font-size="60" font-style="italic" fill="#F4C95D">Globle</text>
+  <text x="720" y="492" font-family="'Space Mono',ui-monospace,monospace" font-size="19" fill="#9DB2C6">country · city · flag · map guessing games</text>
+  <g stroke="#F4C95D" stroke-opacity="0.6">
+    <path d="M24 54V24H54M1146 24H1176V54M1176 576V606H1146M54 606H24V576" fill="none" stroke-width="2"/>
+  </g>
+</svg>

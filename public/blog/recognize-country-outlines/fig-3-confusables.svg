@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-label="Side-by-side stylised comparisons of commonly confused outline pairs: Chile versus Norway, and Paraguay versus Uruguay, each with the tell that separates them.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,serif" font-size="27" fill="#EAF2F8">Confusable pairs — and the tell</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 3 · same family, one separating feature (stylised)</text>
+  <!-- Pair 1: Chile vs Norway -->
+  <g transform="translate(70,130)">
+    <rect width="400" height="330" rx="8" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <!-- Chile: smooth ribbon -->
+    <path d="M92 40 C104 90 96 150 106 200 C112 235 104 262 94 270 C82 252 90 200 80 150 C72 100 82 60 92 40 Z" fill="#1B3350" stroke="#F4C95D" stroke-width="2"/>
+    <text x="95" y="300" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">CHILE</text>
+    <!-- Norway: ribbon with fjord spikes + wide top -->
+    <path d="M270 60 L296 42 L318 52 L302 74 L288 96 L296 112 L282 134 L290 152 L278 176 L286 196 L272 220 L278 244 L262 262 L254 236 L262 210 L250 186 L260 162 L248 138 L258 116 L250 92 Z" fill="#1B3350" stroke="#F4C95D" stroke-width="2"/>
+    <text x="280" y="300" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">NORWAY</text>
+    <text x="200" y="40" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#F4C95D">RIBBON vs RIBBON</text>
+    <text x="200" y="325" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#FEB24C">tell: Norway's edge is jagged fjords + a wide crown</text>
+  </g>
+  <!-- Pair 2: Paraguay vs Uruguay -->
+  <g transform="translate(530,130)">
+    <rect width="400" height="330" rx="8" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <!-- Paraguay: two-lobed blob -->
+    <path d="M70 120 C74 84 108 66 140 76 C160 82 168 100 162 118 C186 122 198 142 190 166 C182 192 152 204 122 196 C90 188 66 156 70 120 Z" fill="#1B3350" stroke="#F4C95D" stroke-width="2"/>
+    <path d="M70 120 C100 128 130 126 162 118" stroke="#F4C95D" stroke-opacity="0.5" fill="none" stroke-dasharray="3 4"/>
+    <text x="130" y="240" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">PARAGUAY</text>
+    <!-- Uruguay: single round blob with flat coast -->
+    <path d="M250 110 C262 82 300 74 328 88 C352 100 360 128 350 152 C342 172 318 186 292 182 C264 178 244 146 250 110 Z" fill="#1B3350" stroke="#F4C95D" stroke-width="2"/>
+    <path d="M292 182 C312 180 334 168 350 152" stroke="#FEB24C" stroke-width="2.5" fill="none"/>
+    <text x="305" y="240" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">URUGUAY</text>
+    <text x="200" y="40" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#F4C95D">BLOB vs BLOB</text>
+    <text x="200" y="325" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#FEB24C">tell: Uruguay has one smooth Atlantic edge; Paraguay is split by a river</text>
+  </g>
+  <text x="50" y="516" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#5E7891">Outlines stylised for illustration · the real pairs are in Silhouette mode's archive</text>
+</svg>

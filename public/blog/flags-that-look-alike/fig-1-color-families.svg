@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" role="img" aria-label="The four great flag colour families: pan-African green-yellow-red, pan-Arab red-white-black-green, pan-Slavic white-blue-red, and the Nordic cross.">
+  <rect width="1000" height="500" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="468" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,serif" font-size="27" fill="#EAF2F8">Why flags look alike: the four great colour families</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 1 · shared colours signal shared history — and cause most quiz mistakes</text>
+  <!-- pan-African -->
+  <g transform="translate(60,130)">
+    <rect width="70" height="140" fill="#009639"/>
+    <rect x="70" width="70" height="140" fill="#FCD116"/>
+    <rect x="140" width="70" height="140" fill="#CE1126"/>
+    <rect width="210" height="140" fill="none" stroke="#0B1622" stroke-width="2"/>
+    <text x="105" y="175" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#F4C95D">PAN-AFRICAN</text>
+    <text x="105" y="196" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12.5" fill="#9DB2C6">Ghana · Mali · Senegal</text>
+    <text x="105" y="214" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12.5" fill="#9DB2C6">Guinea · Cameroon…</text>
+  </g>
+  <!-- pan-Arab -->
+  <g transform="translate(300,130)">
+    <rect width="210" height="46.7" fill="#CE1126"/>
+    <rect y="46.7" width="210" height="46.7" fill="#FFFFFF"/>
+    <rect y="93.3" width="210" height="46.7" fill="#000000"/>
+    <path d="M0 0 L80 70 L0 140 Z" fill="#007A3D"/>
+    <rect width="210" height="140" fill="none" stroke="#0B1622" stroke-width="2"/>
+    <text x="105" y="175" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#F4C95D">PAN-ARAB</text>
+    <text x="105" y="196" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12.5" fill="#9DB2C6">Jordan · Palestine · Sudan</text>
+    <text x="105" y="214" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12.5" fill="#9DB2C6">Kuwait · UAE…</text>
+  </g>
+  <!-- pan-Slavic -->
+  <g transform="translate(540,130)">
+    <rect width="210" height="46.7" fill="#FFFFFF"/>
+    <rect y="46.7" width="210" height="46.7" fill="#0039A6"/>
+    <rect y="93.3" width="210" height="46.7" fill="#D52B1E"/>
+    <rect width="210" height="140" fill="none" stroke="#0B1622" stroke-width="2"/>
+    <text x="105" y="175" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#F4C95D">PAN-SLAVIC</text>
+    <text x="105" y="196" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12.5" fill="#9DB2C6">Russia · Slovakia · Slovenia</text>
+    <text x="105" y="214" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12.5" fill="#9DB2C6">Serbia · Croatia…</text>
+  </g>
+  <!-- Nordic cross -->
+  <g transform="translate(780,130)">
+    <rect width="180" height="140" fill="#C8102E"/>
+    <rect x="48" width="28" height="140" fill="#FFFFFF"/>
+    <rect y="56" width="180" height="28" fill="#FFFFFF"/>
+    <rect width="180" height="140" fill="none" stroke="#0B1622" stroke-width="2"/>
+    <text x="90" y="175" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#F4C95D">NORDIC CROSS</text>
+    <text x="90" y="196" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12.5" fill="#9DB2C6">Denmark · Sweden</text>
+    <text x="90" y="214" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12.5" fill="#9DB2C6">Norway · Iceland · Finland</text>
+  </g>
+  <text x="50" y="410" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">→ Within a family, colours can't separate flags. The tell is always structure:</text>
+  <text x="50" y="435" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">   stripe order, orientation, a star, an emblem, or the cross colours.</text>
+</svg>

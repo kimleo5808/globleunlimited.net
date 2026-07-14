@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" role="img" aria-label="The five Nordic cross flags side by side: Denmark, Sweden, Norway, Iceland and Finland, with Norway and Iceland highlighted as colour inverses.">
+  <rect width="1000" height="480" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="448" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,serif" font-size="27" fill="#EAF2F8">The Nordic cross family</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 4 · one design, five colourways — Norway and Iceland are exact inverses</text>
+  <!-- Denmark -->
+  <g transform="translate(60,130)">
+    <rect width="180" height="130" fill="#C8102E"/>
+    <rect x="50" width="24" height="130" fill="#FFFFFF"/>
+    <rect y="53" width="180" height="24" fill="#FFFFFF"/>
+    <rect width="180" height="130" fill="none" stroke="#0B1622" stroke-width="2"/>
+    <text x="90" y="158" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">DENMARK</text>
+    <text x="90" y="178" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#9DB2C6">red + white</text>
+  </g>
+  <!-- Sweden -->
+  <g transform="translate(260,130)">
+    <rect width="180" height="130" fill="#006AA7"/>
+    <rect x="50" width="24" height="130" fill="#FECC02"/>
+    <rect y="53" width="180" height="24" fill="#FECC02"/>
+    <rect width="180" height="130" fill="none" stroke="#0B1622" stroke-width="2"/>
+    <text x="90" y="158" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">SWEDEN</text>
+    <text x="90" y="178" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#9DB2C6">blue + yellow</text>
+  </g>
+  <!-- Norway -->
+  <g transform="translate(460,130)">
+    <rect width="180" height="130" fill="#BA0C2F"/>
+    <rect x="46" width="32" height="130" fill="#FFFFFF"/>
+    <rect y="49" width="180" height="32" fill="#FFFFFF"/>
+    <rect x="54" width="16" height="130" fill="#00205B"/>
+    <rect y="57" width="180" height="16" fill="#00205B"/>
+    <rect width="180" height="130" fill="none" stroke="#F4C95D" stroke-width="3"/>
+    <text x="90" y="158" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#F4C95D">NORWAY</text>
+    <text x="90" y="178" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#9DB2C6">red field, blue cross</text>
+  </g>
+  <!-- Iceland -->
+  <g transform="translate(660,130)">
+    <rect width="180" height="130" fill="#02529C"/>
+    <rect x="46" width="32" height="130" fill="#FFFFFF"/>
+    <rect y="49" width="180" height="32" fill="#FFFFFF"/>
+    <rect x="54" width="16" height="130" fill="#DC1E35"/>
+    <rect y="57" width="180" height="16" fill="#DC1E35"/>
+    <rect width="180" height="130" fill="none" stroke="#F4C95D" stroke-width="3"/>
+    <text x="90" y="158" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#F4C95D">ICELAND</text>
+    <text x="90" y="178" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#9DB2C6">blue field, red cross</text>
+  </g>
+  <!-- Finland small below -->
+  <g transform="translate(60,330)">
+    <rect width="180" height="130" fill="#FFFFFF"/>
+    <rect x="50" width="24" height="130" fill="#002F6C"/>
+    <rect y="53" width="180" height="24" fill="#002F6C"/>
+    <rect width="180" height="130" fill="none" stroke="#0B1622" stroke-width="2"/>
+    <text x="90" y="120" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#0E1C2E"> </text>
+  </g>
+  <text x="150" y="345" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8" transform="translate(120,0)">← FINLAND · white + blue, the calmest of the five</text>
+  <text x="270" y="385" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#FEB24C">memory hook: Norway wears Iceland's colours inside-out —</text>
+  <text x="270" y="408" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">"fire country (volcanoes) keeps the red cross" = Iceland.</text>
+</svg>

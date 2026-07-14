@@ -3,6 +3,8 @@ title: "12 Geography Games Like Globle to Play Next"
 description: "Love Globle? Here are 12 geography games like Globle—country, city, flag and map guessing games—ranked by how they play and what makes each one worth your time."
 date: 2026-06-20
 tags: ["geography games", "games like globle", "alternatives"]
+cover: "/blog/geography-games-like-globle/cover.svg"
+coverAlt: "Atlas-style illustration of three fanned game cards showing a globe, a flag and a country outline, titled 12 Geography Games Like Globle"
 ---
 
 If you have fallen for **Globle**, the daily country-guessing game played on a 3D globe, you are

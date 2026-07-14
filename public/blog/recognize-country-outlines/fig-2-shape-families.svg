@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" role="img" aria-label="Grid of the seven country shape families: boots and peninsulas, ribbons, archipelagos, compact blobs, straight-edge borders, fractal coasts, and oddities.">
+  <rect width="1000" height="640" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="608" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,serif" font-size="27" fill="#EAF2F8">The seven shape families</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 2 · every outline you'll meet belongs to one of these (stylised examples)</text>
+  <!-- row 1 -->
+  <g transform="translate(60,120)">
+    <rect width="200" height="210" rx="8" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M85 30 L108 40 L100 70 L120 105 L138 128 L128 142 L102 122 L88 145 L74 132 L84 100 L70 62 Z" fill="#1B3350" stroke="#F4C95D" stroke-width="2"/>
+    <ellipse cx="72" cy="158" rx="16" ry="9" fill="#1B3350" stroke="#F4C95D" stroke-width="1.5"/>
+    <text x="100" y="188" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#F4C95D">BOOTS &amp; PENINSULAS</text>
+    <text x="100" y="206" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">Italy · Korea · Greece</text>
+  </g>
+  <g transform="translate(290,120)">
+    <rect width="200" height="210" rx="8" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M96 22 C106 55 98 85 106 118 C112 142 104 158 96 164 C86 150 92 118 84 88 C78 58 86 38 96 22 Z" fill="#1B3350" stroke="#F4C95D" stroke-width="2"/>
+    <text x="100" y="188" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#F4C95D">RIBBONS</text>
+    <text x="100" y="206" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">Chile · Norway · Vietnam</text>
+  </g>
+  <g transform="translate(520,120)">
+    <rect width="200" height="210" rx="8" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <ellipse cx="62" cy="52" rx="22" ry="10" fill="#1B3350" stroke="#F4C95D" stroke-width="1.5" transform="rotate(30 62 52)"/>
+    <ellipse cx="98" cy="88" rx="26" ry="11" fill="#1B3350" stroke="#F4C95D" stroke-width="1.5" transform="rotate(22 98 88)"/>
+    <ellipse cx="130" cy="124" rx="18" ry="8" fill="#1B3350" stroke="#F4C95D" stroke-width="1.5" transform="rotate(26 130 124)"/>
+    <circle cx="152" cy="150" r="6" fill="#1B3350" stroke="#F4C95D" stroke-width="1.5"/>
+    <text x="100" y="188" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#F4C95D">ARCHIPELAGOS</text>
+    <text x="100" y="206" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">Japan · Indonesia · Philippines</text>
+  </g>
+  <g transform="translate(750,120)">
+    <rect width="200" height="210" rx="8" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M100 32 C136 34 158 62 154 96 C150 128 126 152 96 150 C64 148 44 120 48 88 C52 56 72 30 100 32 Z" fill="#1B3350" stroke="#F4C95D" stroke-width="2"/>
+    <text x="100" y="188" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#F4C95D">COMPACT BLOBS</text>
+    <text x="100" y="206" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">France · Poland · Uruguay</text>
+  </g>
+  <!-- row 2 -->
+  <g transform="translate(60,360)">
+    <rect width="200" height="210" rx="8" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M55 45 H150 V105 L128 150 H55 Z" fill="#1B3350" stroke="#F4C95D" stroke-width="2"/>
+    <text x="100" y="188" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#F4C95D">STRAIGHT EDGES</text>
+    <text x="100" y="206" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">Egypt · Libya · Colorado-style</text>
+  </g>
+  <g transform="translate(290,360)">
+    <rect width="200" height="210" rx="8" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M60 140 L66 118 L58 112 L70 96 L62 88 L78 74 L72 62 L90 56 L88 42 L106 46 L112 32 L126 44 L138 38 L142 58 L134 74 L144 86 L132 100 L140 116 L124 122 L128 140 L108 136 L100 150 L84 142 L76 152 Z" fill="#1B3350" stroke="#F4C95D" stroke-width="2"/>
+    <text x="100" y="188" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#F4C95D">FRACTAL COASTS</text>
+    <text x="100" y="206" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">Greece · Croatia · Norway fjords</text>
+  </g>
+  <g transform="translate(520,360)">
+    <rect width="200" height="210" rx="8" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M60 60 C90 40 130 44 146 70 C158 92 148 118 122 128 C140 138 142 152 128 158 C104 166 76 156 62 134 C48 112 46 80 60 60 Z" fill="#1B3350" stroke="#F4C95D" stroke-width="2"/>
+    <circle cx="104" cy="100" r="14" fill="#0E1C2E" stroke="#F4C95D" stroke-width="1.5"/>
+    <text x="100" y="188" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#F4C95D">ODDITIES</text>
+    <text x="100" y="206" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">South Africa (hole) · Gambia</text>
+  </g>
+  <g transform="translate(750,360)">
+    <rect width="200" height="210" rx="8" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.2" stroke-dasharray="6 6"/>
+    <text x="100" y="95" text-anchor="middle" font-family="Georgia,serif" font-size="42" fill="#F4C95D">?</text>
+    <text x="100" y="130" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#9DB2C6">every silhouette you</text>
+    <text x="100" y="148" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#9DB2C6">meet → sort it into</text>
+    <text x="100" y="166" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#9DB2C6">a family first</text>
+    <text x="100" y="196" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#F4C95D">YOUR TURN</text>
+  </g>
+</svg>

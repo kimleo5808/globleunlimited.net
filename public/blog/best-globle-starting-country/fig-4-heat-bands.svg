@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" role="img" aria-label="Explainer: Globle's colour feedback maps distance to a heat ramp, from pale yellow when far away to deep red when adjacent.">
+  <rect width="1000" height="400" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="368" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,serif" font-size="27" fill="#EAF2F8">What one colour actually tells you</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 4 · each shade is a distance band, not a direction</text>
+  <!-- ramp -->
+  <g>
+    <rect x="80" y="150" width="168" height="72" fill="#FFEDA0"/>
+    <rect x="248" y="150" width="168" height="72" fill="#FEB24C"/>
+    <rect x="416" y="150" width="168" height="72" fill="#E8743B"/>
+    <rect x="584" y="150" width="168" height="72" fill="#C42D1C"/>
+    <rect x="752" y="150" width="168" height="72" fill="#8B0000"/>
+    <rect x="80" y="150" width="840" height="72" fill="none" stroke="#F4C95D" stroke-opacity="0.5"/>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="16" text-anchor="middle">
+    <text x="164" y="193" fill="#0E1C2E" font-weight="bold">far</text>
+    <text x="332" y="193" fill="#0E1C2E" font-weight="bold">warm</text>
+    <text x="500" y="193" fill="#0E1C2E" font-weight="bold">hot</text>
+    <text x="668" y="193" fill="#EAF2F8" font-weight="bold">very hot</text>
+    <text x="836" y="193" fill="#EAF2F8" font-weight="bold">adjacent</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6" text-anchor="middle">
+    <text x="164" y="260">10,000+ km</text>
+    <text x="332" y="260">~6,000 km</text>
+    <text x="500" y="260">~3,000 km</text>
+    <text x="668" y="260">~1,000 km</text>
+    <text x="836" y="260">borders it</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#F4C95D">
+    <text x="80" y="330">→ a sharp opener is one whose colour bands slice the world into many thin, distinct rings</text>
+  </g>
+</svg>

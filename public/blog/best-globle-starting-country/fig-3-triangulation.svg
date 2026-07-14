@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" role="img" aria-label="Diagram: distance rings from the United Kingdom and Nigeria intersect in a small lens, narrowing the answer to about four candidate countries.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <g stroke="#F4C95D" stroke-opacity="0.06" fill="none">
+    <path d="M0 140H1000M0 280H1000M0 420H1000M250 16V544M500 16V544M750 16V544"/>
+  </g>
+  <text x="50" y="62" font-family="Georgia,serif" font-size="27" fill="#EAF2F8">Two guesses, two rings, one small lens</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 3 · why the UK + Nigeria opening pair narrows 176 countries to ≈4</text>
+  <!-- UK pin and ring -->
+  <g>
+    <circle cx="330" cy="205" r="9" fill="#F4C95D"/>
+    <text x="330" y="180" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="17" fill="#EAF2F8">UNITED KINGDOM</text>
+    <circle cx="330" cy="205" r="185" fill="none" stroke="#FEB24C" stroke-width="2" stroke-dasharray="7 6"/>
+    <circle cx="330" cy="205" r="150" fill="none" stroke="#FEB24C" stroke-opacity="0.35" stroke-dasharray="3 6"/>
+    <text x="163" y="330" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#FEB24C">ring 1: the colour says</text>
+    <text x="163" y="349" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#FEB24C">"about this far away"</text>
+  </g>
+  <!-- Nigeria pin and ring -->
+  <g>
+    <circle cx="620" cy="390" r="9" fill="#F4C95D"/>
+    <text x="620" y="428" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="17" fill="#EAF2F8">NIGERIA</text>
+    <circle cx="620" cy="390" r="215" fill="none" stroke="#E8743B" stroke-width="2" stroke-dasharray="7 6"/>
+    <circle cx="620" cy="390" r="180" fill="none" stroke="#E8743B" stroke-opacity="0.35" stroke-dasharray="3 6"/>
+    <text x="723" y="205" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#E8743B">ring 2 crosses ring 1</text>
+    <text x="723" y="224" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#E8743B">in only two lenses</text>
+  </g>
+  <!-- intersection lens highlight -->
+  <g>
+    <ellipse cx="463" cy="245" rx="46" ry="30" fill="#C42D1C" fill-opacity="0.4" stroke="#C42D1C" stroke-width="2.5" transform="rotate(-32 463 245)"/>
+    <path d="M505 235 C570 200 640 175 705 160" stroke="#F4C95D" stroke-width="1.5" fill="none" stroke-dasharray="2 4"/>
+    <text x="712" y="152" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#F4C95D">≈ 4 candidates left</text>
+  </g>
+  <text x="50" y="516" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#5E7891">Across all 176 possible answers, UK + Nigeria leaves 4.02 candidates on average — the best pair we measured</text>
+</svg>

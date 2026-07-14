@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620" role="img" aria-label="The identical twins: Chad versus Romania differ only in blue shade; Indonesia, Monaco and Poland are red-and-white bicolours separated by proportions and stripe order.">
+  <rect width="1000" height="620" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="588" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,serif" font-size="27" fill="#EAF2F8">The identical twins</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 2 · the closest pairs in vexillology — and where to look</text>
+  <!-- Chad vs Romania -->
+  <g transform="translate(70,120)">
+    <g>
+      <rect width="240" height="160" fill="#002664"/>
+      <rect x="80" width="80" height="160" fill="#FECB00"/>
+      <rect x="160" width="80" height="160" fill="#C60C30"/>
+      <rect width="240" height="160" fill="none" stroke="#0B1622" stroke-width="2"/>
+      <text x="120" y="188" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">CHAD</text>
+    </g>
+    <g transform="translate(280,0)">
+      <rect width="240" height="160" fill="#002B7F"/>
+      <rect x="80" width="80" height="160" fill="#FCD116"/>
+      <rect x="160" width="80" height="160" fill="#CE1126"/>
+      <rect width="240" height="160" fill="none" stroke="#0B1622" stroke-width="2"/>
+      <text x="120" y="188" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">ROMANIA</text>
+    </g>
+    <!-- tell arrows to blue stripes -->
+    <path d="M40 -14 C120 -34 360 -34 400 -14" stroke="#F4C95D" fill="none" stroke-dasharray="2 5"/>
+    <circle cx="40" cy="-12" r="4" fill="#F4C95D"/><circle cx="400" cy="-12" r="4" fill="#F4C95D"/>
+    <text x="590" y="80" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#FEB24C">tell: only the blue.</text>
+    <text x="590" y="103" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">Chad = darker indigo,</text>
+    <text x="590" y="126" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">Romania = brighter blue.</text>
+    <text x="590" y="149" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">On a quiz card: near-luck —</text>
+    <text x="590" y="172" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">use context, not colour.</text>
+  </g>
+  <!-- Indonesia / Monaco / Poland -->
+  <g transform="translate(70,390)">
+    <g>
+      <rect width="200" height="133" fill="#CE1126"/>
+      <rect y="66.5" width="200" height="66.5" fill="#FFFFFF"/>
+      <rect width="200" height="133" fill="none" stroke="#0B1622" stroke-width="2"/>
+      <text x="100" y="160" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">INDONESIA 2:3</text>
+    </g>
+    <g transform="translate(240,6)">
+      <rect width="160" height="128" fill="#CE1126"/>
+      <rect y="64" width="160" height="64" fill="#FFFFFF"/>
+      <rect width="160" height="128" fill="none" stroke="#0B1622" stroke-width="2"/>
+      <text x="80" y="154" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">MONACO 4:5</text>
+    </g>
+    <g transform="translate(440,0)">
+      <rect width="200" height="133" fill="#FFFFFF"/>
+      <rect y="66.5" width="200" height="66.5" fill="#DC143C"/>
+      <rect width="200" height="133" fill="none" stroke="#0B1622" stroke-width="2"/>
+      <text x="100" y="160" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">POLAND (FLIPPED)</text>
+    </g>
+    <text x="700" y="40" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#FEB24C">tells: Poland is white-</text>
+    <text x="700" y="63" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">on-top; Monaco is</text>
+    <text x="700" y="86" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">stubbier (4:5) than</text>
+    <text x="700" y="109" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">Indonesia's long 2:3.</text>
+  </g>
+</svg>

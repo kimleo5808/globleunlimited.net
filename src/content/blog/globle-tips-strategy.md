@@ -3,6 +3,8 @@ title: "Globle Strategy: 9 Tips to Win in Fewer Guesses"
 description: "Master Globle with 9 proven strategies: the best opening guesses, how to read the colour heatmap, triangulation tricks, and mistakes that cost you guesses."
 date: 2026-06-22
 tags: ["globle tips", "globle strategy", "how to win"]
+cover: "/blog/globle-tips-strategy/cover.svg"
+coverAlt: "Atlas-style illustration of a globe with a numbered triangulation path narrowing to a target, titled Globle Strategy: 9 Tips to Win in Fewer Guesses"
 ---
 
 Globle looks simple — type a country, read the colour, repeat — but the gap between a lucky

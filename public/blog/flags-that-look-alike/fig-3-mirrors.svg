@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" role="img" aria-label="The mirrors: Ireland versus Côte d'Ivoire reverse green and orange; Mali sits between Guinea and Senegal, whose flag adds a green star.">
+  <rect width="1000" height="600" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="568" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,serif" font-size="27" fill="#EAF2F8">The mirrors and the shuffle</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 3 · same colours, rearranged — read stripe order like a word</text>
+  <!-- Ireland vs Cote d'Ivoire -->
+  <g transform="translate(70,120)">
+    <g>
+      <rect width="240" height="120" fill="#169B62"/>
+      <rect x="80" width="80" height="120" fill="#FFFFFF"/>
+      <rect x="160" width="80" height="120" fill="#FF883E"/>
+      <rect width="240" height="120" fill="none" stroke="#0B1622" stroke-width="2"/>
+      <text x="120" y="148" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">IRELAND · green first</text>
+    </g>
+    <g transform="translate(300,0)">
+      <rect width="240" height="120" fill="#F77F00"/>
+      <rect x="80" width="80" height="120" fill="#FFFFFF"/>
+      <rect x="160" width="80" height="120" fill="#009A44"/>
+      <rect width="240" height="120" fill="none" stroke="#0B1622" stroke-width="2"/>
+      <text x="120" y="148" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">CÔTE D'IVOIRE · orange first</text>
+    </g>
+    <text x="660" y="45" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#FEB24C">tell: which colour</text>
+    <text x="660" y="68" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">touches the flagpole.</text>
+    <text x="660" y="91" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">Ireland reads G-W-O;</text>
+    <text x="660" y="114" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">Ivory Coast O-W-G.</text>
+  </g>
+  <!-- Guinea / Mali / Senegal -->
+  <g transform="translate(70,350)">
+    <g>
+      <rect width="200" height="133" fill="#CE1126"/>
+      <rect x="66.7" width="66.7" height="133" fill="#FCD116"/>
+      <rect x="133.3" width="66.7" height="133" fill="#009460"/>
+      <rect width="200" height="133" fill="none" stroke="#0B1622" stroke-width="2"/>
+      <text x="100" y="160" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">GUINEA · R-Y-G</text>
+    </g>
+    <g transform="translate(240,0)">
+      <rect width="200" height="133" fill="#14B53A"/>
+      <rect x="66.7" width="66.7" height="133" fill="#FCD116"/>
+      <rect x="133.3" width="66.7" height="133" fill="#CE1126"/>
+      <rect width="200" height="133" fill="none" stroke="#0B1622" stroke-width="2"/>
+      <text x="100" y="160" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">MALI · G-Y-R</text>
+    </g>
+    <g transform="translate(480,0)">
+      <rect width="200" height="133" fill="#00853F"/>
+      <rect x="66.7" width="66.7" height="133" fill="#FDEF42"/>
+      <rect x="133.3" width="66.7" height="133" fill="#E31B23"/>
+      <path d="M100 45 L107 66 L129 66 L111 79 L118 100 L100 87 L82 100 L89 79 L71 66 L93 66 Z" fill="#00853F"/>
+      <rect width="200" height="133" fill="none" stroke="#0B1622" stroke-width="2"/>
+      <text x="100" y="160" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">SENEGAL · + green star</text>
+    </g>
+    <text x="740" y="45" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#FEB24C">tells: Guinea is Mali</text>
+    <text x="740" y="68" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">reversed; Senegal is</text>
+    <text x="740" y="91" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">Mali plus a star in</text>
+    <text x="740" y="114" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">the middle stripe.</text>
+  </g>
+</svg>

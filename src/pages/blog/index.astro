@@ -28,6 +28,16 @@ const fmt = (d: Date) =>
       {posts.map((p) => (
         <li class="post card">
           <a href={`/blog/${p.id}/`} class="post-link">
+            {p.data.cover && (
+              <img
+                class="post-cover"
+                src={p.data.cover}
+                alt={p.data.coverAlt ?? p.data.title}
+                width="1200"
+                height="630"
+                loading="lazy"
+              />
+            )}
             <h2>{p.data.title}</h2>
             <p class="post-desc">{p.data.description}</p>
             <p class="post-meta mono">{fmt(p.data.date)}</p>
@@ -48,6 +58,7 @@ const fmt = (d: Date) =>
   .post { transition: border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
   .post:hover { border-color: var(--accent); transform: translateY(-2px); }
   .post-link { display: block; padding: var(--space-6); }
+  .post-cover { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg-panel-2); margin-bottom: var(--space-4); }
   .post h2 { font-size: var(--fs-h3); color: var(--text); }
   .post-desc { margin-top: var(--space-2); }
   .post-meta { margin-top: var(--space-3); color: var(--text-mute); font-size: var(--fs-small); }

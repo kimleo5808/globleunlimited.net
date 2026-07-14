@@ -3,6 +3,8 @@ title: "The 15 Hardest Countries to Guess in Globle"
 description: "Which countries make Globle brutal? We rank the 15 hardest countries to guess—tiny island nations, isolated states and confusing clusters—and how to crack each."
 date: 2026-06-24
 tags: ["hardest countries", "globle", "geography"]
+cover: "/blog/hardest-countries-to-guess/cover.svg"
+coverAlt: "Atlas-style illustration of tiny islands scattered on a dark ocean under a magnifying glass, titled The 15 Hardest Countries to Guess in Globle"
 ---
 
 Some Globle rounds fall in three guesses. Others drag past a dozen while you stab blindly at the

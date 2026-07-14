@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 480" role="img" aria-label="Australia versus New Zealand: both blue ensigns with the Union Jack, but New Zealand shows four red stars with white borders while Australia shows six white stars including the large Commonwealth Star.">
+  <rect width="1000" height="480" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="448" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,serif" font-size="27" fill="#EAF2F8">The Union Jack twins</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 5 · count the stars, check the colour</text>
+  <!-- Australia -->
+  <g transform="translate(70,130)">
+    <rect width="360" height="240" fill="#00247D"/>
+    <!-- union jack (simplified) -->
+    <g>
+      <rect width="180" height="120" fill="#00247D"/>
+      <path d="M0 0 L180 120 M180 0 L0 120" stroke="#FFFFFF" stroke-width="22"/>
+      <path d="M0 0 L180 120 M180 0 L0 120" stroke="#CF142B" stroke-width="9"/>
+      <path d="M90 0 V120 M0 60 H180" stroke="#FFFFFF" stroke-width="34"/>
+      <path d="M90 0 V120 M0 60 H180" stroke="#CF142B" stroke-width="18"/>
+    </g>
+    <!-- commonwealth star -->
+    <g fill="#FFFFFF">
+      <path d="M90 155 L97 176 L119 176 L101 189 L108 210 L90 197 L72 210 L79 189 L61 176 L83 176 Z"/>
+      <!-- southern cross: 5 stars right side -->
+      <path d="M268 40 L273 55 L288 55 L276 64 L281 79 L268 70 L255 79 L260 64 L248 55 L263 55 Z"/>
+      <path d="M310 96 L315 111 L330 111 L318 120 L323 135 L310 126 L297 135 L302 120 L290 111 L305 111 Z"/>
+      <path d="M268 150 L273 165 L288 165 L276 174 L281 189 L268 180 L255 189 L260 174 L248 165 L263 165 Z"/>
+      <path d="M228 92 L233 107 L248 107 L236 116 L241 131 L228 122 L215 131 L220 116 L208 107 L223 107 Z"/>
+      <path d="M287 122 L290 131 L299 131 L292 137 L295 146 L287 140 L279 146 L282 137 L275 131 L284 131 Z"/>
+    </g>
+    <rect width="360" height="240" fill="none" stroke="#0B1622" stroke-width="2"/>
+    <text x="180" y="270" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">AUSTRALIA · 6 white stars</text>
+  </g>
+  <!-- New Zealand -->
+  <g transform="translate(530,130)">
+    <rect width="360" height="240" fill="#00247D"/>
+    <g>
+      <rect width="180" height="120" fill="#00247D"/>
+      <path d="M0 0 L180 120 M180 0 L0 120" stroke="#FFFFFF" stroke-width="22"/>
+      <path d="M0 0 L180 120 M180 0 L0 120" stroke="#CF142B" stroke-width="9"/>
+      <path d="M90 0 V120 M0 60 H180" stroke="#FFFFFF" stroke-width="34"/>
+      <path d="M90 0 V120 M0 60 H180" stroke="#CF142B" stroke-width="18"/>
+    </g>
+    <!-- 4 red stars with white borders -->
+    <g>
+      <path d="M268 38 L274 56 L292 56 L278 67 L283 85 L268 74 L253 85 L258 67 L244 56 L262 56 Z" fill="#FFFFFF"/>
+      <path d="M268 44 L272 58 L286 58 L275 66 L279 80 L268 72 L257 80 L261 66 L250 58 L264 58 Z" fill="#CC142B"/>
+      <path d="M312 96 L318 114 L336 114 L322 125 L327 143 L312 132 L297 143 L302 125 L288 114 L306 114 Z" fill="#FFFFFF"/>
+      <path d="M312 102 L316 116 L330 116 L319 124 L323 138 L312 130 L301 138 L305 124 L294 116 L308 116 Z" fill="#CC142B"/>
+      <path d="M268 152 L274 170 L292 170 L278 181 L283 199 L268 188 L253 199 L258 181 L244 170 L262 170 Z" fill="#FFFFFF"/>
+      <path d="M268 158 L272 172 L286 172 L275 180 L279 194 L268 186 L257 194 L261 180 L250 172 L264 172 Z" fill="#CC142B"/>
+      <path d="M228 92 L234 110 L252 110 L238 121 L243 139 L228 128 L213 139 L218 121 L204 110 L222 110 Z" fill="#FFFFFF"/>
+      <path d="M228 98 L232 112 L246 112 L235 120 L239 134 L228 126 L217 134 L221 120 L210 112 L224 112 Z" fill="#CC142B"/>
+    </g>
+    <rect width="360" height="240" fill="none" stroke="#0B1622" stroke-width="2"/>
+    <text x="180" y="270" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">NEW ZEALAND · 4 red stars</text>
+  </g>
+  <text x="500" y="440" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#FEB24C">tell: red stars = NZ · six white stars (one giant, under the Jack) = Australia</text>
+</svg>

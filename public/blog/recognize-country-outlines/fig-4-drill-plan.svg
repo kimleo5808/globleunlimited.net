@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" role="img" aria-label="Timeline of the four-week outline training plan: anchors, families, confusables, then full-speed mixed drills.">
+  <rect width="1000" height="420" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="388" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,serif" font-size="27" fill="#EAF2F8">The four-week drill plan</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 4 · ten minutes a day beats one marathon</text>
+  <!-- route line -->
+  <path d="M110 260 C300 180 480 320 660 220 C760 170 840 200 900 180" stroke="#F4C95D" stroke-width="2" stroke-dasharray="3 7" fill="none"/>
+  <!-- week stops -->
+  <g font-family="'Space Mono',ui-monospace,monospace">
+    <g>
+      <circle cx="130" cy="252" r="24" fill="#FFEDA0"/>
+      <text x="130" y="259" text-anchor="middle" font-size="18" fill="#0E1C2E" font-weight="bold">W1</text>
+      <text x="130" y="310" text-anchor="middle" font-size="15" fill="#EAF2F8">ANCHORS</text>
+      <text x="130" y="332" text-anchor="middle" font-size="13" fill="#9DB2C6">20 giants: Russia,</text>
+      <text x="130" y="350" text-anchor="middle" font-size="13" fill="#9DB2C6">Brazil, India…</text>
+    </g>
+    <g>
+      <circle cx="390" cy="248" r="24" fill="#FEB24C"/>
+      <text x="390" y="255" text-anchor="middle" font-size="18" fill="#0E1C2E" font-weight="bold">W2</text>
+      <text x="390" y="310" text-anchor="middle" font-size="15" fill="#EAF2F8">FAMILIES</text>
+      <text x="390" y="332" text-anchor="middle" font-size="13" fill="#9DB2C6">sort every miss into</text>
+      <text x="390" y="350" text-anchor="middle" font-size="13" fill="#9DB2C6">one of the 7 families</text>
+    </g>
+    <g>
+      <circle cx="650" cy="222" r="24" fill="#E8743B"/>
+      <text x="650" y="229" text-anchor="middle" font-size="18" fill="#0E1C2E" font-weight="bold">W3</text>
+      <text x="650" y="285" text-anchor="middle" font-size="15" fill="#EAF2F8">CONFUSABLES</text>
+      <text x="650" y="307" text-anchor="middle" font-size="13" fill="#9DB2C6">drill lookalike pairs</text>
+      <text x="650" y="325" text-anchor="middle" font-size="13" fill="#9DB2C6">until the tell is instant</text>
+    </g>
+    <g>
+      <circle cx="895" cy="178" r="24" fill="#C42D1C"/>
+      <text x="895" y="185" text-anchor="middle" font-size="18" fill="#EAF2F8" font-weight="bold">W4</text>
+      <text x="880" y="241" text-anchor="middle" font-size="15" fill="#EAF2F8">FULL SPEED</text>
+      <text x="880" y="263" text-anchor="middle" font-size="13" fill="#9DB2C6">mixed drills, timed,</text>
+      <text x="880" y="281" text-anchor="middle" font-size="13" fill="#9DB2C6">no hints</text>
+    </g>
+  </g>
+  <!-- compass -->
+  <g transform="translate(880,80)">
+    <circle r="26" fill="none" stroke="#F4C95D" stroke-opacity="0.5"/>
+    <path d="M0 -20 L6 6 L0 0 L-6 6 Z" fill="#F4C95D"/>
+    <text y="45" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">N</text>
+  </g>
+</svg>
