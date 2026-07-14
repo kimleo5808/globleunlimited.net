@@ -43,8 +43,8 @@ distance or direction.
 Here the target shrinks from a whole country to a single point, which makes distance clues sharper.
 
 5. **Globle: Capitals** — The capital-city twist on Globle. You guess capital cities and the
-   distance between them guides you in. We are building our own [Capitals mode](/capitals) — check
-   back soon.
+   distance between them guides you in. You can play our own [Capitals mode](/capitals) right
+   here.
 6. **Cityguessr-style games** — You get a city and must place or name it. Excellent for learning
    that capitals are not always where you expect (hello, Brasília and Canberra).
 7. **Travle** — Connect two countries by naming the chain of nations between them. It tests borders

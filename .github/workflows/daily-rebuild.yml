@@ -6,7 +6,10 @@ name: Daily rebuild
 
 on:
   schedule:
+    # GitHub cron can lag or skip; fire twice so the rebuild lands even if
+    # the first slot is delayed or dropped. Cloudflare dedupes identical builds.
     - cron: '5 0 * * *' # 00:05 UTC daily, just after the new daily unlocks
+    - cron: '0 3 * * *' # 03:00 UTC backup trigger
   workflow_dispatch: {} # allow manual runs from the Actions tab
 
 jobs:

@@ -18,13 +18,14 @@ while (ad >= SITE.launchDate && archive.length < 90) {
   ad = shiftISO(ad, -1);
 }
 
-const title = "Globle Answer Today – Today's Mystery Country";
+const title = "Globle Unlimited Answer Today – Daily Mystery Country";
 const description =
-  'Stuck on today’s Globle? Get today’s Globle answer plus a full archive of past answers. See a hint first, then reveal the country. Updated every day.';
+  'Stuck on today’s Globle Unlimited daily? Get today’s answer plus a full archive of past answers. See a hint first, then reveal the country. Updated every day.';
 
 const schema: Record<string, unknown>[] = [
   { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [
-    { '@type': 'Question', name: 'What time does the Globle answer update?', acceptedAnswer: { '@type': 'Answer', text: 'A new daily mystery country unlocks at 00:00 UTC, so the answer here refreshes once per day.' } },
+    { '@type': 'Question', name: 'What time does the Globle Unlimited answer update?', acceptedAnswer: { '@type': 'Answer', text: 'A new daily mystery country unlocks at 00:00 UTC, so the answer here refreshes once per day.' } },
+    { '@type': 'Question', name: 'Is this the official Globle answer?', acceptedAnswer: { '@type': 'Answer', text: 'No. This page shows the answer to Globle Unlimited’s own daily puzzle. We are not affiliated with the official Globle by Trainwreck Labs, and its daily answer is different from ours.' } },
     { '@type': 'Question', name: 'Why show a hint instead of the answer right away?', acceptedAnswer: { '@type': 'Answer', text: 'The hint lets you nudge yourself toward the solution without spoiling it. The full answer is one tap away if you need it.' } },
   ]},
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
@@ -37,12 +38,18 @@ const schema: Record<string, unknown>[] = [
 <BaseLayout title={title} description={description} path="/answer" schema={schema}>
   <article class="prose page">
     <p class="crumb"><a href="/">Home</a> › Answers</p>
-    <h1>Globle Answer Today</h1>
+    <h1>Globle Unlimited Answer Today</h1>
 
     <p class="lede">
       Want to solve it yourself first? <a href="/">Play Globle Unlimited</a> before you peek. The
       hint for <strong data-nice>{nice}</strong> is below, and the full answer is hidden until you
       open it.
+    </p>
+
+    <p class="notice">
+      <strong>Note:</strong> this is the answer to <em>Globle Unlimited&rsquo;s</em> own daily
+      puzzle. We are not affiliated with the official Globle by Trainwreck Labs, and its daily
+      answer is different from ours.
     </p>
 
     <h2>Today&rsquo;s Hint</h2>
@@ -57,7 +64,7 @@ const schema: Record<string, unknown>[] = [
     <details class="reveal">
       <summary>Tap to reveal today&rsquo;s answer</summary>
       <p class="answer">
-        <strong>The Globle answer for <span data-nice>{nice}</span> is
+        <strong>The Globle Unlimited answer for <span data-nice>{nice}</span> is
         <span data-answer>{flag(country.cca2)} {country.name}</span>.</strong>
       </p>
     </details>
@@ -65,13 +72,13 @@ const schema: Record<string, unknown>[] = [
     <h2>How to Find the Answer Faster</h2>
     <h3>Solve it before you peek</h3>
     <p>
-      The quickest way to solve Globle is a strong opening guess followed by colour triangulation.
+      The quickest way to solve a Globle-style puzzle is a strong opening guess followed by colour triangulation.
       Read our <a href="/how-to-play">how-to-play guide</a> and
       <a href="/blog/globle-tips-strategy">strategy tips</a> to cut your guess count, or jump
       straight into <a href="/">unlimited practice</a>.
     </p>
 
-    <h2>Past Globle Answers</h2>
+    <h2>Past Globle Unlimited Answers</h2>
     {
       archive.length ? (
         <ul class="archive">
@@ -83,13 +90,14 @@ const schema: Record<string, unknown>[] = [
           ))}
         </ul>
       ) : (
-        <p>The archive grows every day. Check back tomorrow to browse past Globle answers.</p>
+        <p>The archive grows every day. Check back tomorrow to browse past Globle Unlimited answers.</p>
       )
     }
 
     <h2>Frequently Asked Questions</h2>
     <div class="faq">
-      <details><summary>What time does the Globle answer update?</summary><p>A new mystery country unlocks at 00:00 UTC, so this page refreshes once per day.</p></details>
+      <details><summary>What time does the Globle Unlimited answer update?</summary><p>A new mystery country unlocks at 00:00 UTC, so this page refreshes once per day.</p></details>
+      <details><summary>Is this the official Globle answer?</summary><p>No. This page shows the answer to Globle Unlimited&rsquo;s own daily puzzle, which is different from the official Globle&rsquo;s answer.</p></details>
       <details><summary>Why a hint instead of the answer?</summary><p>The hint nudges you toward the solution without spoiling it. The full answer is one tap away.</p></details>
     </div>
 
@@ -123,6 +131,7 @@ const schema: Record<string, unknown>[] = [
   .crumb a { color: var(--text-dim); }
   h1 { font-size: var(--fs-h1); margin-bottom: var(--space-4); }
   .lede { font-size: 1.05rem; }
+  .notice { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); color: var(--text-dim); font-size: var(--fs-small); }
   .hint { color: var(--text-dim); padding-left: var(--space-6); margin: var(--space-3) 0; display: flex; flex-direction: column; gap: var(--space-1); }
   .reveal { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-4); }
   .reveal summary { cursor: pointer; color: var(--accent); font-weight: 600; }
