@@ -30,7 +30,7 @@
   <text x="620" y="278" font-family="Georgia,'Times New Roman',serif" font-size="58" fill="#EAF2F8">Name Any US State</text>
   <text x="620" y="348" font-family="Georgia,'Times New Roman',serif" font-size="58" fill="#EAF2F8">From Its Outline</text>
   <text x="620" y="418" font-family="Georgia,'Times New Roman',serif" font-size="58" fill="#F4C95D" font-style="italic">A Field Guide</text>
-  <text x="620" y="528" font-family="'Space Mono',ui-monospace,monospace" font-size="19" fill="#9DB2C6">50 states · four shape families · 1,225 pairs measured</text>
+  <text x="620" y="480" font-family="'Space Mono',ui-monospace,monospace" font-size="19" fill="#9DB2C6">50 states · four shape families · 1,225 pairs measured</text>
   <g stroke="#F4C95D" stroke-opacity="0.6">
     <path d="M24 54V24H54M1146 24H1176V54M1176 576V606H1146M54 606H24V576" fill="none" stroke-width="2"/>
   </g>

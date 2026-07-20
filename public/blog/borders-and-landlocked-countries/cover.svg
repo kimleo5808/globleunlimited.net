@@ -50,10 +50,10 @@
     <circle cx="230" cy="280" r="5" fill="#FEB24C"/>
   </g>
   <text x="620" y="200" font-family="'Space Mono',ui-monospace,monospace" font-size="20" letter-spacing="5" fill="#F4C95D">FIELD NOTES · DATA STUDY</text>
-  <text x="620" y="278" font-family="Georgia,'Times New Roman',serif" font-size="58" fill="#EAF2F8">Borders and</text>
-  <text x="620" y="348" font-family="Georgia,'Times New Roman',serif" font-size="58" fill="#EAF2F8">Landlocked Countries</text>
-  <text x="620" y="418" font-family="Georgia,'Times New Roman',serif" font-size="58" fill="#F4C95D" font-style="italic">A Guesser's Map</text>
-  <text x="620" y="528" font-family="'Space Mono',ui-monospace,monospace" font-size="19" fill="#9DB2C6">176 countries · every land border counted</text>
+  <text x="620" y="278" font-family="Georgia,'Times New Roman',serif" font-size="54" fill="#EAF2F8">Borders and</text>
+  <text x="620" y="343" font-family="Georgia,'Times New Roman',serif" font-size="54" fill="#EAF2F8">Landlocked Countries</text>
+  <text x="620" y="408" font-family="Georgia,'Times New Roman',serif" font-size="54" fill="#F4C95D" font-style="italic">A Guesser's Map</text>
+  <text x="620" y="470" font-family="'Space Mono',ui-monospace,monospace" font-size="19" fill="#9DB2C6">176 countries · every land border counted</text>
   <g stroke="#F4C95D" stroke-opacity="0.6">
     <path d="M24 54V24H54M1146 24H1176V54M1176 576V606H1146M54 606H24V576" fill="none" stroke-width="2"/>
   </g>

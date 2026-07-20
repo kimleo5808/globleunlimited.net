@@ -65,13 +65,21 @@ function bars(rows, { x = 300, y = 120, w = 600, rowH = 38, max, unit = '' }) {
     .join('\n');
 }
 
-/** 1200x630 cover shell; `art` fills the left third. */
+/** 1200x630 cover shell; `art` fills the left third.
+ *
+ *  Title size is derived from the longest line: SVG text does not wrap, and a
+ *  long third line silently runs off the 1200px canvas. Georgia averages
+ *  roughly 0.5em per character, and the title column is 540px wide. */
 function cover({ eyebrow, lines, sub, aria, art }) {
+  const longest = Math.max(...lines.map((l) => l.t.length));
+  const size = Math.min(58, Math.floor(1080 / longest));
+  const step = Math.round(size * 1.2);
+
   const title = lines
     .map((l, i) => {
       const italic = l.italic ? ` font-style="italic"` : '';
       const fill = l.italic ? C.gold : C.text;
-      return `  <text x="620" y="${278 + i * 70}" font-family="${SERIF}" font-size="58" fill="${fill}"${italic}>${esc(l.t)}</text>`;
+      return `  <text x="620" y="${278 + i * step}" font-family="${SERIF}" font-size="${size}" fill="${fill}"${italic}>${esc(l.t)}</text>`;
     })
     .join('\n');
 
@@ -95,7 +103,7 @@ function cover({ eyebrow, lines, sub, aria, art }) {
 ${art}
   <text x="620" y="200" font-family="${MONO}" font-size="20" letter-spacing="5" fill="${C.gold}">${esc(eyebrow)}</text>
 ${title}
-  <text x="620" y="${278 + lines.length * 70 + 40}" font-family="${MONO}" font-size="19" fill="${C.dim}">${esc(sub)}</text>
+  <text x="620" y="${278 + (lines.length - 1) * step + 62}" font-family="${MONO}" font-size="19" fill="${C.dim}">${esc(sub)}</text>
   <g stroke="${C.gold}" stroke-opacity="0.6">
     <path d="M24 54V24H54M1146 24H1176V54M1176 576V606H1146M54 606H24V576" fill="none" stroke-width="2"/>
   </g>
