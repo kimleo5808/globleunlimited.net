@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Bar chart: China has 16 land neighbours, Russia 14, Brazil 10, DR Congo and Germany 9 each.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">The most-connected countries</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 2 · land neighbours</text>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="141" text-anchor="end" fill="#EAF2F8">China</text>
+    <rect x="300" y="126" width="480" height="21" fill="#8B0000"/>
+    <text x="790" y="142" fill="#E06A5A">16</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="183" text-anchor="end" fill="#EAF2F8">Russia</text>
+    <rect x="300" y="168" width="420" height="21" fill="#8B0000"/>
+    <text x="730" y="184" fill="#E06A5A">14</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="225" text-anchor="end" fill="#EAF2F8">Brazil</text>
+    <rect x="300" y="210" width="300" height="21" fill="#C42D1C"/>
+    <text x="610" y="226" fill="#EE7A66">10</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="267" text-anchor="end" fill="#EAF2F8">DR Congo</text>
+    <rect x="300" y="252" width="270" height="21" fill="#C42D1C"/>
+    <text x="580" y="268" fill="#EE7A66">9</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="309" text-anchor="end" fill="#EAF2F8">Germany</text>
+    <rect x="300" y="294" width="270" height="21" fill="#C42D1C"/>
+    <text x="580" y="310" fill="#EE7A66">9</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="351" text-anchor="end" fill="#EAF2F8">Austria</text>
+    <rect x="300" y="336" width="240" height="21" fill="#E8743B"/>
+    <text x="550" y="352" fill="#E8743B">8</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="393" text-anchor="end" fill="#EAF2F8">France</text>
+    <rect x="300" y="378" width="240" height="21" fill="#E8743B"/>
+    <text x="550" y="394" fill="#E8743B">8</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="435" text-anchor="end" fill="#EAF2F8">Serbia</text>
+    <rect x="300" y="420" width="240" height="21" fill="#E8743B"/>
+    <text x="550" y="436" fill="#E8743B">8</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="477" text-anchor="end" fill="#EAF2F8">Tanzania</text>
+    <rect x="300" y="462" width="240" height="21" fill="#E8743B"/>
+    <text x="550" y="478" fill="#E8743B">8</text>
+  </g>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">More neighbours means more guesses that read hot. Source: globleunlimited.net dataset.</text>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Flow diagram: pale yellow means guess somewhere else entirely, mid-scale means triangulate, deep red means enumerate candidates.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">A decision rule from the numbers</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 5 · what to do with the colour you got</text>
+  <g>
+    <rect x="90" y="160" width="250" height="190" fill="none" stroke="#FFEDA0" stroke-width="2" rx="10"/>
+    <rect x="110" y="185" width="210" height="26" fill="#FFEDA0"/>
+    <text x="215" y="204" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#0E1C2E">Pale yellow</text>
+    <text x="215" y="258" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">Scale gave up.</text>
+    <text x="215" y="292" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">Guess far away.</text>
+  </g>
+  <g>
+    <rect x="380" y="160" width="250" height="190" fill="none" stroke="#E8743B" stroke-width="2" rx="10"/>
+    <rect x="400" y="185" width="210" height="26" fill="#E8743B"/>
+    <text x="505" y="204" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#0E1C2E">Orange / amber</text>
+    <text x="505" y="258" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">Scale is working.</text>
+    <text x="505" y="292" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">Triangulate 90° off.</text>
+  </g>
+  <g>
+    <rect x="670" y="160" width="250" height="190" fill="none" stroke="#8B0000" stroke-width="2" rx="10"/>
+    <rect x="690" y="185" width="210" height="26" fill="#8B0000"/>
+    <text x="795" y="204" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#0E1C2E">Deep red</text>
+    <text x="795" y="258" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">Below resolution.</text>
+    <text x="795" y="292" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">Name candidates.</text>
+  </g>
+  <text x="500" y="420" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">The colour is only information in the middle of its range.</text>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">globleunlimited.net</text>
+</svg>

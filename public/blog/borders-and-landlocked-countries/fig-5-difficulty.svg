@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Line chart showing mean difficulty falling from 4.30 for countries with no land neighbour to 1.67 for countries with seven.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">More neighbours, easier answer</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 5 · mean difficulty (1–5) by land-neighbour count</text>
+  <path d="M120 440H960" stroke="#F4C95D" stroke-opacity="0.25"/>
+  <path d="M130 169 L225 198 L320 241 L415 292 L510 303 L605 317 L700 392 L795 424 L890 418" fill="none" stroke="#F4C95D" stroke-width="2.5"/>
+  <circle cx="130" cy="169" r="6" fill="#8B0000"/>
+  <text x="130" y="151.33333333333337" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#9DB2C6">4.30</text>
+  <text x="130" y="472" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">0</text>
+  <circle cx="225" cy="198" r="6" fill="#C42D1C"/>
+  <text x="225" y="180.33333333333331" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#9DB2C6">4.00</text>
+  <text x="225" y="472" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">1</text>
+  <circle cx="320" cy="241" r="6" fill="#C42D1C"/>
+  <text x="320" y="222.86666666666667" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#9DB2C6">3.56</text>
+  <text x="320" y="472" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">2</text>
+  <circle cx="415" cy="292" r="6" fill="#E8743B"/>
+  <text x="415" y="274.1" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#9DB2C6">3.03</text>
+  <text x="415" y="472" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">3</text>
+  <circle cx="510" cy="303" r="6" fill="#E8743B"/>
+  <text x="510" y="284.73333333333335" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#9DB2C6">2.92</text>
+  <text x="510" y="472" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">4</text>
+  <circle cx="605" cy="317" r="6" fill="#E8743B"/>
+  <text x="605" y="299.23333333333335" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#9DB2C6">2.77</text>
+  <text x="605" y="472" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">5</text>
+  <circle cx="700" cy="392" r="6" fill="#FEB24C"/>
+  <text x="700" y="373.6666666666667" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#9DB2C6">2.00</text>
+  <text x="700" y="472" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">6</text>
+  <circle cx="795" cy="424" r="6" fill="#FFEDA0"/>
+  <text x="795" y="405.56666666666666" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#9DB2C6">1.67</text>
+  <text x="795" y="472" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">7</text>
+  <circle cx="890" cy="418" r="6" fill="#FFEDA0"/>
+  <text x="890" y="399.76666666666665" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#9DB2C6">1.73</text>
+  <text x="890" y="472" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EAF2F8">8+</text>
+  <text x="540" y="500" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#5E7891">land neighbours</text>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">Monotonic across every step but the last. Source: globleunlimited.net dataset.</text>
+</svg>

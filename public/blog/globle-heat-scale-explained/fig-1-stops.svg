@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="The five colour stops mapped to distance: deep red at 0 km, red at 3,000, orange at 6,000, amber at 9,000, pale yellow at 12,000 and beyond.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">The five stops, in kilometres</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 1 · each segment covers 3,000 km</text>
+  <g>
+    <rect x="90" y="160" width="160" height="150" fill="#8B0000"/>
+    <text x="170" y="340" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">Deep red</text>
+    <text x="170" y="368" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#F4C95D">0 km</text>
+  </g>
+  <g>
+    <rect x="266" y="160" width="160" height="150" fill="#C42D1C"/>
+    <text x="346" y="340" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">Red</text>
+    <text x="346" y="368" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#F4C95D">3,000 km</text>
+  </g>
+  <g>
+    <rect x="442" y="160" width="160" height="150" fill="#E8743B"/>
+    <text x="522" y="340" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">Orange</text>
+    <text x="522" y="368" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#F4C95D">6,000 km</text>
+  </g>
+  <g>
+    <rect x="618" y="160" width="160" height="150" fill="#FEB24C"/>
+    <text x="698" y="340" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">Amber</text>
+    <text x="698" y="368" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#F4C95D">9,000 km</text>
+  </g>
+  <g>
+    <rect x="794" y="160" width="160" height="150" fill="#FFEDA0"/>
+    <text x="874" y="340" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">Pale yellow</text>
+    <text x="874" y="368" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#F4C95D">12,000+ km</text>
+  </g>
+  <path d="M90 400H954" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="522" y="432" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">the ramp interpolates smoothly between stops</text>
+  <text x="522" y="462" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#FFEDA0">everything past 12,000 km is this same colour</text>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">globleunlimited.net</text>
+</svg>

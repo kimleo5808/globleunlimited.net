@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Grouped bars: from Wellington 140 of 198 capitals land in the pale-yellow band, against 13 from Athens and 17 from Cairo.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">What one opening guess buys you</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 5 · capitals falling in each colour band, by opener</text>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="300" y="128" fill="#9DB2C6">Athens</text>
+    <text x="500" y="128" fill="#9DB2C6">Cairo</text>
+    <text x="700" y="128" fill="#9DB2C6">Wellington</text>
+  </g>
+  <g>
+    <text x="288" y="171" text-anchor="end" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">Deep red</text>
+    <rect x="300" y="155" width="70" height="20" fill="#FFEDA0"/>
+    <text x="377.6428571428571" y="171" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#FFEDA0">65</text>
+    <rect x="500" y="155" width="62" height="20" fill="#FFEDA0"/>
+    <text x="570.1428571428571" y="171" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#FFEDA0">58</text>
+    <rect x="700" y="155" width="4" height="20" fill="#FFEDA0"/>
+    <text x="712.2857142857143" y="171" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#FFEDA0">4</text>
+  </g>
+  <g>
+    <text x="288" y="239" text-anchor="end" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">Red</text>
+    <rect x="300" y="223" width="56" height="20" fill="#FEB24C"/>
+    <text x="363.7142857142857" y="239" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#FEB24C">52</text>
+    <rect x="500" y="223" width="70" height="20" fill="#FEB24C"/>
+    <text x="577.6428571428571" y="239" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#FEB24C">65</text>
+    <rect x="700" y="223" width="8" height="20" fill="#FEB24C"/>
+    <text x="715.5" y="239" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#FEB24C">7</text>
+  </g>
+  <g>
+    <text x="288" y="307" text-anchor="end" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">Orange</text>
+    <rect x="300" y="291" width="41" height="20" fill="#E8743B"/>
+    <text x="348.7142857142857" y="307" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#E8743B">38</text>
+    <rect x="500" y="291" width="25" height="20" fill="#E8743B"/>
+    <text x="532.6428571428571" y="307" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#E8743B">23</text>
+    <rect x="700" y="291" width="8" height="20" fill="#E8743B"/>
+    <text x="715.5" y="307" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#E8743B">7</text>
+  </g>
+  <g>
+    <text x="288" y="375" text-anchor="end" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">Amber</text>
+    <rect x="300" y="359" width="32" height="20" fill="#C42D1C"/>
+    <text x="340.1428571428571" y="375" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EE7A66">30</text>
+    <rect x="500" y="359" width="38" height="20" fill="#C42D1C"/>
+    <text x="545.5" y="375" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EE7A66">35</text>
+    <rect x="700" y="359" width="43" height="20" fill="#C42D1C"/>
+    <text x="750.8571428571429" y="375" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#EE7A66">40</text>
+  </g>
+  <g>
+    <text x="288" y="443" text-anchor="end" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#EAF2F8">Pale yellow</text>
+    <rect x="300" y="427" width="14" height="20" fill="#8B0000"/>
+    <text x="321.92857142857144" y="443" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#E06A5A">13</text>
+    <rect x="500" y="427" width="18" height="20" fill="#8B0000"/>
+    <text x="526.2142857142857" y="443" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#E06A5A">17</text>
+    <rect x="700" y="427" width="150" height="20" fill="#8B0000"/>
+    <text x="858" y="443" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#E06A5A">140</text>
+  </g>
+  <text x="700" y="473" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#F4C95D">71% of the field, one colour</text>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">A corner opener wastes the scale. Source: globleunlimited.net dataset, 199 capitals.</text>
+</svg>

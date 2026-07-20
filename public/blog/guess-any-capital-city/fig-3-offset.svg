@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Bar chart: Moscow sits 3,206 km from Russia’s centroid, Ottawa 2,081 km, Washington D.C. 1,865 km, Canberra 1,784 km.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">Capitals furthest from their own country centre</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 3 · km from capital to country centroid</text>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="141" text-anchor="end" fill="#EAF2F8">Moscow</text>
+    <rect x="310" y="126" width="490" height="21" fill="#8B0000"/>
+    <text x="810.3294117647059" y="142" fill="#E06A5A">3,206 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="183" text-anchor="end" fill="#EAF2F8">Ottawa</text>
+    <rect x="310" y="168" width="318" height="21" fill="#C42D1C"/>
+    <text x="638.2705882352941" y="184" fill="#EE7A66">2,081 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="225" text-anchor="end" fill="#EAF2F8">Washington DC</text>
+    <rect x="310" y="210" width="285" height="21" fill="#C42D1C"/>
+    <text x="605.2352941176471" y="226" fill="#EE7A66">1,865 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="267" text-anchor="end" fill="#EAF2F8">Canberra</text>
+    <rect x="310" y="252" width="273" height="21" fill="#E8743B"/>
+    <text x="592.8470588235293" y="268" fill="#E8743B">1,784 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="309" text-anchor="end" fill="#EAF2F8">Kuala Lumpur</text>
+    <rect x="310" y="294" width="221" height="21" fill="#E8743B"/>
+    <text x="540.5411764705882" y="310" fill="#E8743B">1,442 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="351" text-anchor="end" fill="#EAF2F8">Beijing</text>
+    <rect x="310" y="336" width="181" height="21" fill="#FEB24C"/>
+    <text x="500.9294117647059" y="352" fill="#FEB24C">1,183 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="393" text-anchor="end" fill="#EAF2F8">Jakarta</text>
+    <rect x="310" y="378" width="158" height="21" fill="#FEB24C"/>
+    <text x="478.2941176470588" y="394" fill="#FEB24C">1,035 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="435" text-anchor="end" fill="#EAF2F8">Maputo</text>
+    <rect x="310" y="420" width="157" height="21" fill="#FEB24C"/>
+    <text x="476.7647058823529" y="436" fill="#FEB24C">1,025 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="477" text-anchor="end" fill="#EAF2F8">Algiers</text>
+    <rect x="310" y="462" width="148" height="21" fill="#FFEDA0"/>
+    <text x="467.74117647058824" y="478" fill="#FFEDA0">966 km</text>
+  </g>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">Country knowledge misleads you here. Source: globleunlimited.net dataset.</text>
+</svg>

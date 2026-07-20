@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Bar chart of best opening states: Massachusetts, New Hampshire and Vermont each leave at most 7 candidates.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">The best opening states</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 4 · worst-case states left sharing the reading · ±200 km</text>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="308" y="155" text-anchor="end" fill="#EAF2F8">Massachusetts</text>
+    <rect x="320" y="140" width="305" height="21" fill="#FFEDA0"/>
+    <text x="635.4545454545455" y="156" fill="#FFEDA0">7</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="308" y="199" text-anchor="end" fill="#EAF2F8">New Hampshire</text>
+    <rect x="320" y="184" width="305" height="21" fill="#FFEDA0"/>
+    <text x="635.4545454545455" y="200" fill="#FFEDA0">7</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="308" y="243" text-anchor="end" fill="#EAF2F8">Vermont</text>
+    <rect x="320" y="228" width="305" height="21" fill="#FFEDA0"/>
+    <text x="635.4545454545455" y="244" fill="#FFEDA0">7</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="308" y="287" text-anchor="end" fill="#EAF2F8">Arizona</text>
+    <rect x="320" y="272" width="349" height="21" fill="#FEB24C"/>
+    <text x="679.0909090909091" y="288" fill="#FEB24C">8</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="308" y="331" text-anchor="end" fill="#EAF2F8">Hawaii</text>
+    <rect x="320" y="316" width="349" height="21" fill="#FEB24C"/>
+    <text x="679.0909090909091" y="332" fill="#FEB24C">8</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="308" y="375" text-anchor="end" fill="#EAF2F8">Maine</text>
+    <rect x="320" y="360" width="349" height="21" fill="#FEB24C"/>
+    <text x="679.0909090909091" y="376" fill="#FEB24C">8</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="308" y="419" text-anchor="end" fill="#EAF2F8">Rhode Island</text>
+    <rect x="320" y="404" width="349" height="21" fill="#FEB24C"/>
+    <text x="679.0909090909091" y="420" fill="#FEB24C">8</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="308" y="463" text-anchor="end" fill="#EAF2F8">Connecticut</text>
+    <rect x="320" y="448" width="393" height="21" fill="#E8743B"/>
+    <text x="722.7272727272727" y="464" fill="#E8743B">9</text>
+  </g>
+  <text x="320" y="490" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#F4C95D">The opposite of the country game — here a corner opener wins.</text>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">The US board is small enough that corners still resolve. Source: globleunlimited.net dataset.</text>
+</svg>

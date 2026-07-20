@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Bar chart of the best and worst opening capitals. Madrid leaves at most 26 candidates; Monrovia leaves 56.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">The best opening capitals</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 1 · worst-case capitals left sharing the answer’s reading · lower = better</text>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="278" y="137" text-anchor="end" fill="#EAF2F8">Madrid</text>
+    <rect x="290" y="122" width="243" height="21" fill="#FFEDA0"/>
+    <text x="542.6666666666667" y="138" fill="#FFEDA0">26</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="278" y="177" text-anchor="end" fill="#EAF2F8">Riga</text>
+    <rect x="290" y="162" width="252" height="21" fill="#FFEDA0"/>
+    <text x="552" y="178" fill="#FFEDA0">27</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="278" y="217" text-anchor="end" fill="#EAF2F8">Helsinki</text>
+    <rect x="290" y="202" width="261" height="21" fill="#FEB24C"/>
+    <text x="561.3333333333333" y="218" fill="#FEB24C">28</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="278" y="257" text-anchor="end" fill="#EAF2F8">Tallinn</text>
+    <rect x="290" y="242" width="261" height="21" fill="#FEB24C"/>
+    <text x="561.3333333333333" y="258" fill="#FEB24C">28</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="278" y="297" text-anchor="end" fill="#EAF2F8">Stockholm</text>
+    <rect x="290" y="282" width="271" height="21" fill="#FEB24C"/>
+    <text x="570.6666666666667" y="298" fill="#FEB24C">29</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="278" y="337" text-anchor="end" fill="#EAF2F8">Wellington</text>
+    <rect x="290" y="322" width="271" height="21" fill="#FEB24C"/>
+    <text x="570.6666666666667" y="338" fill="#FEB24C">29</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="278" y="377" text-anchor="end" fill="#EAF2F8">Abidjan</text>
+    <rect x="290" y="362" width="476" height="21" fill="#C42D1C"/>
+    <text x="776" y="378" fill="#EE7A66">51</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="278" y="417" text-anchor="end" fill="#EAF2F8">Freetown</text>
+    <rect x="290" y="402" width="485" height="21" fill="#C42D1C"/>
+    <text x="785.3333333333334" y="418" fill="#EE7A66">52</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="278" y="457" text-anchor="end" fill="#EAF2F8">Majuro</text>
+    <rect x="290" y="442" width="495" height="21" fill="#8B0000"/>
+    <text x="794.6666666666666" y="458" fill="#E06A5A">53</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="278" y="497" text-anchor="end" fill="#EAF2F8">Monrovia</text>
+    <rect x="290" y="482" width="523" height="21" fill="#8B0000"/>
+    <text x="822.6666666666666" y="498" fill="#E06A5A">56</text>
+  </g>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">Tolerance ±500 km. Source: globleunlimited.net dataset, 199 capitals.</text>
+</svg>

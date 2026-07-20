@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Range chart showing the first four bands each span about 2,700 km while the pale-yellow band spans 5,182 km.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">The band that absorbs everything</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 2 · real distance range inside each band, measured from Greece</text>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="238" y="166" text-anchor="end" fill="#EAF2F8">Deep red</text>
+    <rect x="260" y="150" width="99" height="21" fill="#8B0000"/>
+    <text x="368.38666666666666" y="166" fill="#E06A5A">2,692 km wide</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="238" y="228" text-anchor="end" fill="#EAF2F8">Red</text>
+    <rect x="361" y="212" width="107" height="21" fill="#C42D1C"/>
+    <text x="478.49666666666667" y="228" fill="#EE7A66">2,928 km wide</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="238" y="290" text-anchor="end" fill="#EAF2F8">Orange</text>
+    <rect x="481" y="274" width="97" height="21" fill="#E8743B"/>
+    <text x="587.8366666666666" y="290" fill="#E8743B">2,648 km wide</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="238" y="352" text-anchor="end" fill="#EAF2F8">Amber</text>
+    <rect x="581" y="336" width="100" height="21" fill="#FEB24C"/>
+    <text x="691.7866666666666" y="352" fill="#FEB24C">2,736 km wide</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="238" y="414" text-anchor="end" fill="#EAF2F8">Pale yellow</text>
+    <rect x="695" y="398" width="190" height="21" fill="#FFEDA0"/>
+    <text x="895.36" y="414" fill="#FFEDA0">5,182 km wide</text>
+  </g>
+  <path d="M690 130V470" stroke="#F4C95D" stroke-dasharray="4 4" stroke-opacity="0.6"/>
+  <text x="698" y="126" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#F4C95D">scale ends</text>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">Paraguay to Taiwan is 19,932 km — 7,900 km past the ceiling.</text>
+</svg>

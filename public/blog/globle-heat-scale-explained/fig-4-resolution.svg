@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Plate listing country pairs closer than 600 km apart, which produce indistinguishable colours: Austria and Slovakia 422 km, Ghana and Ivory Coast 484 km.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">Below 600 km, colour stops resolving</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 4 · country pairs your eye cannot separate</text>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="16">
+    <text x="110" y="165" fill="#EAF2F8">Austria</text>
+    <text x="330" y="165" fill="#5E7891">↔</text>
+    <text x="370" y="165" fill="#EAF2F8">Slovakia</text>
+    <text x="640" y="165" fill="#C42D1C">422 km</text>
+    <rect x="740" y="149" width="90" height="20" fill="#C42D1C"/>
+    <rect x="838" y="149" width="90" height="20" fill="#C42D1C"/>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="16">
+    <text x="110" y="227" fill="#EAF2F8">Ghana</text>
+    <text x="330" y="227" fill="#5E7891">↔</text>
+    <text x="370" y="227" fill="#EAF2F8">Ivory Coast</text>
+    <text x="640" y="227" fill="#C42D1C">484 km</text>
+    <rect x="740" y="211" width="90" height="20" fill="#C42D1C"/>
+    <rect x="838" y="211" width="90" height="20" fill="#C42D1C"/>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="16">
+    <text x="110" y="289" fill="#EAF2F8">Belgrade region</text>
+    <text x="330" y="289" fill="#5E7891">↔</text>
+    <text x="370" y="289" fill="#EAF2F8">Budapest region</text>
+    <text x="640" y="289" fill="#C42D1C">320 km</text>
+    <rect x="740" y="273" width="90" height="20" fill="#C42D1C"/>
+    <rect x="838" y="273" width="90" height="20" fill="#C42D1C"/>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="16">
+    <text x="110" y="351" fill="#EAF2F8">Vienna</text>
+    <text x="330" y="351" fill="#5E7891">↔</text>
+    <text x="370" y="351" fill="#EAF2F8">Warsaw</text>
+    <text x="640" y="351" fill="#C42D1C">550 km</text>
+    <rect x="740" y="335" width="90" height="20" fill="#C42D1C"/>
+    <rect x="838" y="335" width="90" height="20" fill="#C42D1C"/>
+  </g>
+  <text x="784" y="140" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#5E7891">what you actually see</text>
+  <text x="110" y="452" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#F4C95D">Once two guesses land inside your limit, stop measuring and start naming.</text>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">globleunlimited.net</text>
+</svg>

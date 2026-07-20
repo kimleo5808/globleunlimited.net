@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Bar chart of the densest capitals. Belgrade has 12 other capitals within 500 km, Ljubljana and Sarajevo 11 each.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">The Balkan cluster: twelve capitals inside 500 km</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 2 · other capitals within 500 km</text>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="155" text-anchor="end" fill="#EAF2F8">Belgrade</text>
+    <rect x="300" y="140" width="480" height="21" fill="#8B0000"/>
+    <text x="790" y="156" fill="#E06A5A">12</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="199" text-anchor="end" fill="#EAF2F8">Ljubljana</text>
+    <rect x="300" y="184" width="440" height="21" fill="#C42D1C"/>
+    <text x="750" y="200" fill="#EE7A66">11</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="243" text-anchor="end" fill="#EAF2F8">Sarajevo</text>
+    <rect x="300" y="228" width="440" height="21" fill="#C42D1C"/>
+    <text x="750" y="244" fill="#EE7A66">11</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="287" text-anchor="end" fill="#EAF2F8">Zagreb</text>
+    <rect x="300" y="272" width="360" height="21" fill="#E8743B"/>
+    <text x="670" y="288" fill="#E8743B">9</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="331" text-anchor="end" fill="#EAF2F8">Skopje</text>
+    <rect x="300" y="316" width="320" height="21" fill="#E8743B"/>
+    <text x="630" y="332" fill="#E8743B">8</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="375" text-anchor="end" fill="#EAF2F8">Bratislava</text>
+    <rect x="300" y="360" width="280" height="21" fill="#FEB24C"/>
+    <text x="590" y="376" fill="#FEB24C">7</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="419" text-anchor="end" fill="#EAF2F8">Budapest</text>
+    <rect x="300" y="404" width="280" height="21" fill="#FEB24C"/>
+    <text x="590" y="420" fill="#FEB24C">7</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="463" text-anchor="end" fill="#EAF2F8">Podgorica</text>
+    <rect x="300" y="448" width="280" height="21" fill="#FEB24C"/>
+    <text x="590" y="464" fill="#FEB24C">7</text>
+  </g>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">Colour is not readable below roughly 600 km. Source: globleunlimited.net dataset.</text>
+</svg>

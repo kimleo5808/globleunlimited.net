@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Plate listing eight confusable US state pairs with the distinguishing feature for each.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">The pairs everyone confuses</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 3 · one tell each</text>
+  <g>
+    <rect x="80" y="135" width="410" height="56" fill="none" stroke="#F4C95D" stroke-opacity="0.2" rx="6"/>
+    <text x="98" y="169" font-family="'Space Mono',ui-monospace,monospace" font-size="18" fill="#F4C95D">NH / VT</text>
+    <text x="210" y="169" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">VT widens at the top</text>
+  </g>
+  <g>
+    <rect x="80" y="207" width="410" height="56" fill="none" stroke="#F4C95D" stroke-opacity="0.2" rx="6"/>
+    <text x="98" y="241" font-family="'Space Mono',ui-monospace,monospace" font-size="18" fill="#F4C95D">MO / IA</text>
+    <text x="210" y="241" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">MO has the bootheel</text>
+  </g>
+  <g>
+    <rect x="80" y="279" width="410" height="56" fill="none" stroke="#F4C95D" stroke-opacity="0.2" rx="6"/>
+    <text x="98" y="313" font-family="'Space Mono',ui-monospace,monospace" font-size="18" fill="#F4C95D">WY / CO</text>
+    <text x="210" y="313" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">CO is clearly wider</text>
+  </g>
+  <g>
+    <rect x="80" y="351" width="410" height="56" fill="none" stroke="#F4C95D" stroke-opacity="0.2" rx="6"/>
+    <text x="98" y="385" font-family="'Space Mono',ui-monospace,monospace" font-size="18" fill="#F4C95D">AL / MS</text>
+    <text x="210" y="385" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">MS has the river edge</text>
+  </g>
+  <g>
+    <rect x="530" y="135" width="410" height="56" fill="none" stroke="#F4C95D" stroke-opacity="0.2" rx="6"/>
+    <text x="548" y="169" font-family="'Space Mono',ui-monospace,monospace" font-size="18" fill="#F4C95D">ND / SD</text>
+    <text x="660" y="169" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">SD’s east edge bends</text>
+  </g>
+  <g>
+    <rect x="530" y="207" width="410" height="56" fill="none" stroke="#F4C95D" stroke-opacity="0.2" rx="6"/>
+    <text x="548" y="241" font-family="'Space Mono',ui-monospace,monospace" font-size="18" fill="#F4C95D">KS / NE</text>
+    <text x="660" y="241" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">NE has the west stub</text>
+  </g>
+  <g>
+    <rect x="530" y="279" width="410" height="56" fill="none" stroke="#F4C95D" stroke-opacity="0.2" rx="6"/>
+    <text x="548" y="313" font-family="'Space Mono',ui-monospace,monospace" font-size="18" fill="#F4C95D">CT / MA</text>
+    <text x="660" y="313" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">MA has Cape Cod</text>
+  </g>
+  <g>
+    <rect x="530" y="351" width="410" height="56" fill="none" stroke="#F4C95D" stroke-opacity="0.2" rx="6"/>
+    <text x="548" y="385" font-family="'Space Mono',ui-monospace,monospace" font-size="18" fill="#F4C95D">VA / WV</text>
+    <text x="660" y="385" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#9DB2C6">WV has no straight line</text>
+  </g>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">Seven of the eight pairs are geographic neighbours.</text>
+</svg>

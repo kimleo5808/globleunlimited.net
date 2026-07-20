@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Cover: a globe scattered with capital-city markers, densest across Europe, titled How to Guess Any Capital City in Under 6 Tries">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#15304d"/><stop offset="100%" stop-color="#0B1622"/>
+    </radialGradient>
+    <radialGradient id="globe" cx="38%" cy="32%" r="80%">
+      <stop offset="0%" stop-color="#1B3350"/><stop offset="100%" stop-color="#0E1C2E"/>
+    </radialGradient>
+    <clipPath id="disc"><circle cx="330" cy="315" r="205"/></clipPath>
+  </defs>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g stroke="#F4C95D" stroke-opacity="0.07" fill="none">
+    <path d="M0 105H1200M0 210H1200M0 315H1200M0 420H1200M0 525H1200"/>
+    <path d="M150 0V630M300 0V630M450 0V630M600 0V630M750 0V630M900 0V630M1050 0V630"/>
+  </g>
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#F4C95D" stroke-opacity="0.35"/>
+  <rect x="32" y="32" width="1136" height="566" fill="none" stroke="#F4C95D" stroke-opacity="0.15"/>
+  <circle cx="330" cy="315" r="205" fill="url(#globe)" stroke="#F4C95D" stroke-opacity="0.6" stroke-width="2"/>
+  <g clip-path="url(#disc)" stroke="#F4C95D" stroke-opacity="0.28" fill="none">
+    <ellipse cx="330" cy="315" rx="205" ry="70"/><ellipse cx="330" cy="315" rx="205" ry="140"/>
+    <ellipse cx="330" cy="315" rx="70" ry="205"/><ellipse cx="330" cy="315" rx="140" ry="205"/>
+    <path d="M125 315H535"/>
+  </g>
+  <g>
+    <circle cx="268" cy="232" r="5" fill="#F4C95D" fill-opacity="1"/>
+    <circle cx="286" cy="220" r="5" fill="#F4C95D" fill-opacity="1"/>
+    <circle cx="300" cy="240" r="5" fill="#F4C95D" fill-opacity="1"/>
+    <circle cx="312" cy="226" r="5" fill="#F4C95D" fill-opacity="1"/>
+    <circle cx="322" cy="244" r="5" fill="#F4C95D" fill-opacity="1"/>
+    <circle cx="296" cy="258" r="5" fill="#F4C95D" fill-opacity="1"/>
+    <circle cx="330" cy="214" r="5" fill="#F4C95D" fill-opacity="1"/>
+    <circle cx="352" cy="236" r="5" fill="#F4C95D" fill-opacity="1"/>
+    <circle cx="368" cy="260" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="258" cy="268" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="340" cy="282" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="300" cy="300" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="372" cy="310" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="268" cy="330" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="330" cy="348" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="392" cy="340" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="292" cy="372" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="352" cy="392" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="246" cy="300" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="410" cy="288" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="230" cy="352" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="378" cy="402" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="316" cy="420" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="268" cy="404" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+    <circle cx="420" cy="366" r="3.5" fill="#FEB24C" fill-opacity="0.75"/>
+  </g>
+  <text x="620" y="200" font-family="'Space Mono',ui-monospace,monospace" font-size="20" letter-spacing="5" fill="#F4C95D">FIELD NOTES · DATA STUDY</text>
+  <text x="620" y="278" font-family="Georgia,'Times New Roman',serif" font-size="58" fill="#EAF2F8">How to Guess Any</text>
+  <text x="620" y="348" font-family="Georgia,'Times New Roman',serif" font-size="58" fill="#EAF2F8">Capital City</text>
+  <text x="620" y="418" font-family="Georgia,'Times New Roman',serif" font-size="58" fill="#F4C95D" font-style="italic">in Under 6 Tries</text>
+  <text x="620" y="528" font-family="'Space Mono',ui-monospace,monospace" font-size="19" fill="#9DB2C6">199 capitals · 19,701 pairs measured</text>
+  <g stroke="#F4C95D" stroke-opacity="0.6">
+    <path d="M24 54V24H54M1146 24H1176V54M1176 576V606H1146M54 606H24V576" fill="none" stroke-width="2"/>
+  </g>
+</svg>

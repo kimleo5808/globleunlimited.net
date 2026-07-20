@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="A list plate naming the 23 countries in the pool with no land border, including Japan, Iceland, Madagascar and New Zealand.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">23 countries have no land border at all</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 4 · 13% of the pool — no chain of neighbours to follow inward</text>
+  <text x="90" y="150" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Australia</text>
+  <text x="90" y="188" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Bahamas</text>
+  <text x="90" y="226" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Cuba</text>
+  <text x="90" y="264" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Cyprus</text>
+  <text x="90" y="302" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Falkland Is.</text>
+  <text x="90" y="340" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Fiji</text>
+  <text x="90" y="378" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Fr. S. &amp; Antarctic</text>
+  <text x="90" y="416" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Greenland</text>
+  <text x="390" y="150" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Iceland</text>
+  <text x="390" y="188" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Jamaica</text>
+  <text x="390" y="226" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Japan</text>
+  <text x="390" y="264" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Kosovo</text>
+  <text x="390" y="302" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Madagascar</text>
+  <text x="390" y="340" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· N. Cyprus</text>
+  <text x="390" y="378" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· New Caledonia</text>
+  <text x="390" y="416" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· New Zealand</text>
+  <text x="690" y="150" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Philippines</text>
+  <text x="690" y="188" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Puerto Rico</text>
+  <text x="690" y="226" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Solomon Is.</text>
+  <text x="690" y="264" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Somaliland</text>
+  <text x="690" y="302" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Taiwan</text>
+  <text x="690" y="340" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Trinidad &amp; Tob.</text>
+  <text x="690" y="378" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">· Vanuatu</text>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">These dominate the hardest-countries list. Source: globleunlimited.net dataset.</text>
+</svg>

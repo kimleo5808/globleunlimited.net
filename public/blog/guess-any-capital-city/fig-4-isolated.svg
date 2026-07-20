@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Bar chart: Canberra and Wellington are each 2,326 km from their nearest other capital, Dili 1,905 km, Reykjavik 1,495 km.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">The isolated capitals are free wins</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 4 · km to the nearest other capital</text>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="155" text-anchor="end" fill="#EAF2F8">Canberra</text>
+    <rect x="310" y="140" width="447" height="21" fill="#FFEDA0"/>
+    <text x="767.3076923076924" y="156" fill="#FFEDA0">2,326 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="199" text-anchor="end" fill="#EAF2F8">Wellington</text>
+    <rect x="310" y="184" width="447" height="21" fill="#FFEDA0"/>
+    <text x="767.3076923076924" y="200" fill="#FFEDA0">2,326 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="243" text-anchor="end" fill="#EAF2F8">Dili</text>
+    <rect x="310" y="228" width="366" height="21" fill="#FEB24C"/>
+    <text x="686.3461538461538" y="244" fill="#FEB24C">1,905 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="287" text-anchor="end" fill="#EAF2F8">Melekeok</text>
+    <rect x="310" y="272" width="324" height="21" fill="#FEB24C"/>
+    <text x="644.2307692307693" y="288" fill="#FEB24C">1,686 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="331" text-anchor="end" fill="#EAF2F8">Reykjavík</text>
+    <rect x="310" y="316" width="288" height="21" fill="#E8743B"/>
+    <text x="607.5" y="332" fill="#E8743B">1,495 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="375" text-anchor="end" fill="#EAF2F8">Brasília</text>
+    <rect x="310" y="360" width="281" height="21" fill="#E8743B"/>
+    <text x="601.1538461538462" y="376" fill="#E8743B">1,462 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="419" text-anchor="end" fill="#EAF2F8">Palikir</text>
+    <rect x="310" y="404" width="281" height="21" fill="#E8743B"/>
+    <text x="600.7692307692307" y="420" fill="#E8743B">1,460 km</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="298" y="463" text-anchor="end" fill="#EAF2F8">Port Moresby</text>
+    <rect x="310" y="448" width="269" height="21" fill="#C42D1C"/>
+    <text x="589.0384615384615" y="464" fill="#EE7A66">1,399 km</text>
+  </g>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">One warm reading identifies these outright. Source: globleunlimited.net dataset.</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Four-week drill plan: one-offs, then coastal irregulars, then wedges and slabs, then rectangles drilled in pairs.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">Practice order, hardest last</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 5 · four weeks, by family</text>
+  <g>
+    <rect x="80" y="145" width="180" height="60" fill="#FEB24C" fill-opacity="0.18" stroke="#FEB24C" rx="6"/>
+    <text x="104" y="171" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#FEB24C">WEEK 1</text>
+    <text x="104" y="193" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">The one-offs</text>
+    <text x="280" y="183" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#5E7891">MI LA OK WV FL AK HI TX CA</text>
+  </g>
+  <g>
+    <rect x="80" y="233" width="360" height="60" fill="#E8743B" fill-opacity="0.18" stroke="#E8743B" rx="6"/>
+    <text x="104" y="259" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#E8743B">WEEK 2</text>
+    <text x="104" y="281" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">Coastal irregulars</text>
+    <text x="460" y="271" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#5E7891">Atlantic → Gulf → Pacific</text>
+  </g>
+  <g>
+    <rect x="80" y="321" width="540" height="60" fill="#C42D1C" fill-opacity="0.18" stroke="#C42D1C" rx="6"/>
+    <text x="104" y="347" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#C42D1C">WEEK 3</text>
+    <text x="104" y="369" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">Wedges &amp; slabs</text>
+    <text x="640" y="359" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#5E7891">NV ID MT OR WA UT AZ NM</text>
+  </g>
+  <g>
+    <rect x="80" y="409" width="720" height="60" fill="#8B0000" fill-opacity="0.18" stroke="#8B0000" rx="6"/>
+    <text x="104" y="435" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#8B0000">WEEK 4</text>
+    <text x="104" y="457" font-family="'Space Mono',ui-monospace,monospace" font-size="16" fill="#EAF2F8">Rectangles, in pairs</text>
+    <text x="820" y="447" font-family="'Space Mono',ui-monospace,monospace" font-size="14" fill="#5E7891">CO/WY · ND/SD · KS/NE</text>
+  </g>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">Drill rectangles in pairs — discrimination, not recognition.</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Cover: a network of border connections radiating from a central hub, titled Borders and Landlocked Countries, A Guesser’s Map">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#15304d"/><stop offset="100%" stop-color="#0B1622"/>
+    </radialGradient>
+    <radialGradient id="globe" cx="38%" cy="32%" r="80%">
+      <stop offset="0%" stop-color="#1B3350"/><stop offset="100%" stop-color="#0E1C2E"/>
+    </radialGradient>
+    <clipPath id="disc"><circle cx="330" cy="315" r="205"/></clipPath>
+  </defs>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g stroke="#F4C95D" stroke-opacity="0.07" fill="none">
+    <path d="M0 105H1200M0 210H1200M0 315H1200M0 420H1200M0 525H1200"/>
+    <path d="M150 0V630M300 0V630M450 0V630M600 0V630M750 0V630M900 0V630M1050 0V630"/>
+  </g>
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#F4C95D" stroke-opacity="0.35"/>
+  <rect x="32" y="32" width="1136" height="566" fill="none" stroke="#F4C95D" stroke-opacity="0.15"/>
+  <circle cx="330" cy="315" r="205" fill="url(#globe)" stroke="#F4C95D" stroke-opacity="0.6" stroke-width="2"/>
+  <g clip-path="url(#disc)" stroke="#F4C95D" stroke-opacity="0.28" fill="none">
+    <ellipse cx="330" cy="315" rx="205" ry="70"/><ellipse cx="330" cy="315" rx="205" ry="140"/>
+    <ellipse cx="330" cy="315" rx="70" ry="205"/><ellipse cx="330" cy="315" rx="140" ry="205"/>
+    <path d="M125 315H535"/>
+  </g>
+  <g fill="none">
+    <path d="M340 300 L300 200" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M340 300 L360 230" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M340 300 L270 260" stroke="#F4C95D" stroke-opacity="0.35"/>
+
+    <path d="M340 300 L400 270" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M340 300 L250 330" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M340 300 L320 370" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M340 300 L390 350" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M340 300 L280 410" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M340 300 L360 430" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M340 300 L430 320" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <path d="M340 300 L230 280" stroke="#F4C95D" stroke-opacity="0.35"/>
+  </g>
+  <g>
+    <circle cx="300" cy="200" r="5" fill="#FEB24C"/>
+    <circle cx="360" cy="230" r="5" fill="#FEB24C"/>
+    <circle cx="270" cy="260" r="5" fill="#FEB24C"/>
+    <circle cx="340" cy="300" r="9" fill="#F4C95D"/>
+    <circle cx="400" cy="270" r="5" fill="#FEB24C"/>
+    <circle cx="250" cy="330" r="5" fill="#FEB24C"/>
+    <circle cx="320" cy="370" r="5" fill="#FEB24C"/>
+    <circle cx="390" cy="350" r="5" fill="#FEB24C"/>
+    <circle cx="280" cy="410" r="5" fill="#FEB24C"/>
+    <circle cx="360" cy="430" r="5" fill="#FEB24C"/>
+    <circle cx="430" cy="320" r="5" fill="#FEB24C"/>
+    <circle cx="230" cy="280" r="5" fill="#FEB24C"/>
+  </g>
+  <text x="620" y="200" font-family="'Space Mono',ui-monospace,monospace" font-size="20" letter-spacing="5" fill="#F4C95D">FIELD NOTES · DATA STUDY</text>
+  <text x="620" y="278" font-family="Georgia,'Times New Roman',serif" font-size="58" fill="#EAF2F8">Borders and</text>
+  <text x="620" y="348" font-family="Georgia,'Times New Roman',serif" font-size="58" fill="#EAF2F8">Landlocked Countries</text>
+  <text x="620" y="418" font-family="Georgia,'Times New Roman',serif" font-size="58" fill="#F4C95D" font-style="italic">A Guesser's Map</text>
+  <text x="620" y="528" font-family="'Space Mono',ui-monospace,monospace" font-size="19" fill="#9DB2C6">176 countries · every land border counted</text>
+  <g stroke="#F4C95D" stroke-opacity="0.6">
+    <path d="M24 54V24H54M1146 24H1176V54M1176 576V606H1146M54 606H24V576" fill="none" stroke-width="2"/>
+  </g>
+</svg>
