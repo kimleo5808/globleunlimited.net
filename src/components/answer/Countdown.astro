@@ -1,0 +1,128 @@
+---
+// Return-visit hook: how long until the next daily unlocks at 00:00 UTC.
+//
+// The markup ships with em-dash placeholders rather than real numbers. A CDN
+// caches this page for hours, so any figure rendered at build time would be
+// wrong by the time a visitor sees it; the clock is filled in on mount.
+---
+
+<section class="countdown">
+  <h2 class="ct-head">Next Globle Answer Unlocks In</h2>
+
+  <div class="dials" data-countdown>
+    <div class="dial"><span class="num mono" data-ct-h>--</span><span class="unit">Hours</span></div>
+    <div class="dial"><span class="num mono" data-ct-m>--</span><span class="unit">Minutes</span></div>
+    <div class="dial"><span class="num mono" data-ct-s>--</span><span class="unit">Seconds</span></div>
+  </div>
+
+  <p class="ct-note">
+    <span aria-hidden="true">💡</span>
+    A new mystery country unlocks at 00:00 UTC<span data-ct-local></span>.
+  </p>
+</section>
+
+<script>
+  const host = document.querySelector<HTMLElement>('[data-countdown]');
+  const hEl = document.querySelector<HTMLElement>('[data-ct-h]');
+  const mEl = document.querySelector<HTMLElement>('[data-ct-m]');
+  const sEl = document.querySelector<HTMLElement>('[data-ct-s]');
+  const localEl = document.querySelector<HTMLElement>('[data-ct-local]');
+
+  function nextResetUTC(): Date {
+    const now = new Date();
+    const next = new Date(now);
+    next.setUTCHours(24, 0, 0, 0); // rolls into tomorrow 00:00 UTC
+    return next;
+  }
+
+  const pad = (n: number) => String(Math.floor(n)).padStart(2, '0');
+
+  function tick() {
+    if (!host) return;
+    const ms = nextResetUTC().getTime() - Date.now();
+    if (ms <= 0) {
+      // The puzzle just rolled over; the rebuilt page is the source of truth.
+      location.reload();
+      return;
+    }
+    const total = ms / 1000;
+    if (hEl) hEl.textContent = pad(total / 3600);
+    if (mEl) mEl.textContent = pad((total % 3600) / 60);
+    if (sEl) sEl.textContent = pad(total % 60);
+  }
+
+  if (host) {
+    // Show the reset in the visitor's own clock, which is the whole question
+    // people are actually asking when they search for the reset time.
+    if (localEl) {
+      // Forced to en-US: the surrounding copy is English, so borrowing the
+      // browser's locale here produces sentences in two languages.
+      const local = nextResetUTC().toLocaleString('en-US', {
+        weekday: 'short',
+        hour: 'numeric',
+        minute: '2-digit',
+      });
+      localEl.textContent = ` — ${local} where you are`;
+    }
+    tick();
+    setInterval(tick, 1000);
+  }
+</script>
+
+<style>
+  .countdown {
+    text-align: center;
+    padding: var(--space-12) var(--space-4);
+    border-block: 1px solid var(--line);
+    margin-block: var(--space-12);
+  }
+
+  .ct-head {
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-8);
+    /* Overrides the .prose heading rule; this one is centred, not rail-marked. */
+    border-left: 0;
+    padding-left: 0;
+    margin-top: 0;
+  }
+
+  .dials {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+  .dial {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 140px;
+    padding: var(--space-6) var(--space-4);
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .num {
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .unit {
+    font-size: var(--fs-small);
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .ct-note {
+    margin-top: var(--space-6);
+    color: var(--text-mute);
+    font-size: var(--fs-small);
+  }
+
+  @media (max-width: 560px) {
+    .dial { min-width: 92px; padding: var(--space-4) var(--space-3); }
+    .num { font-size: 1.9rem; }
+  }
+</style>

@@ -1,0 +1,123 @@
+---
+// Recent answers as a card grid. Shared by the landing page (last 8) and the
+// archive (all of them), so the two never drift apart visually.
+import { flag } from '../../lib/game/countries';
+
+export interface AnswerCard {
+  date: string;
+  nice: string;
+  name: string;
+  cca2: string;
+  region: string;
+  difficulty: number;
+  dispatch: string;
+}
+
+interface Props {
+  cards: AnswerCard[];
+  /** Marks the newest card. */
+  latestDate?: string;
+}
+
+const { cards, latestDate } = Astro.props;
+---
+
+<ul class="cards">
+  {cards.map((c) => (
+    <li>
+      <a href={`/globle-answer-archive/${c.date}`} class="card" data-card
+        data-name={c.name.toLowerCase()} data-date={c.date} data-region={c.region}>
+        <span class="card-top">
+          <span class="badge mono">{c.dispatch}</span>
+          {c.date === latestDate && <span class="latest">Latest</span>}
+        </span>
+
+        <span class="country">
+          <span class="flag" aria-hidden="true">{flag(c.cca2)}</span>
+          <span class="name">{c.name}</span>
+        </span>
+
+        <span class="meta">
+          <span class="region">{c.region}</span>
+          <span class="diff mono" title={`Difficulty ${c.difficulty} of 5`}>
+            {'●'.repeat(c.difficulty)}<span class="dim">{'●'.repeat(5 - c.difficulty)}</span>
+          </span>
+        </span>
+
+        <span class="card-foot">
+          <span class="date mono">{c.nice}</span>
+          <span class="go">View answer →</span>
+        </span>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .cards {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    height: 100%;
+    padding: var(--space-4);
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: transform var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  }
+  .card:hover { transform: translateY(-3px); border-color: var(--accent); }
+
+  .card-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
+  .badge {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border-radius: var(--radius-pill);
+    padding: 2px var(--space-2);
+  }
+  .latest {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--bg-deep);
+    background: var(--win);
+    border-radius: var(--radius-pill);
+    padding: 2px var(--space-2);
+  }
+
+  .country { display: flex; align-items: center; gap: var(--space-2); }
+  .flag { font-size: 1.4rem; line-height: 1; }
+  .name { color: var(--text); font-weight: 700; font-size: 1.05rem; }
+
+  .meta { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
+  .region { color: var(--text-mute); font-size: var(--fs-small); }
+  .diff { color: var(--accent); font-size: 0.65rem; letter-spacing: 1px; }
+  .diff .dim { color: var(--text-mute); opacity: 0.35; }
+
+  .card-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-top: auto;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--line);
+  }
+  .date { color: var(--text-mute); font-size: 0.72rem; }
+  .go { color: var(--accent); font-size: var(--fs-small); font-weight: 600; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none; }
+  }
+</style>

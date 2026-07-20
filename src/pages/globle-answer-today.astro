@@ -1,26 +1,31 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HintLadder from '../components/answer/HintLadder.astro';
-import SealedReveal from '../components/answer/SealedReveal.astro';
+import AnswerHero from '../components/answer/AnswerHero.astro';
+import ClueTiles from '../components/answer/ClueTiles.astro';
+import RevealPanel from '../components/answer/RevealPanel.astro';
 import CountryPlate from '../components/answer/CountryPlate.astro';
+import Countdown from '../components/answer/Countdown.astro';
+import AnswerCards from '../components/answer/AnswerCards.astro';
 import { answerForDate, shiftISO } from '../lib/game/daily';
 import { COUNTRIES, flag } from '../lib/game/countries';
 import { prettyDate } from '../lib/game/hint';
-import { analyse } from '../lib/game/analysis';
-import { archiveDates, todayISO } from '../lib/game/archive';
+import { analyse, teaserFor } from '../lib/game/analysis';
+import { archiveDates, cardsFor, dispatchNoFor, todayISO } from '../lib/game/archive';
 import { SITE } from '../lib/site';
 
 const today = todayISO();
 const country = answerForDate(today);
 const analysis = analyse(country);
 const nice = prettyDate(today);
+const dispatchNo = dispatchNoFor(today);
 
 const yesterday = shiftISO(today, -1);
 const hasYesterday = yesterday >= SITE.launchDate;
 const yCountry = hasYesterday ? answerForDate(yesterday) : null;
 
-// Dispatch number doubles as a plain "how long this archive has run" signal.
-const dispatchNo = String(archiveDates(today).length).padStart(4, '0');
+const allDates = archiveDates(today);
+const recent = cardsFor(allDates.slice(-9, -1)); // last 8 completed days
+const totalArchived = allDates.length;
 
 const total = COUNTRIES.length;
 const { ladder, bestOpener, obscurity } = analysis;
@@ -29,10 +34,18 @@ const title = 'Globle Answer Today – Hints First, Then the Reveal';
 const description =
   'The Globle answer today with four hints before the spoiler, a country profile, the opening guess that finds it fastest, and every past answer.';
 
+const features: Array<[string, string]> = [
+  ['New country every day', 'One mystery country per day, the same for everyone, rolling over at 00:00 UTC.'],
+  ['Guessing is by distance', 'Every guess is scored on the great-circle distance from its centre to the target.'],
+  ['Colour shows how close', 'Pale yellow is roughly 9,000 km away; the darkest red means you are almost on top of it.'],
+  ['Unlimited rounds too', 'The daily is one puzzle. Unlimited mode deals a new country the moment you finish.'],
+  ['Your streak is yours', 'Stats live in your browser, not on our servers, so there is no account to make.'],
+];
+
 const faqs: Array<[string, string]> = [
   [
     'What is the Globle answer today?',
-    `Today's mystery country on Globle Unlimited is revealed on this page behind a spoiler seal, after four optional hints. The puzzle changes at 00:00 UTC, and this page is rebuilt at 00:05 UTC every day so the answer shown is always the current one.`,
+    `Today's mystery country on Globle Unlimited is revealed on this page behind a spoiler button, after four optional hints. The puzzle changes at 00:00 UTC, and this page is rebuilt at 00:05 UTC every day so the answer shown is always the current one.`,
   ],
   [
     'What time does the Globle answer change?',
@@ -87,69 +100,88 @@ const schema: Record<string, unknown>[] = [
 ---
 
 <BaseLayout title={title} description={description} path="/globle-answer-today" schema={schema}>
+  <AnswerHero
+    dispatch={`DISPATCH NO. ${dispatchNo}`}
+    dateLabel={nice}
+    date={today}
+    titleLead="Globle Answer"
+    titleAccent="Today"
+    teaser={teaserFor(country)}
+    live
+  />
+
+  <p class="positioning container">
+    The endless country-guessing globe game — the Globle answer today, every day at 00:00 UTC,
+    plus unlimited rounds whenever you want them.
+  </p>
+
+  <!-- ── The core block: clues, then the reveal ── -->
+  <section class="core container">
+    <h2 class="core-head">Globle Answer Today: Clues &amp; Reveal ({today})</h2>
+
+    <h3 class="sub mono">Globle {dispatchNo} Clues</h3>
+    <ClueTiles ladder={ladder} total={total} />
+
+    <h3 class="sub mono">Globle {dispatchNo} Answer</h3>
+    <RevealPanel>
+      <p class="answer">
+        The Globle answer today, {nice}, is
+        <strong>{flag(country.cca2)} {country.name}</strong>.
+      </p>
+      <CountryPlate country={country} analysis={analysis} date={today} />
+    </RevealPanel>
+
+    <p class="deeplink">
+      <span aria-hidden="true">ⓘ</span>
+      <a href="#why-hard">
+        Read the full analysis — why it rates {obscurity.score}/5 and which opening guess finds it fastest
+      </a>
+    </p>
+  </section>
+
+  <Countdown />
+
+  <!-- ── Recent answers ── -->
+  <section class="container">
+    <h2 class="centred">Recent Globle Answers</h2>
+    <p class="centred lede-sm">
+      Every past daily, with the hints that narrowed it and the opening guess that would have
+      cracked it fastest.
+    </p>
+    <AnswerCards cards={recent} />
+    <p class="centred">
+      <a href="/globle-answer-archive" class="btn btn-ghost">Browse all {totalArchived} answers →</a>
+    </p>
+  </section>
+
+  <!-- ══ Everything below here is the written guide ══ -->
   <article class="prose page">
-    <p class="crumb"><a href="/">Home</a> › Globle Answer Today</p>
-
-    <p class="dispatch mono rise">
-      <span class="live" aria-hidden="true"></span>
-      DISPATCH NO. {dispatchNo} · {today} · 00:00 UTC
-    </p>
-
-    <h1 class="rise" style="--d:60ms">Globle Answer Today</h1>
-
-    <p class="lede rise" style="--d:120ms">
-      <strong>Today&rsquo;s mystery country is waiting below a spoiler seal.</strong> Four hints
-      come first, each one narrowing the field a little further, so you can nudge yourself to the
-      solution instead of having it handed to you. Break the seal only when you want it over.
-    </p>
-
-    <p class="honesty rise" style="--d:180ms">
-      <strong>Read this first:</strong> this page publishes the answer to
-      <em>Globle Unlimited&rsquo;s</em> own daily puzzle. We are an independent, fan-made project
-      and are not affiliated with or endorsed by the official Globle by Trainwreck Labs
-      — <strong>their daily country is different from ours.</strong> If you are here for the
-      official game&rsquo;s answer, this is not it.
-    </p>
-
-    <p class="cta-row rise" style="--d:240ms">
-      <a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a>
-    </p>
-
-    <h2>Today&rsquo;s Puzzle at a Glance</h2>
-
-    <h3>The date and the reset</h3>
+    <h2>What Is Globle?</h2>
     <p>
-      This is the puzzle for <strong>{nice}</strong>, dispatch number {dispatchNo} since the
-      archive opened. A fresh country unlocks at 00:00 UTC and this page is regenerated five
-      minutes later, so what you see is the live puzzle rather than a cached copy of yesterday.
+      Globle is a country-guessing game played on a 3D globe. One country is hidden each day, and
+      every guess you make is coloured by how far it sits from the target — so the map itself tells
+      you whether you are getting warmer.
     </p>
-
-    <h3>Which Globle this answer is for</h3>
     <p>
-      Worth repeating plainly, because several sites blur it: the Globle answer today on this page
-      belongs to <a href="/daily">Globle Unlimited&rsquo;s daily challenge</a>. The original Globle
-      by Trainwreck Labs runs its own separate rotation.
+      That daily country is what people mean when they search for the Globle answer today: one
+      puzzle, shared worldwide, replaced on a fixed schedule.
     </p>
 
-    <h4>Globle Unlimited vs the official Globle</h4>
+    <ol class="features">
+      {features.map(([h, body], i) => (
+        <li>
+          <span class="f-num mono">{i + 1}</span>
+          <h3>{h}</h3>
+          <p>{body}</p>
+        </li>
+      ))}
+    </ol>
+
+    <h2>How the Hints Narrow It Down</h2>
     <p>
-      Both games hide one country on a 3D globe and colour your guesses by distance. The
-      difference is that the original serves one puzzle per day and then makes you wait, while
-      this site adds unlimited rounds alongside the daily. That is also why the two answers never
-      match — they are drawn from independent rotations.
-    </p>
-
-    <h2>Today&rsquo;s Hints — Four Rungs Before the Reveal</h2>
-    <p>
-      Open the rungs one at a time. The counter on the right shows how many of the {total}
-      possible countries still fit every clue you have opened so far.
-    </p>
-
-    <HintLadder ladder={ladder} total={total} />
-
-    <p class="stat-quote">
-      Across the archive so far, the four hints cut the field from {total} countries to about 41,
-      then 10, then 7, then 1 — so the first two rungs do most of the work.
+      The four clues above are ordered weakest first, so each one still removes a meaningful slice
+      of the field. Leading with the first letter would collapse the count to one immediately and
+      make the rest pointless.
     </p>
 
     <figure class="plate-fig">
@@ -164,27 +196,17 @@ const schema: Record<string, unknown>[] = [
       <figcaption>Mean candidates remaining after each hint, measured across the answer archive.</figcaption>
     </figure>
 
-    <h2>Reveal the Globle Answer Today</h2>
-    <p>
-      Last chance to solve it yourself. Everything below the seal is a spoiler.
-    </p>
-
-    <SealedReveal>
-      <p class="answer">
-        The Globle answer today, {nice}, is
-        <strong>{flag(country.cca2)} {country.name}</strong>.
-      </p>
-      <CountryPlate country={country} analysis={analysis} date={today} />
-    </SealedReveal>
-
-    <h2>Why Today&rsquo;s Answer Was Hard</h2>
+    <h2 id="why-hard">Why Today&rsquo;s Answer Was Hard</h2>
 
     <h3>Obscurity rating</h3>
     <p>
       Today&rsquo;s country rates <strong>{obscurity.score} of 5 — {obscurity.label}</strong>. Two
       things make a country hard to find in a distance game: it is small, so it is easy to
       overshoot, and it has few land neighbours, so there is no dense cluster of near-misses to
-      walk in from. The rating weights size and neighbour count 65/35, and this country ranks
+      walk in from.
+    </p>
+    <p>
+      The rating weights size and neighbour count 65/35. This country ranks
       {' '}{obscurity.areaRank} of {total} by land area with {analysis.neighbours} land
       neighbour{analysis.neighbours === 1 ? '' : 's'}.
     </p>
@@ -192,16 +214,14 @@ const schema: Record<string, unknown>[] = [
     <h4>How many countries share its colour band</h4>
     <p>
       After the best possible opening guess, <strong>{bestOpener.remaining} countr{bestOpener.remaining === 1 ? 'y is' : 'ies are'}</strong>
-      {' '}still close enough in distance that you could not tell them apart by colour alone. That
-      number is the honest measure of how much work the opening guess leaves you.
+      {' '}still close enough in distance that you could not tell them apart by colour alone.
     </p>
 
     <h3>The opening guess that would have found it fastest</h3>
     <p>
       Of every country larger than 100,000 km², <strong>{bestOpener.name}</strong> is the single
-      best opener against today&rsquo;s answer. It sits {bestOpener.distanceKm.toLocaleString('en-US')} km
-      away, and that particular reading is shared by only {bestOpener.remaining} other
-      candidate{bestOpener.remaining === 1 ? '' : 's'}.
+      best opener against today&rsquo;s answer, sitting
+      {' '}{bestOpener.distanceKm.toLocaleString('en-US')} km away.
     </p>
     <p>
       This is hindsight, not a strategy — you cannot know the best opener before you know the
@@ -221,8 +241,8 @@ const schema: Record<string, unknown>[] = [
 
     <h3>Read the heat ramp</h3>
     <p>
-      Colour is distance, and the scale is not linear in usefulness — the difference between two
-      pale yellows is thousands of kilometres, while two deep reds may be neighbours.
+      Colour is distance, and the scale is not linear in usefulness — the gap between two pale
+      yellows is thousands of kilometres, while two deep reds may be neighbours.
     </p>
 
     <h4>What each colour band means in kilometres</h4>
@@ -279,13 +299,59 @@ const schema: Record<string, unknown>[] = [
       </tbody>
     </table>
 
+    <h2 id="vs-official">Globle Unlimited vs the Official Globle</h2>
+    <p>
+      <strong>The two games do not share an answer.</strong> The Globle answer today on this page
+      is Globle Unlimited&rsquo;s own daily puzzle. The original Globle, made by Trainwreck Labs,
+      runs a completely separate rotation, and we are not affiliated with or endorsed by it.
+    </p>
+
+    <h3>What is the same</h3>
+    <p>
+      Both hide one country on a 3D globe and colour your guesses by great-circle distance, hotter
+      as you close in. If you can play one, you can play the other.
+    </p>
+
+    <h3>What is different</h3>
+    <p>
+      The original serves one puzzle a day and then asks you to wait. This site keeps the daily but
+      adds <a href="/">unlimited rounds</a> alongside it, which is the reason it exists. Two
+      independent rotations means two different countries on any given date.
+    </p>
+
+    <h2>How We Work Out the Globle Answer Today</h2>
+
+    <h3>The answer is computed, not typed in</h3>
+    <p>
+      Nobody on our side plays the puzzle and writes the result down. The day&rsquo;s country is
+      derived from the date itself through a fixed seed — the same mechanism the game uses to serve
+      every player the identical daily. This page reads that function directly, so the Globle
+      answer today cannot drift out of sync with what the game is running.
+    </p>
+    <p>
+      It also means the archive is reconstructable rather than recorded. Any past day can be
+      recomputed exactly, which is why there are no gaps in it.
+    </p>
+
+    <h3>Where the hint counts and ratings come from</h3>
+    <p>
+      Every figure on this page — the {total}-country pool, the candidates remaining at each rung,
+      the difficulty rating, the best opening guess and its distance — is calculated at build time
+      from the game&rsquo;s own dataset, using the same great-circle formula that colours your
+      guesses. The formulas are stated in the open next to the numbers they produce.
+    </p>
+    <p>
+      That matters because several sites publishing a Globle answer today have carried stale or
+      simply wrong countries for days at a stretch. A number you can check beats a number you have
+      to trust.
+    </p>
+
     {hasYesterday && yCountry && (
       <>
         <h2>Yesterday&rsquo;s Globle Answer</h2>
         <p>
           The answer for <a href={`/globle-answer-archive/${yesterday}`}>{prettyDate(yesterday)}</a>
-          {' '}was <strong>{flag(yCountry.cca2)} {yCountry.name}</strong>. Every earlier day is in
-          the archive below.
+          {' '}was <strong>{flag(yCountry.cca2)} {yCountry.name}</strong>.
         </p>
       </>
     )}
@@ -294,50 +360,12 @@ const schema: Record<string, unknown>[] = [
     <p>
       <a href="/capitals">Globle Capitals</a> is the sibling mode: same globe, same heat colouring,
       but the hidden target is a capital city rather than a country. It runs unlimited rather than
-      once a day, so there is no single daily answer to look up — you start a new capital the
-      moment you finish one.
+      once a day, so there is no single daily answer to look up.
     </p>
     <p>
       That makes it the better mode for practice. Cities cluster far more tightly than countries,
       so reading small colour differences is a skill that transfers straight back to the country
       game.
-    </p>
-
-    <h2>How We Work Out the Globle Answer Today</h2>
-
-    <h3>The answer is computed, not typed in</h3>
-    <p>
-      Nobody on our side plays the puzzle and writes the result down. The day&rsquo;s country is
-      derived from the date itself through a fixed seed, which is the same mechanism the game uses
-      to serve every player the identical daily. This page reads that function directly, so the
-      Globle answer today cannot drift out of sync with what the game is actually running.
-    </p>
-    <p>
-      It also means the archive is reconstructable rather than recorded. Any past day can be
-      recomputed exactly, which is why there are no gaps in it and no dates with a question mark.
-    </p>
-
-    <h3>Where the hint counts and ratings come from</h3>
-    <p>
-      Every figure on this page — the {total}-country starting pool, the candidates remaining at
-      each rung, the difficulty rating, the best opening guess and its distance — is calculated at
-      build time from the game&rsquo;s own dataset, using the same great-circle formula that
-      colours your guesses. The formulas are stated in the open next to the numbers they produce.
-    </p>
-    <p>
-      That matters because several sites publishing a Globle answer today have carried stale or
-      simply wrong countries for days at a stretch. A number you can check beats a number you have
-      to trust.
-    </p>
-
-    <h2>Every Past Globle Answer</h2>
-    <p>
-      The full archive lists every country that has been the daily answer since
-      {' '}{prettyDate(SITE.launchDate)}, searchable by name and filterable by continent, along
-      with the ones that have never come up yet.
-    </p>
-    <p class="cta-row">
-      <a href="/globle-answer-archive" class="btn btn-ghost">Browse the answer archive →</a>
     </p>
 
     <h2>Globle Answer Today: FAQ</h2>
@@ -350,18 +378,10 @@ const schema: Record<string, unknown>[] = [
       ))}
     </div>
 
-    <h2>Keep Playing</h2>
-    <p>
-      If the daily left you wanting more, that is the whole reason this site exists. Play
-      <a href="/"> unlimited rounds</a> with a new country every time, try
-      <a href="/silhouette"> the silhouette mode</a>, or see
-      <a href="/unlimited"> all the unlimited games</a> in one place.
-    </p>
-
     <p class="byline">
       Written by the Globle Unlimited team. Hint counts, obscurity ratings and opening-guess
-      figures on this page are computed at build time from the game&rsquo;s own
-      {' '}{total}-country dataset using the same great-circle distance the game scores with.
+      figures are computed at build time from the game&rsquo;s own {total}-country dataset using
+      the same great-circle distance the game scores with.
       <br />
       <span class="mono">Last updated {nice}</span>
     </p>
@@ -369,53 +389,81 @@ const schema: Record<string, unknown>[] = [
 </BaseLayout>
 
 <style>
-  .page { padding-block: var(--space-12); }
-  .crumb { font-size: var(--fs-small); color: var(--text-mute); margin-bottom: var(--space-4); }
-  .crumb a { color: var(--text-dim); }
-  .rise { animation: rise var(--dur) var(--ease) both; animation-delay: var(--d, 0ms); }
-
-  .dispatch {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-size: var(--fs-small);
-    letter-spacing: 0.16em;
+  .positioning {
+    text-align: center;
     color: var(--text-mute);
-    padding-bottom: var(--space-3);
-    border-bottom: 1px solid var(--line);
-    margin-bottom: var(--space-6);
-  }
-  .live {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--win);
-    animation: pulse 2s var(--ease) infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46, 158, 79, 0.5); }
-    50% { opacity: 0.6; box-shadow: 0 0 0 5px rgba(46, 158, 79, 0); }
-  }
-
-  h1 { font-size: var(--fs-h1); margin-bottom: var(--space-4); }
-  .lede { font-size: 1.05rem; }
-
-  .honesty {
-    background: var(--bg-panel);
-    border: 1px solid var(--accent);
-    border-left-width: 3px;
-    border-radius: var(--radius-sm);
-    padding: var(--space-4);
-    color: var(--text-dim);
     font-size: var(--fs-small);
-  }
-
-  .stat-quote {
-    border-left: 3px solid var(--accent);
-    padding-left: var(--space-4);
-    color: var(--text-dim);
     font-style: italic;
+    padding-block: var(--space-6);
+    max-width: 64ch;
   }
 
-  .answer { font-size: 1.2rem; color: var(--text); margin-bottom: var(--space-6); }
+  /* ---- core clue + reveal block ---- */
+  .core {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8) var(--space-6);
+    max-width: var(--wide-width);
+  }
+  .core-head {
+    text-align: center;
+    font-size: var(--fs-h2);
+    margin-bottom: var(--space-8);
+  }
+  .sub {
+    text-align: center;
+    font-size: var(--fs-small);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-mute);
+    margin-block: var(--space-8) var(--space-3);
+  }
+  .answer { font-size: 1.2rem; color: var(--text); margin-block: var(--space-6); text-align: center; }
+  .deeplink {
+    text-align: center;
+    margin-top: var(--space-6);
+    font-size: var(--fs-small);
+    color: var(--text-mute);
+  }
+  .deeplink a { color: var(--accent); }
+
+  .centred { text-align: center; }
+  .lede-sm { color: var(--text-dim); font-size: var(--fs-small); max-width: 60ch; margin-inline: auto; }
+
+  /* ---- written guide ---- */
+  .page { padding-block: var(--space-12); }
+
+  .features {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-4);
+  }
+  .features li {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+  }
+  .f-num {
+    display: inline-grid;
+    place-items: center;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg-deep);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .features h3 {
+    font-size: var(--fs-small);
+    margin: var(--space-3) 0 var(--space-2);
+    color: var(--text);
+  }
+  .features p { color: var(--text-dim); font-size: var(--fs-small); margin: 0; }
 
   .plate-fig { margin: var(--space-6) 0; }
   .plate-fig img {
@@ -447,8 +495,6 @@ const schema: Record<string, unknown>[] = [
   .faq summary { cursor: pointer; color: var(--text); font-weight: 600; }
   .faq p { margin-top: var(--space-2); color: var(--text-dim); }
 
-  .cta-row { margin-block: var(--space-6) var(--space-3); }
-
   .byline {
     margin-top: var(--space-12);
     padding-top: var(--space-4);
@@ -457,8 +503,7 @@ const schema: Record<string, unknown>[] = [
     font-size: var(--fs-small);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .rise { animation: none; }
-    .live { animation: none; }
+  @media (max-width: 640px) {
+    .core { padding: var(--space-6) var(--space-4); border-radius: var(--radius); }
   }
 </style>

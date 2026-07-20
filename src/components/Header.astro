@@ -16,6 +16,10 @@ const inGames = games.some((g) => g.href === path);
     </a>
 
     <nav class="modes" aria-label="Main">
+      <a
+        href="/globle-answer-today"
+        class:list={['mode-link', 'learn', { active: path.startsWith('/globle-answer') }]}
+      >Answer</a>
       <div class="games-menu" data-games>
         <button
           type="button"
@@ -206,6 +210,11 @@ const inGames = games.some((g) => g.href === path);
     .brand-logo { height: 30px; }
     .mode-link { padding: var(--space-1) var(--space-2); }
     .games-panel { min-width: 200px; }
+    .modes { flex-wrap: nowrap; }
+    /* Five items will not fit on one row at this width, and a wrapped header
+       costs ~100px of the first screen. How to Play is reachable from the
+       footer and from links in the body copy; Answer is not. */
+    .mode-link.learn:not([href^='/globle-answer']) { display: none; }
   }
 
   /* ---- Settings panel ---- */

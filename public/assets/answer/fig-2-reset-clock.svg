@@ -19,7 +19,7 @@
   <circle cx="500" cy="130" r="7" fill="#F4C95D"/>
 
   <g font-family="'Space Mono',ui-monospace,monospace" font-size="14">
-    <!-- UK & Ireland, 01:00 -->
+    <!-- UK and Ireland, 01:00 -->
     <circle cx="550.7" cy="110.7" r="5" fill="#FFEDA0"/>
     <text x="572" y="100" text-anchor="start" fill="#EAF2F8">UK &amp; Ireland</text>
     <text x="572" y="118" text-anchor="start" fill="#FFEDA0">1:00 AM</text>

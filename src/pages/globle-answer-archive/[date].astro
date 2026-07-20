@@ -1,13 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import HintLadder from '../../components/answer/HintLadder.astro';
-import SealedReveal from '../../components/answer/SealedReveal.astro';
+import AnswerHero from '../../components/answer/AnswerHero.astro';
+import ClueTiles from '../../components/answer/ClueTiles.astro';
+import RevealPanel from '../../components/answer/RevealPanel.astro';
 import CountryPlate from '../../components/answer/CountryPlate.astro';
 import { answerForDate, shiftISO } from '../../lib/game/daily';
 import { COUNTRIES, flag } from '../../lib/game/countries';
 import { prettyDate } from '../../lib/game/hint';
-import { analyse } from '../../lib/game/analysis';
-import { archiveDates, todayISO } from '../../lib/game/archive';
+import { analyse, teaserFor } from '../../lib/game/analysis';
+import { archiveDates, dispatchNoFor, todayISO } from '../../lib/game/archive';
 import { SITE } from '../../lib/site';
 
 export function getStaticPaths() {
@@ -20,6 +21,7 @@ const today = todayISO();
 const country = answerForDate(date);
 const analysis = analyse(country);
 const nice = prettyDate(date);
+const dispatchNo = dispatchNoFor(date);
 const total = COUNTRIES.length;
 const { ladder, bestOpener, obscurity } = analysis;
 
@@ -57,46 +59,49 @@ const schema: Record<string, unknown>[] = [
 ---
 
 <BaseLayout title={title} description={description} path={`/globle-answer-archive/${date}`} schema={schema}>
-  <article class="prose page">
-    <p class="crumb">
-      <a href="/">Home</a> › <a href="/globle-answer-today">Answer Today</a> ›
-      <a href="/globle-answer-archive"> Archive</a> › {nice}
-    </p>
+  <AnswerHero
+    dispatch={`DISPATCH NO. ${dispatchNo}`}
+    dateLabel={nice}
+    date={date}
+    titleLead="Globle Answer for"
+    titleAccent={nice}
+    teaser={teaserFor(country)}
+    live={isToday}
+  />
 
-    <p class="dispatch mono">{date} · 00:00 UTC</p>
+  <p class="crumb container">
+    <a href="/">Home</a> › <a href="/globle-answer-today">Answer Today</a> ›
+    <a href="/globle-answer-archive"> Archive</a> › {nice}
+  </p>
 
-    <h1>Globle Answer for {nice}</h1>
+  <section class="core container">
+    <h2 class="core-head">Globle Clues &amp; Answer ({date})</h2>
 
-    <p class="lede">
-      {isToday
-        ? 'This is the puzzle currently running. The hints come first; the answer is behind the seal.'
-        : `This day's puzzle has closed. Here is how it was built, what the hints gave away, and the opening guess that would have cracked it fastest.`}
-    </p>
+    <h3 class="sub mono">Globle {dispatchNo} Clues</h3>
+    <ClueTiles ladder={ladder} total={total} />
 
-    <p class="honesty">
-      <strong>Note:</strong> this is <em>Globle Unlimited&rsquo;s</em> own daily puzzle. We are an
-      independent, fan-made project, not affiliated with the official Globle by Trainwreck Labs,
-      whose answer for this date was different.
-    </p>
-
-    <h2>The Hints for {nice}</h2>
-    <p>
-      Each rung narrows the field. The counter shows how many of the {total} countries in the pool
-      still fit every clue opened so far.
-    </p>
-
-    <HintLadder ladder={ladder} total={total} />
-
-    <h2>The Answer</h2>
-    <SealedReveal label={isToday ? 'SEALED · TAP TO BREAK' : 'TAP TO REVEAL'}>
+    <h3 class="sub mono">Globle {dispatchNo} Answer</h3>
+    <RevealPanel label={isToday ? 'Click to reveal the answer' : 'Click to reveal this day’s answer'}>
       <p class="answer">
         The Globle Unlimited answer for {nice} was
         <strong>{flag(country.cca2)} {country.name}</strong>.
       </p>
       <CountryPlate country={country} analysis={analysis} date={date} />
-    </SealedReveal>
+    </RevealPanel>
+  </section>
 
+  <nav class="pager container" aria-label="Nearby days">
+    {hasPrev
+      ? <a class="btn btn-ghost" href={`/globle-answer-archive/${prev}`}>← {prettyDate(prev)}</a>
+      : <span></span>}
+    {hasNext
+      ? <a class="btn btn-ghost" href={`/globle-answer-archive/${next}`}>{prettyDate(next)} →</a>
+      : <span></span>}
+  </nav>
+
+  <article class="prose page">
     <h2>How Hard Was It?</h2>
+
     <h3>Difficulty rating</h3>
     <p>
       {country.name} rates <strong>{obscurity.score} of 5 — {obscurity.label}</strong>. The rating
@@ -114,19 +119,17 @@ const schema: Record<string, unknown>[] = [
       {' '}{bestOpener.remaining + 1} countr{bestOpener.remaining + 1 === 1 ? 'y' : 'ies'}.
     </p>
     <p>
-      Worth knowing for next time: the value of an opening guess swings enormously depending on
-      where the answer sits. Our <a href="/blog/best-globle-starting-country">opening-country
-      analysis</a> ranks every candidate on average performance rather than one lucky day.
+      The value of an opening guess swings enormously depending on where the answer sits. Our
+      <a href="/blog/best-globle-starting-country"> opening-country analysis</a> ranks every
+      candidate on average performance rather than one lucky day.
     </p>
 
-    <nav class="pager" aria-label="Nearby days">
-      {hasPrev
-        ? <a class="btn btn-ghost" href={`/globle-answer-archive/${prev}`}>← {prettyDate(prev)}</a>
-        : <span></span>}
-      {hasNext
-        ? <a class="btn btn-ghost" href={`/globle-answer-archive/${next}`}>{prettyDate(next)} →</a>
-        : <span></span>}
-    </nav>
+    <h2 id="vs-official">Which Globle This Answer Is For</h2>
+    <p>
+      This is <em>Globle Unlimited&rsquo;s</em> own daily puzzle. We are an independent, fan-made
+      project, not affiliated with or endorsed by the official Globle by Trainwreck Labs, whose
+      answer for this date was a different country drawn from a separate rotation.
+    </p>
 
     <p class="cta-row">
       <a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a>
@@ -136,29 +139,37 @@ const schema: Record<string, unknown>[] = [
 </BaseLayout>
 
 <style>
-  .page { padding-block: var(--space-12); }
-  .crumb { font-size: var(--fs-small); color: var(--text-mute); margin-bottom: var(--space-4); }
-  .crumb a { color: var(--text-dim); }
-  .dispatch {
+  .crumb {
     font-size: var(--fs-small);
-    letter-spacing: 0.16em;
     color: var(--text-mute);
-    padding-bottom: var(--space-3);
-    border-bottom: 1px solid var(--line);
-    margin-bottom: var(--space-6);
+    padding-block: var(--space-6) var(--space-2);
   }
-  h1 { font-size: var(--fs-h1); margin-bottom: var(--space-4); }
-  .lede { font-size: 1.05rem; }
-  .honesty {
+  .crumb a { color: var(--text-dim); }
+
+  .core {
     background: var(--bg-panel);
     border: 1px solid var(--line);
-    border-left: 3px solid var(--accent);
-    border-radius: var(--radius-sm);
-    padding: var(--space-3) var(--space-4);
-    color: var(--text-dim);
-    font-size: var(--fs-small);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8) var(--space-6);
+    max-width: var(--wide-width);
   }
-  .answer { font-size: 1.15rem; color: var(--text); margin-bottom: var(--space-6); }
-  .pager { display: flex; justify-content: space-between; gap: var(--space-3); margin: var(--space-12) 0; flex-wrap: wrap; }
-  .cta-row { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-block: var(--space-6) var(--space-3); }
+  .core-head { text-align: center; font-size: var(--fs-h2); margin-bottom: var(--space-8); }
+  .sub {
+    text-align: center;
+    font-size: var(--fs-small);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-mute);
+    margin-block: var(--space-8) var(--space-3);
+  }
+  .answer { font-size: 1.15rem; color: var(--text); margin-block: var(--space-6); text-align: center; }
+
+  .pager { display: flex; justify-content: space-between; gap: var(--space-3); padding-block: var(--space-8); flex-wrap: wrap; }
+
+  .page { padding-block: var(--space-4) var(--space-12); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-block: var(--space-8) var(--space-3); }
+
+  @media (max-width: 640px) {
+    .core { padding: var(--space-6) var(--space-4); border-radius: var(--radius); }
+  }
 </style>

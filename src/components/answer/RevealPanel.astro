@@ -1,0 +1,74 @@
+---
+// The spoiler gate: a single large button that becomes the answer once opened.
+// Built on <details> so it works without JS and is keyboard-operable. Opening
+// it also fires a `toggle` event, which the hero globe listens for to swap its
+// masked map for the highlighted one.
+interface Props {
+  label?: string;
+  /** Anchor id so the hero CTA can jump straight here. */
+  id?: string;
+}
+
+const { label = 'Click to reveal the answer', id = 'reveal' } = Astro.props;
+---
+
+<details class="reveal" id={id} data-reveal>
+  <summary>
+    <span class="hand" aria-hidden="true">👉</span>
+    <span class="label">{label}</span>
+  </summary>
+  <div class="body">
+    <slot />
+  </div>
+</details>
+
+<style>
+  .reveal { margin: var(--space-4) 0; }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    width: fit-content;
+    min-height: 48px;
+    margin-inline: auto;
+    padding: var(--space-4) var(--space-8);
+    cursor: pointer;
+    list-style: none;
+    background: var(--accent);
+    color: var(--bg-deep);
+    font-weight: 700;
+    font-size: 1.05rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-panel);
+    transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); }
+  .hand { font-size: 1.2rem; }
+
+  /* Once open the button shrinks to a quiet "hide" affordance. */
+  .reveal[open] summary {
+    background: transparent;
+    color: var(--text-mute);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    padding: var(--space-2) var(--space-4);
+    box-shadow: none;
+    border: 1px solid var(--line);
+  }
+  .reveal[open] summary .hand { display: none; }
+  .reveal[open] summary .label { text-decoration: line-through; }
+
+  .body { animation: unseal var(--dur) var(--ease) both; }
+  @keyframes unseal {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    summary { transition: none; }
+    .body { animation: none; }
+  }
+</style>

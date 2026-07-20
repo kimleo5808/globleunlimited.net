@@ -1,0 +1,208 @@
+---
+// Above-the-fold panel. The visitor's job — get today's answer — is one click
+// away here; every word of explanation lives further down the page.
+//
+// The globe on the right is the masked locator: turned to the right hemisphere
+// but with the target drawn as ordinary land, so it is a visual anchor that
+// gives nothing away. When the reveal below opens, a few lines of JS swap it
+// for the highlighted version.
+interface Props {
+  /** Mono eyebrow, e.g. "DISPATCH NO. 0024". */
+  dispatch: string;
+  /** Human date, e.g. "July 20, 2026". */
+  dateLabel: string;
+  /** ISO date, selects the locator pair. */
+  date: string;
+  /** H1 text before the accent word. */
+  titleLead: string;
+  /** The accented final word of the H1. */
+  titleAccent: string;
+  /** One-line spoiler-safe description of the country. */
+  teaser: string;
+  /** Anchor the primary CTA jumps to. */
+  revealHref?: string;
+  /** Show the live pulse dot (today's page only). */
+  live?: boolean;
+}
+
+const {
+  dispatch,
+  dateLabel,
+  date,
+  titleLead,
+  titleAccent,
+  teaser,
+  revealHref = '#reveal',
+  live = false,
+} = Astro.props;
+---
+
+<section class="hero">
+  <div class="hero-inner container">
+    <div class="col-text">
+      <p class="eyebrow mono">
+        {live && <span class="live" aria-hidden="true"></span>}
+        {dispatch} · {dateLabel}
+      </p>
+
+      <h1>{titleLead} <span class="accent">{titleAccent}</span></h1>
+
+      <p class="teaser">{teaser}</p>
+
+      <div class="actions">
+        <a href={revealHref} class="btn btn-primary">🔓 Reveal the Answer</a>
+        <a href="/" class="btn btn-ghost">▶ Play Globle Unlimited</a>
+      </div>
+
+      <p class="disclosure">
+        <span aria-hidden="true">ⓘ</span>
+        This is <strong>Globle Unlimited&rsquo;s own</strong> daily puzzle, not the official
+        Globle&rsquo;s answer. <a href="#vs-official">Why they differ →</a>
+      </p>
+    </div>
+
+    <figure class="col-globe">
+      <img
+        data-hero-globe
+        data-answer-src={`/assets/locator/${date}.svg`}
+        src={`/assets/locator/${date}-masked.svg`}
+        alt="Globe turned to the hemisphere holding today's mystery country"
+        width="480"
+        height="480"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <figcaption class="mono" data-globe-caption>Somewhere on this face of the globe.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<script>
+  // Swap the masked globe for the highlighted one the moment the reveal opens.
+  const globe = document.querySelector<HTMLImageElement>('[data-hero-globe]');
+  const caption = document.querySelector<HTMLElement>('[data-globe-caption]');
+  const reveal = document.querySelector<HTMLDetailsElement>('[data-reveal]');
+
+  reveal?.addEventListener('toggle', () => {
+    if (!globe) return;
+    if (reveal.open) {
+      const answer = globe.dataset.answerSrc;
+      if (answer) globe.src = answer;
+      globe.classList.add('is-revealed');
+      if (caption) caption.textContent = 'Answer highlighted in red.';
+    } else {
+      const masked = globe.dataset.answerSrc?.replace('.svg', '-masked.svg');
+      if (masked) globe.src = masked;
+      globe.classList.remove('is-revealed');
+      if (caption) caption.textContent = 'Somewhere on this face of the globe.';
+    }
+  });
+</script>
+
+<style>
+  .hero {
+    background:
+      radial-gradient(120% 100% at 70% 0%, var(--bg-glow) 0%, transparent 60%),
+      var(--bg-panel);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: var(--space-12);
+    padding-block: var(--space-12);
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--fs-small);
+    letter-spacing: 0.16em;
+    color: var(--text-mute);
+    margin-bottom: var(--space-4);
+  }
+  .live {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--win);
+    animation: pulse 2s var(--ease) infinite;
+    flex: none;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(46, 158, 79, 0.5); }
+    50% { opacity: 0.6; box-shadow: 0 0 0 5px rgba(46, 158, 79, 0); }
+  }
+
+  h1 {
+    font-size: var(--fs-display);
+    line-height: var(--lh-tight);
+    margin-bottom: var(--space-4);
+  }
+  .accent { color: var(--accent); }
+
+  .teaser {
+    font-family: var(--font-mono);
+    font-size: var(--fs-small);
+    line-height: 1.8;
+    color: var(--text-dim);
+    max-width: 46ch;
+    margin-bottom: var(--space-6);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  .disclosure {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: var(--text-mute);
+    border-left: 2px solid var(--accent);
+    padding-left: var(--space-3);
+    max-width: 52ch;
+  }
+  .disclosure strong { color: var(--text-dim); }
+  .disclosure a { color: var(--accent); white-space: nowrap; }
+
+  .col-globe { margin: 0; }
+  .col-globe img {
+    display: block;
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    margin-inline: auto;
+    filter: saturate(0.85);
+    transition: filter var(--dur-slow) var(--ease);
+  }
+  .col-globe img.is-revealed {
+    filter: saturate(1.15) drop-shadow(0 0 24px rgba(196, 45, 28, 0.45));
+  }
+  .col-globe figcaption {
+    text-align: center;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--text-mute);
+    margin-top: var(--space-3);
+  }
+
+  @media (max-width: 860px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+      padding-block: var(--space-8);
+    }
+    /* Text first on narrow screens: a decorative globe above the fold would
+       push the reveal CTA off the first viewport, which is the one thing the
+       visitor came here to press. */
+    .col-globe img { max-width: 200px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .live { animation: none; }
+    .col-globe img { transition: none; }
+  }
+</style>

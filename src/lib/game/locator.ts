@@ -27,6 +27,10 @@ export interface Locator {
   land: string;
   /** The target country, drawn on top. */
   target: string;
+  /** Every landmass including the target, as one path. Used by the masked
+   *  variant: drawing land and target as two translucent layers would stack
+   *  their opacity and outline the answer. */
+  landAll: string;
 }
 
 const SIZE = 480;
@@ -61,14 +65,27 @@ export function locatorFor(country: Country): Locator {
     graticule: round(path(geoGraticule10())),
     land: round(path({ type: 'FeatureCollection', features: others })),
     target: targetFeature ? round(path(targetFeature)) : '',
+    landAll: round(path({ type: 'FeatureCollection', features: FEATURES })),
   };
 }
 
 /** Standalone SVG document for the locator, served as its own cacheable file
  *  so the answer pages stay light. Colours are the shared globe tokens, which
- *  are identical in both themes. */
-export function locatorSvg(country: Country): string {
+ *  are identical in both themes.
+ *
+ *  `masked` draws the target in the same parchment as every other landmass, so
+ *  the hero can show the globe before the answer is revealed without giving it
+ *  away. The two variants share everything but that one fill. */
+export function locatorSvg(country: Country, masked = false): string {
   const l = locatorFor(country);
+  if (masked) {
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${l.size}" height="${l.size}" viewBox="0 0 ${l.size} ${l.size}" role="img" aria-label="Globe turned to the hemisphere containing today's mystery country, which is not highlighted">
+<circle cx="${l.size / 2}" cy="${l.size / 2}" r="${l.size / 2 - PADDING}" fill="#1E5F8C"/>
+<path d="${l.graticule}" fill="none" stroke="#F4C95D" stroke-opacity="0.16" stroke-width="0.6"/>
+<path d="${l.landAll}" fill="#E8D9B5" fill-opacity="0.55"/>
+<circle cx="${l.size / 2}" cy="${l.size / 2}" r="${l.size / 2 - PADDING}" fill="none" stroke="#F4C95D" stroke-opacity="0.45"/>
+</svg>`;
+  }
   // Explicit width/height give the file an intrinsic size, so the browser can
   // reserve the right box before it loads instead of assuming 150x150.
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${l.size}" height="${l.size}" viewBox="0 0 ${l.size} ${l.size}" role="img" aria-label="Globe centred on ${country.name}, shown in red against the rest of the world">

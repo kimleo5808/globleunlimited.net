@@ -170,6 +170,34 @@ export function bestOpenerFor(country: Country): Opener {
   return best as Opener;
 }
 
+/** A one-line, spoiler-safe description of the day's country, assembled from
+ *  dataset fields only — no hand-written copy to maintain for 176 countries.
+ *
+ *  Deliberately vague about anything that would name it: no capital, no first
+ *  letter, no neighbour names. */
+export function teaserFor(country: Country): string {
+  const region = country.subregion || country.region || 'somewhere on the map';
+  const coast = country.landlocked ? 'Landlocked' : 'On the coast';
+
+  const size = (() => {
+    const rank = AREA_RANK.get(country.name) ?? COUNTRIES.length;
+    if (rank <= 20) return 'one of the twenty largest countries on Earth';
+    if (rank <= 60) return 'a good-sized country';
+    if (rank <= 120) return 'not a big country';
+    return 'one of the smaller countries in the pool';
+  })();
+
+  const neighbours = country.borders ?? 0;
+  const company =
+    neighbours === 0
+      ? 'with no land borders at all'
+      : neighbours === 1
+        ? 'sharing a land border with exactly one other country'
+        : `hemmed in by ${neighbours} land neighbours`;
+
+  return `${coast}, in ${region}, ${size} — ${company}.`;
+}
+
 /** Everything the answer pages need about one day's country. */
 export function analyse(country: Country): Analysis {
   const bestOpener = bestOpenerFor(country);
