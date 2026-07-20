@@ -123,7 +123,9 @@ const items = Astro.props.headings.filter((h) => h.depth === 2);
   ol {
     list-style: none;
     margin: var(--space-3) 0 0;
-    padding: 0;
+    /* Leaves room for the active item's 4px shift. Without it the shift
+       overflows the scroll container and adds a horizontal scrollbar. */
+    padding: 0 6px 0 0;
     border-left: 1px solid var(--line);
   }
   li { margin: 0; }
@@ -160,7 +162,10 @@ const items = Astro.props.headings.filter((h) => h.depth === 2);
       top: 88px;
       max-height: calc(100vh - 120px);
       overflow-y: auto;
-      /* Scrollbar sits outside the rail rather than shifting the text. */
+      /* Never horizontally. overflow-y:auto makes the x axis scrollable too
+         unless it is pinned, and a sideways-scrolling index is nobody's idea
+         of a table of contents. */
+      overflow-x: hidden;
       scrollbar-width: thin;
     }
     summary { display: none; }
