@@ -1,0 +1,177 @@
+---
+// Sticky H2 index for long-form posts.
+//
+// Headings come from Astro's render() rather than a markdown parse, so every
+// existing post gets a working index without touching its source.
+//
+// Markup ships closed and an inline script opens it on wide screens. Doing it
+// the other way round would put a 200px expanded index above the first
+// paragraph on phones; doing it in CSS alone is not portable, because the
+// closed state of <details> moved to ::details-content in newer engines.
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const items = Astro.props.headings.filter((h) => h.depth === 2);
+---
+
+{items.length > 2 && (
+  <details class="toc" data-toc>
+    <summary>
+      <span class="toc-title mono">Contents</span>
+      <span class="toc-count mono">{items.length} sections</span>
+    </summary>
+
+    <nav aria-label="Table of contents">
+      <p class="toc-head mono">On this page</p>
+      <ol>
+        {items.map((h) => (
+          <li>
+            <a href={`#${h.slug}`} data-toc-link={h.slug}>{h.text}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  </details>
+)}
+
+<script>
+  const toc = document.querySelector<HTMLDetailsElement>('[data-toc]');
+  if (toc) {
+    const wide = window.matchMedia('(min-width: 1100px)');
+    const sync = () => { toc.open = wide.matches; };
+    sync();
+    wide.addEventListener('change', sync);
+
+    // Scroll spy. The top margin clears the 64px sticky header; the bottom
+    // margin means a heading only counts as "current" while it is in the top
+    // third of the viewport, which stops the highlight racing ahead.
+    const links = new Map<string, HTMLElement>();
+    document.querySelectorAll<HTMLElement>('[data-toc-link]').forEach((el) => {
+      const slug = el.dataset.tocLink;
+      if (slug) links.set(slug, el);
+    });
+
+    const headings = Array.from(document.querySelectorAll<HTMLElement>('.post-body h2'))
+      .filter((h) => h.id && links.has(h.id));
+
+    if (headings.length) {
+      let current = '';
+      const setCurrent = (slug: string) => {
+        if (slug === current) return;
+        if (current) links.get(current)?.removeAttribute('aria-current');
+        current = slug;
+        links.get(slug)?.setAttribute('aria-current', 'location');
+      };
+
+      const seen = new Set<string>();
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) seen.add(entry.target.id);
+            else seen.delete(entry.target.id);
+          }
+          // Of everything currently in the band, take the topmost.
+          const first = headings.find((h) => seen.has(h.id));
+          if (first) setCurrent(first.id);
+        },
+        { rootMargin: '-88px 0px -70% 0px' },
+      );
+      headings.forEach((h) => observer.observe(h));
+    }
+  }
+</script>
+
+<style>
+  .toc {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    cursor: pointer;
+    list-style: none;
+    min-height: 44px;
+    color: var(--text);
+  }
+  summary::-webkit-details-marker { display: none; }
+  .toc-title { font-size: var(--fs-small); text-transform: uppercase; letter-spacing: 0.14em; }
+  .toc-count { font-size: 0.75rem; color: var(--text-mute); }
+
+  .toc-head {
+    display: none;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--text-mute);
+    margin-bottom: var(--space-3);
+  }
+
+  ol {
+    list-style: none;
+    margin: var(--space-3) 0 0;
+    padding: 0;
+    border-left: 1px solid var(--line);
+  }
+  li { margin: 0; }
+
+  a {
+    display: block;
+    padding: var(--space-2) var(--space-3);
+    margin-left: -1px;
+    border-left: 3px solid transparent;
+    color: var(--text-dim);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease),
+                border-color var(--dur-fast) var(--ease),
+                transform var(--dur-fast) var(--ease);
+  }
+  a:hover { color: var(--text); border-left-color: var(--line); }
+  a[aria-current='location'] {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    transform: translateX(4px);
+    font-weight: 600;
+  }
+
+  /* Wide screens: the box becomes a bare sticky rail in the left margin. */
+  @media (min-width: 1100px) {
+    .toc {
+      background: transparent;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      position: sticky;
+      top: 88px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      /* Scrollbar sits outside the rail rather than shifting the text. */
+      scrollbar-width: thin;
+    }
+    summary { display: none; }
+    .toc-head { display: block; }
+    ol { margin-top: 0; }
+  }
+
+  @media print { .toc { display: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    a { transition: none; }
+    a[aria-current='location'] { transform: none; }
+  }
+</style>
