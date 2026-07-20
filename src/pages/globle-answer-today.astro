@@ -7,7 +7,8 @@ import CountryPlate from '../components/answer/CountryPlate.astro';
 import Countdown from '../components/answer/Countdown.astro';
 import AnswerCards from '../components/answer/AnswerCards.astro';
 import { answerForDate, shiftISO } from '../lib/game/daily';
-import { COUNTRIES, flag } from '../lib/game/countries';
+import { COUNTRIES } from '../lib/game/countries';
+import { flagUrl } from '../lib/game/flag-img';
 import { prettyDate } from '../lib/game/hint';
 import { analyse, teaserFor } from '../lib/game/analysis';
 import { archiveDates, cardsFor, dispatchNoFor, todayISO } from '../lib/game/archive';
@@ -126,7 +127,7 @@ const schema: Record<string, unknown>[] = [
     <RevealPanel>
       <p class="answer">
         The Globle answer today, {nice}, is
-        <strong>{flag(country.cca2)} {country.name}</strong>.
+        <strong><img class="flag-img" src={flagUrl(country.cca2)} alt="" width="28" height="20" decoding="async" /> {country.name}</strong>.
       </p>
       <CountryPlate country={country} analysis={analysis} date={today} />
     </RevealPanel>
@@ -351,7 +352,7 @@ const schema: Record<string, unknown>[] = [
         <h2>Yesterday&rsquo;s Globle Answer</h2>
         <p>
           The answer for <a href={`/globle-answer-archive/${yesterday}`}>{prettyDate(yesterday)}</a>
-          {' '}was <strong>{flag(yCountry.cca2)} {yCountry.name}</strong>.
+          {' '}was <strong><img class="flag-img" src={flagUrl(yCountry.cca2)} alt="" width="28" height="20" loading="lazy" decoding="async" /> {yCountry.name}</strong>.
         </p>
       </>
     )}

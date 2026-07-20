@@ -4,13 +4,11 @@
 import type { Country, Dataset } from './types';
 import { COUNTRIES, findCountry, suggest } from './countries';
 
+// flagUrl now lives with the rest of the flag rendering helpers.
+export { flagUrl } from './flag-img';
+
 /** Countries that have an ISO alpha-2 code (and therefore a flag SVG). */
 export const FLAG_COUNTRIES: Country[] = COUNTRIES.filter((c) => c.cca2);
-
-/** Flag asset URL for a country code. */
-export function flagUrl(cca2: string): string {
-  return `/assets/flags/${cca2.toLowerCase()}.svg`;
-}
 
 export const flagsDataset: Dataset = {
   all: COUNTRIES,

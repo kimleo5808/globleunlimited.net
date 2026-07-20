@@ -1,8 +1,9 @@
 // Client controller for the Flagle-style flag game.
 // A national flag revealed one tile per wrong guess + distance / direction clues.
 import { GameEngine } from '../../lib/game/engine';
-import { flag } from '../../lib/game/countries';
-import { flagsDataset, flagUrl } from '../../lib/game/flags';
+import { flagImg } from '../../lib/game/flag-img';
+import { flagsDataset } from '../../lib/game/flags';
+import { flagUrl } from '../../lib/game/flag-img';
 import { bearing, compassArrow, compassName } from '../../lib/game/direction';
 import { recordWin } from '../../lib/game/stats';
 import { formatDistance, SETTINGS_EVENT } from '../../lib/settings';
@@ -99,7 +100,7 @@ export function initFlagsGame(root: HTMLElement) {
     row.className = 'guess-row';
     const arrow = g.correct ? '🎯' : compassArrow(g.bearing ?? 0);
     row.innerHTML =
-      `<span class="g-flag">${flag(g.country.cca2)}</span>` +
+      `<span class="g-flag">${flagImg(g.country.cca2)}</span>` +
       `<span class="g-name">${g.country.name}</span>` +
       `<span class="g-dist mono">${g.correct ? 'Correct!' : km(g.distanceKm)}</span>` +
       `<span class="g-arrow">${arrow}</span>`;
@@ -158,7 +159,7 @@ export function initFlagsGame(root: HTMLElement) {
 
     els.modalEmoji.textContent = won ? '🎉' : '😔';
     els.modalTitle.textContent = won ? 'You found it!' : 'Out of guesses';
-    els.modalCountry.innerHTML = `${flag(engine.target.cca2)} ${engine.target.name}`;
+    els.modalCountry.innerHTML = `${flagImg(engine.target.cca2)} ${engine.target.name}`;
     els.modalGuessesLine.hidden = !won;
 
     if (won) {
@@ -233,7 +234,7 @@ export function initFlagsGame(root: HTMLElement) {
   function renderSuggest(list: Guessable[]) {
     if (!list.length) return closeSuggest();
     els.suggestBox.innerHTML = list
-      .map((c) => `<button type="button" class="suggest-item" data-name="${c.name}">${flag(c.cca2)} ${c.name}</button>`)
+      .map((c) => `<button type="button" class="suggest-item" data-name="${c.name}">${flagImg(c.cca2)} ${c.name}</button>`)
       .join('');
     els.suggestBox.hidden = false;
     els.suggestBox.querySelectorAll<HTMLButtonElement>('.suggest-item').forEach((b) => {

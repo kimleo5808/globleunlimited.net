@@ -3,7 +3,7 @@
 // measured values, and the locator globe generated for that date.
 import type { Country } from '../../lib/game/types';
 import type { Analysis } from '../../lib/game/analysis';
-import { flag } from '../../lib/game/countries';
+import { flagUrl } from '../../lib/game/flag-img';
 
 interface Props {
   country: Country;
@@ -26,7 +26,7 @@ const rows: Array<[string, string]> = [
 
 <section class="plate">
   <header class="plate-head">
-    <span class="flag" aria-hidden="true">{flag(country.cca2)}</span>
+    <img class="flag-img plate-flag" src={flagUrl(country.cca2)} alt="" width="28" height="20" decoding="async" />
     <h3 class="name">{country.name}</h3>
   </header>
 
@@ -68,7 +68,7 @@ const rows: Array<[string, string]> = [
     padding-bottom: var(--space-4);
     border-bottom: 1px solid var(--line);
   }
-  .flag { font-size: 2.5rem; line-height: 1; }
+  .plate-flag { width: 56px; height: 40px; border-radius: 4px; }
   .name { margin: 0; font-size: var(--fs-h2); color: var(--text); }
 
   .readout {

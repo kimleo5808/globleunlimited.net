@@ -1,7 +1,7 @@
 ---
 // Recent answers as a card grid. Shared by the landing page (last 8) and the
 // archive (all of them), so the two never drift apart visually.
-import { flag } from '../../lib/game/countries';
+import { flagUrl } from '../../lib/game/flag-img';
 
 export interface AnswerCard {
   date: string;
@@ -33,7 +33,7 @@ const { cards, latestDate } = Astro.props;
         </span>
 
         <span class="country">
-          <span class="flag" aria-hidden="true">{flag(c.cca2)}</span>
+          <img class="flag-img card-flag" src={flagUrl(c.cca2)} alt="" width="28" height="20" loading="lazy" decoding="async" />
           <span class="name">{c.name}</span>
         </span>
 
@@ -96,8 +96,8 @@ const { cards, latestDate } = Astro.props;
     padding: 2px var(--space-2);
   }
 
-  .country { display: flex; align-items: center; gap: var(--space-2); }
-  .flag { font-size: 1.4rem; line-height: 1; }
+  .country { display: flex; align-items: center; gap: var(--space-3); }
+  .card-flag { width: 34px; height: 24px; }
   .name { color: var(--text); font-weight: 700; font-size: 1.05rem; }
 
   .meta { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }

@@ -1,7 +1,7 @@
 // Client controller for the Countryle-style clue game.
 // Deduce the mystery country from six attribute clues. No map, pure DOM table.
 import { GameEngine } from '../../lib/game/engine';
-import { flag } from '../../lib/game/countries';
+import { flagImg } from '../../lib/game/flag-img';
 import { cluesDataset, computeClues, CLUE_COLUMNS } from '../../lib/game/clues';
 import type { Clue } from '../../lib/game/clues';
 import { recordWin } from '../../lib/game/stats';
@@ -62,7 +62,7 @@ export function initCluesGame(root: HTMLElement) {
     const tr = document.createElement('tr');
     tr.className = 'clue-row' + (correct ? ' is-correct' : '');
     tr.innerHTML =
-      `<td class="c-country">${flag(country.cca2)} ${country.name}</td>` +
+      `<td class="c-country">${flagImg(country.cca2)} ${country.name}</td>` +
       CLUE_COLUMNS.map((col) => cell(clues[col.key])).join('');
     els.rows.prepend(tr);
     els.empty.hidden = true;
@@ -104,7 +104,7 @@ export function initCluesGame(root: HTMLElement) {
 
     els.modalEmoji.textContent = won ? '🎉' : '😔';
     els.modalTitle.textContent = won ? 'You found it!' : 'Out of guesses';
-    els.modalCountry.innerHTML = `${flag(engine.target.cca2)} ${engine.target.name}`;
+    els.modalCountry.innerHTML = `${flagImg(engine.target.cca2)} ${engine.target.name}`;
     els.modalGuessesLine.hidden = !won;
 
     if (won) {
@@ -175,7 +175,7 @@ export function initCluesGame(root: HTMLElement) {
   function renderSuggest(list: Guessable[]) {
     if (!list.length) return closeSuggest();
     els.suggestBox.innerHTML = list
-      .map((c) => `<button type="button" class="suggest-item" data-name="${c.name}">${flag(c.cca2)} ${c.name}</button>`)
+      .map((c) => `<button type="button" class="suggest-item" data-name="${c.name}">${flagImg(c.cca2)} ${c.name}</button>`)
       .join('');
     els.suggestBox.hidden = false;
     els.suggestBox.querySelectorAll<HTMLButtonElement>('.suggest-item').forEach((b) => {

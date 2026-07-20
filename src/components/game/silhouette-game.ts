@@ -2,7 +2,8 @@
 // Flat outline + distance / direction / proximity clues. No WebGL.
 // Config-driven: /silhouette uses countries, /states uses US states.
 import { GameEngine } from '../../lib/game/engine';
-import { flag, countriesDataset } from '../../lib/game/countries';
+import { countriesDataset } from '../../lib/game/countries';
+import { flagImg } from '../../lib/game/flag-img';
 import { statesDataset } from '../../lib/game/states';
 import { bearing, compassArrow, compassName, proximityPct } from '../../lib/game/direction';
 import { recordWin } from '../../lib/game/stats';
@@ -30,7 +31,7 @@ export function initSilhouetteGame(root: HTMLElement) {
   const dataset: Dataset = variant === 'states' ? statesDataset : countriesDataset;
   /** Leading icon for a guessed item: flag emoji for countries, code pill for states. */
   const icon = (item: Guessable) =>
-    variant === 'states' ? `<span class="g-abbr">${item.cca2}</span>` : flag(item.cca2);
+    variant === 'states' ? `<span class="g-abbr">${item.cca2}</span>` : flagImg(item.cca2);
 
   const els = {
     card: $('[data-sil]'),

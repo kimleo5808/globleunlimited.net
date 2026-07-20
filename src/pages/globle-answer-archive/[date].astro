@@ -5,7 +5,8 @@ import ClueTiles from '../../components/answer/ClueTiles.astro';
 import RevealPanel from '../../components/answer/RevealPanel.astro';
 import CountryPlate from '../../components/answer/CountryPlate.astro';
 import { answerForDate, shiftISO } from '../../lib/game/daily';
-import { COUNTRIES, flag } from '../../lib/game/countries';
+import { COUNTRIES } from '../../lib/game/countries';
+import { flagUrl } from '../../lib/game/flag-img';
 import { prettyDate } from '../../lib/game/hint';
 import { analyse, teaserFor } from '../../lib/game/analysis';
 import { archiveDates, dispatchNoFor, todayISO } from '../../lib/game/archive';
@@ -84,7 +85,7 @@ const schema: Record<string, unknown>[] = [
     <RevealPanel label={isToday ? 'Click to reveal the answer' : 'Click to reveal this day’s answer'}>
       <p class="answer">
         The Globle Unlimited answer for {nice} was
-        <strong>{flag(country.cca2)} {country.name}</strong>.
+        <strong><img class="flag-img" src={flagUrl(country.cca2)} alt="" width="28" height="20" decoding="async" /> {country.name}</strong>.
       </p>
       <CountryPlate country={country} analysis={analysis} date={date} />
     </RevealPanel>

@@ -2,7 +2,8 @@
 import Globe from 'globe.gl';
 import * as THREE from 'three';
 import { GameEngine, dateSeed } from '../../lib/game/engine';
-import { flag, countriesDataset } from '../../lib/game/countries';
+import { countriesDataset } from '../../lib/game/countries';
+import { flagImg } from '../../lib/game/flag-img';
 import { capitalsDataset } from '../../lib/game/capitals';
 import { haversine } from '../../lib/game/distance';
 import {
@@ -250,7 +251,7 @@ export function initGlobeGame(root: HTMLElement) {
   function renderInfo() {
     const closest = engine.closest;
     els.closestVal.innerHTML = closest
-      ? `${flag(closest.country.cca2)} ${closest.country.name}`
+      ? `${flagImg(closest.country.cca2)} ${closest.country.name}`
       : '—';
     els.borderVal.textContent = closest ? km(closest.distanceKm) : `— ${getUnit()}`;
     els.guessVal.textContent = String(engine.guessCount);
@@ -273,7 +274,7 @@ export function initGlobeGame(root: HTMLElement) {
     row.className = 'guess-row';
     row.innerHTML =
       `<span class="swatch" style="background:${g.color}"></span>` +
-      `<span class="g-flag">${flag(g.country.cca2)}</span>` +
+      `<span class="g-flag">${flagImg(g.country.cca2)}</span>` +
       `<span class="g-name">${g.country.name}</span>` +
       `<span class="g-dist mono">${g.correct ? 'Correct!' : km(g.distanceKm)}</span>`;
     if (g.correct) row.classList.add('is-correct');
@@ -347,7 +348,7 @@ export function initGlobeGame(root: HTMLElement) {
       els.modalExtra.hidden = !els.modalExtra.textContent;
     }
     els.modalGuesses.textContent = String(engine.guessCount);
-    els.modalCountry.innerHTML = `${flag(engine.target.cca2)} ${engine.target.name}`;
+    els.modalCountry.innerHTML = `${flagImg(engine.target.cca2)} ${engine.target.name}`;
     els.modal.hidden = false;
     if (!prefersReduced) controls.autoRotate = false;
   }
@@ -359,7 +360,7 @@ export function initGlobeGame(root: HTMLElement) {
     els.input.disabled = true;
     (els.form.querySelector('button') as HTMLButtonElement).disabled = true;
     els.modalGuesses.textContent = String(rec.guesses);
-    els.modalCountry.innerHTML = `${flag(engine.target.cca2)} ${engine.target.name}`;
+    els.modalCountry.innerHTML = `${flagImg(engine.target.cca2)} ${engine.target.name}`;
     const s = getStats('daily');
     els.modalExtra.textContent = `🔥 Daily streak: ${s.currentStreak} (best ${s.maxStreak}) · Come back tomorrow!`;
     els.modalExtra.hidden = false;
@@ -425,7 +426,7 @@ export function initGlobeGame(root: HTMLElement) {
   function renderSuggest(list: Guessable[]) {
     if (!list.length) return closeSuggest();
     els.suggestBox.innerHTML = list
-      .map((c) => `<button type="button" class="suggest-item" data-name="${c.name}">${flag(c.cca2)} ${c.name}</button>`)
+      .map((c) => `<button type="button" class="suggest-item" data-name="${c.name}">${flagImg(c.cca2)} ${c.name}</button>`)
       .join('');
     els.suggestBox.hidden = false;
     els.suggestBox.querySelectorAll<HTMLButtonElement>('.suggest-item').forEach((b) => {

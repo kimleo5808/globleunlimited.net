@@ -41,16 +41,6 @@ export function suggest(query: string, limit = 6): Country[] {
   return [...starts, ...contains].slice(0, limit);
 }
 
-/** Flag emoji from ISO alpha-2 (regional indicator symbols). */
-export function flag(cca2: string): string {
-  if (!cca2 || cca2.length !== 2) return '🏳️';
-  const base = 0x1f1e6;
-  return String.fromCodePoint(
-    base + (cca2.charCodeAt(0) - 65),
-    base + (cca2.charCodeAt(1) - 65),
-  );
-}
-
 /** Uniform random country. */
 export function randomCountry(rng: () => number = Math.random): Country {
   return COUNTRIES[Math.floor(rng() * COUNTRIES.length)];
