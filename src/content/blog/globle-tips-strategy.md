@@ -100,7 +100,7 @@ there. Five guesses, no luck required — just method.
 
 Strategy only sticks with reps. Run a handful of [Globle Unlimited](/) rounds whenever you have a
 spare minute, try the shared [daily challenge](/daily) to benchmark yourself, and when you are
-stuck, the [today's answer page](/answer) is there as a safety net. Play often enough and the
+stuck, the [today's answer page](/globle-answer-today) is there as a safety net. Play often enough and the
 four-guess solve stops being luck and starts being your normal.
 
 ## Frequently asked questions

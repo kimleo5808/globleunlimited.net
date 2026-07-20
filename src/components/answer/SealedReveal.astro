@@ -1,0 +1,83 @@
+---
+// The spoiler gate. Closed, it is a wax-sealed dispatch; opening it breaks the
+// seal and the answer surfaces. Built on <details> so it works without JS and
+// is keyboard-operable by default.
+interface Props {
+  /** Text on the closed seal, e.g. "SEALED · TAP TO BREAK". */
+  label?: string;
+}
+
+const { label = 'SEALED · TAP TO BREAK' } = Astro.props;
+---
+
+<details class="seal-card">
+  <summary>
+    <svg class="seal" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r="27" fill="var(--accent-dim)" stroke="var(--accent)" stroke-width="2" />
+      <circle cx="32" cy="32" r="21" fill="none" stroke="var(--accent)" stroke-width="1" stroke-opacity="0.5" />
+      <path d="M32 13 L36 28 L51 32 L36 36 L32 51 L28 36 L13 32 L28 28 Z" fill="var(--accent)" fill-opacity="0.85" />
+      <circle cx="32" cy="32" r="4" fill="var(--bg-deep)" />
+    </svg>
+    <span class="seal-label mono">{label}</span>
+  </summary>
+
+  <div class="seal-content">
+    <slot />
+  </div>
+</details>
+
+<style>
+  .seal-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-panel);
+    overflow: hidden;
+    margin: var(--space-6) 0;
+  }
+
+  summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-8) var(--space-4);
+    cursor: pointer;
+    list-style: none;
+    min-height: 48px;
+  }
+  summary::-webkit-details-marker { display: none; }
+
+  .seal {
+    width: 64px;
+    height: 64px;
+    transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+  }
+  summary:hover .seal { transform: rotate(-8deg) scale(1.04); }
+
+  .seal-label {
+    font-size: var(--fs-small);
+    letter-spacing: 0.18em;
+    color: var(--text-mute);
+  }
+  summary:hover .seal-label { color: var(--accent); }
+
+  /* Broken seal: the stamp shrinks away and the content lands. */
+  .seal-card[open] summary { padding-block: var(--space-4); }
+  .seal-card[open] .seal { transform: scale(0.5); opacity: 0.35; }
+  .seal-card[open] .seal-label { font-size: 0.75rem; }
+
+  .seal-content {
+    padding: 0 var(--space-6) var(--space-6);
+    animation: unseal var(--dur) var(--ease) both;
+  }
+
+  @keyframes unseal {
+    from { opacity: 0; transform: scale(0.96); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .seal, .seal-content { transition: none; animation: none; }
+  }
+</style>

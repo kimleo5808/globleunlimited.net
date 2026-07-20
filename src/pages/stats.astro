@@ -4,9 +4,26 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const title = 'Your Globle Stats – Streaks & Best Scores';
 const description =
   'See your Globle stats: daily streak, best guess count, games played, and your full guess distribution. Stored privately in your browser, never uploaded.';
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      { '@type': 'Question', name: 'Where are my Globle stats stored?', acceptedAnswer: { '@type': 'Answer', text: 'Entirely in your own browser, using localStorage. Nothing is uploaded to a server, so there is no account to create and no data for us to see.' } },
+      { '@type': 'Question', name: 'Why did my Globle streak reset to zero?', acceptedAnswer: { '@type': 'Answer', text: 'A daily streak counts consecutive days on which you finished the daily puzzle. Skipping a day resets the current streak, but your max streak is kept as a permanent record.' } },
+      { '@type': 'Question', name: 'Do Unlimited rounds affect my daily streak?', acceptedAnswer: { '@type': 'Answer', text: 'No. Unlimited, Capitals and the daily challenge are tracked separately, so you can practise as much as you like without touching your daily streak.' } },
+      { '@type': 'Question', name: 'What is a good average guess count in Globle?', acceptedAnswer: { '@type': 'Answer', text: 'Most regular players settle between five and eight guesses. Consistently finishing in four or fewer means your opening guess and your continent narrowing are both working well.' } },
+    ],
+  },
+  { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://globleunlimited.net/' },
+    { '@type': 'ListItem', position: 2, name: 'Your Stats', item: 'https://globleunlimited.net/stats' },
+  ]},
+];
 ---
 
-<BaseLayout title={title} description={description} path="/stats">
+<BaseLayout title={title} description={description} path="/stats" schema={schema}>
   <section class="container stats-wrap">
     <h1 class="rise">Your Stats</h1>
     <p class="sub rise" style="--d:80ms">Saved privately in your browser — nothing leaves your device.</p>
@@ -47,6 +64,76 @@ const description =
 
     <p class="cta-row rise" style="--d:240ms"><a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a></p>
   </section>
+
+  <article class="prose explainer">
+    <h2>What Each Stat Means</h2>
+    <p>
+      <strong>Every number above measures a different habit, not a single overall skill.</strong>
+      Streaks reward showing up; guess counts reward reading the globe well. It is normal for one
+      to look strong while the other lags, and knowing which is which tells you what to work on.
+    </p>
+    <ul>
+      <li>
+        <strong>Current streak</strong> — consecutive days you have finished the
+        <a href="/daily">daily challenge</a>. Miss a day and it returns to zero.
+      </li>
+      <li>
+        <strong>Max streak</strong> — the longest run you have ever put together. This one never
+        goes down, so it stays as a personal record even after a reset.
+      </li>
+      <li>
+        <strong>Played</strong> — how many rounds of that mode you have finished. Useful as a
+        denominator: ten wins out of twelve rounds is a very different story from ten out of sixty.
+      </li>
+      <li>
+        <strong>Best guesses</strong> — the fewest guesses you have ever needed to find the mystery
+        country. Lucky first guesses count, so treat this as a ceiling rather than an average.
+      </li>
+      <li>
+        <strong>Guess distribution</strong> — how often you finish in one guess, two, three, and so
+        on. The shape matters more than any single bar: a tall cluster around four or five means
+        your method is repeatable, while a flat spread means you are still guessing by instinct.
+      </li>
+    </ul>
+
+    <h2>How Your Stats Are Stored</h2>
+    <p>
+      <strong>All of it lives in your own browser, in localStorage — nothing is uploaded.</strong>
+      There is no account, no login and no server-side profile, which also means your stats are
+      tied to one browser on one device. Playing on your phone builds a separate record from
+      playing on your laptop, and clearing site data or using private browsing wipes the history.
+      If you want the numbers to keep growing, stick to one browser. Our
+      <a href="/privacy-policy">privacy policy</a> covers exactly what is and is not collected.
+    </p>
+    <p>
+      Each mode is counted on its own. Unlimited and <a href="/capitals">Capitals</a> rounds never
+      touch your daily streak, so you can practise as much as you want without putting a record at
+      risk — that is the whole point of an unlimited mode.
+    </p>
+
+    <h2>How to Improve These Numbers</h2>
+    <h3>Fix your opening guess first</h3>
+    <p>
+      The single biggest lever on your guess distribution is guess number one. A central,
+      high-information starting country splits the world far more evenly than a corner country
+      like New Zealand or Iceland. We ran the numbers on every candidate in
+      <a href="/blog/best-globle-starting-country">the best Globle starting country</a>.
+    </p>
+    <h3>Narrow by continent before you narrow by country</h3>
+    <p>
+      Two well-spaced guesses usually pin down the right landmass. Only then is it worth spending
+      guesses on individual neighbours. The full method is in our
+      <a href="/blog/globle-tips-strategy">Globle tips and strategy guide</a>, and the colour scale
+      itself is explained on <a href="/how-to-play">how to play</a>.
+    </p>
+    <h3>Practise the countries that keep beating you</h3>
+    <p>
+      Most players lose their streaks to the same handful of small or unfamiliar states. Run
+      <a href="/practice">practice mode</a> until they stop surprising you, and see which ones
+      trip up everyone else in
+      <a href="/blog/hardest-countries-to-guess">the hardest countries to guess</a>.
+    </p>
+  </article>
 </BaseLayout>
 
 <script>
@@ -110,6 +197,10 @@ const description =
   }
 
   .cta-row { margin-top: var(--space-8); }
+
+  .explainer { padding-bottom: var(--space-12); }
+  .explainer ul { color: var(--text-dim); padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-3); margin-bottom: var(--space-4); }
+  .explainer ul strong { color: var(--text); }
 
   @media (max-width: 640px) {
     .stat-blocks { grid-template-columns: 1fr; }

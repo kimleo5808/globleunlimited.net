@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HintLadder from '../../components/answer/HintLadder.astro';
+import SealedReveal from '../../components/answer/SealedReveal.astro';
+import CountryPlate from '../../components/answer/CountryPlate.astro';
+import { answerForDate, shiftISO } from '../../lib/game/daily';
+import { COUNTRIES, flag } from '../../lib/game/countries';
+import { prettyDate } from '../../lib/game/hint';
+import { analyse } from '../../lib/game/analysis';
+import { archiveDates, todayISO } from '../../lib/game/archive';
+import { SITE } from '../../lib/site';
+
+export function getStaticPaths() {
+  return archiveDates(todayISO()).map((date) => ({ params: { date } }));
+}
+
+const { date } = Astro.params as { date: string };
+const today = todayISO();
+
+const country = answerForDate(date);
+const analysis = analyse(country);
+const nice = prettyDate(date);
+const total = COUNTRIES.length;
+const { ladder, bestOpener, obscurity } = analysis;
+
+const prev = shiftISO(date, -1);
+const next = shiftISO(date, 1);
+const hasPrev = prev >= SITE.launchDate;
+const hasNext = next <= today;
+const isToday = date === today;
+
+const title = `Globle Answer for ${nice} – Hints and Reveal`;
+const description =
+  `The Globle Unlimited answer for ${nice}, with the four hints that narrowed it down, a country profile, and the opening guess that would have found it fastest.`;
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    description,
+    url: `${SITE.url}/globle-answer-archive/${date}`,
+    datePublished: date,
+    isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Globle Answer Today', item: `${SITE.url}/globle-answer-today` },
+      { '@type': 'ListItem', position: 3, name: 'Archive', item: `${SITE.url}/globle-answer-archive` },
+      { '@type': 'ListItem', position: 4, name: nice, item: `${SITE.url}/globle-answer-archive/${date}` },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path={`/globle-answer-archive/${date}`} schema={schema}>
+  <article class="prose page">
+    <p class="crumb">
+      <a href="/">Home</a> › <a href="/globle-answer-today">Answer Today</a> ›
+      <a href="/globle-answer-archive"> Archive</a> › {nice}
+    </p>
+
+    <p class="dispatch mono">{date} · 00:00 UTC</p>
+
+    <h1>Globle Answer for {nice}</h1>
+
+    <p class="lede">
+      {isToday
+        ? 'This is the puzzle currently running. The hints come first; the answer is behind the seal.'
+        : `This day's puzzle has closed. Here is how it was built, what the hints gave away, and the opening guess that would have cracked it fastest.`}
+    </p>
+
+    <p class="honesty">
+      <strong>Note:</strong> this is <em>Globle Unlimited&rsquo;s</em> own daily puzzle. We are an
+      independent, fan-made project, not affiliated with the official Globle by Trainwreck Labs,
+      whose answer for this date was different.
+    </p>
+
+    <h2>The Hints for {nice}</h2>
+    <p>
+      Each rung narrows the field. The counter shows how many of the {total} countries in the pool
+      still fit every clue opened so far.
+    </p>
+
+    <HintLadder ladder={ladder} total={total} />
+
+    <h2>The Answer</h2>
+    <SealedReveal label={isToday ? 'SEALED · TAP TO BREAK' : 'TAP TO REVEAL'}>
+      <p class="answer">
+        The Globle Unlimited answer for {nice} was
+        <strong>{flag(country.cca2)} {country.name}</strong>.
+      </p>
+      <CountryPlate country={country} analysis={analysis} date={date} />
+    </SealedReveal>
+
+    <h2>How Hard Was It?</h2>
+    <h3>Difficulty rating</h3>
+    <p>
+      {country.name} rates <strong>{obscurity.score} of 5 — {obscurity.label}</strong>. The rating
+      comes from land area and land-neighbour count, weighted 65/35 toward size: it ranks
+      {' '}{obscurity.areaRank} of {total} by area and has {analysis.neighbours} land
+      neighbour{analysis.neighbours === 1 ? '' : 's'}.
+    </p>
+
+    <h3>The fastest opening guess</h3>
+    <p>
+      <strong>{bestOpener.name}</strong> was the strongest opener against this answer. From there
+      the target reads {bestOpener.distanceKm.toLocaleString('en-US')} km away, a distance shared
+      by only {bestOpener.remaining} other candidate{bestOpener.remaining === 1 ? '' : 's'} — so a
+      single guess could have cut the field to
+      {' '}{bestOpener.remaining + 1} countr{bestOpener.remaining + 1 === 1 ? 'y' : 'ies'}.
+    </p>
+    <p>
+      Worth knowing for next time: the value of an opening guess swings enormously depending on
+      where the answer sits. Our <a href="/blog/best-globle-starting-country">opening-country
+      analysis</a> ranks every candidate on average performance rather than one lucky day.
+    </p>
+
+    <nav class="pager" aria-label="Nearby days">
+      {hasPrev
+        ? <a class="btn btn-ghost" href={`/globle-answer-archive/${prev}`}>← {prettyDate(prev)}</a>
+        : <span></span>}
+      {hasNext
+        ? <a class="btn btn-ghost" href={`/globle-answer-archive/${next}`}>{prettyDate(next)} →</a>
+        : <span></span>}
+    </nav>
+
+    <p class="cta-row">
+      <a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a>
+      <a href="/globle-answer-archive" class="btn btn-ghost">All past answers</a>
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .page { padding-block: var(--space-12); }
+  .crumb { font-size: var(--fs-small); color: var(--text-mute); margin-bottom: var(--space-4); }
+  .crumb a { color: var(--text-dim); }
+  .dispatch {
+    font-size: var(--fs-small);
+    letter-spacing: 0.16em;
+    color: var(--text-mute);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: var(--space-6);
+  }
+  h1 { font-size: var(--fs-h1); margin-bottom: var(--space-4); }
+  .lede { font-size: 1.05rem; }
+  .honesty {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-sm);
+    padding: var(--space-3) var(--space-4);
+    color: var(--text-dim);
+    font-size: var(--fs-small);
+  }
+  .answer { font-size: 1.15rem; color: var(--text); margin-bottom: var(--space-6); }
+  .pager { display: flex; justify-content: space-between; gap: var(--space-3); margin: var(--space-12) 0; flex-wrap: wrap; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-block: var(--space-6) var(--space-3); }
+</style>

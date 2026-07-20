@@ -35,7 +35,7 @@ src/
 public/
 ├─ assets/svg/        logo, heat-scale, how-to-play, og-image
 ├─ assets/og-image.png    social share image (1200x630)
-├─ assets/textures/   NASA earth-blue-marble.jpg, earth-topology.png
+├─ assets/textures/   earth-day-4k.jpg (NASA Visible Earth / Blue Marble, public domain)
 └─ assets/data/world.geo.json   country polygons for the globe
 scripts/              one-time data/asset generators (see below)
 ```

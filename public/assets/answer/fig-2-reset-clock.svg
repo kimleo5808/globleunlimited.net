@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="24-hour dial showing that the Globle daily resets at 00:00 UTC, which is 8:00 PM in US Eastern, 5:00 PM in US Pacific, 1:00 AM in the UK and Ireland, 2:00 AM in Central Europe, and 10:00 AM in Sydney.">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,serif" font-size="27" fill="#EAF2F8">One instant, five different clocks</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">PLATE 2 · the daily resets at 00:00 UTC · local time at that moment</text>
+
+  <!-- dial face -->
+  <circle cx="500" cy="300" r="170" fill="none" stroke="#F4C95D" stroke-opacity="0.28" stroke-width="1.5"/>
+  <circle cx="500" cy="300" r="150" fill="none" stroke="#F4C95D" stroke-opacity="0.12"/>
+
+  <!-- hour ticks; every sixth is long -->
+  <g stroke="#F4C95D" stroke-opacity="0.35">
+    <path d="M500 150V130M650 300H670M500 450V470M350 300H330" stroke-opacity="0.6"/>
+    <path d="M541.9 143.5 544 135.8M581 159.7 585 152.8M614.6 185.4 620.2 179.8M640.3 219 647.2 215M656.5 258.1 664.2 256M656.5 341.9 664.2 344M640.3 381 647.2 385M614.6 414.6 620.2 420.2M581 440.3 585 447.2M541.9 456.5 544 464.2M458.1 456.5 456 464.2M419 440.3 415 447.2M385.4 414.6 379.8 420.2M359.7 381 352.8 385M343.5 341.9 335.8 344M343.5 258.1 335.8 256M359.7 219 352.8 215M385.4 185.4 379.8 179.8M419 159.7 415 152.8M458.1 143.5 456 135.8"/>
+  </g>
+
+  <!-- the reset instant, at the top of the dial -->
+  <path d="M500 140V248" stroke="#F4C95D" stroke-width="2.5"/>
+  <circle cx="500" cy="130" r="7" fill="#F4C95D"/>
+
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="14">
+    <!-- UK & Ireland, 01:00 -->
+    <circle cx="550.7" cy="110.7" r="5" fill="#FFEDA0"/>
+    <text x="572" y="100" text-anchor="start" fill="#EAF2F8">UK &amp; Ireland</text>
+    <text x="572" y="118" text-anchor="start" fill="#FFEDA0">1:00 AM</text>
+
+    <!-- Central Europe, 02:00 -->
+    <circle cx="598" cy="130.3" r="5" fill="#FEB24C"/>
+    <text x="618" y="156" text-anchor="start" fill="#EAF2F8">Central Europe</text>
+    <text x="618" y="174" text-anchor="start" fill="#FEB24C">2:00 AM</text>
+
+    <!-- Sydney, 10:00 -->
+    <circle cx="598" cy="469.7" r="5" fill="#E8743B"/>
+    <text x="616" y="466" text-anchor="start" fill="#EAF2F8">Sydney</text>
+    <text x="616" y="484" text-anchor="start" fill="#E8743B">10:00 AM</text>
+
+    <!-- US Pacific, 17:00 previous day -->
+    <circle cx="310.7" cy="350.7" r="5" fill="#C42D1C"/>
+    <text x="292" y="348" text-anchor="end" fill="#EAF2F8">US Pacific</text>
+    <text x="292" y="366" text-anchor="end" fill="#C42D1C">5:00 PM prev.</text>
+
+    <!-- US Eastern, 20:00 previous day -->
+    <circle cx="330.3" cy="202" r="5" fill="#8B0000"/>
+    <text x="312" y="192" text-anchor="end" fill="#EAF2F8">US Eastern</text>
+    <text x="312" y="210" text-anchor="end" fill="#E06A5A">8:00 PM prev.</text>
+  </g>
+
+  <text x="500" y="272" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891" letter-spacing="3">RESETS AT</text>
+  <text x="500" y="345" text-anchor="middle" font-family="Georgia,serif" font-size="34" fill="#F4C95D">00:00 UTC</text>
+  <text x="500" y="372" text-anchor="middle" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">every day · 24-hour dial</text>
+
+  <text x="50" y="520" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">Summer-time offsets (BST / CEST / EDT / PDT / AEST). globleunlimited.net</text>
+</svg>

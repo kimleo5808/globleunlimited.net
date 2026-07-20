@@ -4,4 +4,10 @@
 # Serve the Astro sitemap index at the conventional /sitemap.xml path.
 /sitemap.xml  /sitemap-index.xml  200
 
+# Answer pages moved to keyword-led URLs (2026-07-20). Exact paths must come
+# before the wildcard, which Cloudflare matches top-down.
+/answer      /globle-answer-today  301
+/answer/     /globle-answer-today  301
+/answer/:date  /globle-answer-archive/:date  301
+
 # Add game/content redirects here as routes evolve.

@@ -1,0 +1,135 @@
+---
+// Four hints as rungs on a rail. Each rung the player opens lights its node in
+// the next colour of the game's own heat ramp, so the ladder reads as the
+// temperature climbing toward the answer. Native <details>, no JS.
+import type { Rung } from '../../lib/game/analysis';
+
+interface Props {
+  ladder: Rung[];
+  /** Total countries in the answer pool, shown as the starting figure. */
+  total: number;
+}
+
+const { ladder, total } = Astro.props;
+---
+
+<ol class="ladder" style={`--rungs:${ladder.length}`}>
+  <li class="start">
+    <span class="node node-start" aria-hidden="true"></span>
+    <span class="rung-body">
+      <span class="rung-label">Before any hint</span>
+      <span class="rung-count mono">{total} countries</span>
+    </span>
+  </li>
+
+  {ladder.map((rung, i) => (
+    <li>
+      <details name="hint-ladder">
+        <summary>
+          <span class={`node node-${i}`} aria-hidden="true"></span>
+          <span class="rung-body">
+            <span class="rung-label">Hint {i + 1} — {rung.label}</span>
+            <span class="rung-count mono">{rung.remaining} left</span>
+          </span>
+        </summary>
+        <p class="clue">{rung.clue}</p>
+      </details>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .ladder {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-6) 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  /* The rail the rungs hang from. */
+  .ladder::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: linear-gradient(
+      to bottom,
+      var(--heat-0),
+      var(--heat-1),
+      var(--heat-2),
+      var(--heat-3)
+    );
+    opacity: 0.35;
+  }
+
+  .ladder li { position: relative; }
+
+  details {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    transition: border-color var(--dur-fast) var(--ease);
+  }
+  details[open] { border-color: var(--accent); }
+
+  summary,
+  .start {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  .start { cursor: default; opacity: 0.75; }
+
+  .node {
+    flex: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--text-mute);
+    background: var(--bg-deep);
+    position: relative;
+    z-index: 1;
+    transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+  }
+  .node-start { border-color: var(--text-mute); }
+
+  /* Opened rungs light up in ramp order: cold to hot. */
+  details[open] .node-0 { background: var(--heat-0); border-color: var(--heat-0); }
+  details[open] .node-1 { background: var(--heat-1); border-color: var(--heat-1); }
+  details[open] .node-2 { background: var(--heat-2); border-color: var(--heat-2); }
+  details[open] .node-3 { background: var(--heat-3); border-color: var(--heat-3); }
+
+  .rung-body {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-4);
+  }
+  .rung-label { color: var(--text); font-weight: 600; }
+  .rung-count { color: var(--text-mute); font-size: var(--fs-small); white-space: nowrap; }
+
+  .clue {
+    margin: 0;
+    padding: 0 var(--space-4) var(--space-4) 39px;
+    color: var(--accent);
+    font-size: var(--fs-data);
+  }
+
+  @media (max-width: 480px) {
+    .rung-body { flex-direction: column; gap: var(--space-1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .node, details { transition: none; }
+  }
+</style>

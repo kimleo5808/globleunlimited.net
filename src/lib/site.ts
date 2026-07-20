@@ -11,7 +11,7 @@ export const SITE = {
   locale: 'en_US',
   email: 'hello@globleunlimited.net',
   /** Effective/last-updated date for legal pages. */
-  legalUpdated: 'June 27, 2026',
+  legalUpdated: 'July 20, 2026',
   /** Governing law for the Terms of Service. */
   jurisdiction: 'the United States',
   /** Default meta keywords (overridable per page). */
@@ -49,7 +49,8 @@ export const FOOTER_LINKS = {
   learn: [
     { href: '/how-to-play', label: 'How to Play' },
     { href: '/globle-vs-worldle', label: 'Globle vs Worldle' },
-    { href: '/answer', label: "Today's Answer" },
+    { href: '/globle-answer-today', label: "Today's Answer" },
+    { href: '/globle-answer-archive', label: 'Answer Archive' },
     { href: '/blog', label: 'Blog' },
   ],
   about: [

@@ -112,7 +112,7 @@ The reliable cure for all of this is exposure: the more countries you have actua
 fewer can ambush you. A few rounds of [Globle Unlimited](/) a day will turn today's impossible
 answer into tomorrow's easy one. For more on openings and triangulation, see our
 [Globle strategy guide](/blog/globle-tips-strategy), and if a daily round defeats you, the
-[answer page](/answer) is always there.
+[answer page](/globle-answer-today) is always there.
 
 ## Frequently asked questions
 

@@ -1,0 +1,105 @@
+---
+// Instrument-panel profile of the day's country: flag and name, a grid of
+// measured values, and the locator globe generated for that date.
+import type { Country } from '../../lib/game/types';
+import type { Analysis } from '../../lib/game/analysis';
+import { flag } from '../../lib/game/countries';
+
+interface Props {
+  country: Country;
+  analysis: Analysis;
+  /** ISO date — selects the matching pre-rendered locator globe. */
+  date: string;
+}
+
+const { country, analysis, date } = Astro.props;
+
+const rows: Array<[string, string]> = [
+  ['Capital', analysis.capital ?? '—'],
+  ['Region', country.subregion || country.region || '—'],
+  ['Land area', country.area ? `${country.area.toLocaleString('en-US')} km²` : '—'],
+  ['Area rank', `${analysis.obscurity.areaRank} of 176`],
+  ['Land neighbours', String(analysis.neighbours)],
+  ['Coastline', country.landlocked ? 'None — landlocked' : 'Yes'],
+];
+---
+
+<section class="plate">
+  <header class="plate-head">
+    <span class="flag" aria-hidden="true">{flag(country.cca2)}</span>
+    <h3 class="name">{country.name}</h3>
+  </header>
+
+  <dl class="readout">
+    {rows.map(([k, v]) => (
+      <div>
+        <dt>{k}</dt>
+        <dd class="mono">{v}</dd>
+      </div>
+    ))}
+  </dl>
+
+  <figure class="locator">
+    <img
+      src={`/assets/locator/${date}.svg`}
+      alt={`Orthographic globe centred on ${country.name}, with the country highlighted in red`}
+      width="480"
+      height="480"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>{country.name} at the centre of the visible hemisphere.</figcaption>
+  </figure>
+</section>
+
+<style>
+  .plate {
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-panel);
+  }
+
+  .plate-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--line);
+  }
+  .flag { font-size: 2.5rem; line-height: 1; }
+  .name { margin: 0; font-size: var(--fs-h2); color: var(--text); }
+
+  .readout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+  }
+  .readout dt {
+    font-size: var(--fs-small);
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .readout dd {
+    margin: var(--space-1) 0 0;
+    color: var(--accent);
+    font-size: var(--fs-data);
+  }
+
+  .locator { margin: 0; }
+  .locator img {
+    display: block;
+    width: min(100%, 340px);
+    height: auto;
+    margin-inline: auto;
+  }
+  .locator figcaption {
+    text-align: center;
+    color: var(--text-mute);
+    font-size: var(--fs-small);
+    margin-top: var(--space-2);
+  }
+</style>
