@@ -1,8 +1,12 @@
 name: Daily rebuild
 
 # Rebuilds the site once a day so the answer archive grows (a new
-# /answer/{date} page is generated for each day that passes) and the
-# "today" answer pages stay current.
+# /globle-answer-archive/{date} page is generated for each day that passes) and
+# the "today" answer pages stay current.
+#
+# Triggering the deploy hook only proves the request left the runner, not that a
+# build ran or that it produced today's page. So the job fires the hook and then
+# waits for the new page to actually answer 200 before it reports success.
 
 on:
   schedule:
@@ -12,10 +16,16 @@ on:
     - cron: '0 3 * * *' # 03:00 UTC backup trigger
   workflow_dispatch: {} # allow manual runs from the Actions tab
 
+# Needed only by the keepalive step, which pushes an empty commit.
+permissions:
+  contents: write
+
 jobs:
   trigger:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Trigger Cloudflare Pages deploy
         run: |
           if [ -z "${CF_DEPLOY_HOOK}" ]; then
@@ -26,3 +36,47 @@ jobs:
           echo "Triggered Cloudflare Pages rebuild."
         env:
           CF_DEPLOY_HOOK: ${{ secrets.CF_DEPLOY_HOOK }}
+
+      - name: Wait for today's answer page to go live
+        run: |
+          # The archive runs on UTC dates (see todayISO in src/lib/game/archive.ts),
+          # and both cron slots fire after 00:00 UTC, so today's page is the one the
+          # fresh build must contain.
+          today="$(date -u +%F)"
+          url="https://globleunlimited.net/globle-answer-archive/${today}/"
+
+          # A Pages build takes a couple of minutes; poll for up to ten before
+          # giving up, which is far longer than a healthy build has ever needed.
+          sleep 60
+          for attempt in $(seq 1 18); do
+            code="$(curl -s -o /dev/null -w '%{http_code}' "$url")"
+            if [ "$code" = "200" ]; then
+              echo "Verified: $url is live (attempt ${attempt})."
+              exit 0
+            fi
+            echo "Attempt ${attempt}: $url returned ${code}, retrying in 30s."
+            sleep 30
+          done
+
+          echo "::error::The deploy hook fired but ${url} never went live. The site is now serving a stale answer. Check the Cloudflare Pages build log."
+          exit 1
+
+      - name: Keep the schedule alive
+        run: |
+          # GitHub disables scheduled workflows on a public repo after 60 days
+          # without repository activity. This site rebuilds daily but rarely gets
+          # commits, so without a nudge the schedule would silently switch off.
+          # An empty commit every 50 idle days keeps it running. Pushes made with
+          # GITHUB_TOKEN do not trigger workflows, so this cannot loop.
+          last="$(git log -1 --format=%ct)"
+          now="$(date -u +%s)"
+          idle_days=$(( (now - last) / 86400 ))
+          echo "Last commit was ${idle_days} day(s) ago."
+
+          if [ "$idle_days" -ge 50 ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit --allow-empty -m "Keep the daily rebuild schedule alive"
+            git push
+            echo "Pushed a keepalive commit."
+          fi
