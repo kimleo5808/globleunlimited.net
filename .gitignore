@@ -11,6 +11,10 @@ node_modules/
 # generated map data cache
 scripts/data/
 
+# strategy notes — kept local, never published (the repo is public)
+docs/
+seo-outputs/
+
 # logs & env
 *.log
 .env
