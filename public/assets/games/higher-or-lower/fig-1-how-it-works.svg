@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Game cards: Canada, 9,984,670 square kilometres, 41.3M people, against India with population hidden and Higher and Lower buttons">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">Bigger is not the same as busier</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">Canada is 3.0× India's size — guess which has more people</text>
+  <g>
+    <rect x="70" y="130" width="300" height="290" rx="18" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <text x="94" y="172" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">KNOWN</text>
+    <text x="94" y="214" font-family="Georgia,'Times New Roman',serif" font-size="34" fill="#EAF2F8">Canada</text>
+    <text x="94" y="250" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#9DB2C6">9,984,670 km²</text>
+    <text x="94" y="318" font-family="'Space Mono',ui-monospace,monospace" font-size="40" fill="#F4C95D">41.3M</text>
+    <text x="94" y="344" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">PEOPLE</text>
+  </g>
+  <text x="415" y="290" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="30" fill="#F4C95D">vs</text>
+  <g>
+    <rect x="470" y="130" width="300" height="290" rx="18" fill="#13243A" stroke="#F4C95D" stroke-opacity="0.35"/>
+    <text x="494" y="172" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">CHALLENGER</text>
+    <text x="494" y="214" font-family="Georgia,'Times New Roman',serif" font-size="34" fill="#EAF2F8">India</text>
+    <text x="494" y="250" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#9DB2C6">3,287,590 km²</text>
+    <text x="494" y="318" font-family="'Space Mono',ui-monospace,monospace" font-size="40" fill="#5E7891">???</text>
+    <text x="494" y="344" font-family="'Space Mono',ui-monospace,monospace" font-size="12" fill="#5E7891">PEOPLE</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="16">
+    <rect x="800" y="180" width="150" height="54" rx="27" fill="#2E9E4F"/><text x="875" y="213" text-anchor="middle" fill="#EAF2F8">▲ HIGHER</text>
+    <rect x="800" y="250" width="150" height="54" rx="27" fill="none" stroke="#E06A5A" stroke-width="2"/><text x="875" y="283" text-anchor="middle" fill="#E06A5A">▼ LOWER</text>
+    <text x="875" y="352" text-anchor="middle" font-size="12" fill="#5E7891">STREAK</text>
+    <text x="875" y="388" text-anchor="middle" font-size="30" fill="#F4C95D">7</text>
+  </g>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">Answer: India has 35× more people · population: World Bank 2024 · globleunlimited.net</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Diverging bar chart of trap pairs: Greenland is 14.7 times bigger than Bangladesh with 3053.7 times fewer people; Mongolia is 149.6 times bigger than Lebanon with 1.6 times fewer people; Australia is 76.8 times bigger than South Korea with 1.9 times fewer people; Canada is 3.0 times bigger than India with 35.2 times fewer people; Libya is 66.8 times bigger than Rwanda with 1.9 times fewer people; Botswana is 20.9 times bigger than Burundi with 5.6 times fewer people">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">Six pairs where the bigger country loses</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">left: how many times larger · right: how many times fewer people (log scale)</text>
+  <line x1="500" y1="118" x2="500" y2="486" stroke="#F4C95D" stroke-opacity="0.35"/>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="13">
+    <text x="500" y="134" text-anchor="middle" fill="#EAF2F8">Greenland vs Bangladesh</text>
+    <rect x="392.1" y="142" width="99.9" height="16" fill="#E8D9B5" fill-opacity="0.75"/>
+    <text x="384.1" y="155" text-anchor="end" fill="#9DB2C6">14.7× bigger</text>
+    <rect x="508" y="142" width="298.3" height="16" fill="#C42D1C"/>
+    <text x="814.3" y="155" fill="#9DB2C6">3,054× fewer people</text>
+  </g>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="13">
+    <text x="500" y="192" text-anchor="middle" fill="#EAF2F8">Mongolia vs Lebanon</text>
+    <rect x="305.8" y="200" width="186.2" height="16" fill="#E8D9B5" fill-opacity="0.75"/>
+    <text x="297.8" y="213" text-anchor="end" fill="#9DB2C6">149.6× bigger</text>
+    <rect x="508" y="200" width="18.6" height="16" fill="#C42D1C"/>
+    <text x="534.6" y="213" fill="#9DB2C6">1.6× fewer people</text>
+  </g>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="13">
+    <text x="500" y="250" text-anchor="middle" fill="#EAF2F8">Australia vs South Korea</text>
+    <rect x="330.7" y="258" width="161.3" height="16" fill="#E8D9B5" fill-opacity="0.75"/>
+    <text x="322.7" y="271" text-anchor="end" fill="#9DB2C6">76.8× bigger</text>
+    <rect x="508" y="258" width="23.9" height="16" fill="#C42D1C"/>
+    <text x="539.9" y="271" fill="#9DB2C6">1.9× fewer people</text>
+  </g>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="13">
+    <text x="500" y="308" text-anchor="middle" fill="#EAF2F8">Canada vs India</text>
+    <rect x="450.7" y="316" width="41.3" height="16" fill="#E8D9B5" fill-opacity="0.75"/>
+    <text x="442.7" y="329" text-anchor="end" fill="#9DB2C6">3.0× bigger</text>
+    <rect x="508" y="316" width="132.3" height="16" fill="#C42D1C"/>
+    <text x="648.3" y="329" fill="#9DB2C6">35× fewer people</text>
+  </g>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="13">
+    <text x="500" y="366" text-anchor="middle" fill="#EAF2F8">Libya vs Rwanda</text>
+    <rect x="335.8" y="374" width="156.2" height="16" fill="#E8D9B5" fill-opacity="0.75"/>
+    <text x="327.8" y="387" text-anchor="end" fill="#9DB2C6">66.8× bigger</text>
+    <rect x="508" y="374" width="24.5" height="16" fill="#C42D1C"/>
+    <text x="540.5" y="387" fill="#9DB2C6">1.9× fewer people</text>
+  </g>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="13">
+    <text x="500" y="424" text-anchor="middle" fill="#EAF2F8">Botswana vs Burundi</text>
+    <rect x="379.0" y="432" width="113.0" height="16" fill="#E8D9B5" fill-opacity="0.75"/>
+    <text x="371.0" y="445" text-anchor="end" fill="#9DB2C6">20.9× bigger</text>
+    <rect x="508" y="432" width="63.8" height="16" fill="#C42D1C"/>
+    <text x="579.8" y="445" fill="#9DB2C6">5.6× fewer people</text>
+  </g>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">Population: World Bank 2024 (CC BY 4.0) · area: world-countries · globleunlimited.net</text>
+</svg>

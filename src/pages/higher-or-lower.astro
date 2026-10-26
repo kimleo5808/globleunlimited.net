@@ -1,0 +1,329 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HigherOrLowerGame from '../components/game/HigherOrLowerGame.astro';
+import { SITE } from '../lib/site';
+
+// Figures quoted below come from src/data/population.json (World Bank 2024)
+// and countries.json; the four plates are drawn by `node scripts/game-figures.mjs`.
+const title = 'Higher or Lower Countries – Population Game, Unlimited';
+const description =
+  'Which country has more people? Play higher or lower with real World Bank data. Free, unlimited rounds, population and area modes, no sign-up.';
+
+const faqs: Array<[string, string]> = [
+  ['Is Higher or Lower: Countries free?', 'Yes. The higher or lower countries game is free, with unlimited runs, no account and no download. Your best streak is saved in your own browser.'],
+  ['Where does the population data come from?', 'Population figures are the World Bank’s 2024 estimates (licensed CC BY 4.0). Land area comes from the open world-countries dataset, the same figure every game on this site uses.'],
+  ['Why does a bigger country sometimes have fewer people?', 'Because size and population only line up about three times in four. Deserts, ice and steppe hold few people, so Greenland, Mongolia and Australia lose to far smaller countries.'],
+  ['What happens on a tie?', 'If two values are within half a percent of each other, both answers count as correct and your streak carries on.'],
+  ['Does the higher or lower countries game get harder?', 'Yes. The first five rounds compare countries at least three times apart; after fifteen correct answers the gaps shrink to less than one and a half times.'],
+  ['Can I play with area instead of population?', 'Yes. Switch to Area, or to Mixed, where each round tells you which stat it uses.'],
+  ['Is Taiwan in the game?', 'In Area mode, yes. The World Bank does not publish a population figure for Taiwan, so it is left out of population rounds rather than filled from a second source.'],
+];
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Higher or Lower: Countries',
+    description: 'A free, unlimited higher or lower countries game: say which of two countries has more people or more land.',
+    url: `${SITE.url}/higher-or-lower/`,
+    genre: 'Geography quiz',
+    gamePlatform: 'Web browser',
+    applicationCategory: 'Game',
+    operatingSystem: 'Any',
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to play higher or lower countries',
+    step: [
+      { '@type': 'HowToStep', name: 'Read both cards', text: 'The current country shows its population; the challenger’s is hidden.' },
+      { '@type': 'HowToStep', name: 'Choose higher or lower', text: 'Decide whether the challenger has more or fewer people, and press Higher or Lower.' },
+      { '@type': 'HowToStep', name: 'Keep the streak', text: 'Each right answer moves the challenger across and deals a new one; one wrong answer ends the run.' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Unlimited Games', item: `${SITE.url}/unlimited/` },
+      { '@type': 'ListItem', position: 3, name: 'Higher or Lower: Countries', item: `${SITE.url}/higher-or-lower/` },
+    ],
+  },
+];
+
+const TOP10: Array<[string, string]> = [
+  ['India', '1.45 billion'], ['China', '1.41 billion'], ['United States', '340 million'], ['Indonesia', '283 million'],
+  ['Pakistan', '251 million'], ['Nigeria', '233 million'], ['Brazil', '212 million'], ['Bangladesh', '174 million'],
+  ['Russia', '144 million'], ['Ethiopia', '132 million'],
+];
+---
+
+<BaseLayout title={title} description={description} path="/higher-or-lower/" schema={schema}>
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-title rise" style="--d:0ms">Higher or Lower: Countries</h1>
+      <p class="hero-sub rise" style="--d:80ms">
+        Which country has more people? One guess per round, <strong>unlimited rounds</strong> — how long
+        can your streak run?
+      </p>
+      <HigherOrLowerGame />
+    </div>
+  </section>
+
+  <article class="prose content">
+    <h2>What Is Higher or Lower: Countries?</h2>
+    <p>
+      <strong>Higher or Lower: Countries is a free country population game: two countries appear, you
+      say whether the second has more or fewer people, and every right answer extends your
+      streak.</strong> One wrong answer ends the run, and a new one starts as soon as you press Play
+      again.
+    </p>
+    <p>
+      The higher or lower countries format is simple, but the countries are not. Both cards show the
+      country’s outline drawn to the same scale, so you can see at a glance which one is bigger — and
+      that is exactly where the game catches people. A bigger country does not mean more people, and
+      this higher or lower game is built to show you how often it doesn’t.
+    </p>
+    <p>
+      Three modes change what you compare: Population (the default), Area, and Mixed, where each
+      round tells you which of the two it is asking about. Every mode is unlimited, and your best
+      streak for higher or lower countries is kept in your browser.
+    </p>
+
+    <h2>How to Play Higher or Lower Countries</h2>
+    <ol>
+      <li><strong>Read the current card.</strong> It shows the country, its outline and its
+        population. The other figure — land area, in Population mode — is there for context.</li>
+      <li><strong>Look at the challenger.</strong> Its outline is drawn at the same scale, but its
+        number is hidden.</li>
+      <li><strong>Choose Higher or Lower.</strong> Press a button, or use the arrow keys (H and L also
+        work). The hidden number rolls up and a bar compares the two.</li>
+      <li><strong>Keep going.</strong> If you were right, the challenger slides across to become the
+        current card and a new challenger arrives. If you were wrong, the run ends and the game tells
+        you why the pair caught you.</li>
+    </ol>
+    <figure class="figure">
+      <img src="/assets/games/higher-or-lower/fig-1-how-it-works.svg" alt="Higher or lower countries game cards: Canada, 9,984,670 square kilometres and 41.3 million people, against India with its population hidden" width="1000" height="560" loading="lazy" decoding="async" />
+    </figure>
+    <p>
+      <strong>The higher or lower countries game gets harder as your streak grows.</strong> The first five rounds compare
+      countries at least three times apart. From round six the gaps narrow to between one and a half
+      and three times, with a few deliberate traps mixed in, and after fifteen correct answers every
+      pair is within one and a half times. Two values within half a percent of each other count as a
+      tie, and either answer is right.
+    </p>
+
+    <h2>The 76% Rule: Why Bigger Isn’t Busier</h2>
+    <p>
+      <strong>In 14,365 pairs of countries, “the bigger country has more people” is right only 76.2%
+      of the time.</strong> We compared every pair of the 170 countries that have a World Bank
+      population figure. Roughly one round in four of higher or lower countries is a trap, where the
+      larger country loses.
+    </p>
+    <figure class="figure">
+      <img src="/assets/games/higher-or-lower/fig-2-area-vs-population.svg" alt="Higher or lower countries data: log-log scatter of land area against population for 170 countries, with Greenland, Mongolia and Bangladesh far from the trend" width="1000" height="560" loading="lazy" decoding="async" />
+    </figure>
+    <p>
+      The chart plots each country’s land area against its population. If size decided everything,
+      every dot would sit on one line. Instead the cloud is wide: the dashed lines mark 1, 10, 100
+      and 1,000 people per square kilometre, and countries land anywhere between them.
+    </p>
+    <p>
+      The outliers tell the story. Countries far below the trend are big and empty — Greenland,
+      Mongolia, Australia, Canada and Iceland, all held back by ice, desert or steppe. Countries far
+      above it are small and crowded — Bangladesh, Lebanon and Rwanda. A good higher or lower countries
+      player learns to spot both groups before reading the outline.
+    </p>
+
+    <h2>Six Pairs That Catch Almost Everyone</h2>
+    <p>
+      These are the pairs where the outline points one way and the population the other. Each one
+      appears in the higher or lower countries deck, and each fails for a different reason.
+    </p>
+    <figure class="figure">
+      <img src="/assets/games/higher-or-lower/fig-3-trap-pairs.svg" alt="Six trap pairs in higher or lower countries where the bigger country has fewer people, led by Greenland against Bangladesh" width="1000" height="560" loading="lazy" decoding="async" />
+    </figure>
+    <ul>
+      <li><strong>Greenland vs Bangladesh.</strong> Greenland is 14.7 times larger but has 3,054
+        times fewer people: about 57,000 against 174 million. Ice covers most of the island.</li>
+      <li><strong>Mongolia vs Lebanon.</strong> Mongolia is nearly 150 times bigger; Lebanon still has
+        1.6 times as many people, packed along one stretch of coast.</li>
+      <li><strong>Australia vs South Korea.</strong> 77 times the land, half the people. Most of
+        Australia is desert, and most Australians live on the coast.</li>
+      <li><strong>Canada vs India.</strong> Canada is three times India’s size and has 1/35 of its
+        population — 41.3 million against 1.45 billion.</li>
+      <li><strong>Libya vs Rwanda.</strong> Libya is mostly Sahara; Rwanda is one of the most
+        densely farmed countries on Earth.</li>
+      <li><strong>Botswana vs Burundi.</strong> Botswana is 21 times bigger, with the Kalahari across
+        much of it; Burundi has 5.6 times the people.</li>
+    </ul>
+
+    <h2>From 1,176 to 0.03: The Density Gap</h2>
+    <p>
+      <strong>Bangladesh has 1,176 people per square kilometre; Greenland has 0.03.</strong> That is a
+      gap of about 45,000 times, and it is why area on its own tells you so little in higher or lower
+      countries.
+    </p>
+    <figure class="figure">
+      <img src="/assets/games/higher-or-lower/fig-4-density-extremes.svg" alt="Population density extremes: Bangladesh 1,176 people per square kilometre down to Greenland 0.03" width="1000" height="560" loading="lazy" decoding="async" />
+    </figure>
+    <p>
+      Palestine (850), Lebanon (555), Rwanda (541) and South Korea (516) all pass 500 people per square
+      kilometre. At the other end, Mongolia (2.3), Australia (3.5), Namibia (3.7) and Iceland (3.8)
+      have fewer than four. When one of the crowded countries meets one of the empty ones in a higher
+      or lower country game, the small one almost always wins.
+    </p>
+
+    <h2>Area Mode: Why Maps Make Size So Hard</h2>
+    <p>
+      <strong>Most world maps stretch the far north and south, so the land area you remember is
+      often wrong.</strong> The common Mercator projection draws Greenland about as large as Africa.
+      In reality Africa’s countries cover 30.5 million square kilometres in this game, 14 times
+      Greenland’s 2.2 million. Area rounds of higher or lower countries are where that distortion
+      costs the most streaks.
+    </p>
+    <p>
+      Some of the closest calls in Area mode, from the game’s own figures:
+    </p>
+    <ul>
+      <li><strong>DR Congo vs Greenland.</strong> DR Congo is larger, at 2.34 million km² against 2.17
+        million, though most maps suggest the opposite.</li>
+      <li><strong>Mexico vs Indonesia.</strong> Mexico wins by just 3%; Indonesia’s islands spread
+        across a far wider stretch of sea.</li>
+      <li><strong>Argentina vs Kazakhstan.</strong> Argentina is 2% bigger: the closest pair of large
+        countries in the game.</li>
+      <li><strong>Japan vs Germany.</strong> Japan is 6% larger, which surprises people who picture it
+        as a small island nation.</li>
+      <li><strong>United Kingdom vs Ghana.</strong> Within 2% of each other, at about 240,000 km² each.</li>
+    </ul>
+    <p>
+      In close pairs like these, a higher or lower country game is really testing whether you know the
+      numbers rather than the pictures. When two outlines look alike, trust what you know about each
+      country’s land over what the shape suggests.
+    </p>
+
+    <h2>How the Outlines Are Drawn</h2>
+    <p>
+      Each outline in higher or lower countries is drawn with an equal-area projection centred on that
+      country, at the same scale as the country next to it. That means the relative size you see on
+      the two cards is true to the land, unlike a world map. The larger country fills its card and the
+      smaller one shrinks in proportion; any country too small to see at that scale is enlarged and
+      labelled.
+    </p>
+    <p>
+      Far-flung territory more than 2,500 km from the mainland is left out of the drawing, so Alaska and
+      Hawaii do not shrink the United States to a speck and French Guiana does not appear beside
+      France. The area figures still use each country’s full official total.
+    </p>
+
+    <h2>Population Benchmarks Worth Memorising</h2>
+    <p>
+      To win at higher or lower countries you do not need to know 170 numbers. Anchor a handful and judge the rest against them. These
+      are the ten most populous countries in the game, from the World Bank’s 2024 figures:
+    </p>
+    <table class="cmp">
+      <thead><tr><th>Rank</th><th>Country</th><th>Population (2024)</th></tr></thead>
+      <tbody>
+        {TOP10.map(([c, p], i) => <tr><td>{i + 1}</td><td>{c}</td><td>{p}</td></tr>)}
+      </tbody>
+    </table>
+    <p>
+      Together they hold 57% of the 8.09 billion people in the game. Just 16 countries pass 100
+      million, and 14 have fewer than one million. That gives you three bands to sort any country
+      into: <strong>over 100 million</strong>, <strong>1 to 100 million</strong>, and
+      <strong>under a million</strong>. Most rounds of higher or lower countries are settled by which
+      band each country is in.
+    </p>
+
+    <h2>6 Ways to Win More Higher or Lower Countries Rounds</h2>
+    <ol>
+      <li><strong>Think about the land, not the outline.</strong> Desert, ice, steppe and rainforest
+        hold few people. River valleys and coasts hold many.</li>
+      <li><strong>Learn ten anchors.</strong> The top-ten table above, plus Germany (84 million) and
+        the United Kingdom (69 million), covers most comparisons.</li>
+      <li><strong>Don’t underestimate islands.</strong> Japan has 124 million people and the
+        Philippines 116 million — each more than five times the population of Kazakhstan, a country
+        seven or eight times their size.</li>
+      <li><strong>Watch for crowded small countries.</strong> Bangladesh, Rwanda, the Netherlands and
+        Lebanon beat countries many times their size.</li>
+      <li><strong>In Area mode, mind the near-ties.</strong> Canada and the United States are within
+        7% of each other, as are China and the United States.</li>
+      <li><strong>In Mixed mode, read the label.</strong> Each round says whether it is asking about
+        people or land; most lost runs in Mixed are a misread label.</li>
+    </ol>
+    <p>
+      For more ways to train your sense of size, try <a href="/clues/">Globle Clues</a>, where area is
+      one of six clues, or learn where every country sits with the
+      <a href="/map-quiz/">world map quiz</a>. The countries that hold the fewest people per square
+      kilometre are often the same ones in our guide to
+      <a href="/blog/borders-and-landlocked-countries/">countries with no coastline</a>.
+    </p>
+
+    <h2>Where the Numbers Come From</h2>
+    <p>
+      A country population game is only as good as its numbers. Population figures here are the
+      World Bank’s 2024 estimates (indicator SP.POP.TOTL), published under
+      a CC BY 4.0 licence. Land area comes from the open world-countries dataset, which every game on
+      this site uses. Higher or Lower: Countries covers 170 countries for population and all 176 for area: the World
+      Bank publishes no figure for Taiwan or for five territories in the pool, so those appear only
+      in Area rounds. We update the figures once a year, when the World Bank releases a new series.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      {faqs.map(([q, a]) => (
+        <details>
+          <summary>{q}</summary>
+          <p>{a}</p>
+        </details>
+      ))}
+    </div>
+
+    <h2>More Geography Games</h2>
+    <p>
+      Done with higher or lower countries for now? Try the <a href="/routes/">connect the countries
+      game</a>, find a mystery country by distance in <a href="/">Globle Unlimited</a>, or browse every
+      mode in the <a href="/unlimited/">unlimited geography games</a> hub. Your best streak is on your
+      <a href="/stats/">stats page</a>.
+    </p>
+
+    <p class="byline">
+      Written by the Globle Unlimited team. The 76% figure, the trap pairs and the density extremes
+      are computed from World Bank 2024 population and world-countries land area for every pair of
+      countries in the game.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-block: var(--space-12) var(--space-8); }
+  .hero-inner { text-align: center; max-width: 1200px; }
+  .hero-title { font-size: var(--fs-display); }
+  .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
+  .rise { animation-delay: var(--d, 0ms); }
+  .content { margin-top: var(--space-16); text-align: left; }
+  .content ol, .content ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+
+  .figure { margin: var(--space-6) 0; }
+  .figure img { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); }
+
+  .cmp { width: 100%; border-collapse: collapse; margin: var(--space-6) 0; font-size: var(--fs-small); }
+  .cmp th, .cmp td { border: 1px solid var(--line); padding: var(--space-2) var(--space-3); text-align: left; }
+  .cmp th { background: var(--bg-panel); color: var(--accent); }
+  .cmp td { color: var(--text-dim); }
+
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+  .faq details { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+  .faq summary { cursor: pointer; color: var(--text); font-weight: 600; }
+  .faq p { margin-top: var(--space-2); }
+
+  .byline { margin-top: var(--space-12); font-size: var(--fs-small); color: var(--text-mute); }
+</style>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Bar chart of population density: densest Bangladesh 1176, Palestine 850, Lebanon 555, Rwanda 541, South Korea 516; sparsest Greenland 0.03, Mongolia 2.25, Australia 3.54, Namibia 3.67, Iceland 3.75">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">Bangladesh packs 45,000× more people per km² than Greenland</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">people per square kilometre, densest and emptiest countries in the pool (log scale)</text>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="14"><text x="308" y="143" text-anchor="end" fill="#EAF2F8">Bangladesh</text>
+    <rect x="320" y="128" width="507.0" height="20" fill="#C42D1C"/>
+    <text x="837.0" y="143" fill="#9DB2C6">1,176 /km²</text></g>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="14"><text x="308" y="179" text-anchor="end" fill="#EAF2F8">Palestine</text>
+    <rect x="320" y="164" width="493.0" height="20" fill="#C42D1C"/>
+    <text x="823.0" y="179" fill="#9DB2C6">850 /km²</text></g>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="14"><text x="308" y="215" text-anchor="end" fill="#EAF2F8">Lebanon</text>
+    <rect x="320" y="200" width="474.5" height="20" fill="#C42D1C"/>
+    <text x="804.5" y="215" fill="#9DB2C6">555 /km²</text></g>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="14"><text x="308" y="251" text-anchor="end" fill="#EAF2F8">Rwanda</text>
+    <rect x="320" y="236" width="473.3" height="20" fill="#C42D1C"/>
+    <text x="803.3" y="251" fill="#9DB2C6">541 /km²</text></g>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="14"><text x="308" y="287" text-anchor="end" fill="#EAF2F8">South Korea</text>
+    <rect x="320" y="272" width="471.3" height="20" fill="#C42D1C"/>
+    <text x="801.3" y="287" fill="#9DB2C6">516 /km²</text></g>
+  <line x1="60" y1="312" x2="940" y2="312" stroke="#F4C95D" stroke-opacity="0.25"/>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="14"><text x="308" y="337.4" text-anchor="end" fill="#EAF2F8">Greenland</text>
+    <rect x="320" y="322.4" width="41.9" height="20" fill="#1E5F8C"/>
+    <text x="371.9" y="337.4" fill="#9DB2C6">0.03 /km²</text></g>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="14"><text x="308" y="373.4" text-anchor="end" fill="#EAF2F8">Mongolia</text>
+    <rect x="320" y="358.4" width="235.3" height="20" fill="#1E5F8C"/>
+    <text x="565.3" y="373.4" fill="#9DB2C6">2.3 /km²</text></g>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="14"><text x="308" y="409.40000000000003" text-anchor="end" fill="#EAF2F8">Australia</text>
+    <rect x="320" y="394.40000000000003" width="254.8" height="20" fill="#1E5F8C"/>
+    <text x="584.8" y="409.40000000000003" fill="#9DB2C6">3.5 /km²</text></g>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="14"><text x="308" y="445.40000000000003" text-anchor="end" fill="#EAF2F8">Namibia</text>
+    <rect x="320" y="430.40000000000003" width="256.5" height="20" fill="#1E5F8C"/>
+    <text x="586.5" y="445.40000000000003" fill="#9DB2C6">3.7 /km²</text></g>
+<g font-family="'Space Mono',ui-monospace,monospace" font-size="14"><text x="308" y="481.40000000000003" text-anchor="end" fill="#EAF2F8">Iceland</text>
+    <rect x="320" y="466.40000000000003" width="257.4" height="20" fill="#1E5F8C"/>
+    <text x="587.4" y="481.40000000000003" fill="#9DB2C6">3.8 /km²</text></g>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">Population: World Bank 2024 (CC BY 4.0) · area: world-countries · globleunlimited.net</text>
+</svg>
