@@ -2,15 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CluesGame from '../components/game/CluesGame.astro';
 
-const title = 'Countryle Unlimited – Guess the Country by Clues';
+const title = 'Globle Clues – Countryle-Style Country Clue Game, Unlimited';
 const description =
-  'Play Countryle Unlimited free: deduce the mystery country from clues on continent, area, borders, hemisphere & direction. No daily limit—endless rounds.';
+  'Play Globle Clues free: a Countryle-style game where you deduce the mystery country from clues on continent, area, borders, hemisphere & direction. Endless rounds.';
 
 const schema: Record<string, unknown>[] = [
   {
     '@context': 'https://schema.org',
     '@type': 'VideoGame',
-    name: 'Countryle Unlimited',
+    name: 'Globle Clues',
     genre: 'Geography puzzle',
     gamePlatform: 'Web browser',
     applicationCategory: 'Game',
@@ -20,7 +20,7 @@ const schema: Record<string, unknown>[] = [
   {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
-    name: 'How to play Countryle Unlimited',
+    name: 'How to play Globle Clues',
     step: [
       { '@type': 'HowToStep', name: 'Guess a country', text: 'Type any country name and press Guess.' },
       { '@type': 'HowToStep', name: 'Read the clues', text: 'Each guess is scored across continent, hemisphere, direction, area, borders and landlocked status.' },
@@ -32,8 +32,8 @@ const schema: Record<string, unknown>[] = [
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: [
-      { '@type': 'Question', name: 'Is Countryle Unlimited free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Countryle Unlimited is completely free to play in your browser, with no sign-up required.' } },
-      { '@type': 'Question', name: 'How is Countryle Unlimited different from the daily Countryle?', acceptedAnswer: { '@type': 'Answer', text: 'The daily game gives you one puzzle a day; Countryle Unlimited lets you play endless rounds back-to-back with no daily wait.' } },
+      { '@type': 'Question', name: 'Is Globle Clues free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Globle Clues is completely free to play in your browser, with no sign-up required.' } },
+      { '@type': 'Question', name: 'How is Globle Clues different from Countryle?', acceptedAnswer: { '@type': 'Answer', text: 'Countryle gives you one puzzle a day; Globle Clues is our own take on the format and lets you play endless rounds back-to-back with no daily wait. It is not affiliated with Countryle.' } },
       { '@type': 'Question', name: 'How many guesses do I get?', acceptedAnswer: { '@type': 'Answer', text: 'Seven guesses, with clues on continent, hemisphere, direction, area, borders and landlocked status after each one.' } },
       { '@type': 'Question', name: 'What do the colours and arrows mean?', acceptedAnswer: { '@type': 'Answer', text: 'Green means the clue matches, yellow is close, red is far, and an up or down arrow shows whether the answer is higher or lower on that stat.' } },
     ],
@@ -44,18 +44,19 @@ const schema: Record<string, unknown>[] = [
 <BaseLayout title={title} description={description} path="/clues" schema={schema}>
   <section class="hero">
     <div class="container hero-inner">
-      <h1 class="hero-title rise" style="--d:0ms">Countryle Unlimited</h1>
+      <h1 class="hero-title rise" style="--d:0ms">Globle Clues</h1>
       <p class="hero-sub rise" style="--d:80ms">
-        Deduce the mystery country from six kinds of clue — no map, <strong>unlimited rounds</strong>, no daily wait.
+        A Countryle-style deduction game: find the mystery country from six kinds of clue — no map,
+        <strong>unlimited rounds</strong>, no daily wait.
       </p>
       <CluesGame />
     </div>
   </section>
 
   <article class="prose content">
-    <h2>What Is Countryle Unlimited?</h2>
+    <h2>What Is Globle Clues?</h2>
     <p>
-      <strong>Countryle Unlimited is the endless, map-free country-guessing game where you deduce the mystery
+      <strong>Globle Clues is the endless, map-free country-guessing game where you deduce the mystery
       country from clues like continent, area and direction — with no daily limit.</strong> You type any
       country, and instead of a distance on a globe, you get a row of colour-coded clues: which continent it
       is on, which hemisphere, which way to look, how its area compares, how many neighbours it has, and
@@ -64,13 +65,17 @@ const schema: Record<string, unknown>[] = [
       as long as you like.
     </p>
     <p>
+      Globle Clues is our own version of the format Countryle made popular. It is not affiliated with or
+      endorsed by Countryle.
+    </p>
+    <p>
       This is the pure-logic mode. There is no shape and no globe — just facts and reasoning. If you enjoy
-      narrowing down possibilities like a detective, Countryle Unlimited is the most satisfying of all the
+      narrowing down possibilities like a detective, Globle Clues is the most satisfying of all the
       modes, and endless rounds let you sharpen that reasoning without waiting for tomorrow.
     </p>
 
-    <h2>How to Play Countryle Unlimited</h2>
-    <p>Countryle Unlimited is all about reading clues well:</p>
+    <h2>How to Play Globle Clues</h2>
+    <p>Globle Clues is all about reading clues well:</p>
     <ol>
       <li><strong>Guess any country</strong> and press Enter. Autocomplete helps you spell it.</li>
       <li><strong>Read the six clues</strong> in the row — continent, hemisphere, direction, area, borders and
@@ -80,7 +85,7 @@ const schema: Record<string, unknown>[] = [
       <li><strong>Deduce the country within seven guesses,</strong> then hit Play Again for a fresh round.</li>
     </ol>
     <p>
-      New to the idea? Our <a href="/how-to-play">how-to-play guide</a> covers the basics, and every mode on
+      New to the idea? Our <a href="/how-to-play/">how-to-play guide</a> covers the basics, and every mode on
       the site uses the same country pool, so the geography you learn here carries across.
     </p>
 
@@ -89,10 +94,11 @@ const schema: Record<string, unknown>[] = [
       The whole game is reading six small clues correctly. Here is what each column tells you:
     </p>
     <figure class="figure">
-      <img src="/assets/svg/clue-attributes-legend.svg" alt="Diagram showing a Countryle clue row with green, yellow and red cells for continent, area, borders and landlocked status, plus up and down arrows" width="720" height="300" loading="lazy" />
+      <img src="/assets/svg/clue-attributes-legend.svg" alt="Diagram showing a clue row with green, yellow and red cells for continent, area, borders and landlocked status, plus up and down arrows" width="720" height="300" loading="lazy" />
     </figure>
     <ul>
-      <li><strong>Continent</strong> turns green when your guess is on the same continent as the answer.</li>
+      <li><strong>Continent</strong> turns green when your guess is on the same continent as the answer. North
+        and South America count as one, the Americas.</li>
       <li><strong>Hemisphere</strong> shows N or S and matches when the answer is in the same half of the globe.</li>
       <li><strong>Direction</strong> is a compass arrow pointing from your guess toward the mystery country.</li>
       <li><strong>Area</strong> compares land size; the arrow points up if the answer is larger, down if smaller,
@@ -103,36 +109,37 @@ const schema: Record<string, unknown>[] = [
         countries.</li>
     </ul>
     <p>
-      Read together, the clues let you triangulate fast. A South-America, large-area, many-borders,
-      not-landlocked country is almost certainly one of a handful — often just Brazil or Argentina.
+      Read together, the clues let you triangulate fast. An Americas, southern-hemisphere, large-area,
+      many-borders, not-landlocked country is almost certainly one of a handful — often just Brazil or
+      Argentina.
     </p>
 
-    <h2>Countryle vs Globle vs Worldle</h2>
+    <h2>Globle Clues vs the Other Modes</h2>
     <p>
-      Countryle Unlimited sits alongside our other endless modes, all built on the same country pool but each
+      Globle Clues sits alongside our other endless modes, all built on the same country pool but each
       testing a different kind of knowledge:
     </p>
     <table class="cmp">
       <thead><tr><th>Game</th><th>Main clue</th><th>Skill tested</th></tr></thead>
       <tbody>
-        <tr><td><a href="/clues">Countryle Unlimited</a></td><td>Attribute clues</td><td>Deduction &amp; country facts</td></tr>
+        <tr><td><a href="/clues/">Globle Clues</a></td><td>Attribute clues</td><td>Deduction &amp; country facts</td></tr>
         <tr><td><a href="/">Globle Unlimited</a></td><td>Distance + heat colour</td><td>Mental-map building</td></tr>
-        <tr><td><a href="/silhouette">Worldle Unlimited</a></td><td>Silhouette + direction</td><td>Shape recognition</td></tr>
-        <tr><td><a href="/flags">Flagle Unlimited</a></td><td>Flag reveal + distance</td><td>Flag recognition</td></tr>
+        <tr><td><a href="/silhouette/">Globle Shapes</a></td><td>Silhouette + direction</td><td>Shape recognition</td></tr>
+        <tr><td><a href="/flags/">Globle Flags</a></td><td>Flag reveal + distance</td><td>Flag recognition</td></tr>
       </tbody>
     </table>
     <p>
-      Countryle is the odd one out in the best way: it needs no map at all. If you would rather reason with
+      Globle Clues is the odd one out in the best way: it needs no map at all. If you would rather reason with
       facts than read a globe, this is your mode; if you prefer visuals, try
-      <a href="/silhouette">Worldle Unlimited</a> or <a href="/flags">Flagle Unlimited</a>.
+      <a href="/silhouette/">Globle Shapes</a> or <a href="/flags/">Globle Flags</a>.
     </p>
 
-    <h2>Countryle Unlimited vs the Daily Countryle</h2>
+    <h2>Globle Clues vs the Daily Countryle</h2>
     <p>
-      The daily version gives one shared puzzle per day — good for a quick brain-teaser, but soon over.
-      Countryle Unlimited removes the cap. Every round picks a fresh random country, so you can keep reasoning
+      Countryle gives one shared puzzle per day — good for a quick brain-teaser, but soon over.
+      Globle Clues removes the cap. Every round picks a fresh random country, so you can keep reasoning
       through as many as you like. That volume is exactly what makes your deduction faster over time. When you
-      want the shared streak back, the <a href="/daily">daily Globle</a> is always there.
+      want the shared streak back, the <a href="/daily/">daily Globle</a> is always there.
     </p>
 
     <h2>Strategy: Which Country to Guess First</h2>
@@ -149,12 +156,12 @@ const schema: Record<string, unknown>[] = [
     </ul>
     <p>
       Combine these and you can often solve a round in three or four guesses. Our
-      <a href="/blog/globle-tips-strategy">strategy guide</a> has more ideas that transfer here.
+      <a href="/blog/globle-tips-strategy/">strategy guide</a> has more ideas that transfer here.
     </p>
 
     <h2>A Great Way to Learn Country Facts</h2>
     <p>
-      Countryle Unlimited teaches the kind of geography that sticks: not just where countries are, but how big
+      Globle Clues teaches the kind of geography that sticks: not just where countries are, but how big
       they are, who they border, and how they sit on the globe. Every round quietly builds that knowledge. You
       start to remember that Kazakhstan is enormous and landlocked, that Chile is long and coastal, that the
       Democratic Republic of the Congo has a striking number of neighbours. Because the feedback is instant and
@@ -182,7 +189,7 @@ const schema: Record<string, unknown>[] = [
 
     <h2>Play Anywhere, on Any Device</h2>
     <p>
-      Countryle Unlimited is the lightest mode on the site — a pure clue table with no globe or 3D engine — so
+      Globle Clues is the lightest mode on the site — a pure clue table with no globe or 3D engine — so
       it loads instantly and runs smoothly on any phone, tablet or laptop. There is nothing to install and no
       account to create, and your stats are saved privately in your own browser. On a small screen the clue
       table scrolls sideways so every column stays readable. That lightness makes it easy to play a little and
@@ -191,7 +198,7 @@ const schema: Record<string, unknown>[] = [
 
     <h2>A Classroom-Friendly Brain Teaser</h2>
     <p>
-      Because it rewards reasoning rather than rote recall, Countryle Unlimited works beautifully as a teaching
+      Because it rewards reasoning rather than rote recall, Globle Clues works beautifully as a teaching
       tool. A single round touches continents, hemispheres, relative size, borders and coastlines all at once,
       so students practise connecting facts instead of memorising them in isolation. Teachers can put it on a
       projector and solve a round together, thinking aloud about which clue rules out the most countries.
@@ -202,30 +209,30 @@ const schema: Record<string, unknown>[] = [
 
     <h2>Track Your Best Score</h2>
     <p>
-      Countryle Unlimited keeps a private record of your play, stored locally in your own browser. After each
+      Globle Clues keeps a private record of your play, stored locally in your own browser. After each
       win it shows your best-ever guess count and how many rounds you have played, so you can watch your average
       fall as your deduction sharpens. There is no leaderboard and no login — the numbers are just for you, a
       quiet nudge to solve the next one in fewer moves. If you would rather chase a shared streak, the
-      <a href="/daily">daily challenge</a> tracks one, and warming up with a few unlimited rounds first is a
+      <a href="/daily/">daily challenge</a> tracks one, and warming up with a few unlimited rounds first is a
       good way to get sharp before you play it.
     </p>
 
     <h2>Frequently Asked Questions</h2>
     <div class="faq">
-      <details><summary>Is Countryle Unlimited free?</summary><p>Yes — completely free in your browser with no sign-up. Prefer a map? Try <a href="/">Globle Unlimited</a>.</p></details>
+      <details><summary>Is Globle Clues free?</summary><p>Yes — completely free in your browser with no sign-up. Prefer a map? Try <a href="/">Globle Unlimited</a>.</p></details>
       <details><summary>Do I need an account or download?</summary><p>No. Everything runs in your browser and your progress is saved locally on your device.</p></details>
-      <details><summary>How is it different from the daily Countryle?</summary><p>The <a href="/daily">daily game</a> gives one puzzle a day; Countryle Unlimited lets you play endless rounds back-to-back.</p></details>
+      <details><summary>How is it different from Countryle?</summary><p>Countryle gives one puzzle a day; Globle Clues, our own take on the format, lets you play endless rounds back-to-back. It is not affiliated with Countryle.</p></details>
       <details><summary>How many guesses do I get?</summary><p>Seven, each scored across continent, hemisphere, direction, area, borders and landlocked status.</p></details>
       <details><summary>What do the colours and arrows mean?</summary><p>Green means the clue matches, yellow is close, red is far, and an arrow shows whether the answer is higher or lower on that stat.</p></details>
-      <details><summary>What's a good first guess?</summary><p>A large, well-known country fixes the continent and area range fast — see our <a href="/blog/globle-tips-strategy">strategy guide</a>.</p></details>
+      <details><summary>What's a good first guess?</summary><p>A large, well-known country fixes the continent and area range fast — see our <a href="/blog/globle-tips-strategy/">strategy guide</a>.</p></details>
     </div>
 
     <h2>More Ways to Play</h2>
     <p>
-      Countryle Unlimited is one of several endless modes on Globle Unlimited. Try
-      <a href="/">Globle Unlimited</a> for the 3D globe, <a href="/silhouette">Worldle Unlimited</a> to guess
-      by shape, or <a href="/flags">Flagle Unlimited</a> to guess by flag. You can browse them all on the
-      <a href="/unlimited">unlimited geography games</a> hub.
+      Globle Clues is one of several endless modes on Globle Unlimited. Try
+      <a href="/">Globle Unlimited</a> for the 3D globe, <a href="/silhouette/">Globle Shapes</a> to guess
+      by shape, or <a href="/flags/">Globle Flags</a> to guess by flag. You can browse them all on the
+      <a href="/unlimited/">unlimited geography games</a> hub.
     </p>
     <p class="cta-row"><a href="/" class="btn btn-ghost">Play Globle Unlimited</a></p>
   </article>

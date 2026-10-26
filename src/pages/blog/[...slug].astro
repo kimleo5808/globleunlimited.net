@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
-const url = `${SITE.url}/blog/${post.id}`;
+const url = `${SITE.url}/blog/${post.id}/`;
 
 const fmt = (d: Date) =>
   d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
@@ -40,10 +40,10 @@ const schema: Record<string, unknown>[] = [
 ];
 ---
 
-<BaseLayout title={`${post.data.title} | Globle Unlimited`} description={post.data.description} path={`/blog/${post.id}`} schema={schema}>
+<BaseLayout title={`${post.data.title} | Globle Unlimited`} description={post.data.description} path={`/blog/${post.id}/`} schema={schema} ogType="article">
   <div class="post-wrap">
     <header class="post-head">
-      <p class="crumb"><a href="/">Home</a> › <a href="/blog">Blog</a> › {post.data.title}</p>
+      <p class="crumb"><a href="/">Home</a> › <a href="/blog/">Blog</a> › {post.data.title}</p>
       <h1>{post.data.title}</h1>
       <p class="byline mono">
         By {post.data.author} · {fmt(post.data.date)}
@@ -74,7 +74,7 @@ const schema: Record<string, unknown>[] = [
 
         <hr />
         <p class="cta-row"><a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a></p>
-        <p><a href="/blog">← Back to all posts</a></p>
+        <p><a href="/blog/">← Back to all posts</a></p>
       </article>
     </div>
   </div>

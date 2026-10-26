@@ -20,8 +20,8 @@ const schema: Record<string, unknown>[] = [
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
-      { '@type': 'ListItem', position: 2, name: 'Unlimited Geography Games', item: `${SITE.url}/unlimited` },
-      { '@type': 'ListItem', position: 3, name: 'Globle vs Worldle', item: `${SITE.url}/globle-vs-worldle` },
+      { '@type': 'ListItem', position: 2, name: 'Unlimited Geography Games', item: `${SITE.url}/unlimited/` },
+      { '@type': 'ListItem', position: 3, name: 'Globle vs Worldle', item: `${SITE.url}/globle-vs-worldle/` },
     ],
   },
   {
@@ -30,7 +30,7 @@ const schema: Record<string, unknown>[] = [
     mainEntity: [
       { '@type': 'Question', name: 'What is the main difference between Globle and Worldle?', acceptedAnswer: { '@type': 'Answer', text: 'Globle shades a 3D globe by how close each guess is to the mystery country; Worldle shows a flat silhouette and gives a distance and direction. Globle tests your mental map, Worldle tests shape recognition.' } },
       { '@type': 'Question', name: 'Is Globle or Worldle harder?', acceptedAnswer: { '@type': 'Answer', text: 'Worldle is usually faster because a distinctive shape can be named instantly. Globle is harder for beginners since it gives only distance and colour, but the skill grows quickly.' } },
-      { '@type': 'Question', name: 'Can I play Globle and Worldle unlimited?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. On globleunlimited.net both play in endless rounds with no daily wait.' } },
+      { '@type': 'Question', name: 'Can I play Globle and Worldle unlimited?', acceptedAnswer: { '@type': 'Answer', text: 'Both originals are daily games. On globleunlimited.net you can play our own takes on both formats — Globle Unlimited and Globle Shapes — in endless rounds with no daily wait. Neither is affiliated with the original games.' } },
       { '@type': 'Question', name: 'Do Globle and Worldle share the same answer?', acceptedAnswer: { '@type': 'Answer', text: 'No. Each game picks its own mystery country independently.' } },
     ],
   },
@@ -45,7 +45,7 @@ const SHAPE_ICON = '<path d="M12 8l6 3 8-2 5 6-3 9-9 4-8-5-1-11z" stroke-linejoi
     <div class="container">
       <nav class="crumbs" aria-label="Breadcrumb">
         <a href="/">Home</a> <span aria-hidden="true">›</span>
-        <a href="/unlimited">Unlimited Geography Games</a> <span aria-hidden="true">›</span>
+        <a href="/unlimited/">Unlimited Geography Games</a> <span aria-hidden="true">›</span>
         <span aria-current="page">Globle vs Worldle</span>
       </nav>
       <div class="hero-inner">
@@ -61,14 +61,14 @@ const SHAPE_ICON = '<path d="M12 8l6 3 8-2 5 6-3 9-9 4-8-5-1-11z" stroke-linejoi
           <span class="vs-badge" aria-hidden="true"><svg viewBox="0 0 40 40" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.6" set:html={GLOBE_ICON} /></span>
           <span class="vs-name">Globle</span>
           <span class="vs-desc">Guess the country on a 3D globe, shaded by distance.</span>
-          <span class="vs-cta">Play Globle →</span>
+          <span class="vs-cta">Play Globle Unlimited →</span>
         </a>
         <span class="vs-mark" aria-hidden="true">VS</span>
-        <a class="vs-card rise" style="--d:220ms" href="/silhouette">
+        <a class="vs-card rise" style="--d:220ms" href="/silhouette/">
           <span class="vs-badge" aria-hidden="true"><svg viewBox="0 0 40 40" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.6" set:html={SHAPE_ICON} /></span>
           <span class="vs-name">Worldle</span>
           <span class="vs-desc">Name the country from its silhouette and direction.</span>
-          <span class="vs-cta">Play Worldle →</span>
+          <span class="vs-cta">Play Globle Shapes →</span>
         </a>
       </div>
     </div>
@@ -99,7 +99,7 @@ const SHAPE_ICON = '<path d="M12 8l6 3 8-2 5 6-3 9-9 4-8-5-1-11z" stroke-linejoi
       helped by a distance, a direction arrow and a proximity score.</strong> Each round shows only the outline
       of the mystery country. You guess in six tries, and every wrong guess tells you how far away you are and
       which direction to look. It rewards a good eye for shapes — a distinctive outline like Italy's boot or
-      Chile's ribbon can be named on sight. <a href="/silhouette">Play Worldle Unlimited</a> to see how it feels.
+      Chile's ribbon can be named on sight. <a href="/silhouette/">Play Globle Shapes</a> to see how it feels.
     </p>
 
     <h2>Globle vs Worldle: A Side-by-Side Comparison</h2>
@@ -128,7 +128,7 @@ const SHAPE_ICON = '<path d="M12 8l6 3 8-2 5 6-3 9-9 4-8-5-1-11z" stroke-linejoi
 
     <h2>When to Play Globle</h2>
     <p>
-      Reach for <a href="/">Globle</a> when you want to genuinely learn world geography, not just recognise
+      Reach for Globle — or <a href="/">Globle Unlimited</a> — when you want to genuinely learn world geography, not just recognise
       shapes. Because it forces you to reason from location alone, it is the best trainer for building a mental
       map — where the Gulf states cluster, how close eastern Russia is to Alaska, which countries border which.
       It is also the better pick when you want a longer, more thoughtful puzzle: a tricky Globle round can take
@@ -137,14 +137,15 @@ const SHAPE_ICON = '<path d="M12 8l6 3 8-2 5 6-3 9-9 4-8-5-1-11z" stroke-linejoi
 
     <h2>When to Play Worldle</h2>
     <p>
-      Reach for <a href="/silhouette">Worldle</a> when you want something quick and visual. If you already know
+      Reach for Worldle when you want something quick and visual. If you already know
       your country shapes, or want to learn them, the silhouette format is fast and satisfying — a perfect
       one-minute break. It is also the friendlier introduction for newcomers, because the outline gives you a
       concrete starting point rather than a blank globe. And if you enjoy the "aha" of recognising a shape, few
-      games deliver it as reliably.
+      games deliver it as reliably. Our <a href="/silhouette/">Globle Shapes</a> plays the same way, without the
+      daily limit.
     </p>
 
-    <h2>Why Not Play Both? (And Flagle &amp; Countryle Too)</h2>
+    <h2>Why Not Play Both? (And Flag and Clue Games Too)</h2>
     <p>
       Here is the honest answer to "which is better": most serious players play both, because they build
       different halves of the same skill. Worldle teaches you what countries look like; Globle teaches you where
@@ -152,20 +153,21 @@ const SHAPE_ICON = '<path d="M12 8l6 3 8-2 5 6-3 9-9 4-8-5-1-11z" stroke-linejoi
       place in Globle, and a location you learned in Globle is faster to recognise in Worldle.
     </p>
     <p>
-      The same country pool also powers two more modes worth trying. <a href="/flags">Flagle Unlimited</a> hides
-      a flag behind tiles and reveals it guess by guess, and <a href="/clues">Countryle Unlimited</a> drops the
+      On this site, the same country pool also powers two more modes worth trying. <a href="/flags/">Globle Flags</a> hides
+      a flag behind tiles and reveals it guess by guess, and <a href="/clues/">Globle Clues</a> drops the
       map entirely, asking you to deduce the country from clues like continent, area and borders. Together, the
       four modes teach you a country's location, shape, flag and facts — a far fuller picture than any single
-      game. You can browse them all on the <a href="/unlimited">unlimited geography games</a> hub.
+      game. You can browse them all on the <a href="/unlimited/">unlimited geography games</a> hub.
     </p>
 
     <h2>Play Both, Unlimited and Free</h2>
     <p>
-      The daily versions of Globle and Worldle each give you one puzzle a day and then make you wait. On
-      globleunlimited.net, both play in endless rounds with no daily cap — so you never have to choose one over
-      the other, and you can drill either as much as you like. Everything is free, runs in your browser, and
+      The original Globle and Worldle each give you one puzzle a day and then make you wait. On
+      globleunlimited.net, our own versions of both formats play in endless rounds with no daily cap — so you
+      never have to choose one over the other, and you can drill either as much as you like. Neither is
+      affiliated with the original games. Everything is free, runs in your browser, and
       needs no sign-up. Start with <a href="/">Globle Unlimited</a> if you like maps or
-      <a href="/silhouette">Worldle Unlimited</a> if you like shapes, and switch whenever you please.
+      <a href="/silhouette/">Globle Shapes</a> if you like shapes, and switch whenever you please.
     </p>
 
     <h2>How the Clues Compare</h2>
@@ -174,13 +176,13 @@ const SHAPE_ICON = '<path d="M12 8l6 3 8-2 5 6-3 9-9 4-8-5-1-11z" stroke-linejoi
       score are both really telling you the same thing — how close your last guess was — just shown in different
       ways. Both give you a distance in kilometres or miles, and Worldle adds a direction arrow that Globle
       shows as a compass toward the target. Learn to read one and the other feels immediately familiar. If you
-      are brand new to either, our <a href="/how-to-play">how-to-play guide</a> explains the colour and distance
+      are brand new to either, our <a href="/how-to-play/">how-to-play guide</a> explains the colour and distance
       system in plain language, and it applies to both games.
     </p>
 
     <h2>Tips That Work in Both Games</h2>
     <p>
-      Because Globle and Worldle share the same country pool, the same habits improve your score in either one.
+      Because both games draw on the same map of the world, the same habits improve your score in either one.
       Open with a large, central country so your first distance and direction readings are easy to act on. Treat
       the direction arrow as a compass and step your next guess that way rather than jumping around the map. Learn
       the tight clusters — the Balkans, the Gulf, the Caribbean, Southeast Asia — because a warm reading near one
@@ -191,10 +193,11 @@ const SHAPE_ICON = '<path d="M12 8l6 3 8-2 5 6-3 9-9 4-8-5-1-11z" stroke-linejoi
 
     <h2>Which Should a Beginner Start With?</h2>
     <p>
-      If you are completely new to geography games, start with <a href="/silhouette">Worldle</a>. The silhouette
+      If you are completely new to geography games, start with a shape game — Worldle, or our own
+      <a href="/silhouette/">Globle Shapes</a>. The silhouette
       gives you a concrete anchor — you are naming something you can see — so it feels approachable from the first
       round, and the six-guess limit keeps each game short. Once your eye for shapes is warming up, add
-      <a href="/">Globle</a> to build the location knowledge that Worldle alone does not teach. Within a week of
+      a globe game such as <a href="/">Globle Unlimited</a> to build the location knowledge that Worldle alone does not teach. Within a week of
       playing both a few times a day, you will notice country names you barely recognised becoming familiar
       landmarks, and your guess counts falling in both games at once. That combined progress is faster than
       grinding either game on its own, which is the whole case for treating them as a pair rather than rivals.
@@ -202,9 +205,9 @@ const SHAPE_ICON = '<path d="M12 8l6 3 8-2 5 6-3 9-9 4-8-5-1-11z" stroke-linejoi
 
     <h2>A Quick Verdict</h2>
     <p>
-      If you are still deciding: pick <a href="/silhouette">Worldle</a> for a fast, visual puzzle you can win in
-      under a minute, and pick <a href="/">Globle</a> when you want to actually learn the map and enjoy a longer
-      challenge. Neither is objectively "better" — they suit different moods and build different skills, and the honest
+      If you are still deciding: pick a shape game like Worldle for a fast, visual puzzle you can win in
+      under a minute, and pick a globe game like Globle when you want to actually learn the map and enjoy a
+      longer challenge. Neither is objectively "better" — they suit different moods and build different skills, and the honest
       answer depends on whether you enjoy shapes or locations more. The one
       choice we would steer you away from is playing only one and ignoring the other, because half the fun of
       these games is how they reinforce each other. Try both unlimited, and let your own taste decide.
@@ -212,17 +215,17 @@ const SHAPE_ICON = '<path d="M12 8l6 3 8-2 5 6-3 9-9 4-8-5-1-11z" stroke-linejoi
 
     <h2>Frequently Asked Questions</h2>
     <div class="faq">
-      <details><summary>What's the main difference between Globle and Worldle?</summary><p>Globle shades a 3D globe by proximity to the mystery country; <a href="/silhouette">Worldle</a> shows a flat silhouette with a distance and direction. Globle tests your mental map; Worldle tests shape recognition.</p></details>
-      <details><summary>Is Globle or Worldle harder?</summary><p>Worldle is usually faster — a distinctive shape can be named instantly. <a href="/">Globle</a> is harder for beginners, who often need 15+ guesses at first, but skill grows fast.</p></details>
-      <details><summary>Can I play Globle and Worldle unlimited?</summary><p>Yes — on this site both play in endless rounds with no daily wait. Browse every mode on the <a href="/unlimited">unlimited games hub</a>.</p></details>
+      <details><summary>What's the main difference between Globle and Worldle?</summary><p>Globle shades a 3D globe by proximity to the mystery country; Worldle shows a flat silhouette with a distance and direction. Globle tests your mental map; Worldle tests shape recognition.</p></details>
+      <details><summary>Is Globle or Worldle harder?</summary><p>Worldle is usually faster — a distinctive shape can be named instantly. Globle is harder for beginners, who often need 15+ guesses at first, but skill grows fast.</p></details>
+      <details><summary>Can I play Globle and Worldle unlimited?</summary><p>Both originals are daily games. On this site, our own versions of both formats play in endless rounds with no daily wait. Browse every mode on the <a href="/unlimited/">unlimited games hub</a>.</p></details>
       <details><summary>Are Globle and Worldle free?</summary><p>Yes, both are free in your browser with no sign-up required.</p></details>
       <details><summary>Do Globle and Worldle share the same answer?</summary><p>No — each game picks its own mystery country independently.</p></details>
-      <details><summary>What other games are like Globle and Worldle?</summary><p><a href="/flags">Flagle</a> (guess by flag) and <a href="/clues">Countryle</a> (guess by clues) use the same country pool with different hints.</p></details>
+      <details><summary>What other games are like Globle and Worldle?</summary><p>Flagle (guess by flag) and Countryle (guess by clues) are the best-known. On this site, <a href="/flags/">Globle Flags</a> and <a href="/clues/">Globle Clues</a> play those formats on the same country pool as our globe game.</p></details>
     </div>
 
     <p class="cta-row">
-      <a href="/" class="btn btn-primary">Play Globle</a>
-      <a href="/silhouette" class="btn btn-ghost">Play Worldle</a>
+      <a href="/" class="btn btn-primary">Play Globle Unlimited</a>
+      <a href="/silhouette/" class="btn btn-ghost">Play Globle Shapes</a>
     </p>
   </article>
 </BaseLayout>

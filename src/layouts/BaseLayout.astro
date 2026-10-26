@@ -23,6 +23,10 @@ interface Props {
   schema?: Record<string, unknown>[];
   /** Hide site chrome (used by full-bleed game pages if needed). */
   bare?: boolean;
+  /** Load the AdSense script. Off for pages with no content of their own (404). */
+  ads?: boolean;
+  /** Open Graph type: "article" for blog posts, "website" everywhere else. */
+  ogType?: 'website' | 'article';
 }
 
 const {
@@ -34,9 +38,14 @@ const {
   robots = 'index, follow',
   schema = [],
   bare = false,
+  ads = true,
+  ogType = 'website',
 } = Astro.props;
 
-const canonical = new URL(path ?? Astro.url.pathname, SITE.url).href;
+// Pages are built as directories and served at /daily/; Cloudflare answers the
+// bare /daily with a 308, so the canonical carries the slash as well.
+const withSlash = (p: string) => (p.endsWith('/') || /\.[a-z0-9]+$/i.test(p) ? p : `${p}/`);
+const canonical = new URL(withSlash(path ?? Astro.url.pathname), SITE.url).href;
 const ogImageUrl = new URL(ogImage, SITE.url).href;
 ---
 
@@ -70,7 +79,7 @@ const ogImageUrl = new URL(ogImage, SITE.url).href;
     <link rel="alternate" hreflang="x-default" href={canonical} />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -99,17 +108,35 @@ const ogImageUrl = new URL(ogImage, SITE.url).href;
       ))
     }
 
-    <!-- Google tag (gtag.js) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-XW8L3WFYLE"></script>
+    <!-- Consent Mode v2. Must run before gtag.js and AdSense: storage is denied by
+         default in the EEA, UK and Switzerland until the visitor answers Google's
+         consent message (AdSense → Privacy & messaging), which updates it. -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        region: [
+          'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IE',
+          'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES', 'SE',
+          'IS', 'LI', 'NO', 'GB', 'CH',
+        ],
+        wait_for_update: 500,
+      });
       gtag('js', new Date());
       gtag('config', 'G-XW8L3WFYLE');
     </script>
 
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-XW8L3WFYLE"></script>
+
     <!-- Google AdSense -->
-    <script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7892203965442076" crossorigin="anonymous"></script>
+    {ads && (
+      <script is:inline async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7892203965442076" crossorigin="anonymous"></script>
+    )}
   </head>
   <body>
     {!bare && <Header />}

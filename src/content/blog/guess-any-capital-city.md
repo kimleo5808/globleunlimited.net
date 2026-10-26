@@ -20,13 +20,13 @@ We measured every one of the 199 capitals in our dataset against every other one
 
 ## Why Capitals Are Harder Than Countries
 
-The country game gives you a target with width. Guess a neighbour of the answer and you land in the hottest band almost automatically, because the two centroids are close.
+The country game gives you a target with width. Guess a neighbour of the answer and you land in the hottest band automatically, because neighbouring countries read 0 km — their borders touch.
 
 Capitals remove that cushion.
 
 ### A city is a point, a country is an area
 
-When Globle scores a country guess, it measures centre to centre. Large countries therefore have large catchment: guess anything near Russia's middle and the reading is generous.
+When Globle scores a country guess, it measures border to border. Large countries therefore have large catchment: guess any of Russia's fourteen land neighbours and the reading is 0 km.
 
 Capitals have no catchment. Two capitals 300 km apart read as two different answers, and 300 km is a rounding error on a scale that runs to 12,000.
 
@@ -105,7 +105,7 @@ Madrid works because it hangs off the western edge of the European cluster. It i
 
 #### Wellington is the interesting outlier
 
-New Zealand is the least central country on Earth, and we have argued before that [it makes a poor opening country](/blog/best-globle-starting-country). Yet Wellington ranks eighth among capitals.
+New Zealand is the least central country on Earth, and we have argued before that [it makes a poor opening country](/blog/best-globle-starting-country/). Yet Wellington ranks eighth among capitals.
 
 The difference is that capitals cluster far more tightly than countries do. From an extreme corner, a country opener collapses everything into one cold band. A capital opener from the same corner still separates the Pacific from Asia from Europe, because the clusters are compact enough to sit at genuinely different distances.
 
@@ -140,7 +140,7 @@ Castries and Kingstown each have seven capitals within 500 km. The eastern Carib
 
 #### Reading 200 km differences on the colour ramp
 
-Inside a cluster, colour stops helping. The [heat scale](/how-to-play) spans 12,000 km across five stops, which works out at 3,000 km per segment — so a 200 km difference is under 7% of one segment.
+Inside a cluster, colour stops helping. The [heat scale](/how-to-play/) spans 12,000 km across five stops, which works out at 3,000 km per segment — so a 200 km difference is under 7% of one segment.
 
 You will not see it. Once you know you are in a cluster, stop reading colour and start guessing cluster members directly.
 
@@ -222,11 +222,11 @@ Athens and Cairo spread the field across all five bands. That is what a working 
 
 The Wellington column is what "ruling out the Pacific" actually costs. You spend a full guess to learn that the answer is one of 140 things.
 
-Compare it to the [same test on countries](/blog/best-globle-starting-country), where a New Zealand opener puts 74% of the world into one shade. The pattern holds in both games.
+Compare it to the [same test on countries](/blog/best-globle-starting-country/), where a New Zealand opener puts 74% of the world into one shade. The pattern holds in both games.
 
 ## A Six-Guess Method That Works Every Time
 
-The method is the same shape as [country strategy](/blog/globle-tips-strategy), but the cluster problem changes what each guess is for.
+The method is the same shape as [country strategy](/blog/globle-tips-strategy/), but the cluster problem changes what each guess is for.
 
 ### Guesses 1–2: lock the region
 
@@ -301,11 +301,11 @@ None of the three changes the ranking. They change how much the ranking is worth
 
 <details>
 <summary>Does Globle Capitals have a daily answer?</summary>
-<p>No. <a href="/capitals">Globle Capitals</a> runs unlimited rather than once a day, so a new capital starts the moment you finish one. The daily rotation applies to the country game, whose answer is published on our <a href="/globle-answer-today">answer page</a>.</p>
+<p>No. <a href="/capitals/">Globle Capitals</a> runs unlimited rather than once a day, so a new capital starts the moment you finish one. The daily rotation applies to the country game, whose answer is published on our <a href="/globle-answer-today/">answer page</a>.</p>
 </details>
 
 ---
 
 **Method.** Distances are great-circle, computed on capital coordinates with the haversine formula — the same function the game scores with. The dataset holds 199 capitals; "worst case left" is the maximum, over all possible answers, of the number of other capitals whose distance from the opener falls within 500 km of the answer's. Figures are reproducible from `scripts/blog-data.mjs` in our repository.
 
-Ready to use it? [Play Globle Capitals](/capitals), or read the [country-side version of this study](/blog/best-globle-starting-country).
+Ready to use it? [Play Globle Capitals](/capitals/), or read the [country-side version of this study](/blog/best-globle-starting-country/).

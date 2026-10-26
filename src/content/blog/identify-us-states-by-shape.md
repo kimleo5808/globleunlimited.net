@@ -205,7 +205,7 @@ That is a whole family eliminated from a single edge.
 
 *Plate 4 - the opposite of the country result.*
 
-[Statele](/states) reports distance, direction and a proximity percentage alongside the outline. That extra information changes which opening guess is smart.
+[Globle States](/states/), our Statele-style mode, reports distance, direction and a proximity percentage alongside the outline. That extra information changes which opening guess is smart.
 
 ### The best opening states, measured
 
@@ -339,4 +339,4 @@ That split matters if you are deciding what to trust. Take the tables as fact an
 
 **Method.** Distances are great-circle between state centre points, computed with the same haversine the game uses; all 1,225 state pairs were measured. Shape families and confusable pairs are our own classification, not a measured result — they come from playing the mode, not from an algorithm. Distance figures are reproducible from `scripts/blog-data.mjs` in our repository.
 
-Try it: [play Statele Unlimited](/states), or read the [country version of this field guide](/blog/recognize-country-outlines).
+Try it: [play Globle States](/states/), or read the [country version of this field guide](/blog/recognize-country-outlines/).

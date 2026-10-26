@@ -135,7 +135,7 @@ Two entries are not islands. Kosovo and N. Cyprus are disputed territories whose
 
 With an island answer, a guess 400 km away across water reads almost exactly like a guess 400 km away across land. But there is no chain of adjacent countries to follow inward.
 
-You have to find it more or less directly, which is why island nations dominate the [hardest countries list](/blog/hardest-countries-to-guess).
+You have to find it more or less directly, which is why island nations dominate the [hardest countries list](/blog/hardest-countries-to-guess/).
 
 ## Landlocked: 40 of Our 176
 
@@ -184,7 +184,7 @@ This is the part we did not expect to be so clean.
 
 ### The measurement
 
-We rate every country 1 to 5 for difficulty, weighting land area 65% and neighbour count 35% — the same formula shown on every [answer page](/globle-answer-today). Then we grouped countries by neighbour count and took the mean difficulty of each group.
+We rate every country 1 to 5 for difficulty, weighting land area 65% and neighbour count 35% — the same formula shown on every [answer page](/globle-answer-today/). Then we grouped countries by neighbour count and took the mean difficulty of each group.
 
 | Land neighbours | Countries | Mean difficulty |
 |---|---|---|
@@ -301,4 +301,4 @@ Three limits worth naming.
 
 **Method.** Neighbour counts and landlocked flags come from our 176-country dataset, derived from open data and refined for gameplay. Difficulty is the 1–5 score used across the site, weighting land-area rank 65% and neighbour count 35%. All figures are reproducible from `scripts/blog-data.mjs` in our repository.
 
-Put it to work: [play Globle Unlimited](/), or see which countries this predicts will be hardest in [the hardest countries to guess](/blog/hardest-countries-to-guess).
+Put it to work: [play Globle Unlimited](/), or see which countries this predicts will be hardest in [the hardest countries to guess](/blog/hardest-countries-to-guess/).

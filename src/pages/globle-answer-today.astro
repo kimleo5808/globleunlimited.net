@@ -31,25 +31,25 @@ const totalArchived = allDates.length;
 const total = COUNTRIES.length;
 const { ladder, bestOpener, obscurity } = analysis;
 
-const title = 'Globle Answer Today – Hints First, Then the Reveal';
+const title = "Today's Globle Unlimited Daily Answer – Hints, Then the Reveal";
 const description =
-  'The Globle answer today with four hints before the spoiler, a country profile, the opening guess that finds it fastest, and every past answer.';
+  "The answer to today's Globle Unlimited daily puzzle — our own rotation, not the official Globle — with four hints before the spoiler, a country profile and the opening guess that finds it fastest.";
 
 const features: Array<[string, string]> = [
   ['New country every day', 'One mystery country per day, the same for everyone, rolling over at 00:00 UTC.'],
-  ['Guessing is by distance', 'Every guess is scored on the great-circle distance from its centre to the target.'],
-  ['Colour shows how close', 'Pale yellow is roughly 9,000 km away; the darkest red means you are almost on top of it.'],
+  ['Guessing is by distance', 'Each guess reads the distance from its nearest border to the target’s nearest border, so a neighbour shows 0 km.'],
+  ['Colour shows how close', 'Pale yellow means 12,000 km or more; the darkest red means you are almost on top of it.'],
   ['Unlimited rounds too', 'The daily is one puzzle. Unlimited mode deals a new country the moment you finish.'],
   ['Your streak is yours', 'Stats live in your browser, not on our servers, so there is no account to make.'],
 ];
 
 const faqs: Array<[string, string]> = [
   [
-    'What is the Globle answer today?',
-    `Today's mystery country on Globle Unlimited is revealed on this page behind a spoiler button, after four optional hints. The puzzle changes at 00:00 UTC, and this page is rebuilt at 00:05 UTC every day so the answer shown is always the current one.`,
+    "What is today's Globle Unlimited answer?",
+    `Today's mystery country on Globle Unlimited is revealed on this page behind a spoiler button, after four optional hints. The puzzle changes at 00:00 UTC, and this page is rebuilt shortly afterwards so the answer shown is always the current one.`,
   ],
   [
-    'What time does the Globle answer change?',
+    'What time does the daily answer change?',
     'The daily country rolls over at 00:00 UTC. That is 8:00 PM ET the previous evening, 5:00 PM PT the previous afternoon, 1:00 AM in the UK and Ireland during summer time, and 10:00 AM in eastern Australia.',
   ],
   [
@@ -57,16 +57,16 @@ const faqs: Array<[string, string]> = [
     'No. This is the answer to Globle Unlimited’s own daily puzzle. Globle Unlimited is an independent fan-made project and is not affiliated with the official Globle by Trainwreck Labs, which draws a different country each day.',
   ],
   [
-    'How many guesses is a good Globle score?',
+    'How many guesses is a good score?',
     `Most regular players finish between five and eight guesses. Four or fewer means your opening guess and your continent narrowing are both working. Today's country, for example, can be isolated to ${bestOpener.remaining} candidate${bestOpener.remaining === 1 ? '' : 's'} by a single well-chosen first guess.`,
   ],
   [
-    'Does Globle repeat countries?',
+    'Does the daily repeat countries?',
     `The daily answer is drawn from a pool of ${total} countries and territories, seeded by the date, so a country can reappear after a while. The archive on this site lists every past answer, which is the quickest way to check whether one has already come up.`,
   ],
   [
-    'What is the Globle Capitals answer today?',
-    'Globle Capitals is a separate mode that hides a capital city instead of a country. It runs on its own rotation, so its answer is different from the country puzzle. You can play it any time without waiting for a daily reset.',
+    'Does Globle Capitals have a daily answer?',
+    'No. Globle Capitals is a separate mode that hides a capital city instead of a country, and it deals a new city every round rather than once a day. You can play it any time without waiting for a reset.',
   ],
 ];
 
@@ -85,7 +85,7 @@ const schema: Record<string, unknown>[] = [
     '@type': 'WebPage',
     name: title,
     description,
-    url: `${SITE.url}/globle-answer-today`,
+    url: `${SITE.url}/globle-answer-today/`,
     dateModified: today,
     isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url },
   },
@@ -94,7 +94,7 @@ const schema: Record<string, unknown>[] = [
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
-      { '@type': 'ListItem', position: 2, name: 'Globle Answer Today', item: `${SITE.url}/globle-answer-today` },
+      { '@type': 'ListItem', position: 2, name: "Today's Answer", item: `${SITE.url}/globle-answer-today/` },
     ],
   },
 ];
@@ -105,28 +105,31 @@ const schema: Record<string, unknown>[] = [
     dispatch={`DISPATCH NO. ${dispatchNo}`}
     dateLabel={nice}
     date={today}
-    titleLead="Globle Answer"
-    titleAccent="Today"
+    titleLead="Globle Unlimited Daily"
+    titleAccent="Answer"
     teaser={teaserFor(country)}
     live
   />
 
   <p class="positioning container">
-    The endless country-guessing globe game — the Globle answer today, every day at 00:00 UTC,
-    plus unlimited rounds whenever you want them.
+    One mystery country a day on Globle Unlimited, shared by every player and reset at
+    00:00 UTC — plus unlimited rounds whenever you want them.
   </p>
+
+  <!-- Filled by Countdown in the minutes between the rollover and the rebuild. -->
+  <p class="stale-note container" data-stale-note role="status" hidden></p>
 
   <!-- ── The core block: clues, then the reveal ── -->
   <section class="core container">
-    <h2 class="core-head">Globle Answer Today: Clues &amp; Reveal ({today})</h2>
+    <h2 class="core-head">Today&rsquo;s Daily: Clues &amp; Reveal ({today})</h2>
 
-    <h3 class="sub mono">Globle {dispatchNo} Clues</h3>
+    <h3 class="sub mono">Daily {dispatchNo} Clues</h3>
     <ClueTiles ladder={ladder} total={total} />
 
-    <h3 class="sub mono">Globle {dispatchNo} Answer</h3>
+    <h3 class="sub mono">Daily {dispatchNo} Answer</h3>
     <RevealPanel>
       <p class="answer">
-        The Globle answer today, {nice}, is
+        The Globle Unlimited daily answer for {nice} is
         <strong><img class="flag-img" src={flagUrl(country.cca2)} alt="" width="28" height="20" decoding="async" /> {country.name}</strong>.
       </p>
       <CountryPlate country={country} analysis={analysis} date={today} />
@@ -140,32 +143,33 @@ const schema: Record<string, unknown>[] = [
     </p>
   </section>
 
-  <Countdown />
+  <Countdown date={today} />
 
   <!-- ── Recent answers ── -->
   <section class="container">
-    <h2 class="centred">Recent Globle Answers</h2>
+    <h2 class="centred">Recent Daily Answers</h2>
     <p class="centred lede-sm">
-      Every past daily, with the hints that narrowed it and the opening guess that would have
-      cracked it fastest.
+      The last eight Globle Unlimited dailies, with a difficulty rating for each. The archive
+      lists every one since launch.
     </p>
     <AnswerCards cards={recent} />
     <p class="centred">
-      <a href="/globle-answer-archive" class="btn btn-ghost">Browse all {totalArchived} answers →</a>
+      <a href="/globle-answer-archive/" class="btn btn-ghost">Browse all {totalArchived} answers →</a>
     </p>
   </section>
 
   <!-- ══ Everything below here is the written guide ══ -->
   <article class="prose page">
-    <h2>What Is Globle?</h2>
+    <h2>What Is the Globle Unlimited Daily?</h2>
     <p>
-      Globle is a country-guessing game played on a 3D globe. One country is hidden each day, and
-      every guess you make is coloured by how far it sits from the target — so the map itself tells
-      you whether you are getting warmer.
+      Globle Unlimited is a country-guessing game played on a 3D globe. Every guess you make is
+      coloured by how far it sits from the hidden country — so the map itself tells you whether
+      you are getting warmer.
     </p>
     <p>
-      That daily country is what people mean when they search for the Globle answer today: one
-      puzzle, shared worldwide, replaced on a fixed schedule.
+      Most rounds are unlimited: finish one and the next country is dealt straight away. The daily
+      is the exception — one puzzle, shared by every player on this site, replaced on a fixed
+      schedule. This page is its answer key.
     </p>
 
     <ol class="features">
@@ -237,7 +241,7 @@ const schema: Record<string, unknown>[] = [
       A guess in the middle of the landmass splits the world more evenly than one in a corner.
       Greece averages 5,464 km to every other country; New Zealand averages 13,976 km and tells
       you almost nothing. We ranked every candidate in
-      <a href="/blog/best-globle-starting-country"> the best Globle starting country</a>.
+      <a href="/blog/best-globle-starting-country/"> the best Globle starting country</a>.
     </p>
 
     <h3>Read the heat ramp</h3>
@@ -248,9 +252,9 @@ const schema: Record<string, unknown>[] = [
 
     <h4>What each colour band means in kilometres</h4>
     <p>
-      The ramp spans 0 to 12,000 km across five stops. Pale yellow is roughly 9,000 km or more,
-      orange sits near 6,000, deep orange near 3,000, and the darkest red means you are within a
-      few hundred kilometres. The <a href="/how-to-play">how-to-play guide</a> shows the full
+      The ramp spans 0 to 12,000 km across five stops. Pale yellow means 12,000 km or more, amber
+      sits near 9,000, orange near 6,000, red near 3,000, and the darkest red means you are within
+      a few hundred kilometres. The <a href="/how-to-play/">how-to-play guide</a> shows the full
       scale.
     </p>
 
@@ -264,11 +268,11 @@ const schema: Record<string, unknown>[] = [
     <p>
       Pick your second guess roughly 90 degrees around the globe from your first, not next door to
       it. Two readings from nearly the same place produce nearly the same ring and waste a turn.
-      The <a href="/blog/globle-tips-strategy">strategy guide</a> works through the mid-game from
+      The <a href="/blog/globle-tips-strategy/">strategy guide</a> works through the mid-game from
       there.
     </p>
 
-    <h2>When Does the Globle Answer Reset?</h2>
+    <h2>When Does the Daily Reset?</h2>
     <p>
       At 00:00 UTC, every day, worldwide. Because that is a fixed instant rather than a local
       midnight, the puzzle changes at a different clock time depending on where you are.
@@ -302,15 +306,15 @@ const schema: Record<string, unknown>[] = [
 
     <h2 id="vs-official">Globle Unlimited vs the Official Globle</h2>
     <p>
-      <strong>The two games do not share an answer.</strong> The Globle answer today on this page
-      is Globle Unlimited&rsquo;s own daily puzzle. The original Globle, made by Trainwreck Labs,
+      <strong>The two games do not share an answer.</strong> The answer on this page belongs to
+      Globle Unlimited&rsquo;s own daily puzzle. The original Globle, made by Trainwreck Labs,
       runs a completely separate rotation, and we are not affiliated with or endorsed by it.
     </p>
 
     <h3>What is the same</h3>
     <p>
-      Both hide one country on a 3D globe and colour your guesses by great-circle distance, hotter
-      as you close in. If you can play one, you can play the other.
+      Both hide one country on a 3D globe and colour your guesses by distance, hotter as you close
+      in. If you can play one, you can play the other.
     </p>
 
     <h3>What is different</h3>
@@ -320,14 +324,14 @@ const schema: Record<string, unknown>[] = [
       independent rotations means two different countries on any given date.
     </p>
 
-    <h2>How We Work Out the Globle Answer Today</h2>
+    <h2>How We Work Out Today&rsquo;s Answer</h2>
 
     <h3>The answer is computed, not typed in</h3>
     <p>
       Nobody on our side plays the puzzle and writes the result down. The day&rsquo;s country is
       derived from the date itself through a fixed seed — the same mechanism the game uses to serve
-      every player the identical daily. This page reads that function directly, so the Globle
-      answer today cannot drift out of sync with what the game is running.
+      every player the identical daily. This page reads that function directly, so the answer
+      shown here cannot drift out of sync with what the game is running.
     </p>
     <p>
       It also means the archive is reconstructable rather than recorded. Any past day can be
@@ -338,28 +342,24 @@ const schema: Record<string, unknown>[] = [
     <p>
       Every figure on this page — the {total}-country pool, the candidates remaining at each rung,
       the difficulty rating, the best opening guess and its distance — is calculated at build time
-      from the game&rsquo;s own dataset, using the same great-circle formula that colours your
-      guesses. The formulas are stated in the open next to the numbers they produce.
-    </p>
-    <p>
-      That matters because several sites publishing a Globle answer today have carried stale or
-      simply wrong countries for days at a stretch. A number you can check beats a number you have
-      to trust.
+      from the game&rsquo;s own dataset, using the same distance that colours your guesses:
+      nearest border to nearest border, or centre to centre once two countries are more than
+      3,500 km apart. The formulas are stated in the open next to the numbers they produce.
     </p>
 
     {hasYesterday && yCountry && (
       <>
-        <h2>Yesterday&rsquo;s Globle Answer</h2>
+        <h2>Yesterday&rsquo;s Daily Answer</h2>
         <p>
-          The answer for <a href={`/globle-answer-archive/${yesterday}`}>{prettyDate(yesterday)}</a>
+          The answer for <a href={`/globle-answer-archive/#d-${yesterday}`}>{prettyDate(yesterday)}</a>
           {' '}was <strong><img class="flag-img" src={flagUrl(yCountry.cca2)} alt="" width="28" height="20" loading="lazy" decoding="async" /> {yCountry.name}</strong>.
         </p>
       </>
     )}
 
-    <h2>Globle Capitals Answer Today</h2>
+    <h2>Is There a Globle Capitals Daily?</h2>
     <p>
-      <a href="/capitals">Globle Capitals</a> is the sibling mode: same globe, same heat colouring,
+      <a href="/capitals/">Globle Capitals</a> is the sibling mode: same globe, same heat colouring,
       but the hidden target is a capital city rather than a country. It runs unlimited rather than
       once a day, so there is no single daily answer to look up.
     </p>
@@ -369,7 +369,7 @@ const schema: Record<string, unknown>[] = [
       game.
     </p>
 
-    <h2>Globle Answer Today: FAQ</h2>
+    <h2>Daily Answer FAQ</h2>
     <div class="faq">
       {faqs.map(([q, a]) => (
         <details>
@@ -382,7 +382,7 @@ const schema: Record<string, unknown>[] = [
     <p class="byline">
       Written by the Globle Unlimited team. Hint counts, obscurity ratings and opening-guess
       figures are computed at build time from the game&rsquo;s own {total}-country dataset using
-      the same great-circle distance the game scores with.
+      the same distance the game scores with.
       <br />
       <span class="mono">Last updated {nice}</span>
     </p>
@@ -398,6 +398,18 @@ const schema: Record<string, unknown>[] = [
     padding-block: var(--space-6);
     max-width: 64ch;
   }
+  .stale-note {
+    max-width: var(--wide-width);
+    margin-bottom: var(--space-6);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--accent);
+    border-radius: var(--radius-sm);
+    background: var(--accent-dim);
+    color: var(--text);
+    font-size: var(--fs-small);
+    text-align: center;
+  }
+  .stale-note[hidden] { display: none; }
 
   /* ---- core clue + reveal block ---- */
   .core {

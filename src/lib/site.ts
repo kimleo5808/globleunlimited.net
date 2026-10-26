@@ -11,7 +11,7 @@ export const SITE = {
   locale: 'en_US',
   email: 'hello@globleunlimited.net',
   /** Effective/last-updated date for legal pages. */
-  legalUpdated: 'July 20, 2026',
+  legalUpdated: 'October 26, 2026',
   /** Governing law for the Terms of Service. */
   jurisdiction: 'the United States',
   /** Default meta keywords (overridable per page). */
@@ -26,38 +26,38 @@ export const SITE = {
  *  and the header "Games" dropdown (via FOOTER_LINKS.play). */
 export const GAME_MODES = [
   { href: '/', key: 'globe', name: 'Globle Unlimited', img: '/assets/svg/games/globe.svg', blurb: 'Guess the country on a 3D globe — it glows warmer as you close in.' },
-  { href: '/silhouette', key: 'shape', name: 'Worldle Unlimited', img: '/assets/svg/games/worldle.svg', blurb: 'Name the country from its silhouette alone, with distance and direction clues.' },
-  { href: '/flags', key: 'flag', name: 'Flagle Unlimited', img: '/assets/svg/games/flagle.svg', blurb: 'Guess the country from its flag, revealed one tile at a time.' },
-  { href: '/clues', key: 'clue', name: 'Countryle Unlimited', img: '/assets/svg/games/countryle.svg', blurb: 'Deduce the country from six attribute clues — no map required.' },
-  { href: '/states', key: 'usstates', name: 'Statele Unlimited', img: '/assets/svg/games/statele.svg', blurb: 'Guess the US state from its outline — all 50 states.' },
-  { href: '/capitals', key: 'capital', name: 'Globle Capitals', img: '/assets/svg/games/capitals.svg', blurb: 'Find the mystery capital city on the interactive globe.' },
-  { href: '/practice', key: 'practice', name: 'Practice Mode', img: '/assets/svg/games/practice.svg', blurb: 'Relaxed, unlimited rounds with no streak pressure.' },
+  { href: '/silhouette/', key: 'shape', name: 'Globle Shapes', img: '/assets/svg/games/worldle.svg', blurb: 'Name the country from its silhouette alone, with distance and direction clues.' },
+  { href: '/flags/', key: 'flag', name: 'Globle Flags', img: '/assets/svg/games/flagle.svg', blurb: 'Guess the country from its flag, revealed one tile at a time.' },
+  { href: '/clues/', key: 'clue', name: 'Globle Clues', img: '/assets/svg/games/countryle.svg', blurb: 'Deduce the country from six attribute clues — no map required.' },
+  { href: '/states/', key: 'usstates', name: 'Globle States', img: '/assets/svg/games/statele.svg', blurb: 'Guess the US state from its outline — all 50 states.' },
+  { href: '/capitals/', key: 'capital', name: 'Globle Capitals', img: '/assets/svg/games/capitals.svg', blurb: 'Find the mystery capital city on the interactive globe.' },
+  { href: '/practice/', key: 'practice', name: 'Practice Mode', img: '/assets/svg/games/practice.svg', blurb: 'Relaxed, unlimited rounds with no streak pressure.' },
 ] as const;
 
 export const FOOTER_LINKS = {
   play: [
     { href: '/', label: 'Globle Unlimited' },
-    { href: '/daily', label: 'Daily Globle' },
-    { href: '/silhouette', label: 'Worldle Unlimited' },
-    { href: '/flags', label: 'Flagle Unlimited' },
-    { href: '/clues', label: 'Countryle Unlimited' },
-    { href: '/states', label: 'Statele Unlimited' },
-    { href: '/practice', label: 'Practice Mode' },
-    { href: '/capitals', label: 'Globle Capitals' },
-    { href: '/unlimited', label: 'All Unlimited Games' },
+    { href: '/daily/', label: 'Daily Globle' },
+    { href: '/silhouette/', label: 'Globle Shapes' },
+    { href: '/flags/', label: 'Globle Flags' },
+    { href: '/clues/', label: 'Globle Clues' },
+    { href: '/states/', label: 'Globle States' },
+    { href: '/practice/', label: 'Practice Mode' },
+    { href: '/capitals/', label: 'Globle Capitals' },
+    { href: '/unlimited/', label: 'All Unlimited Games' },
   ],
   learn: [
-    { href: '/how-to-play', label: 'How to Play' },
-    { href: '/globle-vs-worldle', label: 'Globle vs Worldle' },
-    { href: '/globle-answer-today', label: "Today's Answer" },
-    { href: '/globle-answer-archive', label: 'Answer Archive' },
-    { href: '/blog', label: 'Blog' },
+    { href: '/how-to-play/', label: 'How to Play' },
+    { href: '/globle-vs-worldle/', label: 'Globle vs Worldle' },
+    { href: '/globle-answer-today/', label: "Today's Answer" },
+    { href: '/globle-answer-archive/', label: 'Answer Archive' },
+    { href: '/blog/', label: 'Blog' },
   ],
   about: [
-    { href: '/about', label: 'About Us' },
-    { href: '/privacy-policy', label: 'Privacy Policy' },
-    { href: '/terms-of-service', label: 'Terms of Service' },
-    { href: '/contact', label: 'Contact' },
+    { href: '/about/', label: 'About Us' },
+    { href: '/privacy-policy/', label: 'Privacy Policy' },
+    { href: '/terms-of-service/', label: 'Terms of Service' },
+    { href: '/contact/', label: 'Contact' },
   ],
 } as const;
 

@@ -4,11 +4,14 @@ import AnswerCards from '../../components/answer/AnswerCards.astro';
 import { COUNTRIES } from '../../lib/game/countries';
 import { prettyDate } from '../../lib/game/hint';
 import { archiveDates, cardsFor, todayISO } from '../../lib/game/archive';
+import { shiftISO } from '../../lib/game/daily';
 import { SITE } from '../../lib/site';
 
 const today = todayISO();
-const dates = archiveDates(today);
+// Completed days only: today's answer stays behind the reveal on its own page.
+const dates = archiveDates(shiftISO(today, -1));
 const cards = cardsFor(dates); // newest first
+const latest = dates.at(-1);
 
 // Group by calendar month so the grid keeps a sense of time.
 const months: Array<{ key: string; label: string; cards: typeof cards }> = [];
@@ -42,9 +45,9 @@ const neverUsed = COUNTRIES.filter((c) => !usedNames.has(c.name))
   .map((c) => c.name)
   .sort();
 
-const title = 'Globle Answer Archive – Every Past Answer by Date';
+const title = 'Globle Unlimited Daily Archive – Every Past Answer by Date';
 const description =
-  'Every past Globle Unlimited daily answer, searchable by country and filterable by continent, with difficulty ratings and the countries that have never come up.';
+  'Every past answer to the Globle Unlimited daily puzzle (our own rotation, not the official Globle), searchable by country, filterable by continent, with difficulty ratings.';
 
 const schema: Record<string, unknown>[] = [
   {
@@ -52,7 +55,7 @@ const schema: Record<string, unknown>[] = [
     '@type': 'CollectionPage',
     name: title,
     description,
-    url: `${SITE.url}/globle-answer-archive`,
+    url: `${SITE.url}/globle-answer-archive/`,
     dateModified: today,
   },
   {
@@ -60,8 +63,8 @@ const schema: Record<string, unknown>[] = [
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
-      { '@type': 'ListItem', position: 2, name: 'Globle Answer Today', item: `${SITE.url}/globle-answer-today` },
-      { '@type': 'ListItem', position: 3, name: 'Answer Archive', item: `${SITE.url}/globle-answer-archive` },
+      { '@type': 'ListItem', position: 2, name: "Today's Answer", item: `${SITE.url}/globle-answer-today/` },
+      { '@type': 'ListItem', position: 3, name: 'Answer Archive', item: `${SITE.url}/globle-answer-archive/` },
     ],
   },
 ];
@@ -72,12 +75,14 @@ const schema: Record<string, unknown>[] = [
   <section class="hero">
     <div class="container">
       <p class="crumb">
-        <a href="/">Home</a> › <a href="/globle-answer-today">Globle Answer Today</a> › Archive
+        <a href="/">Home</a> › <a href="/globle-answer-today/">Today&rsquo;s Answer</a> › Archive
       </p>
 
-      <h1>Globle Answer <span class="accent">Archive</span></h1>
+      <h1>Daily Answer <span class="accent">Archive</span></h1>
       <p class="lede">
-        Every country that has been the daily answer since {prettyDate(SITE.launchDate)}.
+        Every country that has been the Globle Unlimited daily answer since
+        {' '}{prettyDate(SITE.launchDate)}. These are our own puzzle&rsquo;s answers, not the
+        official Globle&rsquo;s.
       </p>
 
       <dl class="tally">
@@ -106,7 +111,7 @@ const schema: Record<string, unknown>[] = [
     {months.map((month) => (
       <div class="month" data-month>
         <h2 class="month-head mono">{month.label}</h2>
-        <AnswerCards cards={month.cards} latestDate={today} />
+        <AnswerCards cards={month.cards} latestDate={latest} />
       </div>
     ))}
   </section>
@@ -139,7 +144,7 @@ const schema: Record<string, unknown>[] = [
     </p>
 
     <p class="cta-row">
-      <a href="/globle-answer-today" class="btn btn-primary">See today&rsquo;s answer →</a>
+      <a href="/globle-answer-today/" class="btn btn-primary">See today&rsquo;s answer →</a>
       <a href="/" class="btn btn-ghost">▶ Play Globle Unlimited</a>
     </p>
   </article>

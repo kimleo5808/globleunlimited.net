@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GlobeGame from '../components/game/GlobeGame.astro';
+import { CAPITALS } from '../lib/game/capitals';
 
 const title = 'Globle Capitals – Guess the Capital City Game';
 const description =
@@ -68,7 +69,7 @@ const schema: Record<string, unknown>[] = [
         new mystery city.</li>
     </ol>
     <p>
-      New to the whole idea? Our <a href="/how-to-play">how-to-play guide</a> explains how the
+      New to the whole idea? Our <a href="/how-to-play/">how-to-play guide</a> explains how the
       colour heatmap works in detail; it carries over directly to Capitals.
     </p>
 
@@ -96,7 +97,7 @@ const schema: Record<string, unknown>[] = [
       </tbody>
     </table>
     <p>
-      If you enjoy <a href="/">Globle Unlimited</a> and the <a href="/daily">daily challenge</a>,
+      If you enjoy <a href="/">Globle Unlimited</a> and the <a href="/daily/">daily challenge</a>,
       Capitals adds a layer of precision that geography buffs love.
     </p>
 
@@ -135,8 +136,8 @@ const schema: Record<string, unknown>[] = [
         do not fool you.</li>
     </ul>
     <p>
-      Want more strategy? Our <a href="/blog/globle-tips-strategy">Globle tips guide</a> applies to
-      Capitals too, and the <a href="/blog/hardest-countries-to-guess">hardest countries</a> article
+      Want more strategy? Our <a href="/blog/globle-tips-strategy/">Globle tips guide</a> applies to
+      Capitals too, and the <a href="/blog/hardest-countries-to-guess/">hardest countries</a> article
       overlaps with the hardest capitals.
     </p>
 
@@ -179,7 +180,7 @@ const schema: Record<string, unknown>[] = [
       Globle Capitals is excellent practice. It drills the two things quizzes test most: which city
       is a country&rsquo;s capital, and roughly where it sits. Because rounds are unlimited and free,
       you can do focused sessions whenever you have a few minutes. Pair it with the country game on
-      <a href="/">Globle Unlimited</a> and the <a href="/daily">daily challenge</a> for a complete
+      <a href="/">Globle Unlimited</a> and the <a href="/daily/">daily challenge</a> for a complete
       geography workout.
     </p>
 
@@ -202,8 +203,9 @@ const schema: Record<string, unknown>[] = [
 
     <h2>How Many Capitals Are There to Guess?</h2>
     <p>
-      There are roughly 195 widely recognised sovereign countries, and Globle Capitals draws its
-      mystery answer from their capital cities. That is a big but learnable set — far smaller than
+      Globle Capitals draws its mystery answer from {CAPITALS.length} capital cities: one for almost
+      every sovereign country, plus the extra seats of the few countries that split the role, such as
+      South Africa and Bolivia. That is a big but learnable set — far smaller than
       the number of cities in the world, and full of repeating patterns once you group capitals by
       region. Play enough rounds and the list stops feeling intimidating: you start to recognise that
       a hot marker in the Gulf points to a handful of candidates, that East Africa clusters several
@@ -225,8 +227,8 @@ const schema: Record<string, unknown>[] = [
       where every capital sits. The best way to build it is to play, miss, and learn — round after
       unlimited round, with no pressure and no cost. Start a game above, guess your first capital,
       and let the colours guide you in. When you want to switch things up, the country game on
-      <a href="/">Globle Unlimited</a>, the shared <a href="/daily">daily challenge</a>, and the
-      pressure-free <a href="/practice">practice mode</a> are all a click away.
+      <a href="/">Globle Unlimited</a>, the shared <a href="/daily/">daily challenge</a>, and the
+      pressure-free <a href="/practice/">practice mode</a> are all a click away.
     </p>
 
     <p class="cta-row"><a href="/" class="btn btn-ghost">Play Globle Unlimited</a></p>

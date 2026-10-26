@@ -2,9 +2,9 @@
 // Above-the-fold panel. The visitor's job — get today's answer — is one click
 // away here; every word of explanation lives further down the page.
 //
-// The globe on the right is the masked locator: turned to the right hemisphere
-// but with the target drawn as ordinary land, so it is a visual anchor that
-// gives nothing away. When the reveal below opens, a few lines of JS swap it
+// The globe on the right is the masked locator: turned so the answer is on the
+// visible face but well off-centre, with the target drawn as ordinary land, so
+// it is a visual anchor that gives nothing away. When the reveal below opens, a few lines of JS swap it
 // for the highlighted version.
 interface Props {
   /** Mono eyebrow, e.g. "DISPATCH NO. 0024". */
@@ -49,16 +49,16 @@ const {
 
       <p class="teaser">{teaser}</p>
 
-      <div class="actions">
-        <a href={revealHref} class="btn btn-primary">🔓 Reveal the Answer</a>
-        <a href="/" class="btn btn-ghost">▶ Play Globle Unlimited</a>
-      </div>
-
       <p class="disclosure">
         <span aria-hidden="true">ⓘ</span>
         This is <strong>Globle Unlimited&rsquo;s own</strong> daily puzzle, not the official
         Globle&rsquo;s answer. <a href="#vs-official">Why they differ →</a>
       </p>
+
+      <div class="actions">
+        <a href={revealHref} class="btn btn-primary">🔓 Reveal the Answer</a>
+        <a href="/" class="btn btn-ghost">▶ Play Globle Unlimited</a>
+      </div>
     </div>
 
     <figure class="col-globe">
@@ -154,7 +154,6 @@ const {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-3);
-    margin-bottom: var(--space-6);
   }
 
   .disclosure {
@@ -164,6 +163,7 @@ const {
     border-left: 2px solid var(--accent);
     padding-left: var(--space-3);
     max-width: 52ch;
+    margin-bottom: var(--space-6);
   }
   .disclosure strong { color: var(--text-dim); }
   .disclosure a { color: var(--accent); white-space: nowrap; }

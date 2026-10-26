@@ -1,7 +1,7 @@
 ---
 title: "Globle Strategy: 9 Tips to Win in Fewer Guesses"
 description: "Master Globle with 9 proven strategies: the best opening guesses, how to read the colour heatmap, triangulation tricks, and mistakes that cost you guesses."
-date: 2026-06-22
+date: 2026-06-27
 tags: ["globle tips", "globle strategy", "how to win"]
 cover: "/blog/globle-tips-strategy/cover.svg"
 coverAlt: "Atlas-style illustration of a globe with a numbered triangulation path narrowing to a target, titled Globle Strategy: 9 Tips to Win in Fewer Guesses"
@@ -10,7 +10,7 @@ coverAlt: "Atlas-style illustration of a globe with a numbered triangulation pat
 Globle looks simple — type a country, read the colour, repeat — but the gap between a lucky
 fifteen-guess round and a clean four-guess solve comes down to strategy. This guide shares nine
 tips that consistently lower your guess count, from the best opening moves to the subtle art of
-reading the heatmap. If you are brand new, skim the [how-to-play guide](/how-to-play) first, then
+reading the heatmap. If you are brand new, skim the [how-to-play guide](/how-to-play/) first, then
 come back here to sharpen up.
 
 Everything below is easier to practise when you are not rationed to one puzzle a day, which is why
@@ -99,8 +99,8 @@ there. Five guesses, no luck required — just method.
 ## Keep practising
 
 Strategy only sticks with reps. Run a handful of [Globle Unlimited](/) rounds whenever you have a
-spare minute, try the shared [daily challenge](/daily) to benchmark yourself, and when you are
-stuck, the [today's answer page](/globle-answer-today) is there as a safety net. Play often enough and the
+spare minute, try the shared [daily challenge](/daily/) to benchmark yourself, and when you are
+stuck, the [today's answer page](/globle-answer-today/) is there as a safety net. Play often enough and the
 four-guess solve stops being luck and starts being your normal.
 
 ## Frequently asked questions

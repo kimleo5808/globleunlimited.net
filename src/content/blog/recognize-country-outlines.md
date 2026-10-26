@@ -20,7 +20,7 @@ four-week plan that turns all of it into reflex. What you'll learn:
 - The three features experts scan first (and why order matters)
 - The 7 shape families — from boots to fractal coasts — with examples of each
 - The most commonly confused outline pairs, and the single tell for each
-- A ten-minutes-a-day drill plan built around [Silhouette mode](/silhouette)
+- A ten-minutes-a-day drill plan built around [Silhouette mode](/silhouette/)
 
 ## Why outlines are learnable at all
 
@@ -172,7 +172,7 @@ become "the shape north of India" or "the blob inside South Africa's curve." Tha
 catalogue compounds — every learned shape makes the next one cheaper.
 
 > 📖 **Further reading:** shape memory pairs beautifully with flag memory, because both run on
-> single distinguishing features. Our [flags that look alike](/blog/flags-that-look-alike) guide
+> single distinguishing features. Our [flags that look alike](/blog/flags-that-look-alike/) guide
 > applies the same one-tell method to the other half of the quiz world.
 
 ## The four-week drill plan
@@ -187,7 +187,7 @@ for four weeks is enough for most players to go from "anchors only" to naming mo
 USA, Brazil, Australia, India, Argentina, Kazakhstan, Algeria and their tier. These become your
 reference frames — everything else is "near Brazil" or "smaller than India."
 
-**Week 2 — families.** Play daily rounds in [Silhouette mode](/silhouette) and sort every shape
+**Week 2 — families.** Play daily rounds in [Silhouette mode](/silhouette/) and sort every shape
 you miss into one of the seven families *before* reading the answer. The sorting habit is the
 skill; the names attach themselves surprisingly quickly once the family is right.
 
@@ -197,18 +197,18 @@ enough; three tells per pair is how you forget all of them.
 
 **Week 4 — full speed.** Mixed, timed drills with no hints. Miss a shape twice and it goes on
 your personal confusables list for a week-3-style review. From here, maintenance is just playing:
-a daily silhouette plus a round of [Globle](/) keeps the whole catalogue warm — the two skills
+a daily silhouette plus a round of [Globle Unlimited](/) keeps the whole catalogue warm — the two skills
 reinforce each other, since map position and shape are stored together.
 
 If you want a companion challenge while the catalogue builds, our
-[hardest countries to guess](/blog/hardest-countries-to-guess) list overlaps heavily with the
-blob family, and the [geography games roundup](/blog/geography-games-like-globle) has more
-shape-based games to cross-train in — plus [States mode](/states) to run the same method on US
+[hardest countries to guess](/blog/hardest-countries-to-guess/) list overlaps heavily with the
+blob family, and the [geography games roundup](/blog/geography-games-like-globle/) has more
+shape-based games to cross-train in — plus [States mode](/states/) to run the same method on US
 state outlines, where straight edges rule and Colorado is the family mascot.
 
 ## Bonus round: the same method on US states
 
-Everything above transfers to state outlines — and [States mode](/states) is the perfect second
+Everything above transfers to state outlines — and [States mode](/states/) is the perfect second
 gym, because US states exaggerate the families. The straight-edge family dominates utterly:
 **Colorado and Wyoming are pure rectangles** (the only two), Kansas and North Dakota miss by one
 wavy river edge, and the entire west reads as surveyors' geometry. The oddities are world-class:
@@ -265,5 +265,5 @@ search.</p>
 ---
 
 *We build and maintain the seven geography games on this site, including
-[Silhouette mode](/silhouette) and the country dataset the drills above are based on. Spotted an
-outline pair we should add to the confusables table? [Tell us](/contact).*
+[Silhouette mode](/silhouette/) and the country dataset the drills above are based on. Spotted an
+outline pair we should add to the confusables table? [Tell us](/contact/).*

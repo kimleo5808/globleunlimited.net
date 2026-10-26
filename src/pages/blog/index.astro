@@ -20,13 +20,13 @@ const schema: Record<string, unknown>[] = [
     '@type': 'Blog',
     name: 'Globle Unlimited Blog',
     description,
-    url: `${SITE.url}/blog`,
+    url: `${SITE.url}/blog/`,
     blogPost: posts.map((p) => ({
       '@type': 'BlogPosting',
       headline: p.data.title,
       description: p.data.description,
       datePublished: p.data.date.toISOString(),
-      url: `${SITE.url}/blog/${p.id}`,
+      url: `${SITE.url}/blog/${p.id}/`,
     })),
   },
   {
@@ -34,7 +34,7 @@ const schema: Record<string, unknown>[] = [
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE.url}/blog` },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE.url}/blog/` },
     ],
   },
 ];

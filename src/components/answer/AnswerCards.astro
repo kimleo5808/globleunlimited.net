@@ -1,6 +1,7 @@
 ---
 // Recent answers as a card grid. Shared by the landing page (last 8) and the
-// archive (all of them), so the two never drift apart visually.
+// archive (all of them), so the two never drift apart visually. Cards are not
+// links: past days have no page of their own, the archive index is the record.
 import { flagUrl } from '../../lib/game/flag-img';
 
 export interface AnswerCard {
@@ -25,7 +26,7 @@ const { cards, latestDate } = Astro.props;
 <ul class="cards">
   {cards.map((c) => (
     <li>
-      <a href={`/globle-answer-archive/${c.date}`} class="card" data-card
+      <article class="card" id={`d-${c.date}`} data-card
         data-name={c.name.toLowerCase()} data-date={c.date} data-region={c.region}>
         <span class="card-top">
           <span class="badge mono">{c.dispatch}</span>
@@ -45,10 +46,9 @@ const { cards, latestDate } = Astro.props;
         </span>
 
         <span class="card-foot">
-          <span class="date mono">{c.nice}</span>
-          <span class="go">View answer →</span>
+          <time class="date mono" datetime={c.date}>{c.nice}</time>
         </span>
-      </a>
+      </article>
     </li>
   ))}
 </ul>
@@ -72,10 +72,8 @@ const { cards, latestDate } = Astro.props;
     background: var(--bg-panel);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    text-decoration: none;
-    transition: transform var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
   }
-  .card:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .card:target { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
 
   .card-top { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
   .badge {
@@ -115,9 +113,4 @@ const { cards, latestDate } = Astro.props;
     border-top: 1px solid var(--line);
   }
   .date { color: var(--text-mute); font-size: 0.72rem; }
-  .go { color: var(--accent); font-size: var(--fs-small); font-weight: 600; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .card { transition: none; }
-  }
 </style>

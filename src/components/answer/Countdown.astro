@@ -4,10 +4,22 @@
 // The markup ships with em-dash placeholders rather than real numbers. A CDN
 // caches this page for hours, so any figure rendered at build time would be
 // wrong by the time a visitor sees it; the clock is filled in on mount.
+//
+// The page is static and only rebuilt a few minutes after the rollover, so for
+// that window it still shows yesterday's answer. `date` is the day this build
+// was made for; when it no longer matches the UTC date, the script fills the
+// page's [data-stale-note] banner. A visitor who had the page open across the
+// rollover also gets one automatic reload once the rebuild has had time to land.
+interface Props {
+  /** ISO date this build of the page answers. */
+  date: string;
+}
+
+const { date } = Astro.props;
 ---
 
-<section class="countdown">
-  <h2 class="ct-head">Next Globle Answer Unlocks In</h2>
+<section class="countdown" data-page-date={date}>
+  <h2 class="ct-head">Next Daily Puzzle Unlocks In</h2>
 
   <div class="dials" data-countdown>
     <div class="dial"><span class="num mono" data-ct-h>--</span><span class="unit">Hours</span></div>
@@ -22,11 +34,19 @@
 </section>
 
 <script>
+  const section = document.querySelector<HTMLElement>('[data-page-date]');
   const host = document.querySelector<HTMLElement>('[data-countdown]');
   const hEl = document.querySelector<HTMLElement>('[data-ct-h]');
   const mEl = document.querySelector<HTMLElement>('[data-ct-m]');
   const sEl = document.querySelector<HTMLElement>('[data-ct-s]');
   const localEl = document.querySelector<HTMLElement>('[data-ct-local]');
+  const staleNote = document.querySelector<HTMLElement>('[data-stale-note]');
+
+  const pageDate = section?.dataset.pageDate ?? '';
+  /** How long to wait before checking whether the rebuilt page is live. */
+  const RETRY_MS = 3 * 60 * 1000;
+
+  const todayUTC = () => new Date().toISOString().slice(0, 10);
 
   function nextResetUTC(): Date {
     const now = new Date();
@@ -37,14 +57,32 @@
 
   const pad = (n: number) => String(Math.floor(n)).padStart(2, '0');
 
+  const isStale = () => pageDate !== '' && pageDate < todayUTC();
+  let staleShown = false;
+
+  /** The puzzle has rolled over but this copy of the page has not been rebuilt
+   *  yet. Say so rather than presenting yesterday's answer as today's. Only a
+   *  rollover seen live triggers the reload, so a page that is still stale
+   *  after it (or a visitor whose clock runs fast) never loops. */
+  function markStale(reload: boolean) {
+    if (staleShown) return;
+    staleShown = true;
+    if (staleNote) {
+      staleNote.textContent =
+        `The ${todayUTC()} puzzle is already live, and this page is being rebuilt for it. ` +
+        `Until it refreshes, the answer below is the one for ${pageDate}.`;
+      staleNote.hidden = false;
+    }
+    if (reload) setTimeout(() => location.reload(), RETRY_MS);
+  }
+
+  const staleAtLoad = isStale();
+  if (staleAtLoad) markStale(false);
+
   function tick() {
     if (!host) return;
+    if (!staleAtLoad && isStale()) markStale(true);
     const ms = nextResetUTC().getTime() - Date.now();
-    if (ms <= 0) {
-      // The puzzle just rolled over; the rebuilt page is the source of truth.
-      location.reload();
-      return;
-    }
     const total = ms / 1000;
     if (hEl) hEl.textContent = pad(total / 3600);
     if (mEl) mEl.textContent = pad((total % 3600) / 60);
@@ -68,7 +106,6 @@
     setInterval(tick, 1000);
   }
 </script>
-
 <style>
   .countdown {
     text-align: center;

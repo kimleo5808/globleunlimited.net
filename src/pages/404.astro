@@ -5,7 +5,7 @@ const title = 'Page Not Found – Globle Unlimited';
 const description = 'That page drifted off the map. Head back to Globle Unlimited and keep guessing.';
 ---
 
-<BaseLayout title={title} description={description} path="/404">
+<BaseLayout title={title} description={description} path="/404" robots="noindex, follow" ads={false}>
   <section class="notfound">
     <div class="container nf-inner">
       <p class="code mono">404</p>
@@ -13,11 +13,11 @@ const description = 'That page drifted off the map. Head back to Globle Unlimite
       <p class="sub">The country you were looking for isn&rsquo;t here — but the globe is still spinning.</p>
       <div class="actions">
         <a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a>
-        <a href="/how-to-play" class="btn btn-ghost">How to Play</a>
+        <a href="/how-to-play/" class="btn btn-ghost">How to Play</a>
       </div>
       <nav class="links">
-        <a href="/daily">Daily</a> · <a href="/globle-answer-today">Today&rsquo;s Answer</a> ·
-        <a href="/blog">Blog</a> · <a href="/about">About</a>
+        <a href="/daily/">Daily</a> · <a href="/globle-answer-today/">Today&rsquo;s Answer</a> ·
+        <a href="/blog/">Blog</a> · <a href="/about/">About</a>
       </nav>
     </div>
   </section>

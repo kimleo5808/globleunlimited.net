@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GlobeGame from '../components/game/GlobeGame.astro';
 import { SITE } from '../lib/site';
+import { COUNTRIES } from '../lib/game/countries';
 
 const title = 'Globle Unlimited – Play the Endless Country Guessing Game';
 const description =
@@ -69,7 +70,8 @@ const schema: Record<string, unknown>[] = [
       keep playing for as long as you like.
     </p>
     <p>
-      Every round, the game secretly picks one country from roughly 195 nations around the world.
+      Every round, the game secretly picks one country from a pool of {COUNTRIES.length} countries and
+      territories around the world.
       You guess countries one at a time, and each guess lights up on the interactive globe with a
       colour that shows how close it is to the answer. The hotter the colour, the nearer you are.
       There is no timer and no penalty for guessing, so the only goal is to find the mystery country
@@ -100,14 +102,14 @@ const schema: Record<string, unknown>[] = [
     <p>
       That is the entire game, and it is exactly why Globle Unlimited is so easy to pick up yet hard
       to put down. For a deeper walkthrough, including the best opening guesses, read our full
-      <a href="/how-to-play">how-to-play guide</a>.
+      <a href="/how-to-play/">how-to-play guide</a>.
     </p>
 
     <h2>How Guesses Are Scored: Distance &amp; Colour</h2>
     <p>
-      The heatmap is the heart of the game. <strong>Each guess is shaded by how far its centre sits
-      from the mystery country&rsquo;s centre,</strong> measured as a real great-circle distance on
-      the globe. The scale runs from pale yellow for the most distant guesses, through orange, to
+      The heatmap is the heart of the game. <strong>Each guess is shaded by how far its nearest
+      border sits from the mystery country&rsquo;s nearest border,</strong> measured as a real
+      great-circle distance on the globe, so a neighbour of the answer reads 0 km. The scale runs from pale yellow for the most distant guesses, through orange, to
       deep red for guesses that are almost on top of the answer.
     </p>
     <figure class="figure card">
@@ -137,9 +139,9 @@ const schema: Record<string, unknown>[] = [
       </tbody>
     </table>
     <p>
-      Many players do both: they solve the shared <a href="/daily">daily Globle</a> to keep a streak
+      Many players do both: they solve the shared <a href="/daily/">daily Globle</a> to keep a streak
       going, then switch to Globle Unlimited to keep playing. If you prefer a pressure-free warm-up,
-      <a href="/practice">practice mode</a> lets you train without affecting any stats.
+      <a href="/practice/">practice mode</a> lets you train without affecting any stats.
     </p>
 
     <h2>Tips to Win in Fewer Guesses</h2>
@@ -161,8 +163,8 @@ const schema: Record<string, unknown>[] = [
         to judge true proximity rather than relying on a flat-map mental image.</li>
     </ul>
     <p>
-      Want the complete playbook? Our blog covers <a href="/blog/globle-tips-strategy">Globle
-      strategy in depth</a> and ranks the <a href="/blog/hardest-countries-to-guess">hardest
+      Want the complete playbook? Our blog covers <a href="/blog/globle-tips-strategy/">Globle
+      strategy in depth</a> and ranks the <a href="/blog/hardest-countries-to-guess/">hardest
       countries to guess</a>.
     </p>
 
@@ -189,17 +191,17 @@ const schema: Record<string, unknown>[] = [
     <ul>
       <li><strong><a href="/">Unlimited</a></strong> — endless random rounds, the main mode on this
         page.</li>
-      <li><strong><a href="/daily">Daily Globle</a></strong> — one shared mystery country a day,
+      <li><strong><a href="/daily/">Daily Globle</a></strong> — one shared mystery country a day,
         with a streak to keep.</li>
-      <li><strong><a href="/practice">Practice</a></strong> — relaxed rounds that do not touch your
+      <li><strong><a href="/practice/">Practice</a></strong> — relaxed rounds that do not touch your
         stats.</li>
-      <li><strong><a href="/capitals">Capitals</a></strong> — a tougher twist where you guess
+      <li><strong><a href="/capitals/">Capitals</a></strong> — a tougher twist where you guess
         capital cities.</li>
-      <li><strong><a href="/stats">Stats</a></strong> — track your streaks, best scores and guess
+      <li><strong><a href="/stats/">Stats</a></strong> — track your streaks, best scores and guess
         distribution.</li>
     </ul>
     <p>
-      Stuck on a puzzle? You can always check <a href="/globle-answer-today">today&rsquo;s Globle Unlimited answer</a>, but
+      Stuck on a puzzle? You can always check <a href="/globle-answer-today/">today&rsquo;s Globle Unlimited answer</a>, but
       try to solve it yourself first — that is where the fun lives.
     </p>
 
@@ -240,7 +242,11 @@ const schema: Record<string, unknown>[] = [
       </details>
       <details>
         <summary>How many countries are in the game?</summary>
-        <p>The mystery country is chosen from roughly 195 countries, covering every continent.</p>
+        <p>
+          The mystery country is chosen from {COUNTRIES.length} countries and territories covering every
+          continent. A few micro-states, such as Singapore, Malta and Bahrain, are too small for the world
+          map the game uses and are not in the pool.
+        </p>
       </details>
       <details>
         <summary>How do the colours work?</summary>
@@ -255,12 +261,12 @@ const schema: Record<string, unknown>[] = [
       <details>
         <summary>What is today&rsquo;s Globle Unlimited answer?</summary>
         <p>You can find today&rsquo;s mystery country, with a hint first, on our
-          <a href="/globle-answer-today">answer page</a>.</p>
+          <a href="/globle-answer-today/">answer page</a>.</p>
       </details>
     </div>
 
     <p class="cta-row">
-      <a href="/how-to-play" class="btn btn-ghost">Read the full guide</a>
+      <a href="/how-to-play/" class="btn btn-ghost">Read the full guide</a>
     </p>
   </article>
 </BaseLayout>

@@ -1,7 +1,7 @@
 ---
 title: "12 Geography Games Like Globle to Play Next"
 description: "Love Globle? Here are 12 geography games like Globle—country, city, flag and map guessing games—ranked by how they play and what makes each one worth your time."
-date: 2026-06-20
+date: 2026-06-27
 tags: ["geography games", "games like globle", "alternatives"]
 cover: "/blog/geography-games-like-globle/cover.svg"
 coverAlt: "Atlas-style illustration of three fanned game cards showing a globe, a flag and a country outline, titled 12 Geography Games Like Globle"
@@ -30,9 +30,9 @@ distance or direction.
 
 1. **Globle Unlimited** — The endless version of the classic. A new random mystery country every
    round, the same warm-to-cold colour heatmap, and no waiting until tomorrow. If you want to drill
-   your world map, [start here](/) and read the [how-to-play guide](/how-to-play) first.
+   your world map, [start here](/) and read the [how-to-play guide](/how-to-play/) first.
 2. **Daily Globle** — One shared mystery country per day for the whole world. Great for comparing
-   scores with friends and keeping a streak going. Try our [daily challenge](/daily).
+   scores with friends and keeping a streak going. Try our [daily challenge](/daily/).
 3. **Worldle** — Shows the silhouette of a country and asks you to name it, then gives distance and
    direction arrows for each guess. More shape-recognition than Globle, but the proximity feedback
    feels familiar.
@@ -45,7 +45,7 @@ distance or direction.
 Here the target shrinks from a whole country to a single point, which makes distance clues sharper.
 
 5. **Globle: Capitals** — The capital-city twist on Globle. You guess capital cities and the
-   distance between them guides you in. You can play our own [Capitals mode](/capitals) right
+   distance between them guides you in. You can play our own [Capitals mode](/capitals/) right
    here.
 6. **Cityguessr-style games** — You get a city and must place or name it. Excellent for learning
    that capitals are not always where you expect (hello, Brasília and Canberra).
@@ -90,7 +90,7 @@ For players who like the Wordle structure with a geographic flavour.
 
 If you want the purest continuation of the Globle experience, stay with the globe: play
 [Globle Unlimited](/) for endless rounds, then test yourself on the shared
-[daily challenge](/daily). If you crave something visually richer, GeoGuessr is the obvious step
+[daily challenge](/daily/). If you crave something visually richer, GeoGuessr is the obvious step
 up. And if you like trivia as much as maps, the fact-by-fact country games will round out your
 rotation.
 

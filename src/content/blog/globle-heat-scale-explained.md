@@ -20,21 +20,21 @@ Here is the short version: the ramp runs from 0 to 12,000 km across five stops. 
 
 ## What the Colour Actually Measures
 
-Every guess is scored on one number: the great-circle distance between your guess's centre point and the answer's centre point.
+Every guess is scored on one number: a great-circle distance between your guess and the answer. Which two points it is measured between depends on how far apart the countries are.
 
-### Centroid to centroid, great-circle
+### Border to border up close, centre to centre far away
 
 Great-circle distance is the shortest path over the surface of a sphere. It is the honest way to measure on a globe, and it is what the game uses.
 
-The centroid part is where it gets loose. Each country is reduced to a single representative point, and everything is measured from there.
+When the two countries' centre points are within 3,500 km of each other, the game measures from the nearest point on your guess's border to the nearest point on the answer's border. Beyond 3,500 km it measures centre point to centre point instead.
 
-#### Why centroid distance isn't how far you'd travel
+#### Why the game switches
 
-Russia's centroid is in Siberia. Chile's is somewhere in the middle of a 4,300 km ribbon.
+Up close, borders are what matter. Guess Chile against a Peru answer and the reading is 0 km, because the two countries touch — even though their centre points are well over 2,000 km apart. A centre-to-centre reading would make a neighbour look cooler than it is.
 
-Guess Chile against a Peru answer and the reading reflects the distance between two arbitrary interior points, not the fact that the two countries share a border. Long, thin and enormous countries all misreport this way.
+Far away, the difference stops mattering. Whether a guess on the other side of the world reads 9,000 or 9,300 km, the advice is the same: look somewhere else.
 
-> 📝 **Note:** this is why a neighbour of the answer sometimes reads cooler than a country further away. The centroid, not the border, is what got measured.
+> 📝 **Note:** a 0 km reading means your guess shares a border with the answer, not that you are near its middle. Enormous neighbours such as Russia or Brazil read 0 km against every country they touch.
 
 ## The Five Stops, in Kilometres
 
@@ -64,7 +64,7 @@ In principle that gives you continuous information. In practice your eye resolve
 
 It means that inside Europe, colour is nearly useless. Vienna to Warsaw is 550 km. Belgrade to Budapest is 320 km.
 
-A whole cluster of European answers will read as the same shade from anywhere outside Europe, which is exactly what we found when [measuring capitals](/blog/guess-any-capital-city).
+A whole cluster of European answers will read as the same shade from anywhere outside Europe, which is exactly what we found when [measuring capitals](/blog/guess-any-capital-city/).
 
 ## Why Two Pale Yellows Can Be 5,000 km Apart
 
@@ -128,7 +128,7 @@ You have spent a guess to learn that the answer is one of 129 things. That is ba
 
 Greece puts 58 countries in deep red, 52 in red, and only 10 in the saturated band. Every band carries real information.
 
-This is the measurable version of the advice in [our opening-country study](/blog/best-globle-starting-country): central openers work because they use the whole scale, not just the end of it.
+This is the measurable version of the advice in [our opening-country study](/blog/best-globle-starting-country/): central openers work because they use the whole scale, not just the end of it.
 
 #### Kazakhstan and Brazil sit in between
 
@@ -169,7 +169,7 @@ Colour is one way to report distance. It is not the only one, and the alternativ
 
 ### Proximity percentage
 
-Worldle-style games report closeness as a percentage instead of a colour. Our own [silhouette mode](/silhouette) does the same, scoring against half the Earth's circumference — 20,000 km — so 0% means antipodal and 100% means correct.
+Worldle-style games report closeness as a percentage instead of a colour. Our own [silhouette mode](/silhouette/) does the same, scoring against half the Earth's circumference — 20,000 km — so 0% means antipodal and 100% means correct.
 
 The advantage is obvious: a percentage never saturates. 3% and 12% are visibly different numbers, where the equivalent colours are not.
 
@@ -205,7 +205,7 @@ The far end is sacrificed because a guess 17,000 km away and one 13,000 km away 
 
 A correct guess is not the hottest red. It is a distinct green, reserved for the answer alone.
 
-That matters because a neighbouring country can sit at almost 0 km from the answer's centroid and read as maximum red. Without a separate win colour you could not tell "adjacent" from "correct."
+That matters because every neighbouring country reads 0 km — the borders touch — and shows maximum red. Without a separate win colour you could not tell "adjacent" from "correct."
 
 ## Turning the Scale Into a Decision Rule
 
@@ -249,11 +249,11 @@ Guess New Zealand, then guess Fiji. They are 2,987 km apart — almost a full co
 
 If two guesses that far apart produce an identical colour, you have found the ceiling. Note how much information that costs: nearly 3,000 km of separation, reported as no difference at all.
 
-### Check the centroid effect
+### Check the border effect
 
-Against an answer in South America, guess Chile and then guess Bolivia. Chile is a 4,300 km ribbon whose centroid sits well south of most of the continent's population.
+Against an answer in South America, guess Brazil. It borders ten countries, so it reads 0 km against any of them — maximum red, even though Brazil's own middle may be 2,000 km from the answer.
 
-The reading will often flatter Bolivia over Chile even when Chile shares more border with the region you are hunting.
+The lesson: a 0 km reading from a big country narrows the answer to its neighbours, not to its middle. List the countries it touches and work through the small ones first.
 
 ### Check your own resolution
 
@@ -269,7 +269,7 @@ Switch to naming candidates. It is faster and it does not depend on your monitor
 
 ## What This Article Can't Tell You
 
-**It assumes the dataset's centre points.** Every distance here is measured on our 176 country centroids. A different dataset would move some figures, though not the shape of the argument.
+**It assumes the dataset's centre points.** The band counts and distances here are measured between our 176 country centroids. That is exactly what the game reads for guesses more than 3,500 km from the answer; closer in it switches to border distance, so near readings come out smaller than the centroid figures. A different dataset would move some figures, though not the shape of the argument.
 
 **It cannot predict your screen.** Colour resolution depends on display, brightness and colour vision. The 600 km figure is a reasonable middle, not a universal constant.
 
@@ -279,7 +279,7 @@ Switch to naming candidates. It is faster and it does not depend on your monitor
 
 <details>
 <summary>How does Globle's colour system work?</summary>
-<p>Each guess is coloured by the great-circle distance between its centre point and the mystery country's centre point. The ramp runs from deep red at 0 km through red, orange and amber to pale yellow at 12,000 km, with each segment covering 3,000 km.</p>
+<p>Each guess is coloured by its great-circle distance from the mystery country: border to border when the two are within 3,500 km of each other, centre point to centre point beyond that. The ramp runs from deep red at 0 km through red, orange and amber to pale yellow at 12,000 km, with each segment covering 3,000 km.</p>
 </details>
 
 <details>
@@ -288,8 +288,8 @@ Switch to naming candidates. It is faster and it does not depend on your monitor
 </details>
 
 <details>
-<summary>Why does a neighbouring country sometimes read cooler than expected?</summary>
-<p>Because the game measures centre point to centre point, not border to border. Long or very large countries such as Chile, Russia and Brazil have centroids far from their borders, so a shared border can still produce a substantial centroid distance.</p>
+<summary>Why does a neighbouring country read 0 km?</summary>
+<p>Because close in, the game measures from the nearest point of your guess's border to the nearest point of the answer's border, and neighbours touch. That is why a 0 km reading narrows the answer to the countries your guess borders, not to the area around its middle.</p>
 </details>
 
 <details>
@@ -304,6 +304,6 @@ Switch to naming candidates. It is faster and it does not depend on your monitor
 
 ---
 
-**Method.** Colour stops and the 12,000 km maximum are read directly from the game's own `color.ts`. Distances are great-circle on country centre points, computed with the same haversine the game scores with. Band counts and spreads are reproducible from `scripts/blog-data.mjs` in our repository.
+**Method.** Colour stops and the 12,000 km maximum are read directly from the game's own `color.ts`. Distances are great-circle on country centre points, computed with the same haversine the game uses (the game itself switches to border-to-border distance within 3,500 km). Band counts and spreads are reproducible from `scripts/blog-data.mjs` in our repository.
 
-See it in action: [play Globle Unlimited](/), or read the [full rules and colour guide](/how-to-play).
+See it in action: [play Globle Unlimited](/), or read the [full rules and colour guide](/how-to-play/).

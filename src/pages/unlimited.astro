@@ -15,7 +15,7 @@ const schema: Record<string, unknown>[] = [
     '@type': 'CollectionPage',
     name: 'Unlimited Geography Games',
     description,
-    url: `${SITE.url}/unlimited`,
+    url: `${SITE.url}/unlimited/`,
   },
   {
     '@context': 'https://schema.org',
@@ -33,7 +33,7 @@ const schema: Record<string, unknown>[] = [
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: SITE.url },
-      { '@type': 'ListItem', position: 2, name: 'Unlimited Geography Games', item: `${SITE.url}/unlimited` },
+      { '@type': 'ListItem', position: 2, name: 'Unlimited Geography Games', item: `${SITE.url}/unlimited/` },
     ],
   },
   {
@@ -42,7 +42,7 @@ const schema: Record<string, unknown>[] = [
     mainEntity: [
       { '@type': 'Question', name: 'Are these geography games free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Every mode is free to play in your browser with no sign-up required.' } },
       { '@type': 'Question', name: 'What does "unlimited" mean?', acceptedAnswer: { '@type': 'Answer', text: 'You can play endless rounds back-to-back, with no once-a-day cap like the daily version.' } },
-      { '@type': 'Question', name: 'Which game should I start with?', acceptedAnswer: { '@type': 'Answer', text: 'Globle Unlimited if you like maps, Worldle for shapes, Flagle for flags, and Countryle for pure deduction.' } },
+      { '@type': 'Question', name: 'Which game should I start with?', acceptedAnswer: { '@type': 'Answer', text: 'Globle Unlimited if you like maps, Globle Shapes for outlines, Globle Flags for flags, and Globle Clues for pure deduction.' } },
       { '@type': 'Question', name: 'Do I need to download anything?', acceptedAnswer: { '@type': 'Answer', text: 'No. Everything runs in any browser on desktop or mobile, and your progress is saved locally.' } },
     ],
   },
@@ -84,8 +84,9 @@ const schema: Record<string, unknown>[] = [
     <p>
       <strong>Unlimited geography games are free country-guessing games you can play in endless back-to-back
       rounds, with no once-a-day limit.</strong> Most popular geography puzzles — Globle, Worldle, Flagle and
-      the rest — give you a single shared puzzle each day and then make you wait until tomorrow. The unlimited
-      versions remove that cap entirely: finish a round and the next begins instantly. That one change turns a
+      the rest — give you a single shared puzzle each day and then make you wait until tomorrow. The modes
+      here are our own takes on those formats, built to remove that cap entirely: finish a round and the next
+      begins instantly. None of them is affiliated with the games that inspired it. That one change turns a
       quick daily habit into a proper way to learn the world, because the skill behind every one of these games
       is built through repetition.
     </p>
@@ -99,27 +100,28 @@ const schema: Record<string, unknown>[] = [
     <p>Each game tests a different skill. Here is what makes each one worth playing:</p>
     <h3>Globle Unlimited</h3>
     <p>
-      The original. You guess countries on a real 3D globe, and each guess is shaded by how close it is to the
+      The flagship mode. You guess countries on a real 3D globe, and each guess is shaded by how close it is to the
       mystery country — pale yellow when far, burning red when near. It is the best mode for building a mental
       map of where everything sits. <a href="/">Play Globle Unlimited</a>.
     </p>
-    <h3>Worldle Unlimited</h3>
+    <h3>Globle Shapes</h3>
     <p>
       Here you see only a country's black silhouette and name it from the shape, helped by a distance, a
-      direction arrow and a proximity score. It is pure shape recognition, and it is fast once your eye is in.
-      <a href="/silhouette">Play Worldle Unlimited</a>.
+      direction arrow and a proximity score, in the style of Worldle. It is pure shape recognition, and it is
+      fast once your eye is in.
+      <a href="/silhouette/">Play Globle Shapes</a>.
     </p>
-    <h3>Flagle Unlimited</h3>
+    <h3>Globle Flags</h3>
     <p>
       A national flag hides behind six tiles. Each wrong guess reveals one tile plus a distance and direction
-      clue, so the flag and the geography come together piece by piece. <a href="/flags">Play Flagle
-      Unlimited</a>.
+      clue, so the flag and the geography come together piece by piece, as in Flagle.
+      <a href="/flags/">Play Globle Flags</a>.
     </p>
-    <h3>Countryle Unlimited</h3>
+    <h3>Globle Clues</h3>
     <p>
       The deduction mode, with no map at all. You guess a country and get six colour-coded clues — continent,
-      hemisphere, direction, area, borders and whether it is landlocked — and reason your way to the answer.
-      <a href="/clues">Play Countryle Unlimited</a>.
+      hemisphere, direction, area, borders and whether it is landlocked — and reason your way to the answer,
+      the way Countryle plays. <a href="/clues/">Play Globle Clues</a>.
     </p>
 
     <h2>Compare All Modes</h2>
@@ -128,10 +130,10 @@ const schema: Record<string, unknown>[] = [
       <thead><tr><th>Mode</th><th>What you see</th><th>Main clue</th><th>Skill</th></tr></thead>
       <tbody>
         <tr><td><a href="/">Globle Unlimited</a></td><td>A 3D globe</td><td>Distance + heat colour</td><td>Mental map</td></tr>
-        <tr><td><a href="/silhouette">Worldle Unlimited</a></td><td>A silhouette</td><td>Distance + direction</td><td>Shape recognition</td></tr>
-        <tr><td><a href="/flags">Flagle Unlimited</a></td><td>A hidden flag</td><td>Tile reveal + distance</td><td>Flag recognition</td></tr>
-        <tr><td><a href="/clues">Countryle Unlimited</a></td><td>A clue table</td><td>Attribute clues</td><td>Deduction</td></tr>
-        <tr><td><a href="/capitals">Globle Capitals</a></td><td>A 3D globe</td><td>Distance to a capital</td><td>Capital cities</td></tr>
+        <tr><td><a href="/silhouette/">Globle Shapes</a></td><td>A silhouette</td><td>Distance + direction</td><td>Shape recognition</td></tr>
+        <tr><td><a href="/flags/">Globle Flags</a></td><td>A hidden flag</td><td>Tile reveal + distance</td><td>Flag recognition</td></tr>
+        <tr><td><a href="/clues/">Globle Clues</a></td><td>A clue table</td><td>Attribute clues</td><td>Deduction</td></tr>
+        <tr><td><a href="/capitals/">Globle Capitals</a></td><td>A 3D globe</td><td>Distance to a capital</td><td>Capital cities</td></tr>
       </tbody>
     </table>
 
@@ -142,15 +144,15 @@ const schema: Record<string, unknown>[] = [
       daily puzzle, you can play ten unlimited rounds, see ten answers, and correct ten mistakes. That volume is
       what turns hesitation into instant recognition. Unlimited play is also the place to experiment freely —
       try an unusual opening guess, chase a weakness on purpose — because nothing is on the line. When you do
-      want the shared challenge, the <a href="/daily">daily Globle</a> is always a click away.
+      want the shared challenge, the <a href="/daily/">daily Globle</a> is always a click away.
     </p>
 
     <h2>How the Clues Work Across Games</h2>
     <p>
       Although each mode looks different, the underlying idea is shared: every guess tells you how close you
-      are. In Globle it is a heat colour and a distance; in Worldle and Flagle it is a distance plus a direction
-      arrow; in Countryle it is a row of matched, close and far attributes. Learn to read one and you can read
-      them all. If you are brand new, our <a href="/how-to-play">how-to-play guide</a> explains the colour and
+      are. On the globe it is a heat colour and a distance; in Shapes and Flags it is a distance plus a
+      direction arrow; in Clues it is a row of matched, close and far attributes. Learn to read one and you can read
+      them all. If you are brand new, our <a href="/how-to-play/">how-to-play guide</a> explains the colour and
       distance system in plain language, and it applies to every mode on this page.
     </p>
 
@@ -176,7 +178,7 @@ const schema: Record<string, unknown>[] = [
     <h2>Play on Any Device</h2>
     <p>
       Every unlimited mode runs entirely in your browser, so there is nothing to download and nothing to keep
-      updated. The lighter modes — Worldle, Flagle and Countryle — load in an instant and play smoothly on the
+      updated. The lighter modes — Shapes, Flags, Clues and States — load in an instant and play smoothly on the
       cheapest phone, while the globe modes add an interactive 3D earth you can spin and zoom. Your stats are
       saved privately on your own device, so you can pick up a round in any spare minute and watch your scores
       improve over time. Nothing syncs to a server and nothing is ever lost, whether you play on a laptop at
@@ -202,8 +204,8 @@ const schema: Record<string, unknown>[] = [
       pointing straight at the answer. Learn the most distinctive shapes and flags, since a single glance often
       names the country before you need any other clue. And treat every wrong guess as information: the country
       that surprises you is exactly the one worth remembering. Our
-      <a href="/blog/globle-tips-strategy">strategy guide</a> and our list of the
-      <a href="/blog/hardest-countries-to-guess">hardest countries to guess</a> go deeper, and both apply to
+      <a href="/blog/globle-tips-strategy/">strategy guide</a> and our list of the
+      <a href="/blog/hardest-countries-to-guess/">hardest countries to guess</a> go deeper, and both apply to
       every mode here.
     </p>
 
@@ -213,16 +215,16 @@ const schema: Record<string, unknown>[] = [
       counts, rounds played, and, for the daily challenge, your current and longest streak. There is no
       leaderboard and no account, so the numbers are purely yours, a quiet nudge to beat yesterday. A good rhythm
       is to warm up with a few unlimited rounds in whichever mode you are weakest at, then play the shared
-      <a href="/daily">daily Globle</a> while your geography is fresh. Over a couple of weeks you will watch your
+      <a href="/daily/">daily Globle</a> while your geography is fresh. Over a couple of weeks you will watch your
       averages fall across every mode.
     </p>
 
     <h2>One Country Pool, Four Ways to Learn It</h2>
     <p>
       What makes this collection more than a list of separate games is that they reinforce each other. The
-      country you learn to recognise by shape in <a href="/silhouette">Worldle</a> is the same one whose flag you
-      uncover in <a href="/flags">Flagle</a>, whose location you pin down in <a href="/">Globle</a>, and whose
-      size and borders you deduce in <a href="/clues">Countryle</a>. Rotating between modes builds a fuller,
+      country you learn to recognise by shape in <a href="/silhouette/">Globle Shapes</a> is the same one whose
+      flag you uncover in <a href="/flags/">Globle Flags</a>, whose location you pin down on
+      <a href="/">the globe</a>, and whose size and borders you deduce in <a href="/clues/">Globle Clues</a>. Rotating between modes builds a fuller,
       more durable picture of each country than drilling any single one — you end up knowing not just where a
       country is, but what it looks like, what flag it flies, and how it compares to its neighbours.
     </p>
@@ -230,11 +232,11 @@ const schema: Record<string, unknown>[] = [
     <h2>Frequently Asked Questions</h2>
     <div class="faq">
       <details><summary>Are these geography games free?</summary><p>Yes — every mode is free in your browser with no sign-up. Start with <a href="/">Globle Unlimited</a>.</p></details>
-      <details><summary>What does "unlimited" mean?</summary><p>You can play endless rounds back-to-back, with no once-a-day cap like the <a href="/daily">daily version</a>.</p></details>
-      <details><summary>Which game should I start with?</summary><p>Globle if you like maps, <a href="/silhouette">Worldle</a> for shapes, <a href="/flags">Flagle</a> for flags, or <a href="/clues">Countryle</a> for pure deduction.</p></details>
+      <details><summary>What does "unlimited" mean?</summary><p>You can play endless rounds back-to-back, with no once-a-day cap like the <a href="/daily/">daily version</a>.</p></details>
+      <details><summary>Which game should I start with?</summary><p>Globle Unlimited if you like maps, <a href="/silhouette/">Globle Shapes</a> for outlines, <a href="/flags/">Globle Flags</a> for flags, or <a href="/clues/">Globle Clues</a> for pure deduction.</p></details>
       <details><summary>Do I need to download anything?</summary><p>No — everything runs in any browser on desktop or mobile, and your progress is saved locally.</p></details>
-      <details><summary>Are these good for learning geography?</summary><p>Yes. Regular play builds a mental map of countries, borders, flags and capitals — see <a href="/how-to-play">how to play</a>.</p></details>
-      <details><summary>Is there still a daily challenge?</summary><p>Yes, alongside the unlimited modes — one shared puzzle a day if you want the <a href="/daily">streak</a>.</p></details>
+      <details><summary>Are these good for learning geography?</summary><p>Yes. Regular play builds a mental map of countries, borders, flags and capitals — see <a href="/how-to-play/">how to play</a>.</p></details>
+      <details><summary>Is there still a daily challenge?</summary><p>Yes, alongside the unlimited modes — one shared puzzle a day if you want the <a href="/daily/">streak</a>.</p></details>
     </div>
   </article>
 </BaseLayout>

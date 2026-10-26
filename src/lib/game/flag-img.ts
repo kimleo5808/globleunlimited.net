@@ -2,7 +2,7 @@
 //
 // Flag emoji were the obvious choice and the wrong one: Windows ships no
 // regional-indicator glyphs, so a large share of desktop visitors saw "UG"
-// and "IE" instead of flags. These are the same SVGs the Flagle mode already
+// and "IE" instead of flags. These are the same SVGs the flags mode already
 // uses, served from public/assets/flags/{cca2}.svg.
 //
 // Aspect ratios in the set run from 0.82 (Nepal) to 2.00, so every flag is

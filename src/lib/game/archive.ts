@@ -1,6 +1,6 @@
 // Shared date range for everything that enumerates past answers: the archive
-// index, the per-day pages and the locator endpoint. Keeping it in one place
-// means those three can never disagree about which days exist.
+// index and the recent-answers strip on today's page. Keeping it in one place
+// means the two can never disagree about which days exist.
 import { SITE } from '../site';
 import { answerForDate, shiftISO } from './daily';
 import { obscurityOf } from './analysis';

@@ -1,11 +1,13 @@
 ---
 import { FOOTER_LINKS } from '../lib/site';
-// Normalize away the directory-format trailing slash so "/silhouette/" matches "/silhouette".
-const path = Astro.url.pathname.replace(/\/+$/, '') || '/';
+// Compare paths without the directory-format trailing slash, so the current
+// URL and a "/silhouette/" link match however either side is written.
+const bare = (p: string) => p.replace(/\/+$/, '') || '/';
+const path = bare(Astro.url.pathname);
 // All playable modes live in the single-source play list; the header collapses
 // them into one "Games" dropdown so the top bar stays uncluttered.
 const games = FOOTER_LINKS.play;
-const inGames = games.some((g) => g.href === path);
+const inGames = games.some((g) => bare(g.href) === path);
 ---
 
 <header class="site-header">
@@ -17,7 +19,7 @@ const inGames = games.some((g) => g.href === path);
 
     <nav class="modes" aria-label="Main">
       <a
-        href="/globle-answer-today"
+        href="/globle-answer-today/"
         class:list={['mode-link', 'learn', { active: path.startsWith('/globle-answer') }]}
       >Answer</a>
       <div class="games-menu" data-games>
@@ -33,15 +35,15 @@ const inGames = games.some((g) => g.href === path);
         <div class="games-panel" data-games-panel hidden role="menu" aria-label="Game modes">
           {
             games.map((g) => (
-              <a href={g.href} role="menuitem" class:list={['games-item', { active: path === g.href }]}>
+              <a href={g.href} role="menuitem" class:list={['games-item', { active: path === bare(g.href) }]}>
                 {g.label}
               </a>
             ))
           }
         </div>
       </div>
-      <a href="/how-to-play" class:list={['mode-link', 'learn', { active: path === '/how-to-play' }]}>How to Play</a>
-      <a href="/stats" class:list={['mode-link', 'icon', { active: path === '/stats' }]} aria-label="Your stats" title="Your stats">📊</a>
+      <a href="/how-to-play/" class:list={['mode-link', 'learn', { active: path === '/how-to-play' }]}>How to Play</a>
+      <a href="/stats/" class:list={['mode-link', 'icon', { active: path === '/stats' }]} aria-label="Your stats" title="Your stats">📊</a>
       <button type="button" class="mode-link icon" data-settings-open aria-label="Settings" title="Settings" aria-haspopup="dialog">⚙️</button>
     </nav>
   </div>

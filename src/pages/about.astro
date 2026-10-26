@@ -47,7 +47,7 @@ const schema: Record<string, unknown>[] = [
       Everything on the site is designed around that goal. The interactive globe uses real
       satellite imagery so the world looks like the world. Guesses are scored by genuine
       great-circle distance, not a rough approximation. And the
-      <a href="/blog">strategy guides</a> exist to help you actually improve, not just play.
+      <a href="/blog/">strategy guides</a> exist to help you actually improve, not just play.
     </p>
 
     <h2>Who makes it</h2>
@@ -74,8 +74,9 @@ const schema: Record<string, unknown>[] = [
         datasets and refined for gameplay.</li>
     </ul>
     <p>
-      Distances are calculated using the haversine formula on each country&rsquo;s centre point, so
-      the colour you see reflects real geographic proximity.
+      Distances are calculated with the haversine formula between the nearest points of two
+      countries&rsquo; borders (centre to centre once they are thousands of kilometres apart), so the
+      colour you see reflects real geographic proximity.
     </p>
 
     <h2>Our relationship to the official Globle</h2>
@@ -90,10 +91,10 @@ const schema: Record<string, unknown>[] = [
       When a round starts, the game selects a mystery country. Each time you guess, we measure the
       great-circle distance between your guess and the answer and translate it into a colour: pale
       yellow when you are far away, deepening through orange to red as you close in. The
-      <a href="/daily">daily challenge</a> uses a shared date seed so the whole world hunts the same
-      country, while <a href="/practice">practice mode</a> lets you warm up without affecting your
+      <a href="/daily/">daily challenge</a> uses a shared date seed so the whole world hunts the same
+      country, while <a href="/practice/">practice mode</a> lets you warm up without affecting your
       streak. If you ever want to see how the scoring and colours fit together, our
-      <a href="/how-to-play">how-to-play guide</a> walks through it step by step.
+      <a href="/how-to-play/">how-to-play guide</a> walks through it step by step.
     </p>
 
     <h2>What we value</h2>
@@ -118,9 +119,9 @@ const schema: Record<string, unknown>[] = [
 
     <h2>What&rsquo;s next</h2>
     <p>
-      We are actively improving Globle Unlimited. A dedicated <a href="/capitals">Capitals mode</a>
+      We are actively improving Globle Unlimited. A dedicated <a href="/capitals/">Capitals mode</a>
       is now live, and we are always refining difficulty, performance and the strategy content
-      on our <a href="/blog">blog</a>. The best way to shape what comes next is to play and tell us
+      on our <a href="/blog/">blog</a>. The best way to shape what comes next is to play and tell us
       what you think.
     </p>
 
@@ -128,15 +129,15 @@ const schema: Record<string, unknown>[] = [
     <p>
       The game is free to play and requires no account. Your stats and streaks are stored privately
       in your own browser — not on our servers. You can read exactly what we do and do not collect
-      in our <a href="/privacy-policy">Privacy Policy</a>, and the rules of use in our
-      <a href="/terms-of-service">Terms of Service</a>.
+      in our <a href="/privacy-policy/">Privacy Policy</a>, and the rules of use in our
+      <a href="/terms-of-service/">Terms of Service</a>.
     </p>
 
     <h2>Get in touch</h2>
     <p>
       Found a bug, have a feature idea, or just want to say hello? We genuinely read everything.
       Email us at <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or use the
-      <a href="/contact">contact page</a>. Then go play a few rounds of
+      <a href="/contact/">contact page</a>. Then go play a few rounds of
       <a href="/">Globle Unlimited</a> — that is the best way to tell us what works.
     </p>
   </article>

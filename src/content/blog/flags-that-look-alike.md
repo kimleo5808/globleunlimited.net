@@ -14,7 +14,7 @@ Zealand? The colours are right there and they refuse to tell you the answer.
 Here is the liberating secret: **lookalike flags are almost never separated by colour. They are
 separated by structure** — stripe order, a star, an emblem, a ratio, a cross. Learn one
 structural *tell* per pair and the trap doors close permanently. This guide covers the fifteen
-pairs (and trios) responsible for most wrong answers in [Flags mode](/flags), organised by
+pairs (and trios) responsible for most wrong answers in [Flags mode](/flags/), organised by
 *why* they look alike, with a single memorable tell for each.
 
 What you'll learn:
@@ -218,19 +218,19 @@ sort your personal cheat sheet in that order and the rendering gods can't touch 
 Reading a list builds recognition for a day; retrieval builds it for good. The routine that
 works:
 
-1. **Play [Flags mode](/flags) daily** and keep a note of every pair you actually confuse — your
+1. **Play [Flags mode](/flags/) daily** and keep a note of every pair you actually confuse — your
    personal list will be five to eight pairs, not all fifteen.
 2. **Drill the pair, not the flag.** When you miss Guinea, don't stare at Guinea; put Guinea and
    Mali side by side and say the tell out loud ("red at the pole — Guinea"). The confusion is the
    unit of learning.
 3. **Say the hook, not the fact.** "Snow on top of Poland" outlives "white stripe uppermost" by
    months. Silly is sticky.
-4. **Cross-train.** Flags anchor to places: a round of [Globle](/) or
-   [Capitals mode](/capitals) after flag drills ties each flag to its map position and capital,
+4. **Cross-train.** Flags anchor to places: a round of [Globle Unlimited](/) or
+   [Capitals mode](/capitals/) after flag drills ties each flag to its map position and capital,
    and the three memories reinforce each other. Our
-   [outline recognition guide](/blog/recognize-country-outlines) applies the same
+   [outline recognition guide](/blog/recognize-country-outlines/) applies the same
    tell-based method to country shapes, and the
-   [geography games roundup](/blog/geography-games-like-globle) has more flag games to practise
+   [geography games roundup](/blog/geography-games-like-globle/) has more flag games to practise
    in.
 
 Two weeks of this and the trap doors stop being trap doors — you will find yourself *hoping* the
@@ -279,5 +279,5 @@ uses a rectangle, which is why aspect ratio (like Qatar's extreme 11:28) can its
 ---
 
 *We build and maintain the seven geography games on this site, including
-[Flags mode](/flags) and its flag artwork. Think we missed a lookalike pair?
-[Tell us](/contact) and we'll add it to the drill deck.*
+[Flags mode](/flags/) and its flag artwork. Think we missed a lookalike pair?
+[Tell us](/contact/) and we'll add it to the drill deck.*

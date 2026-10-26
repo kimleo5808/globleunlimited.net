@@ -1,12 +1,11 @@
 name: Daily rebuild
 
-# Rebuilds the site once a day so the answer archive grows (a new
-# /globle-answer-archive/{date} page is generated for each day that passes) and
-# the "today" answer pages stay current.
+# Rebuilds the site once a day so /globle-answer-today shows the current answer
+# and the archive index gains yesterday's.
 #
 # Triggering the deploy hook only proves the request left the runner, not that a
 # build ran or that it produced today's page. So the job fires the hook and then
-# waits for the new page to actually answer 200 before it reports success.
+# waits for the live page to actually carry today's date before it reports success.
 
 on:
   schedule:
@@ -39,26 +38,25 @@ jobs:
 
       - name: Wait for today's answer page to go live
         run: |
-          # The archive runs on UTC dates (see todayISO in src/lib/game/archive.ts),
-          # and both cron slots fire after 00:00 UTC, so today's page is the one the
-          # fresh build must contain.
+          # The puzzle runs on UTC dates (see todayISO in src/lib/game/archive.ts),
+          # and both cron slots fire after 00:00 UTC. The page embeds its build date
+          # as data-page-date, so a stale deploy is told apart from a fresh one.
           today="$(date -u +%F)"
-          url="https://globleunlimited.net/globle-answer-archive/${today}/"
+          url="https://globleunlimited.net/globle-answer-today/"
 
           # A Pages build takes a couple of minutes; poll for up to ten before
           # giving up, which is far longer than a healthy build has ever needed.
           sleep 60
           for attempt in $(seq 1 18); do
-            code="$(curl -s -o /dev/null -w '%{http_code}' "$url")"
-            if [ "$code" = "200" ]; then
-              echo "Verified: $url is live (attempt ${attempt})."
+            if curl -fsS "${url}?v=${attempt}" | grep -q "data-page-date=\"${today}\""; then
+              echo "Verified: $url is serving ${today} (attempt ${attempt})."
               exit 0
             fi
-            echo "Attempt ${attempt}: $url returned ${code}, retrying in 30s."
+            echo "Attempt ${attempt}: $url is not serving ${today} yet, retrying in 30s."
             sleep 30
           done
 
-          echo "::error::The deploy hook fired but ${url} never went live. The site is now serving a stale answer. Check the Cloudflare Pages build log."
+          echo "::error::The deploy hook fired but ${url} never switched to ${today}. The site is now serving a stale answer. Check the Cloudflare Pages build log."
           exit 1
 
       - name: Keep the schedule alive

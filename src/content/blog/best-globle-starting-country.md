@@ -186,13 +186,13 @@ A ranking is not a strategy. Here is the playable version:
    *and* about *that* far from Nigeria? There will usually be three to five. Pick the one whose
    neighbours would best split the remainder.
 4. **Drill it where repetition is free.** One puzzle a day is a slow classroom. Run the opening
-   ten times in [unlimited mode](/unlimited), or replay specific regions in
-   [practice mode](/practice), and the lens-listing step becomes automatic. Our
-   [strategy guide](/blog/globle-tips-strategy) covers the mid-game squeeze from there.
+   ten times in [unlimited mode](/unlimited/), or replay specific regions in
+   [practice mode](/practice/), and the lens-listing step becomes automatic. Our
+   [strategy guide](/blog/globle-tips-strategy/) covers the mid-game squeeze from there.
 
 For calibration on the hard tail — the microstates and lookalike islands that survive even a
 perfect opening — see our list of the
-[hardest countries to guess in Globle](/blog/hardest-countries-to-guess).
+[hardest countries to guess in Globle](/blog/hardest-countries-to-guess/).
 
 ## What the study can't tell you
 
@@ -262,9 +262,9 @@ we varied the band from ±300 km to ±700 km.</p>
 
 <details>
 <summary>Does the best opener change in other game modes?</summary>
-<p>The logic transfers but the geography changes. In <a href="/capitals">Capitals mode</a>
+<p>The logic transfers but the geography changes. In <a href="/capitals/">Capitals mode</a>
 distances run between capital cities, which shifts the rankings slightly; in
-<a href="/states">States mode</a> the field is only 50 answers, so a central opener like Kansas
+<a href="/states/">States mode</a> the field is only 50 answers, so a central opener like Kansas
 carries more of the load. The principle — prefer thin rings over warm feelings — holds
 everywhere.</p>
 </details>
@@ -273,4 +273,4 @@ everywhere.</p>
 
 *Method note: analysis run July 2026 on Globle Unlimited's 176-country dataset (centre points
 derived from Natural Earth). We build and maintain the seven geography games on this site and the
-dataset behind them. Found something we missed? [Tell us](/contact) — we'll re-run the numbers.*
+dataset behind them. Found something we missed? [Tell us](/contact/) — we'll re-run the numbers.*
