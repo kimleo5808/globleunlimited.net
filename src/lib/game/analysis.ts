@@ -1,14 +1,16 @@
 // Build-time analysis of a daily answer.
 //
-// Everything here is derived from src/data/countries.json (176 countries) and
-// capitals.json using the same haversine the game itself scores with, so the
-// numbers on the answer pages describe the real puzzle rather than a guess at
-// it. The formulas are deliberately simple and are disclosed on the page.
+// Everything here is derived from src/data/countries.json (176 countries),
+// capitals.json and the world outlines, using the same border-to-border
+// distance the game itself scores with, so the numbers on the answer pages
+// describe the real puzzle rather than a guess at it. The formulas are
+// deliberately simple and are disclosed on the page.
 import type { Country } from './types';
 import { COUNTRIES } from './countries';
-import { haversine } from './distance';
+import { borderDistanceKm, buildBorderIndex } from './border-distance';
 import { hintFor } from './hint';
 import capitalsData from '../../data/capitals.json';
+import world from '../../../public/assets/data/world.geo.json';
 
 interface CapitalRow {
   name: string;
@@ -38,7 +40,7 @@ export interface Obscurity {
 export interface Opener {
   name: string;
   cca2: string;
-  /** Great-circle distance from this opener to the answer. */
+  /** Distance reading (km) the game shows for this opener against the answer. */
   distanceKm: number;
   /** Countries left inside the same colour band after this opening guess. */
   remaining: number;
@@ -73,10 +75,51 @@ const AREA_RANK = new Map<string, number>(
 
 const OPENERS = COUNTRIES.filter((c) => (c.area ?? 0) >= OPENER_MIN_AREA_KM2);
 
-/** Capital city of a country, or null when the dataset has no row for it. */
+const BORDERS = buildBorderIndex((world as { features: Parameters<typeof buildBorderIndex>[0] }).features);
+
+/** Pair distances are symmetric and reused across every opener, so cache them. */
+const DISTANCE_CACHE = new Map<string, number>();
+
+/** The distance reading the game would show for guess `a` against answer `b`. */
+function gameDistance(a: Country, b: Country): number {
+  const key = a.name < b.name ? `${a.name}|${b.name}` : `${b.name}|${a.name}`;
+  let d = DISTANCE_CACHE.get(key);
+  if (d === undefined) {
+    d = borderDistanceKm(BORDERS, a, b);
+    DISTANCE_CACHE.set(key, d);
+  }
+  return d;
+}
+
+/** Seats for pool entries with no row in capitals.json, which holds only the
+ *  sovereign capitals the Capitals game plays with. */
+const OTHER_SEATS: Record<string, string> = {
+  'Falkland Islands': 'Stanley',
+  'French Southern and Antarctic Lands': 'Port-aux-Français',
+  Greenland: 'Nuuk',
+  'New Caledonia': 'Nouméa',
+  'Puerto Rico': 'San Juan',
+  'N. Cyprus': 'North Nicosia',
+  Palestine: 'East Jerusalem (proclaimed), Ramallah (administrative)',
+  'Western Sahara': 'Laayoune (disputed)',
+};
+
+/** Listed first where a country splits the role between several cities. */
+const PRIMARY_CAPITAL: Record<string, string> = { ZA: 'Pretoria', BO: 'Sucre' };
+
+/** Capital city (or cities) of a country, or null when none is known.
+ *  Kosovo and Somaliland have no ISO code, so they are matched by name: an
+ *  empty-code match would hand all of them whichever code-less row sorts first. */
 export function capitalOf(country: Country): string | null {
-  const row = CAPITALS.find((c) => c.cca2 === country.cca2);
-  return row ? row.name : null;
+  const rows = country.cca2
+    ? CAPITALS.filter((c) => c.cca2 === country.cca2)
+    : CAPITALS.filter((c) => c.country === country.name);
+  if (!rows.length) return OTHER_SEATS[country.name] ?? null;
+  const primary = PRIMARY_CAPITAL[country.cca2];
+  return rows
+    .map((c) => c.name)
+    .sort((a, b) => Number(b === primary) - Number(a === primary))
+    .join(' / ');
 }
 
 /** Candidates remaining after each hint rung, filters applied cumulatively. */
@@ -150,12 +193,12 @@ export function bestOpenerFor(country: Country): Opener {
 
   for (const opener of OPENERS) {
     if (opener.name === country.name) continue;
-    const target = haversine(opener.lat, opener.lng, country.lat, country.lng);
+    const target = gameDistance(opener, country);
 
     let remaining = 0;
     for (const c of COUNTRIES) {
       if (c.name === opener.name) continue;
-      const d = haversine(opener.lat, opener.lng, c.lat, c.lng);
+      const d = gameDistance(opener, c);
       if (Math.abs(d - target) <= BAND_TOLERANCE_KM) remaining++;
     }
 

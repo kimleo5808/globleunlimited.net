@@ -12,12 +12,12 @@ const cfg =
     ? {
         noun: 'state', placeholder: 'Enter state name or abbreviation…', ariaInput: 'Enter state name',
         ariaImg: 'Silhouette of the mystery US state', silUrl: '/assets/data/us-states.silhouettes.json',
-        shareName: 'Statele Unlimited', sharePath: '/states', statsMode: 'states', maxKm: 6000, unitDefault: 'mi',
+        shareName: 'Globle States', sharePath: '/states/', statsMode: 'states', maxKm: 6000, unitDefault: 'mi',
       }
     : {
         noun: 'country', placeholder: 'Enter country name…', ariaInput: 'Enter country name',
         ariaImg: 'Silhouette of the mystery country', silUrl: '/assets/data/silhouettes.json',
-        shareName: 'Worldle Unlimited', sharePath: '/silhouette', statsMode: 'silhouette', maxKm: 20000, unitDefault: 'km',
+        shareName: 'Globle Shapes', sharePath: '/silhouette/', statsMode: 'silhouette', maxKm: 20000, unitDefault: 'km',
       };
 ---
 
@@ -62,6 +62,9 @@ const cfg =
     <button type="submit" class="btn btn-primary" disabled>Guess</button>
   </form>
 
+  <!-- Shown when the end-of-round modal is closed, to bring it back -->
+  <button type="button" class="btn btn-ghost round-result" data-reopen hidden>Round over · See result</button>
+
   <!-- Progress pips -->
   <div class="pips rise" style="--d:280ms">
     <div class="pip-row" data-pips aria-hidden="true"></div>
@@ -82,6 +85,7 @@ const cfg =
   <!-- End modal (win or reveal) -->
   <div class="modal-overlay" data-modal hidden>
     <div class="modal card" role="dialog" aria-modal="true" aria-label="Round over">
+      <button type="button" class="modal-close" data-modal-close aria-label="Close">✕</button>
       <div class="modal-emoji" data-modal-emoji>🎉</div>
       <h2 class="modal-title" data-modal-title>You found it!</h2>
       <p class="modal-line">

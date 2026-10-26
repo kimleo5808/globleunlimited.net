@@ -1,13 +1,13 @@
 // Client controller for the Flagle-style flag game.
 // A national flag revealed one tile per wrong guess + distance / direction clues.
 import { GameEngine } from '../../lib/game/engine';
-import { flagImg } from '../../lib/game/flag-img';
+import { flagImg, flagUrl } from '../../lib/game/flag-img';
 import { flagsDataset } from '../../lib/game/flags';
-import { flagUrl } from '../../lib/game/flag-img';
 import { bearing, compassArrow, compassName } from '../../lib/game/direction';
-import { recordWin } from '../../lib/game/stats';
+import { recordLoss, recordWin } from '../../lib/game/stats';
 import { formatDistance, SETTINGS_EVENT } from '../../lib/settings';
-import type { Guessable, Guess } from '../../lib/game/types';
+import { bindAutocomplete, bindModal, bindShare, renderPips } from './shared';
+import type { Guess } from '../../lib/game/types';
 
 const MAX_GUESSES = 6;
 const TILE_COUNT = 6;
@@ -24,6 +24,7 @@ export function initFlagsGame(root: HTMLElement) {
     hint: root.querySelector('[data-flag-hint]'),
     form: $<HTMLFormElement>('[data-guess-form]'),
     input: $<HTMLInputElement>('[data-guess-input]'),
+    submit: $<HTMLButtonElement>('[data-guess-form] button'),
     suggestBox: $('[data-suggest]'),
     pips: $('[data-pips]'),
     pipCount: $('[data-pipcount]'),
@@ -39,13 +40,20 @@ export function initFlagsGame(root: HTMLElement) {
     modalExtra: $('[data-modal-extra]'),
     playAgain: $<HTMLButtonElement>('[data-play-again]'),
     shareBtn: $<HTMLButtonElement>('[data-share]'),
+    reopen: root.querySelector<HTMLElement>('[data-reopen]'),
   };
 
   const dataset = flagsDataset;
   const engine = new GameEngine('silhouette', undefined, dataset); // shares the capped 6-guess flow
+  const modal = bindModal(els.modal, els.reopen);
   let over = false;
   let tileEls: HTMLElement[] = [];
   const km = (n: number) => formatDistance(n);
+
+  function setInputEnabled(on: boolean) {
+    els.input.disabled = !on;
+    els.submit.disabled = !on;
+  }
 
   // ---- Flag + tiles ----
   function buildTiles() {
@@ -77,22 +85,7 @@ export function initFlagsGame(root: HTMLElement) {
     tileEls.forEach((t) => t.classList.add('revealed'));
   }
 
-  // ---- Progress pips ----
-  function renderPips() {
-    const n = engine.guessCount;
-    els.pips.innerHTML = '';
-    for (let i = 0; i < MAX_GUESSES; i++) {
-      const pip = document.createElement('span');
-      pip.className = 'pip';
-      const g = engine.guesses[i];
-      if (g) {
-        pip.style.background = g.color;
-        pip.style.borderColor = g.color;
-      }
-      els.pips.appendChild(pip);
-    }
-    els.pipCount.textContent = `GUESSES ${n} / ${MAX_GUESSES}`;
-  }
+  const pips = () => renderPips(els.pips, els.pipCount, engine.guesses, MAX_GUESSES);
 
   // ---- Guess rows ----
   function addRow(g: Guess) {
@@ -115,6 +108,15 @@ export function initFlagsGame(root: HTMLElement) {
 
   window.addEventListener(SETTINGS_EVENT, renderList);
 
+  // ---- Autocomplete + errors ----
+  const ac = bindAutocomplete({
+    input: els.input,
+    box: els.suggestBox,
+    suggest: (q) => dataset.suggest(q),
+    icon: (c) => flagImg(c.cca2),
+    onPick: (name) => submitGuess(name),
+  });
+
   // ---- Submit ----
   els.form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -127,18 +129,18 @@ export function initFlagsGame(root: HTMLElement) {
     if (!value) return;
     const out = engine.guess(value);
 
-    if (out.status === 'invalid') { flashError('Not a recognized country'); return; }
-    if (out.status === 'duplicate') { flashError('Already guessed'); return; }
+    if (out.status === 'invalid') { ac.error('Not a recognized country'); return; }
+    if (out.status === 'duplicate') { ac.error('Already guessed'); return; }
 
     const g = out.guess;
     g.bearing = bearing(g.country.lat, g.country.lng, engine.target.lat, engine.target.lng);
 
-    clearError();
+    ac.clearError();
     els.input.value = '';
-    closeSuggest();
+    ac.close();
     els.clueTip?.setAttribute('hidden', '');
     addRow(g);
-    renderPips();
+    pips();
     if (!out.won) revealNext(engine.guessCount); // one tile per wrong guess
     announce(
       g.correct
@@ -150,12 +152,13 @@ export function initFlagsGame(root: HTMLElement) {
     else if (engine.guessCount >= MAX_GUESSES) finish(false);
   }
 
+  function announce(msg: string) { els.live.textContent = msg; }
+
   // ---- Round end ----
   function finish(won: boolean) {
     over = true;
     revealAll();
-    els.input.disabled = true;
-    (els.form.querySelector('button') as HTMLButtonElement).disabled = true;
+    setInputEnabled(false);
 
     els.modalEmoji.textContent = won ? '🎉' : '😔';
     els.modalTitle.textContent = won ? 'You found it!' : 'Out of guesses';
@@ -169,9 +172,10 @@ export function initFlagsGame(root: HTMLElement) {
         s.bestGuesses != null ? `Best: ${s.bestGuesses} guesses · Played: ${s.played}` : '';
       els.modalExtra.hidden = !els.modalExtra.textContent;
     } else {
+      recordLoss('flags');
       els.modalExtra.hidden = true;
     }
-    els.modal.hidden = false;
+    modal.open();
   }
 
   // ---- Play again ----
@@ -179,76 +183,28 @@ export function initFlagsGame(root: HTMLElement) {
     engine.reset();
     over = false;
     els.list.innerHTML = '';
-    els.modal.hidden = true;
-    clearError();
-    els.input.disabled = false;
-    (els.form.querySelector('button') as HTMLButtonElement).disabled = false;
+    modal.reset();
+    ac.clearError();
+    setInputEnabled(true);
     els.clueTip?.removeAttribute('hidden');
     loadFlag(engine.target.cca2);
-    renderPips();
+    pips();
     els.input.focus();
   });
 
   // ---- Share ----
-  els.shareBtn.addEventListener('click', async () => {
+  bindShare(els.shareBtn, () => {
     const line = engine.won
-      ? `I guessed the flag in ${engine.guessCount}/${MAX_GUESSES} on Flagle Unlimited!`
-      : `This flag stumped me on Flagle Unlimited!`;
-    const text = `${line} https://globleunlimited.net/flags`;
-    try {
-      if (navigator.share) await navigator.share({ text });
-      else {
-        await navigator.clipboard.writeText(text);
-        els.shareBtn.textContent = 'Copied!';
-        setTimeout(() => (els.shareBtn.textContent = 'Share'), 1500);
-      }
-    } catch { /* cancelled */ }
+      ? `I guessed the flag in ${engine.guessCount}/${MAX_GUESSES} on Globle Flags!`
+      : `This flag stumped me on Globle Flags!`;
+    return `${line} https://globleunlimited.net/flags/`;
   });
-
-  // ---- Errors + a11y ----
-  function flashError(msg: string) {
-    els.input.setAttribute('aria-invalid', 'true');
-    els.suggestBox.innerHTML = `<div class="suggest-error">${msg}</div>`;
-    els.suggestBox.hidden = false;
-  }
-  function clearError() { els.input.removeAttribute('aria-invalid'); }
-  function announce(msg: string) { els.live.textContent = msg; }
-
-  // ---- Autocomplete ----
-  let activeIdx = -1;
-  els.input.addEventListener('input', () => {
-    activeIdx = -1;
-    renderSuggest(dataset.suggest(els.input.value));
-  });
-  els.input.addEventListener('keydown', (e) => {
-    const items = [...els.suggestBox.querySelectorAll('.suggest-item')] as HTMLElement[];
-    if (!items.length) return;
-    if (e.key === 'ArrowDown') { e.preventDefault(); activeIdx = (activeIdx + 1) % items.length; }
-    else if (e.key === 'ArrowUp') { e.preventDefault(); activeIdx = (activeIdx - 1 + items.length) % items.length; }
-    else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); items[activeIdx].click(); return; }
-    else return;
-    items.forEach((it, i) => it.classList.toggle('active', i === activeIdx));
-  });
-  els.input.addEventListener('blur', () => setTimeout(closeSuggest, 120));
-
-  function renderSuggest(list: Guessable[]) {
-    if (!list.length) return closeSuggest();
-    els.suggestBox.innerHTML = list
-      .map((c) => `<button type="button" class="suggest-item" data-name="${c.name}">${flagImg(c.cca2)} ${c.name}</button>`)
-      .join('');
-    els.suggestBox.hidden = false;
-    els.suggestBox.querySelectorAll<HTMLButtonElement>('.suggest-item').forEach((b) => {
-      b.addEventListener('click', () => { els.input.value = b.dataset.name || ''; submitGuess(els.input.value); });
-    });
-  }
-  function closeSuggest() { els.suggestBox.hidden = true; els.suggestBox.innerHTML = ''; }
 
   // ---- Boot ----
   buildTiles();
-  renderPips();
+  pips();
   els.hint?.remove();
-  els.input.disabled = false;
-  (els.form.querySelector('button') as HTMLButtonElement).disabled = false;
+  setInputEnabled(true);
   loadFlag(engine.target.cca2);
   els.input.focus();
 }

@@ -1,6 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+/** Modes with a guess limit: rounds can be lost, so they get a win rate. */
+const CAPPED = [
+  { mode: 'silhouette', icon: '🗺️', name: 'Globle Shapes', href: '/silhouette/' },
+  { mode: 'flags', icon: '🏳️', name: 'Globle Flags', href: '/flags/' },
+  { mode: 'clues', icon: '🔎', name: 'Globle Clues', href: '/clues/' },
+  { mode: 'states', icon: '📍', name: 'Globle States', href: '/states/' },
+] as const;
+
 const title = 'Your Globle Stats – Streaks & Best Scores';
 const description =
   'See your Globle stats: daily streak, best guess count, games played, and your full guess distribution. Stored privately in your browser, never uploaded.';
@@ -18,7 +26,7 @@ const schema: Record<string, unknown>[] = [
   },
   { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://globleunlimited.net/' },
-    { '@type': 'ListItem', position: 2, name: 'Your Stats', item: 'https://globleunlimited.net/stats' },
+    { '@type': 'ListItem', position: 2, name: 'Your Stats', item: 'https://globleunlimited.net/stats/' },
   ]},
 ];
 ---
@@ -60,6 +68,20 @@ const schema: Record<string, unknown>[] = [
         <h3 class="dist-title">Guess distribution</h3>
         <div class="dist" data-dist="capitals"></div>
       </section>
+
+      {CAPPED.map((m) => (
+        <section class="card stat-card">
+          <h2>{m.icon} <a href={m.href}>{m.name}</a></h2>
+          <dl class="grid">
+            <div><dt>Wins</dt><dd class="mono" data-s={`${m.mode}.wins`}>0</dd></div>
+            <div><dt>Played</dt><dd class="mono" data-s={`${m.mode}.played`}>0</dd></div>
+            <div><dt>Win rate</dt><dd class="mono" data-s={`${m.mode}.winRate`}>—</dd></div>
+            <div><dt>Best guesses</dt><dd class="mono" data-s={`${m.mode}.bestGuesses`}>—</dd></div>
+          </dl>
+          <h3 class="dist-title">Guess distribution</h3>
+          <div class="dist" data-dist={m.mode}></div>
+        </section>
+      ))}
     </div>
 
     <p class="cta-row rise" style="--d:240ms"><a href="/" class="btn btn-primary">▶ Play Globle Unlimited</a></p>
@@ -75,7 +97,7 @@ const schema: Record<string, unknown>[] = [
     <ul>
       <li>
         <strong>Current streak</strong> — consecutive days you have finished the
-        <a href="/daily">daily challenge</a>. Miss a day and it returns to zero.
+        <a href="/daily/">daily challenge</a>. Miss a day and it returns to zero.
       </li>
       <li>
         <strong>Max streak</strong> — the longest run you have ever put together. This one never
@@ -84,6 +106,11 @@ const schema: Record<string, unknown>[] = [
       <li>
         <strong>Played</strong> — how many rounds of that mode you have finished. Useful as a
         denominator: ten wins out of twelve rounds is a very different story from ten out of sixty.
+      </li>
+      <li>
+        <strong>Win rate</strong> — in the modes with a guess limit (Shapes, Flags, Clues and
+        States), the share of rounds you solved before running out. The globe modes have no limit,
+        so every finished round there is a win.
       </li>
       <li>
         <strong>Best guesses</strong> — the fewest guesses you have ever needed to find the mystery
@@ -103,10 +130,10 @@ const schema: Record<string, unknown>[] = [
       tied to one browser on one device. Playing on your phone builds a separate record from
       playing on your laptop, and clearing site data or using private browsing wipes the history.
       If you want the numbers to keep growing, stick to one browser. Our
-      <a href="/privacy-policy">privacy policy</a> covers exactly what is and is not collected.
+      <a href="/privacy-policy/">privacy policy</a> covers exactly what is and is not collected.
     </p>
     <p>
-      Each mode is counted on its own. Unlimited and <a href="/capitals">Capitals</a> rounds never
+      Each mode is counted on its own. Unlimited and <a href="/capitals/">Capitals</a> rounds never
       touch your daily streak, so you can practise as much as you want without putting a record at
       risk — that is the whole point of an unlimited mode.
     </p>
@@ -117,42 +144,46 @@ const schema: Record<string, unknown>[] = [
       The single biggest lever on your guess distribution is guess number one. A central,
       high-information starting country splits the world far more evenly than a corner country
       like New Zealand or Iceland. We ran the numbers on every candidate in
-      <a href="/blog/best-globle-starting-country">the best Globle starting country</a>.
+      <a href="/blog/best-globle-starting-country/">the best Globle starting country</a>.
     </p>
     <h3>Narrow by continent before you narrow by country</h3>
     <p>
       Two well-spaced guesses usually pin down the right landmass. Only then is it worth spending
       guesses on individual neighbours. The full method is in our
-      <a href="/blog/globle-tips-strategy">Globle tips and strategy guide</a>, and the colour scale
-      itself is explained on <a href="/how-to-play">how to play</a>.
+      <a href="/blog/globle-tips-strategy/">Globle tips and strategy guide</a>, and the colour scale
+      itself is explained on <a href="/how-to-play/">how to play</a>.
     </p>
     <h3>Practise the countries that keep beating you</h3>
     <p>
       Most players lose their streaks to the same handful of small or unfamiliar states. Run
-      <a href="/practice">practice mode</a> until they stop surprising you, and see which ones
+      <a href="/practice/">practice mode</a> until they stop surprising you, and see which ones
       trip up everyone else in
-      <a href="/blog/hardest-countries-to-guess">the hardest countries to guess</a>.
+      <a href="/blog/hardest-countries-to-guess/">the hardest countries to guess</a>.
     </p>
   </article>
 </BaseLayout>
 
 <script>
-  import { getStats } from '../lib/game/stats';
+  import { currentDailyStreak, getStats, todayISO, winRate } from '../lib/game/stats';
   import type { GameMode } from '../lib/game/types';
+
+  const MODES: GameMode[] = ['daily', 'unlimited', 'capitals', 'silhouette', 'flags', 'clues', 'states'];
 
   function set(path: string, value: string | number | null) {
     const el = document.querySelector(`[data-s="${path}"]`);
     if (el) el.textContent = value == null ? '—' : String(value);
   }
 
-  (['daily', 'unlimited', 'capitals'] as GameMode[]).forEach((mode) => {
+  MODES.forEach((mode) => {
     const s = getStats(mode);
-    set(`${mode}.currentStreak`, s.currentStreak);
     set(`${mode}.maxStreak`, s.maxStreak);
     set(`${mode}.played`, s.played);
     set(`${mode}.wins`, s.wins);
     set(`${mode}.bestGuesses`, s.bestGuesses);
+    const rate = winRate(s);
+    set(`${mode}.winRate`, rate == null ? null : `${rate}%`);
   });
+  set('daily.currentStreak', currentDailyStreak(todayISO()));
 
   // Distribution bars
   const keys = ['1', '2', '3', '4', '5', '6', '7+'];
@@ -169,8 +200,7 @@ const schema: Record<string, unknown>[] = [
       })
       .join('');
   }
-  renderDist('unlimited');
-  renderDist('capitals');
+  MODES.filter((m) => m !== 'daily').forEach(renderDist);
 </script>
 
 <style>
@@ -182,6 +212,8 @@ const schema: Record<string, unknown>[] = [
   .stat-blocks { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-6); margin-top: var(--space-8); }
   .stat-card { padding: var(--space-6); }
   .stat-card h2 { font-size: var(--fs-h3); margin-bottom: var(--space-4); }
+  .stat-card h2 a { color: inherit; text-decoration: none; }
+  .stat-card h2 a:hover { color: var(--accent); }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
   .grid dt { font-size: var(--fs-small); color: var(--text-mute); }
   .grid dd { font-size: 1.6rem; color: var(--accent); }

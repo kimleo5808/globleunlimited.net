@@ -146,6 +146,27 @@ a:hover { color: var(--accent); }
   flex: none;
 }
 
+/* ---- End-of-round modal controls (shared by every game) ---- */
+.modal-overlay .modal { position: relative; }
+.modal-close {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  color: var(--text-mute);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.modal-close:hover { background: var(--bg-panel-2); color: var(--text); }
+.round-result { margin-top: var(--space-4); }
+.round-result[hidden] { display: none; }
+
 /* ---- Entrance animation (staggered reveal) ---- */
 @keyframes rise {
   from { opacity: 0; transform: translateY(16px); }

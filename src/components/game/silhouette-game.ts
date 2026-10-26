@@ -6,9 +6,10 @@ import { countriesDataset } from '../../lib/game/countries';
 import { flagImg } from '../../lib/game/flag-img';
 import { statesDataset } from '../../lib/game/states';
 import { bearing, compassArrow, compassName, proximityPct } from '../../lib/game/direction';
-import { recordWin } from '../../lib/game/stats';
+import { recordLoss, recordWin } from '../../lib/game/stats';
 import { formatDistance, getUnit, SETTINGS_EVENT } from '../../lib/settings';
 import type { Unit } from '../../lib/settings';
+import { bindAutocomplete, bindModal, bindShare, renderPips } from './shared';
 import type { Guessable, Guess, GameMode, Dataset } from '../../lib/game/types';
 
 const MAX_GUESSES = 6;
@@ -22,14 +23,14 @@ export function initSilhouetteGame(root: HTMLElement) {
   const variant = root.dataset.variant === 'states' ? 'states' : 'countries';
   const cfg = {
     silUrl: root.dataset.silUrl || '/assets/data/silhouettes.json',
-    shareName: root.dataset.shareName || 'Worldle Unlimited',
-    sharePath: root.dataset.sharePath || '/silhouette',
+    shareName: root.dataset.shareName || 'Globle Shapes',
+    sharePath: root.dataset.sharePath || '/silhouette/',
     statsMode: (root.dataset.statsMode || 'silhouette') as GameMode,
     maxKm: Number(root.dataset.maxKm) || 20000,
     unitDefault: (root.dataset.unitDefault || 'km') as Unit,
   };
   const dataset: Dataset = variant === 'states' ? statesDataset : countriesDataset;
-  /** Leading icon for a guessed item: flag emoji for countries, code pill for states. */
+  /** Leading icon for a guessed item: flag image for countries, code pill for states. */
   const icon = (item: Guessable) =>
     variant === 'states' ? `<span class="g-abbr">${item.cca2}</span>` : flagImg(item.cca2);
 
@@ -39,6 +40,7 @@ export function initSilhouetteGame(root: HTMLElement) {
     hint: root.querySelector('[data-sil-hint]'),
     form: $<HTMLFormElement>('[data-guess-form]'),
     input: $<HTMLInputElement>('[data-guess-input]'),
+    submit: $<HTMLButtonElement>('[data-guess-form] button'),
     suggestBox: $('[data-suggest]'),
     pips: $('[data-pips]'),
     pipCount: $('[data-pipcount]'),
@@ -54,14 +56,21 @@ export function initSilhouetteGame(root: HTMLElement) {
     modalExtra: $('[data-modal-extra]'),
     playAgain: $<HTMLButtonElement>('[data-play-again]'),
     shareBtn: $<HTMLButtonElement>('[data-share]'),
+    reopen: root.querySelector<HTMLElement>('[data-reopen]'),
   };
 
   const engine = new GameEngine('silhouette', undefined, dataset);
+  const modal = bindModal(els.modal, els.reopen);
   let silhouettes: SilhouetteMap = {};
   let over = false;
   // Respect an explicit unit choice; otherwise fall back to the page default
   // (/states defaults to miles for its US audience).
   const km = (n: number) => formatDistance(n, getUnit(cfg.unitDefault));
+
+  function setInputEnabled(on: boolean) {
+    els.input.disabled = !on;
+    els.submit.disabled = !on;
+  }
 
   // ---- Silhouette rendering ----
   function renderSilhouette(name: string) {
@@ -76,19 +85,7 @@ export function initSilhouetteGame(root: HTMLElement) {
     }
   }
 
-  // ---- Progress pips ----
-  function renderPips() {
-    const n = engine.guessCount;
-    els.pips.innerHTML = '';
-    for (let i = 0; i < MAX_GUESSES; i++) {
-      const pip = document.createElement('span');
-      pip.className = 'pip';
-      const g = engine.guesses[i];
-      if (g) { pip.style.background = g.color; pip.style.borderColor = g.color; }
-      els.pips.appendChild(pip);
-    }
-    els.pipCount.textContent = `GUESSES ${n} / ${MAX_GUESSES}`;
-  }
+  const pips = () => renderPips(els.pips, els.pipCount, engine.guesses, MAX_GUESSES);
 
   // ---- Guess rows ----
   function addRow(g: Guess) {
@@ -114,6 +111,15 @@ export function initSilhouetteGame(root: HTMLElement) {
 
   window.addEventListener(SETTINGS_EVENT, renderList);
 
+  // ---- Autocomplete + errors ----
+  const ac = bindAutocomplete({
+    input: els.input,
+    box: els.suggestBox,
+    suggest: (q) => dataset.suggest(q),
+    icon,
+    onPick: (name) => submitGuess(name),
+  });
+
   // ---- Submit ----
   els.form.addEventListener('submit', (e) => { e.preventDefault(); submitGuess(els.input.value); });
 
@@ -122,19 +128,19 @@ export function initSilhouetteGame(root: HTMLElement) {
     const value = raw.trim();
     if (!value) return;
     const out = engine.guess(value);
-    if (out.status === 'invalid') { flashError(`Not a recognized ${variant === 'states' ? 'state' : 'country'}`); return; }
-    if (out.status === 'duplicate') { flashError('Already guessed'); return; }
+    if (out.status === 'invalid') { ac.error(`Not a recognized ${variant === 'states' ? 'state' : 'country'}`); return; }
+    if (out.status === 'duplicate') { ac.error('Already guessed'); return; }
 
     const g = out.guess;
     g.bearing = bearing(g.country.lat, g.country.lng, engine.target.lat, engine.target.lng);
     g.proximity = proximityPct(g.distanceKm, cfg.maxKm);
 
-    clearError();
+    ac.clearError();
     els.input.value = '';
-    closeSuggest();
+    ac.close();
     els.clueTip?.setAttribute('hidden', ''); // hint has served its purpose
     addRow(g);
-    renderPips();
+    pips();
     announce(
       g.correct
         ? `${g.country.name}, correct!`
@@ -145,11 +151,12 @@ export function initSilhouetteGame(root: HTMLElement) {
     else if (engine.guessCount >= MAX_GUESSES) finish(false);
   }
 
+  function announce(msg: string) { els.live.textContent = msg; }
+
   // ---- Round end ----
   function finish(won: boolean) {
     over = true;
-    els.input.disabled = true;
-    (els.form.querySelector('button') as HTMLButtonElement).disabled = true;
+    setInputEnabled(false);
 
     els.modalEmoji.textContent = won ? '🎉' : '😔';
     els.modalTitle.textContent = won ? 'You found it!' : 'Out of guesses';
@@ -163,9 +170,10 @@ export function initSilhouetteGame(root: HTMLElement) {
         s.bestGuesses != null ? `Best: ${s.bestGuesses} guesses · Played: ${s.played}` : '';
       els.modalExtra.hidden = !els.modalExtra.textContent;
     } else {
+      recordLoss(cfg.statsMode);
       els.modalExtra.hidden = true;
     }
-    els.modal.hidden = false;
+    modal.open();
   }
 
   // ---- Play again ----
@@ -173,77 +181,32 @@ export function initSilhouetteGame(root: HTMLElement) {
     engine.reset();
     over = false;
     els.list.innerHTML = '';
-    els.modal.hidden = true;
-    clearError();
-    els.input.disabled = false;
-    (els.form.querySelector('button') as HTMLButtonElement).disabled = false;
+    modal.reset();
+    ac.clearError();
+    setInputEnabled(true);
     els.clueTip?.removeAttribute('hidden');
     renderSilhouette(engine.target.name);
-    renderPips();
+    pips();
     els.input.focus();
   });
 
   // ---- Share ----
-  els.shareBtn.addEventListener('click', async () => {
+  bindShare(els.shareBtn, () => {
     const noun = variant === 'states' ? 'state' : 'country';
     const line = engine.won
       ? `I found the mystery ${noun} in ${engine.guessCount}/${MAX_GUESSES} on ${cfg.shareName}!`
       : `${cfg.shareName} stumped me!`;
-    const text = `${line} https://globleunlimited.net${cfg.sharePath}`;
-    try {
-      if (navigator.share) await navigator.share({ text });
-      else {
-        await navigator.clipboard.writeText(text);
-        els.shareBtn.textContent = 'Copied!';
-        setTimeout(() => (els.shareBtn.textContent = 'Share'), 1500);
-      }
-    } catch { /* cancelled */ }
+    return `${line} https://globleunlimited.net${cfg.sharePath}`;
   });
-
-  // ---- Errors + a11y ----
-  function flashError(msg: string) {
-    els.input.setAttribute('aria-invalid', 'true');
-    els.suggestBox.innerHTML = `<div class="suggest-error">${msg}</div>`;
-    els.suggestBox.hidden = false;
-  }
-  function clearError() { els.input.removeAttribute('aria-invalid'); }
-  function announce(msg: string) { els.live.textContent = msg; }
-
-  // ---- Autocomplete ----
-  let activeIdx = -1;
-  els.input.addEventListener('input', () => { activeIdx = -1; renderSuggest(dataset.suggest(els.input.value)); });
-  els.input.addEventListener('keydown', (e) => {
-    const items = [...els.suggestBox.querySelectorAll('.suggest-item')] as HTMLElement[];
-    if (!items.length) return;
-    if (e.key === 'ArrowDown') { e.preventDefault(); activeIdx = (activeIdx + 1) % items.length; }
-    else if (e.key === 'ArrowUp') { e.preventDefault(); activeIdx = (activeIdx - 1 + items.length) % items.length; }
-    else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); items[activeIdx].click(); return; }
-    else return;
-    items.forEach((it, i) => it.classList.toggle('active', i === activeIdx));
-  });
-  els.input.addEventListener('blur', () => setTimeout(closeSuggest, 120));
-
-  function renderSuggest(list: Guessable[]) {
-    if (!list.length) return closeSuggest();
-    els.suggestBox.innerHTML = list
-      .map((c) => `<button type="button" class="suggest-item" data-name="${c.name}">${icon(c)} ${c.name}</button>`)
-      .join('');
-    els.suggestBox.hidden = false;
-    els.suggestBox.querySelectorAll<HTMLButtonElement>('.suggest-item').forEach((b) => {
-      b.addEventListener('click', () => { els.input.value = b.dataset.name || ''; submitGuess(els.input.value); });
-    });
-  }
-  function closeSuggest() { els.suggestBox.hidden = true; els.suggestBox.innerHTML = ''; }
 
   // ---- Boot ----
-  renderPips();
+  pips();
   fetch(cfg.silUrl)
     .then((r) => r.json())
     .then((data: SilhouetteMap) => {
       silhouettes = data;
       els.hint?.remove();
-      els.input.disabled = false;
-      (els.form.querySelector('button') as HTMLButtonElement).disabled = false;
+      setInputEnabled(true);
       renderSilhouette(engine.target.name);
       els.input.focus();
     })

@@ -70,6 +70,20 @@ export function recordWin(mode: GameMode, guesses: number, resetStreak = false):
   return s;
 }
 
+/** Record a round that ran out of guesses (the capped modes). Without this,
+ *  played always equalled wins and every win rate read 100%. */
+export function recordLoss(mode: GameMode): ModeStats {
+  const s = getStats(mode);
+  s.played += 1;
+  save(mode, s);
+  return s;
+}
+
+/** Win rate as a whole percentage, or null before the first round. */
+export function winRate(s: ModeStats): number | null {
+  return s.played ? Math.round((s.wins / s.played) * 100) : null;
+}
+
 // ---- Daily lock ----
 export function getDaily(): DailyRecord | null {
   if (!hasLS()) return null;
@@ -88,13 +102,19 @@ export function isDailyDone(todayISO: string): boolean {
 export function setDailyDone(rec: DailyRecord) {
   if (!hasLS()) return;
   try {
-    const prev = getDaily();
-    // Break streak if the player skipped a day before today.
     localStorage.setItem(DAILY_KEY, JSON.stringify(rec));
-    void prev;
   } catch {
     /* ignore */
   }
+}
+
+/** The daily streak as it stands today. The stored figure only resets on the
+ *  next win, so a player who skipped a day would otherwise still see the old
+ *  streak until they played again. */
+export function currentDailyStreak(today: string): number {
+  const last = getDaily()?.date;
+  if (!last || (last !== today && !isYesterday(last, today))) return 0;
+  return getStats('daily').currentStreak;
 }
 
 /** Today's date in UTC as ISO "YYYY-MM-DD" (daily answer is UTC-synced). */

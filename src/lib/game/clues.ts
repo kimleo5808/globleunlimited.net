@@ -48,7 +48,7 @@ export const CLUE_COLUMNS = [
 export function computeClues(guess: Country, target: Country): Record<string, Clue> {
   const out: Record<string, Clue> = {};
 
-  // Continent — green if same region, yellow if same broad landmass, else red.
+  // Continent — green if same region, else red.
   out.continent = {
     key: 'continent',
     display: guess.region || '—',

@@ -28,6 +28,9 @@ const { mode = 'unlimited' } = Astro.props;
     <button type="submit" class="btn btn-primary" disabled>Enter</button>
   </form>
 
+  <!-- Shown when the end-of-round modal is closed, to bring it back -->
+  <button type="button" class="btn btn-ghost round-result" data-reopen hidden>Round over · See result</button>
+
   <!-- Globe -->
   <div class="globe-stage rise" style="--d:240ms">
     <div class="globe-mount" data-globe role="img" aria-label="Interactive globe showing your guesses">
@@ -64,6 +67,7 @@ const { mode = 'unlimited' } = Astro.props;
   <!-- Win modal -->
   <div class="modal-overlay" data-modal hidden>
     <div class="modal card" role="dialog" aria-modal="true" aria-label="You found it">
+      <button type="button" class="modal-close" data-modal-close aria-label="Close">✕</button>
       <div class="modal-emoji">🎉</div>
       <h2 class="modal-title">You found it!</h2>
       <p class="modal-line">

@@ -32,6 +32,9 @@
     <button type="submit" class="btn btn-primary" disabled>Guess</button>
   </form>
 
+  <!-- Shown when the end-of-round modal is closed, to bring it back -->
+  <button type="button" class="btn btn-ghost round-result" data-reopen hidden>Round over · See result</button>
+
   <!-- Progress pips -->
   <div class="pips rise" style="--d:280ms">
     <div class="pip-row" data-pips aria-hidden="true"></div>
@@ -52,6 +55,7 @@
   <!-- End modal (win or reveal) -->
   <div class="modal-overlay" data-modal hidden>
     <div class="modal card" role="dialog" aria-modal="true" aria-label="Round over">
+      <button type="button" class="modal-close" data-modal-close aria-label="Close">✕</button>
       <div class="modal-emoji" data-modal-emoji>🎉</div>
       <h2 class="modal-title" data-modal-title>You found it!</h2>
       <p class="modal-line">

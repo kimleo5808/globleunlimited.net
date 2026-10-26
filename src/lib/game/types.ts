@@ -37,7 +37,8 @@ export interface Country {
 export interface Guess {
   /** The guessed item (a Country, or a Capital in capitals mode). */
   country: Guessable;
-  /** Great-circle distance (km) from guess centroid to target centroid. */
+  /** Distance (km) from guess to target: border-to-border in the country globe
+   *  modes (see border-distance.ts), centre-to-centre everywhere else. */
   distanceKm: number;
   /** Heat colour for this guess (#rrggbb). */
   color: string;

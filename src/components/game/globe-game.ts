@@ -1,11 +1,13 @@
 // Client-side controller wiring globe.gl to the GameEngine + DOM.
 import Globe from 'globe.gl';
 import * as THREE from 'three';
-import { GameEngine, dateSeed } from '../../lib/game/engine';
+import { GameEngine } from '../../lib/game/engine';
+import { dailyDataset, dateSeed } from '../../lib/game/daily';
 import { countriesDataset } from '../../lib/game/countries';
 import { flagImg } from '../../lib/game/flag-img';
 import { capitalsDataset } from '../../lib/game/capitals';
-import { haversine } from '../../lib/game/distance';
+import { borderDistanceKm, buildBorderIndex } from '../../lib/game/border-distance';
+import type { BorderIndex } from '../../lib/game/border-distance';
 import {
   recordWin,
   getStats,
@@ -14,8 +16,10 @@ import {
   getDaily,
   todayISO,
   isYesterday,
+  currentDailyStreak,
 } from '../../lib/game/stats';
 import { formatDistance, getUnit, SETTINGS_EVENT } from '../../lib/settings';
+import { bindAutocomplete, bindModal, bindShare } from './shared';
 import type { Guessable, Dataset, Guess, GameMode } from '../../lib/game/types';
 
 const LAND_BASE = 'rgba(232, 217, 181, 0.18)'; // unguessed land tint
@@ -28,6 +32,7 @@ interface Els {
   root: HTMLElement;
   form: HTMLFormElement;
   input: HTMLInputElement;
+  submit: HTMLButtonElement;
   suggestBox: HTMLElement;
   globeMount: HTMLElement;
   hint: HTMLElement | null;
@@ -42,6 +47,7 @@ interface Els {
   playAgain: HTMLButtonElement;
   dailyCta: HTMLElement;
   shareBtn: HTMLButtonElement;
+  reopen: HTMLElement | null;
   streakCell: HTMLElement;
   streakVal: HTMLElement;
   live: HTMLElement;
@@ -58,6 +64,7 @@ export function initGlobeGame(root: HTMLElement) {
     root,
     form: $('[data-guess-form]'),
     input: $('[data-guess-input]'),
+    submit: $('[data-guess-form] button'),
     suggestBox: $('[data-suggest]'),
     globeMount: $('[data-globe]'),
     hint: root.querySelector('[data-globe-hint]'),
@@ -72,6 +79,7 @@ export function initGlobeGame(root: HTMLElement) {
     playAgain: $('[data-play-again]'),
     dailyCta: $('[data-daily-cta]'),
     shareBtn: $('[data-share]'),
+    reopen: root.querySelector('[data-reopen]'),
     streakCell: $('[data-streak-cell]'),
     streakVal: $('[data-streak]'),
     live: $('[data-live]'),
@@ -88,17 +96,24 @@ export function initGlobeGame(root: HTMLElement) {
     if (borderLabel) borderLabel.textContent = 'Distance'; // capitals are points, not borders
   }
 
+  // Country boundary points for real border-to-border distance; filled once the
+  // GeoJSON loads (guessing is disabled until then).
+  let borders: BorderIndex = new Map();
+  const borderDistance = (a: Guessable, b: Guessable) => borderDistanceKm(borders, a, b);
+
   // Daily mode: seed the engine so the whole world shares today's country.
   // Countries use real border-to-border distance; capitals use point distance.
   const engine =
     mode === 'daily'
-      ? new GameEngine('daily', dateSeed(today), countriesDataset, borderDistanceKm)
-      : new GameEngine(mode, undefined, dataset, isCapitals ? undefined : borderDistanceKm);
+      ? new GameEngine('daily', dateSeed(today), dailyDataset, borderDistance)
+      : new GameEngine(mode, undefined, dataset, isCapitals ? undefined : borderDistance);
+
+  const modal = bindModal(els.modal, els.reopen);
 
   // Daily shows the streak; "Play Again" becomes "Play Unlimited".
   if (mode === 'daily') {
     els.streakCell.hidden = false;
-    els.streakVal.textContent = String(getStats('daily').currentStreak);
+    els.streakVal.textContent = String(currentDailyStreak(today));
     els.playAgain.hidden = true;
     els.dailyCta.hidden = false;
   }
@@ -107,49 +122,6 @@ export function initGlobeGame(root: HTMLElement) {
   const points: Array<{ lat: number; lng: number; color: string; label: string }> = [];
   let features: GeoFeature[] = [];
   const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Country boundary points (flattened [lat,lng,...]) for real border-to-border distance.
-  const polyByName = new Map<string, Float64Array>();
-  const FAR_KM = 3500; // beyond this, centroid distance is close enough for colouring
-
-  /** Border-to-border distance (km) between two countries; falls back to centroid. */
-  function borderDistanceKm(a: Guessable, b: Guessable): number {
-    const c = haversine(a.lat, a.lng, b.lat, b.lng);
-    if (c > FAR_KM) return c;
-    const pa = polyByName.get(a.name);
-    const pb = polyByName.get(b.name);
-    if (!pa || !pb) return c;
-    let min = c;
-    for (let i = 0; i < pa.length; i += 2) {
-      const la = pa[i], lo = pa[i + 1];
-      for (let j = 0; j < pb.length; j += 2) {
-        const d = haversine(la, lo, pb[j], pb[j + 1]);
-        if (d < min) {
-          min = d;
-          if (min < 10) return min;
-        }
-      }
-    }
-    return min;
-  }
-
-  /** Flatten a GeoJSON geometry to [lat,lng,...], downsampled to ~400 points. */
-  function flattenGeometry(geom: any): Float64Array {
-    const pts: number[] = [];
-    const polys = geom.type === 'MultiPolygon' ? geom.coordinates : [geom.coordinates];
-    for (const poly of polys) {
-      for (const ring of poly) {
-        for (const [lng, lat] of ring) pts.push(lat, lng);
-      }
-    }
-    const maxPts = 400;
-    const total = pts.length / 2;
-    if (total <= maxPts) return Float64Array.from(pts);
-    const stride = Math.ceil(total / maxPts);
-    const out: number[] = [];
-    for (let i = 0; i < total; i += stride) out.push(pts[i * 2], pts[i * 2 + 1]);
-    return Float64Array.from(out);
-  }
 
   // ---- Globe ----
   const globe = new Globe(els.globeMount)
@@ -209,6 +181,11 @@ export function initGlobeGame(root: HTMLElement) {
   const HOME_ALTITUDE = 1.85; // lower = globe fills more of the frame
   globe.pointOfView({ lat: 20, lng: 0, altitude: HOME_ALTITUDE }, 0);
 
+  function setInputEnabled(on: boolean) {
+    els.input.disabled = !on;
+    els.submit.disabled = !on;
+  }
+
   // load polygons
   fetch(GEO_URL)
     .then((r) => r.json())
@@ -216,14 +193,9 @@ export function initGlobeGame(root: HTMLElement) {
       features = fc.features;
       globe.polygonsData(features);
       // Index boundary points for border-distance (countries modes only).
-      if (!isCapitals) {
-        for (const f of features) {
-          polyByName.set((f as any).properties.name, flattenGeometry((f as any).geometry));
-        }
-      }
+      if (!isCapitals) borders = buildBorderIndex(fc.features);
       els.hint?.remove();
-      els.input.disabled = false;
-      (els.form.querySelector('button') as HTMLButtonElement).disabled = false;
+      setInputEnabled(true);
       // Daily already solved today → show the locked, revealed state.
       if (mode === 'daily' && isDailyDone(today)) {
         engine.won = true;
@@ -286,6 +258,15 @@ export function initGlobeGame(root: HTMLElement) {
     els.live.textContent = msg;
   }
 
+  // ---- Autocomplete + errors ----
+  const ac = bindAutocomplete({
+    input: els.input,
+    box: els.suggestBox,
+    suggest: (q) => dataset.suggest(q),
+    icon: (c) => flagImg(c.cca2),
+    onPick: (name) => submitGuess(name),
+  });
+
   // ---- Guess submit ----
   els.form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -294,16 +275,15 @@ export function initGlobeGame(root: HTMLElement) {
 
   function submitGuess(raw: string) {
     const value = raw.trim();
-    if (!value) return;
+    if (!value || engine.won) return;
     const out = engine.guess(value);
 
     if (out.status === 'invalid') {
-      const known = dataset.find(value);
-      flashError(known ? 'Game over — press Play Again.' : isCapitals ? 'Not a recognized capital' : 'Not a recognized country');
+      ac.error(isCapitals ? 'Not a recognized capital' : 'Not a recognized country');
       return;
     }
     if (out.status === 'duplicate') {
-      flashError('Already guessed');
+      ac.error('Already guessed');
       return;
     }
 
@@ -319,9 +299,9 @@ export function initGlobeGame(root: HTMLElement) {
       colorByName.set(out.guess.country.name, out.guess.color);
       refreshGlobe();
     }
-    clearError();
+    ac.clearError();
     els.input.value = '';
-    closeSuggest();
+    ac.close();
     addRow(out.guess);
     renderInfo();
     focusCountry(out.guess.country);
@@ -332,6 +312,7 @@ export function initGlobeGame(root: HTMLElement) {
 
   function onWin() {
     refreshGlobe();
+    setInputEnabled(false);
     // Record stats (streak only meaningful for daily).
     if (mode === 'daily') {
       const prev = getDaily();
@@ -349,7 +330,7 @@ export function initGlobeGame(root: HTMLElement) {
     }
     els.modalGuesses.textContent = String(engine.guessCount);
     els.modalCountry.innerHTML = `${flagImg(engine.target.cca2)} ${engine.target.name}`;
-    els.modal.hidden = false;
+    modal.open();
     if (!prefersReduced) controls.autoRotate = false;
   }
 
@@ -357,14 +338,13 @@ export function initGlobeGame(root: HTMLElement) {
   function showDailyDone() {
     const rec = getDaily();
     if (!rec) return;
-    els.input.disabled = true;
-    (els.form.querySelector('button') as HTMLButtonElement).disabled = true;
+    setInputEnabled(false);
     els.modalGuesses.textContent = String(rec.guesses);
     els.modalCountry.innerHTML = `${flagImg(engine.target.cca2)} ${engine.target.name}`;
     const s = getStats('daily');
-    els.modalExtra.textContent = `🔥 Daily streak: ${s.currentStreak} (best ${s.maxStreak}) · Come back tomorrow!`;
+    els.modalExtra.textContent = `🔥 Daily streak: ${currentDailyStreak(today)} (best ${s.maxStreak}) · Come back tomorrow!`;
     els.modalExtra.hidden = false;
-    els.modal.hidden = false;
+    modal.open();
   }
 
   // ---- Play again (Unlimited core) ----
@@ -374,8 +354,9 @@ export function initGlobeGame(root: HTMLElement) {
     points.length = 0;
     refreshPoints();
     els.list.innerHTML = '';
-    els.modal.hidden = true;
-    clearError();
+    modal.reset();
+    ac.clearError();
+    setInputEnabled(true);
     renderInfo();
     refreshGlobe();
     globe.pointOfView({ lat: 20, lng: 0, altitude: HOME_ALTITUDE }, prefersReduced ? 0 : 700);
@@ -383,57 +364,13 @@ export function initGlobeGame(root: HTMLElement) {
     els.input.focus();
   });
 
-  els.shareBtn.addEventListener('click', async () => {
+  bindShare(els.shareBtn, () => {
     const noun = isCapitals ? 'mystery capital' : 'mystery country';
-    const text = `I found the ${noun} in ${engine.guessCount} guesses on Globle Unlimited! https://globleunlimited.net`;
-    try {
-      if (navigator.share) await navigator.share({ text });
-      else {
-        await navigator.clipboard.writeText(text);
-        els.shareBtn.textContent = 'Copied!';
-        setTimeout(() => (els.shareBtn.textContent = 'Share'), 1500);
-      }
-    } catch { /* user cancelled */ }
+    // A daily solved earlier today is restored without its guesses, so the
+    // count comes from the saved record rather than the empty engine.
+    const solvedIn = engine.guessCount || getDaily()?.guesses || 0;
+    return `I found the ${noun} in ${solvedIn} guesses on Globle Unlimited! https://globleunlimited.net/`;
   });
-
-  // ---- Errors ----
-  function flashError(msg: string) {
-    els.input.setAttribute('aria-invalid', 'true');
-    els.suggestBox.innerHTML = `<div class="suggest-error">${msg}</div>`;
-    els.suggestBox.hidden = false;
-  }
-  function clearError() {
-    els.input.removeAttribute('aria-invalid');
-  }
-
-  // ---- Autocomplete ----
-  let activeIdx = -1;
-  els.input.addEventListener('input', () => {
-    activeIdx = -1;
-    renderSuggest(dataset.suggest(els.input.value));
-  });
-  els.input.addEventListener('keydown', (e) => {
-    const items = [...els.suggestBox.querySelectorAll('.suggest-item')] as HTMLElement[];
-    if (!items.length) return;
-    if (e.key === 'ArrowDown') { e.preventDefault(); activeIdx = (activeIdx + 1) % items.length; }
-    else if (e.key === 'ArrowUp') { e.preventDefault(); activeIdx = (activeIdx - 1 + items.length) % items.length; }
-    else if (e.key === 'Enter' && activeIdx >= 0) { e.preventDefault(); items[activeIdx].click(); return; }
-    else return;
-    items.forEach((it, i) => it.classList.toggle('active', i === activeIdx));
-  });
-  els.input.addEventListener('blur', () => setTimeout(closeSuggest, 120));
-
-  function renderSuggest(list: Guessable[]) {
-    if (!list.length) return closeSuggest();
-    els.suggestBox.innerHTML = list
-      .map((c) => `<button type="button" class="suggest-item" data-name="${c.name}">${flagImg(c.cca2)} ${c.name}</button>`)
-      .join('');
-    els.suggestBox.hidden = false;
-    els.suggestBox.querySelectorAll<HTMLButtonElement>('.suggest-item').forEach((b) => {
-      b.addEventListener('click', () => { els.input.value = b.dataset.name || ''; submitGuess(els.input.value); });
-    });
-  }
-  function closeSuggest() { els.suggestBox.hidden = true; els.suggestBox.innerHTML = ''; }
 
   renderInfo();
 }
