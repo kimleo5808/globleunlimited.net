@@ -15,7 +15,11 @@
     "build:capitals": "node scripts/build-capitals.mjs scripts/data/ne_places.json src/data",
     "build:silhouettes": "node scripts/build-silhouettes.mjs public/assets/data/world.geo.json public/assets/data/silhouettes.json",
     "build:flags": "node scripts/build-flags.mjs",
-    "build:states": "node scripts/build-states.mjs"
+    "build:states": "node scripts/build-states.mjs",
+    "build:routes": "node scripts/build-routes.mjs",
+    "build:population": "node scripts/build-population.mjs",
+    "build:scaled-silhouettes": "node scripts/build-scaled-silhouettes.mjs",
+    "build:map-quiz": "node scripts/build-map-quiz.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",
@@ -34,6 +38,7 @@
     "topojson-simplify": "^3.0.3",
     "typescript": "^5.7.3",
     "us-atlas": "^3.0.1",
+    "world-atlas": "^2.0.2",
     "world-countries": "^5.1.0"
   }
 }

@@ -1,0 +1,211 @@
+---
+import MapQuizLayout from '../../layouts/MapQuizLayout.astro';
+
+// State outlines from us-atlas (US Census cartographic boundaries); capitals
+// and Census regions from scripts/build-map-quiz.mjs.
+const faqs: Array<[string, string]> = [
+  ['How many states are in the US states map quiz?', 'All 50 states. Washington, D.C. is drawn on the map but not asked, because it is a federal district rather than a state.'],
+  ['What is the hardest state to find on the map?', 'Rhode Island, the smallest state, followed by Delaware and Connecticut. The US states map quiz adds a tap ring to any state too small to click on your screen.'],
+  ['Is the US states map quiz free?', 'Yes. Click, Type and Learn modes are free with no account, and your best accuracy and time are saved in your browser.'],
+  ['Can I practise one region of the US at a time?', 'Learn mode shows each state’s Census region — Northeast (9 states), Midwest (12), South (16) and West (13) — so you can study one group before running the full quiz.'],
+  ['Does the quiz include state capitals?', 'Learn mode shows every state capital. Many are not the largest city: Albany, not New York City; Sacramento, not Los Angeles; Springfield, not Chicago.'],
+  ['Can I print a blank US map?', 'Yes. The free worksheet numbers all 50 states, with blank lines for the names and a separate answer key.'],
+];
+const howTo: Array<[string, string]> = [
+  ['Read the name', 'The bar above the map names one state at a time.'],
+  ['Click it', 'Click or tap it on the map; the smallest states get tap rings.'],
+  ['Learn from misses', 'A wrong click shows which state you hit; three misses reveal the answer.'],
+  ['Finish all 50', 'Work through the country and check your accuracy and time.'],
+];
+---
+
+<MapQuizLayout
+  region="us-states"
+  title="US States Map Quiz – Find All 50 States, Free"
+  description="Click all 50 US states on a free map quiz, then try type mode and state capitals. No sign-up, works on phones, printable blank US map included."
+  h1="US States Map Quiz"
+  sub="Click the state we name — all 50 states, no sign-up, <strong>free printable blank map</strong>."
+  faqs={faqs}
+  gameDescription="A free US states map quiz covering all 50 states, with click, type and learn modes."
+  howTo={howTo}
+>
+  <h2>How the US States Map Quiz Works</h2>
+  <p>
+    <strong>The US states map quiz names one of the 50 states at a time, and you click it on the
+    map.</strong> First-try answers turn green, answers after a miss turn amber, and after three
+    wrong clicks the quiz shows you the right state. Each wrong click tells you which state you hit,
+    so mixing up Vermont and New Hampshire teaches you both at once.
+  </p>
+  <p>
+    In this US states map quiz, Alaska and Hawaii appear in their usual inset positions, south-west
+    of the mainland, scaled to fit. Any state too small to click on your screen — Rhode Island on a phone, for example — gets a
+    dashed tap ring that counts as a hit. Type mode highlights a state and asks for its name (the
+    two-letter abbreviation works too), and Learn mode shows each state’s capital, area and Census
+    region.
+  </p>
+
+  <h2>The 50 States by Census Region</h2>
+  <p>
+    <strong>The US Census Bureau groups the states into four regions, and learning them one region
+    at a time is the fastest way through the US states map quiz.</strong> Learn mode shows each
+    state’s region.
+  </p>
+  <h3>Northeast (9)</h3>
+  <p>
+    Connecticut, Maine, Massachusetts, New Hampshire, New Jersey, New York, Pennsylvania, Rhode Island
+    and Vermont. The six New England states plus the three Mid-Atlantic ones. Small, packed together
+    and the source of most mistakes.
+  </p>
+  <h3>Midwest (12)</h3>
+  <p>
+    Illinois, Indiana, Iowa, Kansas, Michigan, Minnesota, Missouri, Nebraska, North Dakota, Ohio, South
+    Dakota and Wisconsin. The Great Lakes states to the east and the Great Plains to the west.
+    Michigan’s two peninsulas make it the easiest to spot.
+  </p>
+  <h3>South (16)</h3>
+  <p>
+    Alabama, Arkansas, Delaware, Florida, Georgia, Kentucky, Louisiana, Maryland, Mississippi, North
+    Carolina, Oklahoma, South Carolina, Tennessee, Texas, Virginia and West Virginia. The largest
+    region by number of states; Delaware and Maryland surprise people by being counted here rather
+    than in the Northeast, which is worth remembering when the US states map quiz asks for them.
+  </p>
+  <h3>West (13)</h3>
+  <p>
+    Alaska, Arizona, California, Colorado, Hawaii, Idaho, Montana, Nevada, New Mexico, Oregon, Utah,
+    Washington and Wyoming. Big, mostly rectangular states, plus the two that do not touch the rest.
+  </p>
+
+  <h2>The Hardest States to Find</h2>
+  <ul>
+    <li><strong>Rhode Island.</strong> The smallest state — Alaska could hold it more than 400 times.
+      It sits between Connecticut and Massachusetts on the coast, and in the US states map quiz it
+      gets a tap ring whenever it is too small to click on your screen.</li>
+    <li><strong>Delaware.</strong> The second smallest, on the Delmarva Peninsula next to Maryland and
+      New Jersey.</li>
+    <li><strong>Connecticut, New Jersey and Maryland.</strong> Small, irregular and squeezed between
+      bigger neighbours along the East Coast.</li>
+    <li><strong>Vermont and New Hampshire.</strong> Two narrow states that are almost mirror images:
+      Vermont is wider at the top, New Hampshire at the bottom, and New Hampshire has the short
+      coastline.</li>
+    <li><strong>The rectangles.</strong> Colorado and Wyoming are both near-perfect rectangles; Colorado
+      is the southern one, next to New Mexico.</li>
+    <li><strong>The Dakotas.</strong> North Dakota sits on the Canadian border, South Dakota below it.</li>
+  </ul>
+
+  <h2>Memory Tricks for the US Map</h2>
+  <ol>
+    <li><strong>Anchor the corners.</strong> Washington in the north-west, Maine in the north-east,
+      California in the south-west and Florida in the south-east frame the whole map.</li>
+    <li><strong>Find the Four Corners.</strong> Utah, Colorado, Arizona and New Mexico meet at a single
+      point — the only place in the US where four states touch.</li>
+    <li><strong>Follow the Mississippi.</strong> Minnesota, Wisconsin, Iowa, Illinois, Missouri,
+      Kentucky, Tennessee, Arkansas, Mississippi and Louisiana all border it, splitting the country
+      into east and west.</li>
+    <li><strong>Count the Great Lakes states.</strong> Minnesota, Wisconsin, Illinois, Indiana,
+      Michigan, Ohio, Pennsylvania and New York all touch at least one of the lakes.</li>
+    <li><strong>Leave New England for last.</strong> Once everything else is placed, the six small
+      states in the north-east are the only gaps left in the US states map quiz, and each one has
+      fewer candidates.</li>
+  </ol>
+
+  <h2>The Largest and Smallest States</h2>
+  <p>
+    <strong>Alaska is the largest state by far — more than twice the size of Texas, the next one
+    down.</strong> By total area the five largest are Alaska, Texas, California, Montana and New
+    Mexico, all in the West or South. The five smallest are Rhode Island, Delaware, Connecticut, New
+    Jersey and New Hampshire, all on the East Coast — which is exactly why the north-east is where
+    most US states map quiz runs lose points.
+  </p>
+  <p>
+    Size on the map can mislead in the other direction too. Alaska is drawn smaller than it really is
+    in the inset, so it can look similar to Texas; in reality you could fit Texas into Alaska twice
+    with room to spare.
+  </p>
+
+  <h2>Shapes That Give a State Away</h2>
+  <p>
+    A few states are recognisable from their outline alone, and placing them first gives the US states
+    map quiz a set of fixed points:
+  </p>
+  <ul>
+    <li><strong>Michigan</strong> — the mitten of the Lower Peninsula, with the Upper Peninsula across
+      the water to its north.</li>
+    <li><strong>Florida</strong> — the long peninsula in the south-east, with a panhandle reaching west
+      along the Gulf of Mexico.</li>
+    <li><strong>Louisiana</strong> — the boot, with its toe in the Gulf.</li>
+    <li><strong>Oklahoma</strong> — a saucepan, with its handle reaching west between Kansas and
+      Texas.</li>
+    <li><strong>Idaho</strong> — tall and narrow at the top, where its panhandle reaches the Canadian
+      border.</li>
+    <li><strong>Tennessee</strong> — a long, thin parallelogram. It and Missouri each border eight
+      other states, more than any other state.</li>
+  </ul>
+  <p>
+    Once these are placed, their neighbours fall into position: Indiana and Ohio below Michigan,
+    Georgia and Alabama above Florida, Arkansas and Mississippi beside Louisiana. If you want to train
+    this skill on its own, our <a href="/states/">Globle States</a> game shows you one outline at a time.
+  </p>
+
+  <h2>States on the Borders</h2>
+  <p>
+    Thirteen states share a border with Canada, counting the boundaries that run through the Great
+    Lakes: Alaska, Washington, Idaho, Montana, North Dakota, Minnesota, Michigan, Ohio, Pennsylvania,
+    New York, Vermont, New Hampshire and Maine. Four share a border with Mexico: California, Arizona,
+    New Mexico and Texas. Tracing both borders is a quick warm-up before a run of the US states map
+    quiz, because it fixes the outline of the whole country.
+  </p>
+
+  <h2>Abbreviations That Trip People Up</h2>
+  <p>
+    Type mode accepts postal abbreviations, and a handful are easy to mix up. AK is Alaska and AL is
+    Alabama; AZ is Arizona and AR is Arkansas. The M states are the hardest group: MA is
+    Massachusetts, ME is Maine, MD is Maryland, MI is Michigan, MN is Minnesota, MS is Mississippi,
+    MO is Missouri and MT is Montana. In the US states map quiz, typing the full name is always safe.
+  </p>
+
+  <h2>Using the US States Map Quiz in Class</h2>
+  <p>
+    No accounts are needed, so a class can start straight away. Work through one Census region at a
+    time in Learn mode on the board, run the US states map quiz in Click mode for that region, then
+    use the printable blank map as a check in the next lesson. Retry missed at the end of a run gives
+    each student a short list of the states they still need to practise.
+  </p>
+
+  <h2>State Capitals Worth Checking</h2>
+  <p>
+    Learn mode lists every capital, and many are smaller than the state’s best-known city. New York’s
+    capital is Albany, California’s is Sacramento, Illinois’s is Springfield, Pennsylvania’s is
+    Harrisburg, Florida’s is Tallahassee and Washington’s is Olympia. Texas’s capital is Austin, not
+    Houston or Dallas; Nevada’s is Carson City, not Las Vegas. If you want to drill capitals on a
+    globe instead, our <a href="/capitals/">capital cities game</a> covers every country.
+  </p>
+  <p>
+    For a different way to learn the states, try naming each one from its outline alone in
+    <a href="/states/">Globle States</a>, or read our guide to
+    <a href="/blog/identify-us-states-by-shape/">identifying US states by shape</a>, which groups them
+    by the shapes they have in common.
+  </p>
+
+  <h2>Printable Blank US Map</h2>
+  <p>
+    The free <a href="/assets/printables/us-states-worksheet.svg" target="_blank" rel="noopener">US
+    states worksheet</a> numbers all 50 states from north to south, with blank lines alongside and a
+    separate <a href="/assets/printables/us-states-answers.svg" target="_blank" rel="noopener">answer
+    key</a>. The small north-eastern states are numbered in the margin with leader lines. It is laid
+    out for A4 landscape, prints fine on US Letter, and is free to use in class alongside the US states
+    map quiz.
+  </p>
+
+  <Fragment slot="after">
+    <h2>More Map Quizzes</h2>
+    <p>
+      Ready for the rest of the world? Try the <a href="/map-quiz/">world map quiz</a> with all 193
+      countries, or the <a href="/map-quiz/europe/">Europe</a> and
+      <a href="/map-quiz/africa/">Africa</a> quizzes.
+    </p>
+    <p class="byline">
+      Written by the Globle Unlimited team. State outlines from the US Census Bureau via us-atlas;
+      regions follow the Census Bureau’s four-region scheme.
+    </p>
+  </Fragment>
+</MapQuizLayout>

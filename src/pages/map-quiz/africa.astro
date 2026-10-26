@@ -1,0 +1,213 @@
+---
+import MapQuizLayout from '../../layouts/MapQuizLayout.astro';
+
+// Counts and facts come from scripts/build-map-quiz.mjs (world-countries,
+// Natural Earth 1:50m, World Bank 2024 population).
+const faqs: Array<[string, string]> = [
+  ['How many countries are in Africa?', 'Africa has 54 UN member states, and the Africa map quiz asks for all of them. Western Sahara (disputed) and Somaliland (not recognised) are drawn on the map but not asked.'],
+  ['What is the hardest country to find in the Africa map quiz?', 'Usually one of the small West African coastal states — Gambia, Guinea-Bissau or Togo — or an island such as São Tomé and Príncipe. The islands get tap rings so they are never too small to click.'],
+  ['Is the Africa map quiz free?', 'Yes. Click, Type and Learn modes are all free, with no account. Your best accuracy and time are saved in your browser.'],
+  ['Which African countries are landlocked?', 'Sixteen: Botswana, Burkina Faso, Burundi, Central African Republic, Chad, Eswatini, Ethiopia, Lesotho, Malawi, Mali, Niger, Rwanda, South Sudan, Uganda, Zambia and Zimbabwe.'],
+  ['Can I print an Africa map to practise?', 'Yes. The free worksheet numbers all 54 countries north to south, with blank lines for the names and a separate answer key.'],
+  ['Does the Africa map quiz include capitals?', 'Learn mode shows each country’s capital along with its area and population. Nigeria’s capital is Abuja, not Lagos, and South Africa has three: Pretoria, Cape Town and Bloemfontein.'],
+];
+const howTo: Array<[string, string]> = [
+  ['Read the name', 'The bar above the map names one African country at a time.'],
+  ['Click it', 'Click or tap it on the map; the island nations have tap rings.'],
+  ['Learn from misses', 'A wrong click shows which country you hit; three misses reveal the answer.'],
+  ['Finish all 54', 'Work through the continent and check your accuracy and time.'],
+];
+---
+
+<MapQuizLayout
+  region="africa"
+  title="Africa Map Quiz – All 54 Countries, Free & Printable"
+  description="Click all 54 countries on our free Africa map quiz, then test yourself in type mode. Tap rings for the islands, learn mode and a printable worksheet."
+  h1="Africa Map Quiz"
+  sub="Click the country we name — all 54 countries, no sign-up, <strong>free printable worksheet</strong>."
+  faqs={faqs}
+  gameDescription="A free Africa map quiz covering all 54 countries, with click, type and learn modes."
+  howTo={howTo}
+>
+  <h2>How the Africa Map Quiz Works</h2>
+  <p>
+    <strong>The Africa map quiz names one of the continent’s 54 countries at a time, and you click it
+    on the map.</strong> Found first time, it turns green; after a miss, amber; and if three clicks
+    go wrong, the quiz shows you where it is and moves on. Every wrong click tells you which country
+    you actually hit, which is often the fastest way to learn its neighbour.
+  </p>
+  <p>
+    Two other modes use the same map. Type mode highlights a country and asks for its name, which is
+    the stronger test of memory. Learn mode drops the score and lets you tap any country for its
+    capital, area and population. A good routine for the Africa map quiz is a few minutes of Learn,
+    one run of Click, then Type once Click feels easy.
+  </p>
+
+  <h2>How Many Countries Are in Africa?</h2>
+  <p>
+    <strong>Africa has 54 UN member states, more than any other continent, and the Africa map quiz
+    asks for every one.</strong> Two more places appear on the map but are not asked: Western
+    Sahara, whose status is disputed, and Somaliland, which runs itself but is not recognised as a
+    country by the UN.
+  </p>
+  <p>
+    The continent runs from Tunisia in the north to South Africa in the south, about 8,000 km. The
+    largest country is Algeria at 2.38 million km²; the smallest is the Seychelles at just 452 km².
+    Nigeria has the most people, about 233 million, followed by Ethiopia (132 million) and Egypt (117
+    million). Sixteen countries have no coastline, and six are islands: Cape Verde, Comoros,
+    Madagascar, Mauritius, São Tomé and Príncipe and the Seychelles.
+  </p>
+
+  <h2>Africa by Sub-region</h2>
+  <p>
+    Fifty-four names are easier to learn in five groups. These are the sub-regions the quiz uses, and
+    Learn mode shows each country’s group too.
+  </p>
+  <h3>North Africa (6)</h3>
+  <p>
+    Algeria, Egypt, Libya, Morocco, Sudan and Tunisia. Big countries along the Mediterranean and the
+    Sahara, easy to place once you remember that Tunisia is the small one tucked between Algeria and
+    Libya, and that Sudan sits south of Egypt.
+  </p>
+  <h3>West Africa (16)</h3>
+  <p>
+    Benin, Burkina Faso, Cape Verde, Gambia, Ghana, Guinea, Guinea-Bissau, Ivory Coast, Liberia, Mali,
+    Mauritania, Niger, Nigeria, Senegal, Sierra Leone and Togo. This is where most Africa map quiz
+    runs go wrong: a row of small coastal countries between Senegal and Nigeria, with three similar
+    names — Guinea, Guinea-Bissau and Equatorial Guinea, which is not even in West Africa.
+  </p>
+  <h3>Middle Africa (10)</h3>
+  <p>
+    Angola, Cameroon, Central African Republic, Chad, DR Congo, Equatorial Guinea, Gabon, Republic of
+    the Congo, São Tomé and Príncipe, and South Sudan. DR Congo is the anchor: it borders nine
+    countries, more than any other in Africa, so finding it gives you the whole centre of the map.
+  </p>
+  <h3>East Africa (17)</h3>
+  <p>
+    Burundi, Comoros, Djibouti, Eritrea, Ethiopia, Kenya, Madagascar, Malawi, Mauritius, Mozambique,
+    Rwanda, Seychelles, Somalia, Tanzania, Uganda, Zambia and Zimbabwe. The largest group, from the
+    Horn of Africa down to the Zambezi, plus four island nations in the Indian Ocean.
+  </p>
+  <h3>Southern Africa (5)</h3>
+  <p>
+    Botswana, Eswatini, Lesotho, Namibia and South Africa. Lesotho sits entirely inside South Africa,
+    and Eswatini almost does; both are much easier to click once you know to look inside their big
+    neighbour.
+  </p>
+
+  <h2>The Hardest Countries to Find in the Africa Map Quiz</h2>
+  <p>
+    Size is the main reason a country gets missed, and Africa’s smallest are either islands or
+    squeezed between larger neighbours:
+  </p>
+  <ul>
+    <li><strong>The islands.</strong> The Seychelles (452 km²), São Tomé and Príncipe (964 km²),
+      Comoros (1,862 km²), Mauritius (2,040 km²) and Cape Verde (4,033 km²). All five get tap rings in
+      the Africa map quiz, but you still need to know which ocean each one is in.</li>
+    <li><strong>Gambia.</strong> A thin strip along the Gambia River, almost surrounded by Senegal. At
+      10,689 km² it is the smallest country on the African mainland.</li>
+    <li><strong>The West African coast.</strong> Guinea-Bissau, Sierra Leone, Liberia, Togo and Benin
+      sit side by side; most players mix up at least one pair.</li>
+    <li><strong>Rwanda and Burundi.</strong> Two small, similar shapes between DR Congo and Tanzania,
+      with Rwanda to the north.</li>
+    <li><strong>Djibouti and Eritrea.</strong> Small countries on the Red Sea that are easy to lose in
+      the Horn of Africa.</li>
+  </ul>
+
+  <h2>Memory Tricks for the Map of Africa</h2>
+  <ol>
+    <li><strong>Walk the coast clockwise.</strong> Morocco, Algeria, Tunisia, Libya, Egypt, then down
+      the Red Sea: Sudan, Eritrea, Djibouti, Somalia. Saying them in order fixes a frame you can fill
+      in from.</li>
+    <li><strong>Use the Nile as a spine.</strong> Uganda, South Sudan, Sudan and Egypt line up along
+      it from south to north.</li>
+    <li><strong>Read the West African coast in pairs.</strong> Senegal and Gambia, Guinea-Bissau and
+      Guinea, Sierra Leone and Liberia, Ivory Coast and Ghana, Togo and Benin.</li>
+    <li><strong>Find the big three first.</strong> Algeria, DR Congo and Sudan are the largest
+      countries; place them and the rest of the Africa map quiz has landmarks.</li>
+    <li><strong>Remember the landlocked middle.</strong> Mali, Niger and Chad form a band across the
+      Sahel with no coastline at all.</li>
+  </ol>
+
+  <h2>Type Mode and African Capitals</h2>
+  <p>
+    Type mode asks for the country, not the capital, but Learn mode shows every capital, and a few
+    catch people out. Nigeria’s capital is Abuja rather than Lagos; Ivory Coast’s is Yamoussoukro
+    rather than Abidjan; Tanzania’s is Dodoma rather than Dar es Salaam; and Benin’s is Porto-Novo
+    rather than Cotonou. South Africa has three capitals — Pretoria, Cape Town and Bloemfontein — and
+    Burundi moved its political capital to Gitega in 2019. When you can name these in your head, try
+    our <a href="/capitals/">capital cities game</a>.
+  </p>
+
+  <h2>Africa’s Largest Countries by Area and Population</h2>
+  <p>
+    <strong>Africa’s 54 countries cover about 30 million km² and hold about 1.5 billion people.</strong>
+    The biggest by land and the biggest by population are different lists, which is worth knowing
+    before you start the Africa map quiz:
+  </p>
+  <table class="cmp">
+    <thead><tr><th>Rank</th><th>Largest by area</th><th>Most people (2024)</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Algeria — 2.38 million km²</td><td>Nigeria — 233 million</td></tr>
+      <tr><td>2</td><td>DR Congo — 2.34 million km²</td><td>Ethiopia — 132 million</td></tr>
+      <tr><td>3</td><td>Sudan — 1.89 million km²</td><td>Egypt — 117 million</td></tr>
+      <tr><td>4</td><td>Libya — 1.76 million km²</td><td>DR Congo — 109 million</td></tr>
+      <tr><td>5</td><td>Chad — 1.28 million km²</td><td>Tanzania — 69 million</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Only DR Congo appears in both columns. The four Saharan giants — Algeria, Sudan, Libya and Chad —
+    are huge but thinly populated, while Nigeria fits more people than any of them into less than half
+    the land. If you also play <a href="/higher-or-lower/">Higher or Lower: Countries</a>, these pairs
+    come up often.
+  </p>
+
+  <h2>African Countries That Changed Name or Shape</h2>
+  <p>
+    A map of Africa from thirty years ago would trip you up in a few places. The Africa map quiz uses
+    current names, and Type mode accepts the common alternatives:
+  </p>
+  <ul>
+    <li><strong>South Sudan</strong> became independent from Sudan in 2011, the newest country in the
+      world, and moved Sudan’s southern border hundreds of kilometres north.</li>
+    <li><strong>Eswatini</strong> was called Swaziland until 2018. Both names work in Type mode.</li>
+    <li><strong>Ivory Coast</strong> is officially Côte d’Ivoire; <strong>Cape Verde</strong> has used
+      Cabo Verde as its official name since 2013. The quiz accepts either form.</li>
+    <li><strong>The two Congos</strong> face each other across the Congo River: DR Congo, with its
+      capital at Kinshasa, and the much smaller Republic of the Congo, with Brazzaville.</li>
+    <li><strong>Eritrea</strong> separated from Ethiopia in 1993, which is why Ethiopia is now
+      landlocked.</li>
+  </ul>
+
+  <h2>Using the Africa Map Quiz in Class</h2>
+  <p>
+    The quiz needs no accounts, so a class can start in seconds. A pattern that works well: put Learn
+    mode on the board and walk through one sub-region together, run the Africa map quiz in Click mode
+    for that sub-region’s countries, then hand out the printable worksheet as a check the next day.
+    Retry missed at the end of a run gives each student a short list of their own weak spots to take
+    home.
+  </p>
+
+  <h2>Printable Africa Map Worksheet</h2>
+  <p>
+    The free <a href="/assets/printables/africa-worksheet.svg" target="_blank" rel="noopener">Africa
+    worksheet</a> numbers all 54 countries from north to south, with blank lines alongside and a
+    separate <a href="/assets/printables/africa-answers.svg" target="_blank" rel="noopener">answer
+    key</a>. Small countries and islands are numbered in the margin with a leader line. It is laid out
+    for A4 landscape, prints fine on US Letter, and is free to use in class alongside the Africa map
+    quiz.
+  </p>
+
+  <Fragment slot="after">
+    <h2>More Map Quizzes</h2>
+    <p>
+      Next, try the <a href="/map-quiz/europe/">Europe map quiz</a> or the full
+      <a href="/map-quiz/">world map quiz</a> with all 193 countries. To practise African borders,
+      connect two countries over land in <a href="/routes/">Globle Routes</a>.
+    </p>
+    <p class="byline">
+      Written by the Globle Unlimited team. Country list and sizes from the open world-countries
+      dataset; outlines from Natural Earth (1:50m); populations from the World Bank (2024).
+    </p>
+  </Fragment>
+</MapQuizLayout>

@@ -1,13 +1,12 @@
 ---
-import { FOOTER_LINKS } from '../lib/site';
+import { GAME_MENU } from '../lib/site';
 // Compare paths without the directory-format trailing slash, so the current
 // URL and a "/silhouette/" link match however either side is written.
 const bare = (p: string) => p.replace(/\/+$/, '') || '/';
 const path = bare(Astro.url.pathname);
-// All playable modes live in the single-source play list; the header collapses
-// them into one "Games" dropdown so the top bar stays uncluttered.
-const games = FOOTER_LINKS.play;
-const inGames = games.some((g) => bare(g.href) === path);
+// Every mode lives in one grouped "Games" dropdown so the top bar stays
+// uncluttered; the hub link closes the panel.
+const inGames = path === '/unlimited' || GAME_MENU.some((group) => group.links.some((g) => bare(g.href) === path));
 ---
 
 <header class="site-header">
@@ -32,14 +31,20 @@ const inGames = games.some((g) => bare(g.href) === path);
         >
           Games <span class="caret" aria-hidden="true">▾</span>
         </button>
-        <div class="games-panel" data-games-panel hidden role="menu" aria-label="Game modes">
+        <div class="games-panel" data-games-panel hidden role="menu" aria-label="Game modes" style={`--groups:${GAME_MENU.length}`}>
           {
-            games.map((g) => (
-              <a href={g.href} role="menuitem" class:list={['games-item', { active: path === bare(g.href) }]}>
-                {g.label}
-              </a>
+            GAME_MENU.map((group) => (
+              <div class="games-group" role="group" aria-label={group.label}>
+                <span class="games-group-label" aria-hidden="true">{group.label}</span>
+                {group.links.map((g) => (
+                  <a href={g.href} role="menuitem" class:list={['games-item', { active: path === bare(g.href) }]}>
+                    {g.label}
+                  </a>
+                ))}
+              </div>
             ))
           }
+          <a href="/unlimited/" role="menuitem" class:list={['games-item', 'games-all', { active: path === '/unlimited' }]}>All unlimited games →</a>
         </div>
       </div>
       <a href="/how-to-play/" class:list={['mode-link', 'learn', { active: path === '/how-to-play' }]}>How to Play</a>
@@ -186,10 +191,10 @@ const inGames = games.some((g) => bare(g.href) === path);
     right: 0;
     z-index: 60;
     min-width: 220px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    padding: var(--space-2);
+    display: grid;
+    grid-template-columns: repeat(var(--groups, 1), minmax(170px, auto));
+    gap: var(--space-2) var(--space-4);
+    padding: var(--space-3);
     background: var(--bg-panel);
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
@@ -207,11 +212,21 @@ const inGames = games.some((g) => bare(g.href) === path);
   }
   .games-item:hover { color: var(--text); background: var(--bg-panel-2); }
   .games-item.active { color: var(--accent); background: var(--accent-dim); }
+  .games-group { display: flex; flex-direction: column; gap: 2px; }
+  .games-group-label {
+    padding: var(--space-1) var(--space-3);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+  }
+  .games-all { grid-column: 1 / -1; border-top: 1px solid var(--line); border-radius: 0 0 var(--radius-sm) var(--radius-sm); padding-top: var(--space-3); }
 
   @media (max-width: 560px) {
     .brand-logo { height: 30px; }
     .mode-link { padding: var(--space-1) var(--space-2); }
-    .games-panel { min-width: 200px; }
+    .games-panel { min-width: 200px; grid-template-columns: 1fr; }
     .modes { flex-wrap: nowrap; }
     /* Five items will not fit on one row at this width, and a wrapped header
        costs ~100px of the first screen. How to Play is reachable from the

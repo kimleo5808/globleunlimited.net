@@ -1,0 +1,286 @@
+---
+import { readFileSync } from 'node:fs';
+
+// Interactive Map Quiz island: click the named country (Click), name the
+// highlighted one (Type), or explore (Learn). Each region page passes its id;
+// outlines and facts load from /assets/data/map-quiz/{region}.json.
+interface Props {
+  region: 'world' | 'africa' | 'europe' | 'us-states';
+}
+const { region } = Astro.props;
+
+/** Quizzes that exist; the chips link between their pages. */
+const QUIZZES = [
+  ['world', 'World', '/map-quiz/'],
+  ['africa', 'Africa', '/map-quiz/africa/'],
+  ['europe', 'Europe', '/map-quiz/europe/'],
+  ['us-states', 'US States', '/map-quiz/us-states/'],
+] as const;
+const noun = region === 'us-states' ? 'state' : 'country';
+// The map's frame, so the page reserves its height before the outlines load.
+const { width, height } = JSON.parse(readFileSync(`public/assets/data/map-quiz/${region}.json`, 'utf8'));
+---
+
+<div class="mqgame" data-mqgame data-region={region} data-noun={noun}>
+  <nav class="regions rise" style="--d:120ms" aria-label="Choose a map quiz">
+    {QUIZZES.map(([key, label, href]) => (
+      <a href={href} class:list={['chip', { on: key === region }]} aria-current={key === region ? 'page' : undefined}>{label}</a>
+    ))}
+  </nav>
+
+  <div class="mq-panel card rise" style="--d:200ms">
+    <div class="prompt">
+      <div class="modes" role="group" aria-label="Quiz mode">
+        <button type="button" class="mode" data-mode="click" aria-pressed="true">Click</button>
+        <button type="button" class="mode" data-mode="type" aria-pressed="false">Type</button>
+        <button type="button" class="mode" data-mode="learn" aria-pressed="false">Learn</button>
+      </div>
+
+      <div class="ask" data-ask>
+        <span class="ask-label mono" data-ask-label>Click on</span>
+        <span class="ask-name" data-ask-name>Loading…</span>
+        <form class="type-form" data-type-form autocomplete="off" hidden>
+          <div class="type-field">
+            <input type="text" class="type-input" data-type-input placeholder={`Name the highlighted ${noun}…`} aria-label={`Name the highlighted ${noun}`} autocomplete="off" autocapitalize="off" spellcheck="false" />
+            <div class="suggest" data-suggest hidden role="listbox" aria-label="Suggestions"></div>
+          </div>
+          <button type="submit" class="btn btn-primary">Check</button>
+        </form>
+        <span class="ask-note" data-ask-note aria-live="polite"></span>
+      </div>
+
+      <dl class="tally mono">
+        <div><dt>Found</dt><dd data-found>0 / 0</dd></div>
+        <div><dt>Accuracy</dt><dd data-accuracy>—</dd></div>
+        <div><dt>Time</dt><dd data-time>0:00</dd></div>
+      </dl>
+      <button type="button" class="btn btn-ghost skip" data-skip>Skip ↷</button>
+    </div>
+
+    <div class="map-wrap" data-map-wrap>
+      <svg class="map" data-map aria-hidden="true" viewBox={`0 0 ${width} ${height}`} style={`aspect-ratio: ${width} / ${height}`}></svg>
+      <div class="zoom">
+        <button type="button" data-zoom="in" aria-label="Zoom in">+</button>
+        <button type="button" data-zoom="out" aria-label="Zoom out">−</button>
+        <button type="button" data-zoom="reset" aria-label="Reset zoom">⤢</button>
+      </div>
+      <aside class="info card" data-info hidden>
+        <button type="button" class="info-close" data-info-close aria-label="Close">✕</button>
+        <h3 class="info-name" data-info-name></h3>
+        <dl class="info-facts" data-info-facts></dl>
+      </aside>
+      <span class="map-hint mono" data-map-hint>Loading map…</span>
+    </div>
+    <div class="legend">
+      <span><i class="sw sw-found"></i>Found first try</span>
+      <span><i class="sw sw-late"></i>Found after a miss</span>
+      <span><i class="sw sw-missed"></i>Missed</span>
+      <span><i class="sw sw-ring"></i>Tap ring for small {noun === 'state' ? 'states' : 'countries'}</span>
+      {region !== 'world' && <a href={`/assets/printables/${region}-worksheet.svg`} target="_blank" rel="noopener">⎙ Printable worksheet</a>}
+    </div>
+  </div>
+
+  <p class="kbd-note">Keyboard and screen-reader users: Type mode asks for names, so the whole quiz can be played without a mouse.</p>
+  <p class="sr-only" aria-live="polite" data-live></p>
+
+  <!-- Shown when the end-of-quiz modal is closed, to bring it back -->
+  <button type="button" class="btn btn-ghost round-result" data-reopen hidden>Quiz complete · See result</button>
+
+  <div class="modal-overlay" data-modal hidden>
+    <div class="modal card" role="dialog" aria-modal="true" aria-label="Quiz complete">
+      <button type="button" class="modal-close" data-modal-close aria-label="Close">✕</button>
+      <div class="modal-emoji" data-modal-emoji>🗺️</div>
+      <h2 class="modal-title" data-modal-title>Quiz complete!</h2>
+      <p class="modal-line" data-modal-score></p>
+      <p class="modal-line modal-extra" data-modal-best></p>
+      <p class="modal-line missed" data-modal-missed></p>
+      <div class="modal-actions">
+        <button class="btn btn-primary" data-retry>Retry missed</button>
+        <button class="btn btn-ghost" data-play-again>Play again</button>
+        <button class="btn btn-ghost" data-share>Share</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initMapQuiz } from './map-quiz-game';
+  const root = document.querySelector<HTMLElement>('[data-mqgame]');
+  if (root) initMapQuiz(root);
+</script>
+
+<style>
+  .mqgame { display: flex; flex-direction: column; align-items: center; margin-top: var(--space-6); text-align: left; }
+
+  .regions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-2); }
+  .chip {
+    padding: var(--space-1) var(--space-4);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    color: var(--text-dim);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .chip:hover { color: var(--text); border-color: var(--accent); }
+  .chip.on { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+
+  .mq-panel { width: 100%; max-width: 1120px; margin-top: var(--space-4); padding: 0; overflow: hidden; }
+  .prompt {
+    position: sticky; top: 0; z-index: 5;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--line);
+  }
+  .modes { display: flex; gap: var(--space-1); }
+  .mode {
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--text-dim);
+    font-family: var(--font-body);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .mode[aria-pressed='true'] { background: var(--text); border-color: var(--text); color: var(--bg-panel); }
+  .ask { display: flex; flex-direction: column; align-items: center; min-width: 0; }
+  .ask-label { font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-mute); }
+  .ask-name { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; line-height: 1.15; text-align: center; }
+  .ask-note { min-height: 1.2em; font-size: var(--fs-small); color: var(--danger); text-align: center; }
+  .ask-note.ok { color: var(--win); }
+  .type-form { display: flex; gap: var(--space-2); width: min(420px, 100%); margin-top: var(--space-1); }
+  .type-form[hidden] { display: none; }
+  .type-field { position: relative; flex: 1; }
+  .type-input {
+    width: 100%;
+    padding: var(--space-2) var(--space-4);
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    color: var(--text);
+  }
+  .type-input[aria-invalid='true'] { border-color: var(--danger); }
+  .suggest {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 30;
+    background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-panel); overflow: hidden;
+  }
+  .mqgame :global(.suggest-item) {
+    display: block; width: 100%; text-align: left;
+    padding: var(--space-2) var(--space-4);
+    background: transparent; border: 0; cursor: pointer;
+    color: var(--text); font-size: var(--fs-small);
+  }
+  .mqgame :global(.suggest-item:hover), .mqgame :global(.suggest-item.active) { background: var(--bg-panel-2); color: var(--accent); }
+  .mqgame :global(.suggest-error) { padding: var(--space-2) var(--space-4); color: var(--danger); font-size: var(--fs-small); }
+  .mqgame :global(.g-abbr) { font-family: var(--font-mono); font-size: 0.7rem; padding: 1px 4px; border: 1px solid var(--line); border-radius: 4px; }
+
+  .tally { display: flex; gap: var(--space-4); margin: 0; }
+  .tally div { text-align: right; }
+  .tally dt { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-mute); }
+  .tally dd { margin: 0; font-size: 1.05rem; color: var(--accent); white-space: nowrap; }
+  .skip { padding: var(--space-1) var(--space-3); font-size: var(--fs-small); }
+  .skip[hidden] { display: none; }
+
+  .map-wrap { position: relative; background: #d8edf8; touch-action: none; }
+  :global(html[data-theme='dark']) .map-wrap { background: #0f2a44; }
+  .map { display: block; width: 100%; height: auto; max-height: 72vh; cursor: grab; user-select: none; }
+  .map.dragging { cursor: grabbing; }
+  .mqgame :global(.ctx) { fill: #eef1ef; stroke: #b9c2c9; stroke-width: 0.6; vector-effect: non-scaling-stroke; pointer-events: none; }
+  :global(html[data-theme='dark']) .mqgame :global(.ctx) { fill: #1d3550; stroke: #2c4a68; }
+  .mqgame :global(.it) { fill: #ffffff; stroke: #1b3d4e; stroke-width: 0.8; vector-effect: non-scaling-stroke; cursor: pointer; transition: fill var(--dur-fast) var(--ease); }
+  :global(html[data-theme='dark']) .mqgame :global(.it) { fill: #e8d9b5; stroke: #0b1622; }
+  .mqgame :global(.it:hover) { fill: #fff3cf; }
+  .mqgame :global(.it.found) { fill: var(--win); }
+  .mqgame :global(.it.late) { fill: #feb24c; }
+  .mqgame :global(.it.missed) { fill: #e06a5a; }
+  .mqgame :global(.it.wrong) { fill: #e06a5a; }
+  /* Blue, so the country to name never reads as an amber "found after a miss". */
+  .mqgame :global(.it.target) { fill: #3d8fd6; stroke: #0f3f6b; stroke-width: 2.5; }
+  .mqgame :global(.it.reveal) { fill: #f4c95d; animation: pulse 0.6s ease-in-out 3; }
+  .mqgame :global(.it.picked) { fill: var(--accent-dim); stroke: var(--accent); stroke-width: 2; }
+  .mqgame :global(.ring) { fill: rgba(0, 0, 0, 0); stroke: #1b3d4e; stroke-width: 1.2; stroke-dasharray: 3 2; vector-effect: non-scaling-stroke; cursor: pointer; pointer-events: all; }
+  :global(html[data-theme='dark']) .mqgame :global(.ring) { stroke: #e8d9b5; }
+  .mqgame :global(.ring.found) { fill: var(--win); }
+  .mqgame :global(.ring.late) { fill: #feb24c; }
+  .mqgame :global(.ring.missed), .mqgame :global(.ring.wrong) { fill: #e06a5a; }
+  .mqgame :global(.ring.target) { fill: #3d8fd6; stroke: #0f3f6b; stroke-dasharray: none; }
+  .mqgame :global(.ring.reveal) { fill: #f4c95d; stroke: #b07a10; stroke-dasharray: none; }
+  @keyframes pulse { 50% { opacity: 0.35; } }
+
+  .zoom { position: absolute; top: var(--space-3); right: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); }
+  .zoom button {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--bg-panel);
+    color: var(--text);
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  /* Under the map rather than over it: an overlay hid Alaska and Hawaii. */
+  .legend {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-4);
+    padding: var(--space-2) var(--space-4);
+    background: var(--bg-panel);
+    border-top: 1px solid var(--line);
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+  .legend a { margin-left: auto; }
+  .legend a { color: var(--accent); font-weight: 600; }
+  .sw { display: inline-block; width: 11px; height: 11px; margin-right: 6px; vertical-align: -1px; border-radius: 2px; }
+  .sw-found { background: var(--win); }
+  .sw-late { background: #feb24c; }
+  .sw-missed { background: #e06a5a; }
+  .sw-ring { border: 1.2px dashed var(--text); border-radius: 50%; }
+  .map-hint { position: absolute; inset: 0; display: grid; place-items: center; color: var(--text-dim); font-size: var(--fs-small); pointer-events: none; }
+  .map-hint:empty { display: none; }
+
+  .info { position: absolute; top: var(--space-3); left: var(--space-3); width: min(280px, 70%); padding: var(--space-4); }
+  .info[hidden] { display: none; }
+  .info-close { position: absolute; top: 6px; right: 6px; border: 0; background: transparent; color: var(--text-mute); cursor: pointer; }
+  .info-name { font-size: 1.2rem; margin-bottom: var(--space-2); }
+  .info-name :global(.flag-img) { width: 26px; height: 18px; vertical-align: 0.1em; }
+  .info-facts { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2px var(--space-3); font-size: var(--fs-small); }
+  .info-facts :global(dt) { color: var(--text-mute); }
+  .info-facts :global(dd) { margin: 0; color: var(--text); }
+
+  .kbd-note { margin-top: var(--space-3); font-size: 0.75rem; color: var(--text-mute); text-align: center; }
+
+  /* ---- Modal ---- */
+  .modal-overlay[hidden] { display: none; }
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    display: grid; place-items: center;
+    background: rgba(11, 22, 34, 0.7);
+    backdrop-filter: blur(4px);
+    padding: var(--space-4);
+    animation: rise var(--dur-fast) var(--ease) both;
+  }
+  .modal { max-width: 440px; width: 100%; padding: var(--space-8); text-align: center; }
+  .modal-emoji { font-size: 2.5rem; }
+  .modal-title { margin-top: var(--space-2); }
+  .modal-line { color: var(--text-dim); margin-top: var(--space-2); }
+  .modal-extra { color: var(--accent); font-family: var(--font-mono); font-size: var(--fs-small); }
+  .missed { font-size: var(--fs-small); }
+  .modal-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: center; margin-top: var(--space-6); }
+
+  @media (max-width: 760px) {
+    .prompt { grid-template-columns: 1fr auto; gap: var(--space-2) var(--space-3); padding: var(--space-3); }
+    .modes { grid-column: 1 / -1; justify-content: center; }
+    .ask { grid-column: 1 / -1; order: 2; }
+    .tally { order: 3; }
+    .skip { order: 4; }
+    .ask-name { font-size: 1.35rem; }
+    .map { max-height: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mqgame :global(.it.reveal) { animation: none; }
+  }
+</style>

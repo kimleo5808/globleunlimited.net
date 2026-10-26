@@ -1,0 +1,111 @@
+---
+// Shared frame for the Map Quiz pages: game first (H1, one-line promise, the
+// quiz), then the page's own written guide in the slot. Each region page
+// supplies its copy, FAQ and schema.
+import BaseLayout from './BaseLayout.astro';
+import MapQuizGame from '../components/game/MapQuizGame.astro';
+import { SITE } from '../lib/site';
+
+interface Props {
+  region: 'world' | 'africa' | 'europe' | 'us-states';
+  title: string;
+  description: string;
+  h1: string;
+  sub: string;
+  faqs: Array<[string, string]>;
+  /** One-line description for the VideoGame schema. */
+  gameDescription: string;
+  howTo: Array<[string, string]>;
+}
+
+const { region, title, description, h1, sub, faqs, gameDescription, howTo } = Astro.props;
+const path = region === 'world' ? '/map-quiz/' : `/map-quiz/${region}/`;
+const url = `${SITE.url}${path}`;
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: h1,
+    description: gameDescription,
+    url,
+    genre: 'Geography quiz',
+    gamePlatform: 'Web browser',
+    applicationCategory: 'Game',
+    operatingSystem: 'Any',
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: `How to play the ${h1.toLowerCase()}`,
+    step: howTo.map(([name, text]) => ({ '@type': 'HowToStep', name, text })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Map Quiz', item: `${SITE.url}/map-quiz/` },
+      ...(region === 'world' ? [] : [{ '@type': 'ListItem', position: 3, name: h1, item: url }]),
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path={path} schema={schema}>
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-title rise" style="--d:0ms">{h1}</h1>
+      <p class="hero-sub rise" style="--d:80ms" set:html={sub} />
+      <MapQuizGame region={region} />
+    </div>
+  </section>
+
+  <article class="prose content">
+    <slot />
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      {faqs.map(([q, a]) => (
+        <details>
+          <summary>{q}</summary>
+          <p>{a}</p>
+        </details>
+      ))}
+    </div>
+
+    <slot name="after" />
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-block: var(--space-12) var(--space-8); }
+  .hero-inner { text-align: center; max-width: 1200px; }
+  .hero-title { font-size: var(--fs-display); }
+  .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
+  .rise { animation-delay: var(--d, 0ms); }
+  .content { margin-top: var(--space-16); text-align: left; }
+  .content :global(ol), .content :global(ul) { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+
+  .content :global(.figure) { margin: var(--space-6) 0; }
+  .content :global(.figure img) { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); }
+
+  .content :global(.cmp) { width: 100%; border-collapse: collapse; margin: var(--space-6) 0; font-size: var(--fs-small); }
+  .content :global(.cmp th), .content :global(.cmp td) { border: 1px solid var(--line); padding: var(--space-2) var(--space-3); text-align: left; vertical-align: top; }
+  .content :global(.cmp th) { background: var(--bg-panel); color: var(--accent); }
+  .content :global(.cmp td) { color: var(--text-dim); }
+
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+  .faq details { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+  .faq summary { cursor: pointer; color: var(--text); font-weight: 600; }
+  .faq p { margin-top: var(--space-2); }
+
+  .content :global(.byline) { margin-top: var(--space-12); font-size: var(--fs-small); color: var(--text-mute); }
+</style>

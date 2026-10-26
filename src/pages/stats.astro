@@ -69,6 +69,38 @@ const schema: Record<string, unknown>[] = [
         <div class="dist" data-dist="capitals"></div>
       </section>
 
+      <section class="card stat-card">
+        <h2>🧭 <a href="/routes/">Globle Routes</a></h2>
+        <dl class="grid">
+          <div><dt>Routes finished</dt><dd class="mono" data-s="routes.wins">0</dd></div>
+          <div><dt>Played</dt><dd class="mono" data-s="routes.played">0</dd></div>
+          <div><dt>Win rate</dt><dd class="mono" data-s="routes.winRate">—</dd></div>
+          <div><dt>Best vs par</dt><dd class="mono" data-s="routes.bestGuesses">—</dd></div>
+        </dl>
+        <h3 class="dist-title">Guesses over par</h3>
+        <div class="dist" data-dist="routes"></div>
+      </section>
+
+      <section class="card stat-card">
+        <h2>↕️ <a href="/higher-or-lower/">Higher or Lower</a></h2>
+        <dl class="grid">
+          <div><dt>Best streak</dt><dd class="mono" data-s="higher-or-lower.maxStreak">0</dd></div>
+          <div><dt>Runs</dt><dd class="mono" data-s="higher-or-lower.played">0</dd></div>
+          <div><dt>Correct answers</dt><dd class="mono" data-s="higher-or-lower.wins">0</dd></div>
+        </dl>
+      </section>
+
+      <section class="card stat-card">
+        <h2>📍 <a href="/map-quiz/">Map Quiz</a></h2>
+        <dl class="grid" data-mapquiz>
+          <div><dt>World</dt><dd class="mono" data-mq="world">—</dd></div>
+          <div><dt>Africa</dt><dd class="mono" data-mq="africa">—</dd></div>
+          <div><dt>Europe</dt><dd class="mono" data-mq="europe">—</dd></div>
+          <div><dt>US States</dt><dd class="mono" data-mq="us-states">—</dd></div>
+        </dl>
+        <p class="dist-title">Best accuracy · time</p>
+      </section>
+
       {CAPPED.map((m) => (
         <section class="card stat-card">
           <h2>{m.icon} <a href={m.href}>{m.name}</a></h2>
@@ -164,10 +196,10 @@ const schema: Record<string, unknown>[] = [
 </BaseLayout>
 
 <script>
-  import { currentDailyStreak, getStats, todayISO, winRate } from '../lib/game/stats';
+  import { currentDailyStreak, getMapQuizBests, getStats, todayISO, winRate } from '../lib/game/stats';
   import type { GameMode } from '../lib/game/types';
 
-  const MODES: GameMode[] = ['daily', 'unlimited', 'capitals', 'silhouette', 'flags', 'clues', 'states'];
+  const MODES: GameMode[] = ['daily', 'unlimited', 'capitals', 'silhouette', 'flags', 'clues', 'states', 'routes', 'higher-or-lower'];
 
   function set(path: string, value: string | number | null) {
     const el = document.querySelector(`[data-s="${path}"]`);
@@ -184,10 +216,25 @@ const schema: Record<string, unknown>[] = [
     set(`${mode}.winRate`, rate == null ? null : `${rate}%`);
   });
   set('daily.currentStreak', currentDailyStreak(todayISO()));
+  // Routes records guesses over par, so its best reads "+0" rather than "0".
+  const routesBest = getStats('routes').bestGuesses;
+  set('routes.bestGuesses', routesBest == null ? null : `par +${routesBest}`);
 
-  // Distribution bars
-  const keys = ['1', '2', '3', '4', '5', '6', '7+'];
+  // Map Quiz keeps one best run per region: accuracy, then time.
+  const bests = getMapQuizBests();
+  document.querySelectorAll<HTMLElement>('[data-mq]').forEach((el) => {
+    const b = bests[el.dataset.mq!];
+    if (!b) return;
+    const time = document.createElement('span');
+    time.className = 'mq-time';
+    time.textContent = `in ${Math.floor(b.seconds / 60)}:${String(b.seconds % 60).padStart(2, '0')}`;
+    el.replaceChildren(`${b.accuracy}%`, time);
+  });
+
+  // Distribution bars. Routes buckets are guesses over par, from +0.
   function renderDist(mode: GameMode) {
+    const keys = mode === 'routes' ? ['0', '1', '2', '3', '4', '5'] : ['1', '2', '3', '4', '5', '6', '7+'];
+    const label = (k: string) => (mode === 'routes' ? `+${k}` : k);
     const dist = getStats(mode).distribution;
     const max = Math.max(1, ...keys.map((k) => dist[k] ?? 0));
     const host = document.querySelector(`[data-dist="${mode}"]`);
@@ -196,11 +243,12 @@ const schema: Record<string, unknown>[] = [
       .map((k) => {
         const n = dist[k] ?? 0;
         const pct = Math.round((n / max) * 100);
-        return `<div class="dist-row"><span class="dist-k mono">${k}</span><span class="dist-bar" style="width:${Math.max(6, pct)}%">${n || ''}</span></div>`;
+        return `<div class="dist-row"><span class="dist-k mono">${label(k)}</span><span class="dist-bar" style="width:${Math.max(6, pct)}%">${n || ''}</span></div>`;
       })
       .join('');
   }
-  MODES.filter((m) => m !== 'daily').forEach(renderDist);
+  // Daily has no histogram; Higher or Lower scores streaks, not guess counts.
+  MODES.filter((m) => m !== 'daily' && m !== 'higher-or-lower').forEach(renderDist);
 </script>
 
 <style>
@@ -217,6 +265,7 @@ const schema: Record<string, unknown>[] = [
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
   .grid dt { font-size: var(--fs-small); color: var(--text-mute); }
   .grid dd { font-size: 1.6rem; color: var(--accent); }
+  .grid :global(.mq-time) { display: block; font-size: 0.8rem; color: var(--text-dim); }
 
   .dist-title { font-size: var(--fs-small); color: var(--text-mute); text-transform: uppercase; letter-spacing: 0.1em; margin: var(--space-6) 0 var(--space-3); }
   .dist { display: flex; flex-direction: column; gap: var(--space-2); }

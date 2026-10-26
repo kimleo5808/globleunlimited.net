@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Bar chart of small member states per region: North America 8 of 23, Oceania 8 of 14, Europe 7 of 44, Africa 5 of 54, Asia 4 of 46, South America 0 of 12">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">32 member states are smaller than 10,000 km²</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">per quiz: members under 10,000 km², the ones a fingertip can miss</text>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="139" text-anchor="end" fill="#EAF2F8">North America</text>
+    <rect x="300" y="124" width="336" height="21" fill="#2E9E4F"/>
+    <text x="646" y="140" fill="#9DB2C6">8 of 23</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="179" text-anchor="end" fill="#EAF2F8">Oceania</text>
+    <rect x="300" y="164" width="336" height="21" fill="#C39BD3"/>
+    <text x="646" y="180" fill="#9DB2C6">8 of 14</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="219" text-anchor="end" fill="#EAF2F8">Europe</text>
+    <rect x="300" y="204" width="294" height="21" fill="#7FB3D5"/>
+    <text x="604" y="220" fill="#9DB2C6">7 of 44</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="259" text-anchor="end" fill="#EAF2F8">Africa</text>
+    <rect x="300" y="244" width="210" height="21" fill="#E8743B"/>
+    <text x="520" y="260" fill="#9DB2C6">5 of 54</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="299" text-anchor="end" fill="#EAF2F8">Asia</text>
+    <rect x="300" y="284" width="168" height="21" fill="#FEB24C"/>
+    <text x="478" y="300" fill="#9DB2C6">4 of 46</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="339" text-anchor="end" fill="#EAF2F8">South America</text>
+    <rect x="300" y="324" width="3" height="21" fill="#9BD08A"/>
+    <text x="313" y="340" fill="#9DB2C6">0 of 12</text>
+  </g>
+  <text x="50" y="396" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#F4C95D">SMALLEST IN EACH QUIZ</text>
+  <text x="50" y="426" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#EAF2F8">Seychelles (452 km²)</text><text x="350" y="426" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#EAF2F8">Maldives (300 km²)</text><text x="650" y="426" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#EAF2F8">Monaco (2.0 km²)</text><text x="50" y="452" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#EAF2F8">Saint Kitts and Nevis (261 km²)</text><text x="350" y="452" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#EAF2F8">Nauru (21 km²)</text><text x="650" y="452" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#EAF2F8">Suriname (163,820 km²)</text>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">Area: world-countries · UN members only (Vatican City counted as an observer) · globleunlimited.net</text>
+</svg>

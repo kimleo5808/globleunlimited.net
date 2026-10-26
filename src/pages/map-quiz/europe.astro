@@ -1,0 +1,216 @@
+---
+import MapQuizLayout from '../../layouts/MapQuizLayout.astro';
+
+// Counts and facts come from scripts/build-map-quiz.mjs (world-countries,
+// Natural Earth 1:50m, World Bank 2024 population).
+const faqs: Array<[string, string]> = [
+  ['How many countries are in the Europe map quiz?', 'The Europe map quiz asks for 44 UN member states. Vatican City is a UN observer rather than a member and Kosovo is not a UN member, so both are drawn on the map but not asked.'],
+  ['Is Russia in the Europe map quiz?', 'Yes. Russia is counted in Europe, and the map shows it as far as the Urals. Türkiye, Georgia, Armenia, Azerbaijan and Kazakhstan are counted in Asia instead, and Cyprus in Europe.'],
+  ['How do I click Monaco or San Marino?', 'Every country too small to click at the current zoom gets a dashed tap ring, including Andorra, Liechtenstein, Malta, Monaco and San Marino. Zoom in and the real outline takes over.'],
+  ['Is the Europe map quiz free?', 'Yes, with no account. Click, Type and Learn modes are all free, and your best accuracy and time are saved in your browser.'],
+  ['What is the hardest part of the map of Europe?', 'The Balkans: eight countries in a small area, several of them new since the 1990s. North Macedonia, Montenegro and Bosnia and Herzegovina are the ones most players mix up.'],
+  ['Can I print a map of Europe to practise?', 'Yes. The free worksheet numbers all 44 countries from north to south, with blank lines and a separate answer key.'],
+];
+const howTo: Array<[string, string]> = [
+  ['Read the name', 'The bar above the map names one European country at a time.'],
+  ['Click it', 'Click or tap it; microstates have dashed tap rings.'],
+  ['Learn from misses', 'A wrong click shows which country you hit; three misses reveal the answer.'],
+  ['Finish all 44', 'Work through Europe and check your accuracy and time.'],
+];
+---
+
+<MapQuizLayout
+  region="europe"
+  title="Europe Map Quiz – 44 Countries Incl. Microstates, Free"
+  description="Find all 44 European countries on a free map quiz — even Monaco and San Marino get tap rings. Click, type or learn mode, plus a printable map."
+  h1="Europe Map Quiz"
+  sub="Click the country we name — all 44 countries, <strong>tap rings for the microstates</strong>, no sign-up."
+  faqs={faqs}
+  gameDescription="A free Europe map quiz covering all 44 countries, including the microstates, with click, type and learn modes."
+  howTo={howTo}
+>
+  <h2>How the Europe Map Quiz Works</h2>
+  <p>
+    <strong>The Europe map quiz names one of 44 European countries at a time, and you click it on the
+    map.</strong> First-try answers turn green, answers after a miss turn amber, and after three
+    wrong clicks the quiz shows you the right one. Each wrong click names the country you hit, so a
+    mix-up between, say, Slovakia and Slovenia teaches you both.
+  </p>
+  <p>
+    Europe is the continent where map quizzes most often become pixel hunts, because five of its
+    countries are smaller than a typical city. In this Europe map quiz every one of them has a dashed
+    tap ring at full view, and the ring fades as soon as you zoom in far enough to click the real
+    outline. Type mode and Learn mode use the same map: name the highlighted country, or tap any
+    country for its capital, area and population.
+  </p>
+
+  <h2>How Many Countries Are in Europe?</h2>
+  <p>
+    <strong>The Europe map quiz counts 44 UN member states.</strong> Two more places appear on the map
+    but are not asked: Vatican City, which is a UN observer state, and Kosovo, which most EU countries
+    recognise but which is not a UN member.
+  </p>
+  <p>
+    Where Europe ends is a matter of convention, so the quiz follows one rule throughout. Russia is
+    counted in Europe, and the map shows it as far as the Urals. Türkiye, Georgia, Armenia, Azerbaijan
+    and Kazakhstan are counted in Asia, and Cyprus in Europe. That gives a continent stretching from
+    Iceland to the Urals, with Russia the largest country at 17.1 million km² and Monaco the smallest
+    at about 2 km². Thirteen of the 44 have no coastline, more than in any other region except Africa.
+  </p>
+
+  <h2>Europe by Sub-region</h2>
+  <p>
+    The quiz sorts Europe into six groups, and Learn mode shows each country’s group. Learning one
+    group at a time is the quickest way through the Europe map quiz.
+  </p>
+  <h3>Northern Europe (10)</h3>
+  <p>
+    Denmark, Estonia, Finland, Iceland, Ireland, Latvia, Lithuania, Norway, Sweden and the United
+    Kingdom. The Nordic countries plus the Baltics and the British Isles. The Baltic states run
+    Estonia, Latvia, Lithuania from north to south, alphabetically too.
+  </p>
+  <h3>Western Europe (8)</h3>
+  <p>
+    Belgium, France, Germany, Liechtenstein, Luxembourg, Monaco, the Netherlands and Switzerland.
+    Germany and France anchor it; the Benelux countries sit to their north-west, and two of the
+    microstates — Liechtenstein and Monaco — belong here.
+  </p>
+  <h3>Central Europe (6)</h3>
+  <p>
+    Austria, Czechia, Hungary, Poland, Slovakia and Slovenia. Slovakia and Slovenia are the pair most
+    often swapped: Slovakia borders Poland, Slovenia borders Italy and the Adriatic.
+  </p>
+  <h3>Southern Europe (8)</h3>
+  <p>
+    Andorra, Cyprus, Greece, Italy, Malta, Portugal, San Marino and Spain. The Mediterranean
+    peninsulas and islands, with three of the smallest countries: Andorra in the Pyrenees, San Marino
+    inside Italy, and Malta south of Sicily.
+  </p>
+  <h3>Southeast Europe (8)</h3>
+  <p>
+    Albania, Bosnia and Herzegovina, Bulgaria, Croatia, Montenegro, North Macedonia, Romania and
+    Serbia. The Balkans and their neighbours: the hardest part of any Europe map quiz, covered in the
+    next section.
+  </p>
+  <h3>Eastern Europe (4)</h3>
+  <p>
+    Belarus, Moldova, Russia and Ukraine. Moldova, squeezed between Romania and Ukraine, is the one
+    people forget.
+  </p>
+
+  <h2>The Hardest Countries to Find in the Europe Map Quiz</h2>
+  <ul>
+    <li><strong>The microstates.</strong> Monaco (about 2 km²), San Marino (61 km²), Liechtenstein
+      (160 km²), Malta (316 km²) and Andorra (468 km²). All five have tap rings; the challenge is
+      remembering where each one is.</li>
+    <li><strong>The Balkans.</strong> Bosnia and Herzegovina, Montenegro, North Macedonia and Albania
+      fit into an area smaller than the United Kingdom. Montenegro is on the coast between Croatia and
+      Albania; North Macedonia is landlocked, north of Greece.</li>
+    <li><strong>Slovakia and Slovenia.</strong> Similar names, different places: Slovakia is north of
+      Hungary, Slovenia west of Croatia.</li>
+    <li><strong>Luxembourg.</strong> At 2,586 km² it is easy to miss where Belgium, France and Germany
+      meet.</li>
+    <li><strong>Belgium and the Netherlands.</strong> Two low countries on the North Sea that players
+      often swap: the Netherlands is the northern one, bordering Germany; Belgium sits between it and
+      France. In the Europe map quiz, getting this pair right also places Luxembourg beneath them.</li>
+    <li><strong>Moldova.</strong> Landlocked between Romania and Ukraine, and easy to overlook next
+      to its larger neighbour.</li>
+  </ul>
+
+  <h2>Memory Tricks for the Map of Europe</h2>
+  <ol>
+    <li><strong>Start with the boot and the boxes.</strong> Italy’s boot, the Iberian square of Spain
+      and Portugal, and the hexagon of France give you three fixed points.</li>
+    <li><strong>Go round the Baltic.</strong> Denmark, Sweden, Finland, Russia, Estonia, Latvia,
+      Lithuania, Poland, Germany — a ring of nine countries around one sea.</li>
+    <li><strong>Read the Danube.</strong> Germany, Austria, Slovakia, Hungary, Croatia, Serbia,
+      Romania, Bulgaria, Moldova and Ukraine all touch it; following its course from west to east
+      walks you through Central and Southeast Europe.</li>
+    <li><strong>Pin the microstates to a neighbour.</strong> Andorra between France and Spain;
+      Monaco on the French Riviera; San Marino inside Italy; Liechtenstein between Switzerland and
+      Austria; Malta south of Sicily.</li>
+    <li><strong>Learn the Balkans last.</strong> Once everything around them is placed, the
+      remaining gaps in the Europe map quiz narrow the choices for each Balkan country.</li>
+  </ol>
+
+  <h2>Type Mode and European Capitals</h2>
+  <p>
+    Learn mode lists every capital, and a few are worth checking before you start: Switzerland’s is
+    Bern rather than Zürich or Geneva, Türkiye’s Ankara rather than Istanbul (though Türkiye sits in
+    the Asia quiz), and the Netherlands’ Amsterdam, even though the government sits in The Hague.
+    Several capitals share their country’s name — Luxembourg, Monaco, San Marino and Andorra (Andorra
+    la Vella) — which makes them easy points once you know the country. For more practice, try our
+    <a href="/capitals/">capital cities game</a>.
+  </p>
+
+  <h2>Europe’s Largest Countries by Area and Population</h2>
+  <p>
+    <strong>Russia dominates both lists: it covers about three-quarters of Europe’s land in the quiz
+    and has the most people.</strong> Beyond Russia the two lists diverge, which helps when two
+    shapes on the map look about the same size:
+  </p>
+  <table class="cmp">
+    <thead><tr><th>Rank</th><th>Largest by area</th><th>Most people (2024)</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Russia — 17.1 million km²</td><td>Russia — 144 million</td></tr>
+      <tr><td>2</td><td>Ukraine — 604,000 km²</td><td>Germany — 84 million</td></tr>
+      <tr><td>3</td><td>France — 552,000 km²</td><td>United Kingdom — 69 million</td></tr>
+      <tr><td>4</td><td>Spain — 506,000 km²</td><td>France — 69 million</td></tr>
+      <tr><td>5</td><td>Sweden — 450,000 km²</td><td>Italy — 59 million</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Ukraine is the largest country entirely in Europe, bigger than France or Spain. Germany has the
+    second-largest population but only the sixth-largest area in the Europe map quiz, just behind
+    Sweden.
+  </p>
+
+  <h2>European Countries That Changed Name or Shape</h2>
+  <p>
+    Europe’s map has changed more than any other continent’s in the last forty years. The Europe map
+    quiz uses current names, and Type mode accepts the older ones:
+  </p>
+  <ul>
+    <li><strong>North Macedonia</strong> took its current name in 2019; before that it was officially
+      “the former Yugoslav Republic of Macedonia”. Typing Macedonia works.</li>
+    <li><strong>Czechia</strong> has been the country’s official short name since 2016; Czech Republic
+      is still accepted.</li>
+    <li><strong>Montenegro</strong> became independent in 2006, ending the union of Serbia and
+      Montenegro and leaving Serbia landlocked.</li>
+    <li><strong>Kosovo</strong> declared independence from Serbia in 2008. It appears on the map but
+      is not asked, because it is not a UN member.</li>
+    <li><strong>Türkiye</strong> asked to be known by that name in 2022. It sits in the Asia part of
+      the world quiz, but Turkey still works in Type mode.</li>
+  </ul>
+
+  <h2>Using the Europe Map Quiz in Class</h2>
+  <p>
+    No accounts are needed, so a class can start straight away. Put Learn mode on the board and go
+    through one sub-region together, then run the Europe map quiz in Click mode and finish with the
+    printable worksheet the next lesson. The microstates make good bonus questions for quick
+    finishers, and Retry missed gives every student a personal list to practise.
+  </p>
+
+  <h2>Printable Europe Map Worksheet</h2>
+  <p>
+    The free <a href="/assets/printables/europe-worksheet.svg" target="_blank" rel="noopener">Europe
+    worksheet</a> numbers all 44 countries from north to south, with blank lines alongside and a
+    separate <a href="/assets/printables/europe-answers.svg" target="_blank" rel="noopener">answer
+    key</a>. Microstates and small countries are numbered in the margin with leader lines. It is laid
+    out for A4 landscape, prints fine on US Letter, and is free to use in class alongside the Europe
+    map quiz.
+  </p>
+
+  <Fragment slot="after">
+    <h2>More Map Quizzes</h2>
+    <p>
+      Next, try the <a href="/map-quiz/africa/">Africa map quiz</a> or the full
+      <a href="/map-quiz/">world map quiz</a>. To test European borders a different way, connect two
+      countries over land in <a href="/routes/">Globle Routes</a>, which runs a Europe-only mode.
+    </p>
+    <p class="byline">
+      Written by the Globle Unlimited team. Country list and sizes from the open world-countries
+      dataset; outlines from Natural Earth (1:50m); populations from the World Bank (2024).
+    </p>
+  </Fragment>
+</MapQuizLayout>

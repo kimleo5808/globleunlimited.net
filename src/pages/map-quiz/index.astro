@@ -1,0 +1,217 @@
+---
+import MapQuizLayout from '../../layouts/MapQuizLayout.astro';
+
+// Counts below come from scripts/build-map-quiz.mjs (world-countries, Natural
+// Earth); the plates are drawn by `node scripts/game-figures.mjs`.
+const faqs: Array<[string, string]> = [
+  ['How many countries are in the world map quiz?', 'All 193 UN member states. Vatican City and Palestine are UN observer states rather than members, and territories such as Greenland or Puerto Rico are drawn on the map but not asked.'],
+  ['Which countries are hardest to find on a map?', 'The 32 member states smaller than 10,000 km², led by Monaco at about 2 km² and Nauru at 21 km². In this world map quiz each of them gets a tap ring, so you never have to hunt for a single pixel.'],
+  ['Is the world map quiz free?', 'Yes. Every mode is free, with no account and no download. Your best accuracy and time are saved in your own browser.'],
+  ['Can I quiz just one continent?', 'Yes. Africa, Europe and the US states each have their own quiz page, with a printable worksheet, and you can switch between them with the buttons above the map.'],
+  ['Does the world map quiz work on phones?', 'Yes. Pinch to zoom, drag to move the map, and tap a ring for the smallest countries. Type mode works well on a phone keyboard too.'],
+  ['What happens if I click the wrong country?', 'It flashes red and the quiz tells you which country you clicked, so a miss still teaches you something. After three misses it shows you where the right one is and moves on.'],
+  ['Where does the map data come from?', 'Country outlines come from Natural Earth, a public-domain map dataset, and country facts from the open world-countries dataset, with populations from the World Bank.'],
+];
+const howTo: Array<[string, string]> = [
+  ['Read the name', 'The bar above the map names one country at a time.'],
+  ['Click it', 'Click or tap that country on the map. Use the rings for tiny countries.'],
+  ['Learn from misses', 'A wrong click shows which country you hit; three misses reveal the answer.'],
+  ['Finish the map', 'Work through all 193 and check your accuracy and time.'],
+];
+---
+
+<MapQuizLayout
+  region="world"
+  title="World Map Quiz – Find All 193 Countries, Free"
+  description="A free world map quiz: click all 193 countries, type their names, or learn the map. Tap targets for tiny states, no sign-up, free printable map."
+  h1="World Map Quiz"
+  sub="Click the country we name — all 193 countries, <strong>tap rings for the tiny ones</strong>, no sign-up."
+  faqs={faqs}
+  gameDescription="A free world map quiz covering all 193 UN member states, with click, type and learn modes."
+  howTo={howTo}
+>
+  <h2>What Is the World Map Quiz?</h2>
+  <p>
+    <strong>Our world map quiz is a free click-the-country game covering all 193 UN member states,
+    with type and learn modes and tap rings for the countries too small to click.</strong> The quiz
+    names a country; you find it on the map. A right answer turns it green, a miss tells you what you
+    clicked instead, and the map fills in as you go.
+  </p>
+  <p>
+    It is built for learning rather than for speed alone. Every country stays on the map once you
+    find it, so the blank spaces show you exactly which parts of the world you still need to work on.
+    When you finish, the world map quiz lists every country you missed so you can practise just those.
+  </p>
+
+  <h2>How the World Map Quiz Works: Click, Type and Learn</h2>
+  <p>Three modes use the same map:</p>
+  <ul>
+    <li><strong>Click.</strong> The bar above the map names a country and you click it. Green means
+      you found it first time, amber means you found it after a miss, and red means the quiz had to
+      show you.</li>
+    <li><strong>Type.</strong> The quiz highlights a country and you type its name, with
+      autocomplete to help with spelling. It is the harder test, because you have to recall the name
+      rather than recognise it, and it is the mode to use with a keyboard or screen reader.</li>
+    <li><strong>Learn.</strong> No score at all: tap any country to see its capital, area,
+      population and region. Use it before your first attempt, or after a run to look up the
+      countries you missed.</li>
+  </ul>
+  <p>
+    Three wrong answers on the same country and the world map quiz shows you where it is, then moves
+    on. Your accuracy counts only countries found on the first try, and the clock starts with your
+    first answer, so you can read the map for as long as you like before you begin.
+  </p>
+
+  <h2>How Many Countries Are on the Map?</h2>
+  <p>
+    <strong>The world map quiz asks for all 193 UN member states.</strong> That is the number most
+    atlases and school curricula use. Two more, Vatican City and Palestine, are UN observer states;
+    they and territories such as Greenland, Puerto Rico and Western Sahara are drawn on the map but
+    not asked.
+  </p>
+  <figure class="figure">
+    <img src="/assets/games/map-quiz/fig-1-quiz-regions.svg" alt="World map quiz regions: 193 UN member states split into Africa 54, Asia 46, Europe 44, North America 23, Oceania 14 and South America 12" width="1000" height="560" loading="lazy" decoding="async" />
+  </figure>
+  <p>
+    By region, the 193 break down as Africa 54, Asia 46, Europe 44, North America 23 (including
+    Central America and the Caribbean), Oceania 14 and South America 12. A few countries straddle a
+    border between continents, and the quiz follows one consistent rule: Russia is counted in Europe;
+    Türkiye, Georgia, Armenia, Azerbaijan and Kazakhstan in Asia; and Cyprus in Europe.
+  </p>
+
+  <h2>The 32 Countries Most Players Miss</h2>
+  <p>
+    <strong>32 member states are smaller than 10,000 square kilometres, and on a world map they are
+    specks or not drawn at all.</strong> Most click-map quizzes leave you hunting for them pixel by
+    pixel. In this world map quiz every one gets a tap ring.
+  </p>
+  <figure class="figure">
+    <img src="/assets/games/map-quiz/fig-2-tiny-targets.svg" alt="Bar chart of small member states under 10,000 square kilometres by region: eight in North America, eight in Oceania, seven in Europe, five in Africa, four in Asia" width="1000" height="560" loading="lazy" decoding="async" />
+  </figure>
+  <p>
+    The smallest of all is Monaco, at about 2 km², followed by Nauru (21 km²), Tuvalu (26 km²) and San
+    Marino (61 km²). Eight of the 14 countries in Oceania are under 10,000 km², and so are eight in
+    North America, all of them Caribbean islands. Africa has five small island nations, Europe seven
+    microstates and small countries, and Asia four.
+  </p>
+  <p>
+    The rings adapt to your screen. Whenever a country is smaller than about twelve pixels at the
+    current zoom, a dashed ring appears around it and counts as a hit. Zoom in and the ring fades
+    once the real outline is big enough to click, so the world map quiz is just as fair on a phone as
+    on a large monitor.
+  </p>
+
+  <h2>The Largest and Smallest Countries on the Map</h2>
+  <p>
+    <strong>Russia is the largest country in the world map quiz at 17.1 million km², and Monaco the
+    smallest at about 2 km².</strong> The next largest are Canada, China, the United States, Brazil and
+    Australia; by the land-area figures the quiz uses, China is slightly larger than the United
+    States, though the two swap places in rankings that count coastal and inland water.
+  </p>
+  <p>
+    At the other end, the five smallest member states are Monaco, Nauru, Tuvalu, San Marino and
+    Liechtenstein, all under 200 km². Vatican City, at less than half a square kilometre, is smaller
+    still, but it is a UN observer rather than a member, so the world map quiz shows it without
+    asking for it.
+  </p>
+
+  <h2>How Scoring Works</h2>
+  <p>
+    Your accuracy is the share of countries you found on the first try, so a run where you found
+    everything but needed second chances on twenty countries scores lower than a careful run with
+    fewer answers rushed. The clock starts with your first answer and stops with your last. Your best
+    run on each quiz is the one with the highest accuracy, with time as the tie-breaker, and it is
+    kept in your browser. In this world map quiz, skipping a country counts as a miss, so it pays to
+    make a guess.
+  </p>
+
+  <h2>Using the World Map Quiz in Class</h2>
+  <p>
+    There are no accounts, so a class can start in seconds on any device. Many teachers use the world
+    map quiz in three steps: Learn mode on the board to introduce a region, Click mode for students
+    to practise on their own, and the printable worksheet as a quick check the next lesson. Retry
+    missed at the end of a run gives every student their own list of weak spots, which makes good
+    homework.
+  </p>
+
+  <h2>Learn the World Region by Region</h2>
+  <p>
+    The full world map quiz is a big task, and most people learn faster one continent at a time. The
+    regional quizzes use more detailed outlines and come with a printable worksheet:
+  </p>
+  <ul>
+    <li><strong><a href="/map-quiz/africa/">Africa map quiz</a></strong> — 54 countries, including the
+      crowded West African coast and six island nations.</li>
+    <li><strong><a href="/map-quiz/europe/">Europe map quiz</a></strong> — 44 countries, from Iceland
+      to Russia, with tap rings for Andorra, Liechtenstein, Monaco, Malta and San Marino.</li>
+    <li><strong><a href="/map-quiz/us-states/">US states map quiz</a></strong> — all 50 states, with
+      the four Census regions as a way to learn them in chunks.</li>
+  </ul>
+  <p>
+    Asia, the Americas and Oceania are covered in full by the world map quiz in the meantime; their
+    own regional pages are next on our list.
+  </p>
+
+  <h2>How to Memorise the World Map in 5 Steps</h2>
+  <ol>
+    <li><strong>Start with the giants.</strong> Russia, Canada, the United States, China, Brazil and
+      Australia cover more than 40% of the world’s land. Place them first and they become anchors
+      for everything around them.</li>
+    <li><strong>Go one region at a time.</strong> A region you can finish in five minutes sticks
+      better than a world you abandon halfway. South America, with 12 countries, is a good first
+      win.</li>
+    <li><strong>Use Learn mode before Click mode.</strong> Two minutes of tapping around a region
+      gives your memory something to hold before the questions start.</li>
+    <li><strong>Switch to Type mode once Click feels easy.</strong> Recognising a country is easier
+      than recalling its name; when you can do both, you know it.</li>
+    <li><strong>Retry only your misses.</strong> At the end of every run, Retry missed gives you a
+      short quiz of the countries you got wrong. Repeat it the next day, and again a few days later.</li>
+  </ol>
+
+  <h2>Free Printable World and Region Maps</h2>
+  <p>
+    Every regional quiz comes with a free printable worksheet: a numbered outline map and a list of
+    blank lines, plus a separate answer key. They are laid out for A4 in landscape and print fine on US
+    Letter, and you are welcome to use them in class. Small countries are numbered in the margin with a leader
+    line, so nothing is too tiny to label.
+  </p>
+  <figure class="figure">
+    <img src="/assets/games/map-quiz/fig-3-printable-africa.svg" alt="Printable Africa map worksheet with 54 numbered countries and blank answer lines, from the world map quiz" width="1000" height="560" loading="lazy" decoding="async" />
+  </figure>
+
+  <h2>World Map Quiz vs Seterra, Sporcle and JetPunk</h2>
+  <p>
+    There are several good map quizzes online, and each does something well. Here is how this world
+    map quiz compares, including what the others do better:
+  </p>
+  <table class="cmp">
+    <thead><tr><th></th><th>Globle Unlimited</th><th>Seterra</th><th>Sporcle / JetPunk</th></tr></thead>
+    <tbody>
+      <tr><td>Countries asked</td><td>193 UN members</td><td>Varies by quiz</td><td>Varies; user-made quizzes</td></tr>
+      <tr><td>Small countries</td><td>Tap rings that adapt to zoom</td><td>Zoom in</td><td>Often hard to click</td></tr>
+      <tr><td>Modes</td><td>Click, Type, Learn</td><td>Pin, Type and more</td><td>Click or type, often timed</td></tr>
+      <tr><td>Learn mode</td><td>Free</td><td>Requires an upgrade</td><td>—</td></tr>
+      <tr><td>Languages</td><td>English</td><td>42 languages</td><td>Mostly English</td></tr>
+      <tr><td>Printable map</td><td>Free, with answer key</td><td>Free PDFs</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <p>
+    If you need a quiz in another language or a very specific topic, Seterra’s catalogue is hard to
+    beat. If you want one well-tested world map quiz with fair targets for the small countries and a
+    free way to learn before you test, this one is built for that.
+  </p>
+
+  <Fragment slot="after">
+    <h2>More Geography Games</h2>
+    <p>
+      Once the map is in your head, put it to work: connect two countries over land in
+      <a href="/routes/">Globle Routes</a>, find a mystery country by distance in
+      <a href="/">Globle Unlimited</a>, or name countries from their outlines in
+      <a href="/silhouette/">Globle Shapes</a>.
+    </p>
+    <p class="byline">
+      Written by the Globle Unlimited team. Country counts, sizes and regions come from the open
+      world-countries dataset; outlines from Natural Earth; populations from the World Bank (2024).
+    </p>
+  </Fragment>
+</MapQuizLayout>
