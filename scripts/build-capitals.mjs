@@ -44,12 +44,15 @@ for (const f of geo.features) {
 }
 
 // Natural Earth's 110m places flag some former capitals and seats of government
-// as admin-0 capitals, keeps Astana's 2019–2022 name, and has no row for Juba.
+// as admin-0 capitals, keeps Astana's 2019–2022 name and Burundi's pre-2019
+// capital, and has no row for Juba.
 const DROP = new Set(['Abidjan']); // Ivory Coast's capital is Yamoussoukro (1983)
 const REPLACE = {
   'Dar es Salaam': { name: 'Dodoma', lat: -6.163, lng: 35.7516, aliases: [] },
   Cotonou: { name: 'Porto-Novo', lat: 6.4969, lng: 2.6289, aliases: [] },
   'Nur-Sultan': { name: 'Astana', lat: 51.1811, lng: 71.4278, aliases: ['nur sultan'] },
+  // Burundi moved its political capital in 2019; Bujumbura stays the economic one.
+  Bujumbura: { name: 'Gitega', lat: -3.4271, lng: 29.9246, aliases: [] },
 };
 const ADD = [
   { name: 'Juba', country: 'South Sudan', cca2: 'SS', lat: 4.8594, lng: 31.5713, aliases: [] },
