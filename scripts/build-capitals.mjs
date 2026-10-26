@@ -43,6 +43,24 @@ for (const f of geo.features) {
   });
 }
 
+// Natural Earth's 110m places flag some former capitals and seats of government
+// as admin-0 capitals, keeps Astana's 2019–2022 name, and has no row for Juba.
+const DROP = new Set(['Abidjan']); // Ivory Coast's capital is Yamoussoukro (1983)
+const REPLACE = {
+  'Dar es Salaam': { name: 'Dodoma', lat: -6.163, lng: 35.7516, aliases: [] },
+  Cotonou: { name: 'Porto-Novo', lat: 6.4969, lng: 2.6289, aliases: [] },
+  'Nur-Sultan': { name: 'Astana', lat: 51.1811, lng: 71.4278, aliases: ['nur sultan'] },
+};
+const ADD = [
+  { name: 'Juba', country: 'South Sudan', cca2: 'SS', lat: 4.8594, lng: 31.5713, aliases: [] },
+];
+for (let i = capitals.length - 1; i >= 0; i--) {
+  const c = capitals[i];
+  if (DROP.has(c.name)) capitals.splice(i, 1);
+  else if (REPLACE[c.name]) capitals[i] = { ...c, ...REPLACE[c.name] };
+}
+capitals.push(...ADD);
+
 capitals.sort((a, b) => a.name.localeCompare(b.name));
 writeFileSync(`${OUT_DIR}/capitals.json`, JSON.stringify(capitals));
 console.log(`wrote ${capitals.length} capitals -> ${OUT_DIR}/capitals.json`);

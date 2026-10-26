@@ -43,6 +43,15 @@ for (const c of worldCountries) {
 const normalize = (s) =>
   s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
 
+// Natural Earth polygons with no numeric ISO code, so no world-countries row to
+// join. Without these they would show area 0 and no neighbours, which makes the
+// clue mode skip them and the difficulty rating call them the hardest on Earth.
+const NO_ISO_META = {
+  Kosovo: { region: 'Europe', subregion: 'Southeast Europe', area: 10887, borders: 4, landlocked: true },
+  'N. Cyprus': { region: 'Europe', subregion: 'Southern Europe', area: 3355, borders: 1, landlocked: false },
+  Somaliland: { region: 'Africa', subregion: 'Eastern Africa', area: 176120, borders: 3, landlocked: false },
+};
+
 const countries = [];
 const geoFeatures = [];
 
@@ -69,17 +78,19 @@ for (const f of features) {
   }
   aliasSet.delete(normalize(name)); // canonical handled separately
 
+  const fallback = NO_ISO_META[name];
   countries.push({
     name,
     cca2,
     lat: +lat.toFixed(4),
     lng: +lng.toFixed(4),
-    region: meta?.region ?? '',
-    subregion: meta?.subregion ?? '',
-    // Clue attributes for the Countryle-style /clues mode (all from world-countries).
-    area: meta?.area ?? 0,
-    borders: meta?.borders?.length ?? 0,
-    landlocked: meta?.landlocked ?? false,
+    region: meta?.region ?? fallback?.region ?? '',
+    subregion: meta?.subregion ?? fallback?.subregion ?? '',
+    // Clue attributes for the Countryle-style /clues mode (from world-countries,
+    // or NO_ISO_META for the three polygons it has no row for).
+    area: meta?.area ?? fallback?.area ?? 0,
+    borders: meta?.borders?.length ?? fallback?.borders ?? 0,
+    landlocked: meta?.landlocked ?? fallback?.landlocked ?? false,
     aliases: [...aliasSet].filter(Boolean),
   });
 
