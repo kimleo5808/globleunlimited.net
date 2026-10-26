@@ -1,0 +1,309 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RoutesGame from '../components/game/RoutesGame.astro';
+import { SITE } from '../lib/site';
+
+// Network figures quoted below are computed from src/data/routes.json by
+// `node scripts/game-figures.mjs`, which also draws the four plates.
+const title = 'Connect the Countries Game – Globle Routes, Unlimited';
+const description =
+  'Connect two countries over land by naming every country in between. A free Travle-style border game with unlimited routes, hints and a 3D globe.';
+
+const faqs: Array<[string, string]> = [
+  ['Is Globle Routes free?', 'Yes. Every route in this connect the countries game is free, there is no account and no daily limit: press New route as often as you like. Your results are saved in your own browser.'],
+  ['How is this different from Travle?', 'Travle is a daily puzzle. Globle Routes is an unlimited connect the countries game with three route lengths, region filters and a 3D globe that draws your path. It is our own version of the format and is not affiliated with Travle.'],
+  ['Which borders count in the connect the countries game?', 'Shared land borders, plus two fixed crossings: the Channel Tunnel between France and the United Kingdom and the Øresund Bridge between Denmark and Sweden. Overseas territories do not create borders, so France does not touch Brazil.'],
+  ['Why is my island guess always red?', 'Island countries such as Japan, Iceland or Australia have no land border with anything in the game, so in a country border game they can never sit on a route. They are marked “no land route”.'],
+  ['What does “1 away” mean?', 'Your guess is not on a shortest route, but it borders a country that is. Treat it as a pointer towards the right corridor rather than a wasted turn.'],
+  ['How many routes are there?', 'This connect countries game can join 8,430 pairs of countries over land. 6,342 of them need between two and eight countries in between, which is the range the game deals.'],
+  ['Where does the border data come from?', 'The land borders behind the connect the countries game come from the open world-countries dataset and outlines from Natural Earth. The method is described on this page so every number can be checked.'],
+];
+
+const schema: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'Globle Routes',
+    description: 'A free, unlimited connect the countries game played on a 3D globe.',
+    url: `${SITE.url}/routes/`,
+    genre: 'Geography puzzle',
+    gamePlatform: 'Web browser',
+    applicationCategory: 'Game',
+    operatingSystem: 'Any',
+    isAccessibleForFree: true,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: 'How to play the connect the countries game',
+    step: [
+      { '@type': 'HowToStep', name: 'Read the route', text: 'Note the start and finish countries highlighted in gold on the globe.' },
+      { '@type': 'HowToStep', name: 'Name a country', text: 'Type a country you would cross over land between them.' },
+      { '@type': 'HowToStep', name: 'Read the colour', text: 'Green is on a shortest route, amber borders it, red does not help.' },
+      { '@type': 'HowToStep', name: 'Close the chain', text: 'Connect start to finish; match par for a perfect score.' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.url}/` },
+      { '@type': 'ListItem', position: 2, name: 'Unlimited Games', item: `${SITE.url}/unlimited/` },
+      { '@type': 'ListItem', position: 3, name: 'Globle Routes', item: `${SITE.url}/routes/` },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} path="/routes/" schema={schema}>
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-title rise" style="--d:0ms">Globle Routes: Connect the Countries</h1>
+      <p class="hero-sub rise" style="--d:80ms">
+        Connect two countries over land — name every country between start and finish.
+        <strong>Unlimited routes</strong>, no daily wait.
+      </p>
+      <RoutesGame />
+    </div>
+  </section>
+
+  <article class="prose content">
+    <h2>What Is Globle Routes?</h2>
+    <p>
+      <strong>Globle Routes is a free connect the countries game: you get a start and a finish
+      country, and you name every country you would cross over land to join them.</strong> Each
+      correct country lights up a gold link on the globe, and the round ends the moment your chain
+      reaches the finish. The fewer guesses you need, the better your score.
+    </p>
+    <p>
+      If you have played Travle or another country border game, the idea will feel familiar, and Globle Routes is our own take on
+      that format. The difference is that you never wait for tomorrow: the connect the countries game
+      deals a fresh route whenever you press New route, in three lengths and five regions, and it
+      draws every route on the same 3D globe as <a href="/">Globle Unlimited</a>. It is not
+      affiliated with or endorsed by Travle.
+    </p>
+    <p>
+      A connect the countries game rewards a particular kind of map knowledge. Recognising a shape or a flag is not
+      enough here; you need to know who borders whom, which corridors are the only way through, and
+      where the land runs out. That is exactly the knowledge most quizzes skip.
+    </p>
+
+    <h2>How to Play the Connect the Countries Game</h2>
+    <p>Every round of the connect the countries game follows the same four steps:</p>
+    <ol>
+      <li><strong>Read the route.</strong> The start and finish countries glow gold on the globe and
+        sit at either end of the route strip.</li>
+      <li><strong>Name a country in between.</strong> Type any country and press Guess. Autocomplete
+        helps with spelling.</li>
+      <li><strong>Read the verdict.</strong> Green means the country is on a shortest route. Amber,
+        “1 away”, means it borders a country that is. Red means it does not help.</li>
+      <li><strong>Close the chain.</strong> As soon as the countries you have named join start to
+        finish over land, the route is complete.</li>
+    </ol>
+    <figure class="figure">
+      <img src="/assets/games/routes/fig-1-how-routes-work.svg" alt="Connect the countries game example: the shortest land route from Portugal to Poland crosses Spain, France and Germany, three guesses for par" width="1000" height="560" loading="lazy" decoding="async" />
+    </figure>
+    <p>
+      <strong>Par is the length of the shortest route.</strong> Portugal to Poland has a par of three
+      — Spain, France and Germany — so solving it in three guesses is perfect, and every extra
+      guess shows up as +1, +2 and so on. You get par plus five guesses before the round ends; if
+      you run out, the game outlines one shortest route so the miss still teaches you something.
+    </p>
+    <p>
+      Three hints are available every time you connect two countries: the outline of the next country you need, the
+      initials of every country still missing, or the outlines of all of them at once. Hints never
+      cost a guess, but a route solved without them is the one worth sharing.
+    </p>
+
+    <h2>Which Borders Count in the Connect the Countries Game?</h2>
+    <p>
+      <strong>Two countries connect when they share a land border.</strong> The connect the countries
+      game uses that rule almost everywhere, with a few deliberate exceptions:
+    </p>
+    <table class="cmp">
+      <thead><tr><th>Case</th><th>Counts?</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>Shared land border</td><td>Yes</td><td>Spain – France</td></tr>
+        <tr><td>Rail tunnel or road bridge</td><td>Yes, two of them</td><td>Channel Tunnel (France – United Kingdom), Øresund Bridge (Denmark – Sweden)</td></tr>
+        <tr><td>Overseas territory</td><td>No</td><td>France does not touch Brazil through French Guiana</td></tr>
+        <tr><td>Sea crossing or ferry</td><td>No</td><td>Spain – Morocco only counts because of Ceuta and Melilla’s land borders</td></tr>
+        <tr><td>Island country</td><td>Never on a route</td><td>Japan, Iceland, Australia</td></tr>
+        <tr><td>Microstates</td><td>Not in the game</td><td>Andorra, Monaco, Vatican City</td></tr>
+      </tbody>
+    </table>
+    <p>
+      The tunnel and the bridge are there because people actually travel that way, and without them
+      the United Kingdom and Ireland would be cut off from the rest of Europe. We stopped there on
+      purpose: once ferries count, you could connect almost any two countries and the puzzle loses its
+      shape.
+    </p>
+
+    <h2>The Map Behind the Game: 157 Countries, Two Networks</h2>
+    <p>
+      <strong>157 of the 176 countries in the connect the countries game can be reached over land; the other 19 are
+      islands with no land border at all.</strong> The routeable countries do not form one web but
+      two big ones and a couple of loose pairs.
+    </p>
+    <figure class="figure">
+      <img src="/assets/games/routes/fig-2-land-network.svg" alt="World map of land networks: 131 countries in Africa and Eurasia, 22 in the Americas, two isolated pairs and 19 islands with no land route" width="1000" height="560" loading="lazy" decoding="async" />
+    </figure>
+    <p>
+      The largest network joins 131 countries across Africa, Europe and Asia. The Americas form a
+      second, separate chain of 22 countries, from Canada down to Argentina and Chile. Two pairs
+      stand alone: Cyprus with Northern Cyprus, and the Dominican Republic with Haiti, which share
+      the island of Hispaniola.
+    </p>
+    <p>
+      Two single countries hold those networks together. <strong>Panama is the only land link
+      between North and South America</strong>, so every route from Mexico to Colombia passes
+      through it. <strong>Egypt is Africa’s only land link to Asia</strong>, through the Sinai to
+      Israel and Palestine, which makes it the most important country in the whole game.
+    </p>
+
+    <h2>Chokepoints: The Countries Most Routes Pass Through</h2>
+    <p>
+      <strong>Egypt sits on 31.4% of all shortest routes in the game.</strong> For this connect the countries game we counted, for
+      every pair of countries that can be joined over land, which countries the shortest route between
+      them passes through. When several routes tie, each gets an equal share.
+    </p>
+    <figure class="figure">
+      <img src="/assets/games/routes/fig-3-chokepoints.svg" alt="Bar chart of chokepoint countries: Egypt 31.4%, Sudan 26.5%, Russia 26.3%, Israel 26.1%, Türkiye 23.8% of all shortest routes" width="1000" height="560" loading="lazy" decoding="async" />
+    </figure>
+    <p>
+      After Egypt come Sudan (26.5%), Russia (26.3%), Israel (26.1%) and Türkiye (23.8%), then Syria,
+      China, France, Algeria and Spain. The pattern is easy to read once you see it: any route from
+      Africa to Asia funnels through Sudan, Egypt and Israel; routes from Europe into Asia run either
+      through Russia or through Türkiye; every route to the British Isles goes through France, and
+      every route to Portugal through Spain.
+    </p>
+    <p>
+      When you connect countries on different continents, a chokepoint is a gift. If your route crosses from one continent to another,
+      the chokepoint is almost certainly on it, so naming it first turns one long route into two
+      short ones.
+    </p>
+
+    <h2>How Long Are the Routes?</h2>
+    <p>
+      <strong>8,430 pairs of countries can be connected over land, and 6,342 of them need between
+      two and eight countries in between.</strong> That is the range our connect the countries game deals from, split into
+      three lengths: Short (two or three countries between), Medium (four or five) and Long (six to
+      eight).
+    </p>
+    <figure class="figure">
+      <img src="/assets/games/routes/fig-4-route-lengths.svg" alt="Histogram of shortest route lengths for 8,430 country pairs; the most common routes need four or five countries in between" width="1000" height="560" loading="lazy" decoding="async" />
+    </figure>
+    <p>
+      The most common routes have four or five countries in between, which is why Medium is the
+      default. The longest route in the game runs from Lesotho to Timor-Leste with seventeen
+      countries in between, by way of southern Africa, the Nile, the Middle East, Iran, China and
+      Southeast Asia. It is too long to deal, but it is a fun one to try in your head.
+    </p>
+    <p>
+      Region filters let you connect countries within one continent: 40 countries in the Europe network, 50 in
+      Africa, 42 in Asia and 24 in the Americas. A regional route never detours through another
+      continent, so an Asian route will not use Russia, and a European one will not use Türkiye.
+    </p>
+
+    <h2>7 Strategies to Connect the Countries in Fewer Guesses</h2>
+    <p>These habits work in any country border game, not just this one:</p>
+    <ol>
+      <li><strong>Think in corridors, not countries.</strong> Ask which band of land would connect the two countries — the Balkans, the Sahel, the Andes — and then fill it in.</li>
+      <li><strong>Name the chokepoint first.</strong> If the route changes continent, Egypt, Panama,
+        Türkiye or Russia is probably on it. One right guess splits the problem in two.</li>
+      <li><strong>Treat amber as a compass.</strong> “1 away” tells you which country your guess
+        borders on the route, so the answer is one step from there.</li>
+      <li><strong>Work back from the finish.</strong> The country next to the finish is often easier
+        to see than the one next to the start, and the chain can grow from both ends.</li>
+      <li><strong>Remember the giants.</strong> Russia and China each border fourteen countries in
+        the game, so they shortcut routes that look impossible.</li>
+      <li><strong>Skip the islands.</strong> Japan, the Philippines and Madagascar can never be on a
+        route, however central they look.</li>
+      <li><strong>Save hints for the last gap.</strong> The initials hint is strongest when one
+        country is missing, because a single letter usually leaves only one candidate.</li>
+    </ol>
+    <p>
+      If borders are still the weak spot in your connect the countries game, our piece on
+      <a href="/blog/borders-and-landlocked-countries/">which countries have the most neighbours</a>
+      is a good warm-up, and the <a href="/map-quiz/">world map quiz</a> helps you place the small
+      countries that most routes squeeze through.
+    </p>
+
+    <h2>Globle Routes vs Travle and Other Country Border Games</h2>
+    <p>
+      Several country border games use the same idea. Here is how they compare, including what the
+      others do better:
+    </p>
+    <table class="cmp">
+      <thead><tr><th></th><th>Globle Routes</th><th>Travle</th><th>Mappr Country Path</th></tr></thead>
+      <tbody>
+        <tr><td>Unlimited routes</td><td>Yes, three lengths</td><td>Practice mode</td><td>Practice mode</td></tr>
+        <tr><td>Daily puzzle</td><td>Not yet</td><td>Yes, plus a weekly challenge</td><td>Yes</td></tr>
+        <tr><td>3D globe</td><td>Yes</td><td>No</td><td>No</td></tr>
+        <tr><td>Bridges and tunnels</td><td>Channel Tunnel, Øresund</td><td>Yes, plus water within a country</td><td>Land only</td></tr>
+        <tr><td>Region filters</td><td>Five regions</td><td>—</td><td>No</td></tr>
+        <tr><td>Hints</td><td>3 per route</td><td>3 per route</td><td>—</td></tr>
+        <tr><td>Price</td><td>Free, no account</td><td>Free</td><td>Free</td></tr>
+      </tbody>
+    </table>
+    <p>
+      If you want one shared puzzle a day to compare with friends, Travle’s daily and weekly
+      challenges are hard to beat. If you want to practise until the map of borders is in your head,
+      an unlimited connect the countries game is the faster way to get there.
+    </p>
+
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      {faqs.map(([q, a]) => (
+        <details>
+          <summary>{q}</summary>
+          <p>{a}</p>
+        </details>
+      ))}
+    </div>
+
+    <h2>More Geography Games</h2>
+    <p>
+      Want a break from the connect the countries game? Find a mystery country by distance in
+      <a href="/">Globle Unlimited</a>, name countries from their outline in
+      <a href="/silhouette/">Globle Shapes</a>, or browse every mode in the
+      <a href="/unlimited/">unlimited geography games</a> hub.
+    </p>
+
+    <p class="byline">
+      Written by the Globle Unlimited team. Route counts, chokepoint shares and route lengths are
+      computed from the game’s own land-border network (world-countries borders, Natural Earth
+      outlines) across every pair of countries.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-block: var(--space-12) var(--space-8); }
+  .hero-inner { text-align: center; max-width: 1200px; }
+  .hero-title { font-size: var(--fs-display); }
+  .hero-sub { color: var(--text-dim); font-size: 1.15rem; margin-top: var(--space-3); }
+  .rise { animation-delay: var(--d, 0ms); }
+  .content { margin-top: var(--space-16); text-align: left; }
+  .content ol, .content ul { color: var(--text-dim); margin: var(--space-4) 0; padding-left: var(--space-6); display: flex; flex-direction: column; gap: var(--space-2); }
+
+  .figure { margin: var(--space-6) 0; }
+  .figure img { width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--line); }
+
+  .cmp { width: 100%; border-collapse: collapse; margin: var(--space-6) 0; font-size: var(--fs-small); }
+  .cmp th, .cmp td { border: 1px solid var(--line); padding: var(--space-2) var(--space-3); text-align: left; }
+  .cmp th { background: var(--bg-panel); color: var(--accent); }
+  .cmp td { color: var(--text-dim); }
+
+  .faq { display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-4); }
+  .faq details { background: var(--bg-panel); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); }
+  .faq summary { cursor: pointer; color: var(--text); font-weight: 600; }
+  .faq p { margin-top: var(--space-2); }
+
+  .byline { margin-top: var(--space-12); font-size: var(--fs-small); color: var(--text-mute); }
+</style>

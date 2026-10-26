@@ -1,6 +1,4 @@
 // Client-side controller wiring globe.gl to the GameEngine + DOM.
-import Globe from 'globe.gl';
-import * as THREE from 'three';
 import { GameEngine } from '../../lib/game/engine';
 import { dailyDataset, dateSeed } from '../../lib/game/daily';
 import { countriesDataset } from '../../lib/game/countries';
@@ -20,11 +18,10 @@ import {
 } from '../../lib/game/stats';
 import { formatDistance, getUnit, SETTINGS_EVENT } from '../../lib/settings';
 import { bindAutocomplete, bindModal, bindShare } from './shared';
+import { createGlobe, WORLD_GEO_URL } from './globe-setup';
 import type { Guessable, Dataset, Guess, GameMode } from '../../lib/game/types';
 
 const LAND_BASE = 'rgba(232, 217, 181, 0.18)'; // unguessed land tint
-const TEXTURE = '/assets/textures/earth-day-4k.jpg'; // vivid daytime satellite map
-const GEO_URL = '/assets/data/world.geo.json';
 
 type GeoFeature = { properties: { name: string; cca2: string } };
 
@@ -121,18 +118,10 @@ export function initGlobeGame(root: HTMLElement) {
   // Guessed capital markers (capitals mode)
   const points: Array<{ lat: number; lng: number; color: string; label: string }> = [];
   let features: GeoFeature[] = [];
-  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   // ---- Globe ----
-  const globe = new Globe(els.globeMount)
-    .backgroundColor('rgba(0,0,0,0)')
-    .showAtmosphere(true)
-    .atmosphereColor('#cfe6ff')
-    .atmosphereAltitude(0.22)
-    .globeImageUrl(TEXTURE)
-    .polygonAltitude(0.008)
+  const { globe, controls, prefersReduced, lookAt, home } = createGlobe(els.globeMount);
+  globe
     .polygonCapColor((f) => capColor(f as GeoFeature))
-    .polygonSideColor(() => 'rgba(0,0,0,0.10)')
     .polygonStrokeColor(() => (isCapitals ? 'rgba(244,201,93,0.35)' : 'rgba(11,22,34,0.55)'))
     .pointsData([])
     .pointLat('lat')
@@ -153,41 +142,13 @@ export function initGlobeGame(root: HTMLElement) {
     globe.pointsData([...points]);
   }
 
-  // controls: auto-rotate when idle, zoom on
-  const controls = globe.controls() as any;
-  controls.enableZoom = true;
-  controls.autoRotate = !prefersReduced;
-  controls.autoRotateSpeed = 0.55;
-  controls.minDistance = 180;
-  controls.maxDistance = 520;
-  controls.addEventListener('start', () => (controls.autoRotate = false));
-
-  // Bright, even lighting so the whole globe stays vivid (no dark night side).
-  const keyLight = new THREE.DirectionalLight(0xffffff, 1.3);
-  keyLight.position.set(1, 0.6, 1);
-  globe.lights([new THREE.AmbientLight(0xffffff, 2.7), keyLight]);
-
-  // Slightly richer texture rendering.
-  const mat = globe.globeMaterial() as THREE.MeshPhongMaterial;
-  mat.shininess = 6;
-  mat.specular = new THREE.Color(0x111418);
-
-  function fitSize() {
-    const w = els.globeMount.clientWidth;
-    globe.width(w).height(w);
-  }
-  fitSize();
-  new ResizeObserver(fitSize).observe(els.globeMount);
-  const HOME_ALTITUDE = 1.85; // lower = globe fills more of the frame
-  globe.pointOfView({ lat: 20, lng: 0, altitude: HOME_ALTITUDE }, 0);
-
   function setInputEnabled(on: boolean) {
     els.input.disabled = !on;
     els.submit.disabled = !on;
   }
 
   // load polygons
-  fetch(GEO_URL)
+  fetch(WORLD_GEO_URL)
     .then((r) => r.json())
     .then((fc) => {
       features = fc.features;
@@ -217,7 +178,7 @@ export function initGlobeGame(root: HTMLElement) {
   }
 
   function focusCountry(c: Guessable) {
-    globe.pointOfView({ lat: c.lat, lng: c.lng, altitude: 1.9 }, prefersReduced ? 0 : 700);
+    lookAt(c.lat, c.lng);
   }
 
   function renderInfo() {
@@ -359,8 +320,7 @@ export function initGlobeGame(root: HTMLElement) {
     setInputEnabled(true);
     renderInfo();
     refreshGlobe();
-    globe.pointOfView({ lat: 20, lng: 0, altitude: HOME_ALTITUDE }, prefersReduced ? 0 : 700);
-    if (!prefersReduced) controls.autoRotate = true;
+    home();
     els.input.focus();
   });
 

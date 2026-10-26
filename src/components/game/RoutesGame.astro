@@ -1,0 +1,294 @@
+---
+// Interactive Globle Routes island: connect two countries over land.
+// Globe on the left draws the chain; the console on the right holds the
+// route strip, input, hints and guess log. Hydrates client-side.
+import { ROUTE_REGIONS } from '../../lib/game/routes';
+
+const LENGTHS = [
+  ['short', 'Short'],
+  ['medium', 'Medium'],
+  ['long', 'Long'],
+] as const;
+---
+
+<div class="rgame" data-rgame>
+  <div class="rg-globe rise" style="--d:120ms" data-globe-block>
+    <div class="globe-mount" data-globe role="img" aria-label="Globe showing the route between the start and finish countries">
+      <span class="globe-hint mono" data-globe-hint>Loading globe…</span>
+    </div>
+    <p class="globe-note mono">Drag to spin · the route draws as you guess</p>
+  </div>
+
+  <div class="rg-console card rise" style="--d:200ms">
+    <div class="chips-row">
+      <div class="chip-group" role="group" aria-label="Route length">
+        <span class="chip-label mono">Length</span>
+        {LENGTHS.map(([key, label]) => (
+          <button type="button" class="chip" data-length={key} aria-pressed="false">{label}</button>
+        ))}
+      </div>
+      <div class="chip-group" role="group" aria-label="Region">
+        <span class="chip-label mono">Region</span>
+        {ROUTE_REGIONS.map((r) => (
+          <button type="button" class="chip" data-region={r} aria-pressed="false">{r}</button>
+        ))}
+      </div>
+    </div>
+
+    <ol class="strip" data-strip aria-label="Your route so far"></ol>
+
+    <div class="meta-row mono">
+      <span>PAR <strong data-par>–</strong></span>
+      <span>GUESSES <strong data-count>0</strong> / <span data-limit>–</span></span>
+      <span class="togo" data-togo></span>
+    </div>
+
+    <form class="guess-form" data-guess-form autocomplete="off">
+      <div class="guess-field">
+        <input
+          type="text"
+          class="guess-input"
+          data-guess-input
+          placeholder="Name a country on the route…"
+          aria-label="Name a country on the route"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+        />
+        <div class="suggest" data-suggest hidden role="listbox" aria-label="Country suggestions"></div>
+      </div>
+      <button type="submit" class="btn btn-primary">Guess</button>
+    </form>
+
+    <!-- Shown when the end-of-round modal is closed, to bring it back -->
+    <button type="button" class="btn btn-ghost round-result" data-reopen hidden>Round over · See result</button>
+
+    <!-- Narrow screens: the globe is moved here, under the guess box -->
+    <div class="globe-slot" data-globe-slot></div>
+
+    <div class="hints">
+      <button type="button" class="hint-btn" data-hint="next">💡 Next outline</button>
+      <button type="button" class="hint-btn" data-hint="initials">💡 Initials</button>
+      <button type="button" class="hint-btn" data-hint="all">💡 All outlines</button>
+      <span class="hint-left mono" data-hint-left>3 hints</span>
+    </div>
+    <p class="hint-out mono" data-hint-out hidden></p>
+
+    <p class="log-label mono">Your guesses</p>
+    <ol class="log" data-log aria-label="Your guesses"></ol>
+
+    <div class="console-actions">
+      <button type="button" class="btn btn-ghost" data-new>▶ New route</button>
+    </div>
+
+    <p class="legend">
+      Green = on a shortest route · amber = borders the route · red = no help.
+      The Channel Tunnel and Øresund Bridge count; islands have no land route.
+    </p>
+  </div>
+
+  <p class="sr-only" aria-live="polite" data-live></p>
+
+  <div class="modal-overlay" data-modal hidden>
+    <div class="modal card" role="dialog" aria-modal="true" aria-label="Route finished">
+      <button type="button" class="modal-close" data-modal-close aria-label="Close">✕</button>
+      <div class="modal-emoji" data-modal-emoji>🎉</div>
+      <h2 class="modal-title" data-modal-title>Route complete!</h2>
+      <p class="modal-line" data-modal-route></p>
+      <p class="modal-line" data-modal-score></p>
+      <p class="modal-line modal-extra" data-modal-extra hidden></p>
+      <div class="modal-actions">
+        <button class="btn btn-primary" data-play-again>▶ New route</button>
+        <button class="btn btn-ghost" data-share>Share</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initRoutesGame } from './routes-game';
+  const root = document.querySelector<HTMLElement>('[data-rgame]');
+  if (root) initRoutesGame(root);
+</script>
+
+<style>
+  .rgame {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 540px);
+    gap: var(--space-8);
+    align-items: start;
+    margin-top: var(--space-8);
+    text-align: left;
+  }
+
+  /* ---- Globe ---- */
+  .rg-globe { display: flex; flex-direction: column; align-items: center; }
+  .globe-mount {
+    width: min(540px, 100%);
+    aspect-ratio: 1;
+    display: grid; place-items: center;
+    filter: drop-shadow(var(--shadow-glow));
+    cursor: grab;
+  }
+  .globe-mount:active { cursor: grabbing; }
+  .globe-mount :global(canvas) { border-radius: 50%; }
+  .globe-hint { color: var(--text-dim); font-size: var(--fs-small); }
+  .globe-note { margin-top: var(--space-2); font-size: 0.72rem; color: var(--text-mute); }
+
+  /* ---- Console ---- */
+  .rg-console { padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); }
+  .chips-row { display: flex; flex-wrap: wrap; gap: var(--space-3) var(--space-6); }
+  .chip-group { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+  .chip-label { width: 100%; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-mute); }
+  .chip {
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: var(--space-1) var(--space-3);
+    color: var(--text-dim);
+    font-family: var(--font-body);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .chip:hover { color: var(--text); border-color: var(--accent); }
+  .chip[aria-pressed='true'] { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+  .chip:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* Route strip: start → found countries → empty slots → finish */
+  /* Wraps rather than scrolls: a hidden overflow would hide the finish. */
+  .strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); }
+  .rgame :global(.slot) {
+    flex: 0 1 auto;
+    min-width: 64px;
+    display: grid; place-items: center;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-small);
+    font-weight: 700;
+    white-space: nowrap;
+    position: relative;
+  }
+  .rgame :global(.slot + .slot)::before {
+    content: '→';
+    position: absolute;
+    left: calc(-1 * var(--space-4) + 2px);
+    color: var(--text-mute);
+    font-weight: 400;
+    transform: translateX(-30%);
+  }
+  .rgame :global(.slot-end) { background: #f4c95d; color: #15303f; }
+  .rgame :global(.slot-on) { background: var(--win); color: #fff; animation: rise var(--dur) var(--ease) both; }
+  .rgame :global(.slot-empty) { border: 1px dashed var(--text-mute); color: var(--text-mute); }
+
+  .meta-row { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); font-size: 0.75rem; letter-spacing: 0.06em; color: var(--text-dim); }
+  .meta-row > span { white-space: nowrap; }
+  .meta-row strong { color: var(--accent); }
+  .togo { margin-left: auto; }
+
+  .guess-form { display: flex; gap: var(--space-2); }
+  .guess-field { position: relative; flex: 1; }
+  .guess-input {
+    width: 100%;
+    padding: var(--space-3) var(--space-4);
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    color: var(--text);
+  }
+  .guess-input::placeholder { color: var(--text-mute); }
+  .guess-input[aria-invalid='true'] { border-color: var(--danger); }
+  .guess-input:disabled { opacity: 0.5; }
+  .suggest {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0; right: 0;
+    z-index: 30;
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-panel);
+    overflow: hidden;
+  }
+  .rgame :global(.suggest-item) {
+    display: block; width: 100%; text-align: left;
+    padding: var(--space-2) var(--space-4);
+    background: transparent; border: 0; cursor: pointer;
+    color: var(--text); font-size: var(--fs-small);
+  }
+  .rgame :global(.suggest-item:hover), .rgame :global(.suggest-item.active) { background: var(--bg-panel-2); color: var(--accent); }
+  .rgame :global(.suggest-error) { padding: var(--space-2) var(--space-4); color: var(--danger); font-size: var(--fs-small); }
+  .round-result { margin-top: 0; align-self: flex-start; }
+
+  .hints { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+  .hint-btn {
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: var(--space-1) var(--space-3);
+    color: var(--text-dim);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .hint-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--text); }
+  .hint-btn:disabled { opacity: 0.4; cursor: default; }
+  .hint-left { margin-left: auto; font-size: 0.72rem; color: var(--text-mute); }
+  .hint-out { font-size: var(--fs-small); color: var(--accent); display: flex; flex-direction: column; gap: var(--space-1); }
+  .hint-out[hidden] { display: none; }
+
+  .log-label { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-mute); }
+  .log { list-style: none; margin: calc(-1 * var(--space-2)) 0 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+  .rgame :global(.row) {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    background: var(--bg-panel);
+    border: 1px solid var(--line);
+    border-left: 6px solid var(--row-colour);
+    border-radius: var(--radius-sm);
+    animation: rise var(--dur) var(--ease) both;
+  }
+  .rgame :global(.row-name) { color: var(--text); font-weight: 600; }
+  .rgame :global(.row-tip) { display: block; color: var(--text-mute); font-size: 0.75rem; font-weight: 400; }
+  .rgame :global(.row-verdict) { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; color: var(--row-colour); }
+  .rgame :global(.row-on) { --row-colour: var(--win); }
+  .rgame :global(.row-near) { --row-colour: #c98a12; }
+  .rgame :global(.row-off) { --row-colour: var(--danger); }
+
+  .console-actions { display: flex; gap: var(--space-3); }
+  .legend { font-size: 0.75rem; color: var(--text-mute); line-height: 1.6; }
+
+  /* ---- Modal ---- */
+  .modal-overlay[hidden] { display: none; }
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 100;
+    display: grid; place-items: center;
+    background: rgba(11, 22, 34, 0.7);
+    backdrop-filter: blur(4px);
+    padding: var(--space-4);
+    animation: rise var(--dur-fast) var(--ease) both;
+  }
+  .modal { max-width: 400px; width: 100%; padding: var(--space-8); text-align: center; }
+  .modal-emoji { font-size: 2.5rem; }
+  .modal-title { margin-top: var(--space-2); }
+  .modal-line { color: var(--text-dim); margin-top: var(--space-2); }
+  .modal-extra { color: var(--accent); font-family: var(--font-mono); font-size: var(--fs-small); }
+  .modal-extra[hidden] { display: none; }
+  .modal-actions { display: flex; gap: var(--space-3); justify-content: center; margin-top: var(--space-6); }
+
+  .globe-slot:empty { display: none; }
+  @media (max-width: 900px) {
+    .rgame { grid-template-columns: 1fr; gap: var(--space-4); }
+    .globe-mount { width: min(260px, 70vw); }
+    .rg-console { padding: var(--space-4); }
+    /* Route, guess box and globe first; length and region settings after. */
+    .chips-row { order: 1; }
+    .globe-slot ~ * { order: 2; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rgame :global(.slot-on), .rgame :global(.row) { animation: none; }
+  }
+</style>

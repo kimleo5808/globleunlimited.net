@@ -51,7 +51,7 @@ export interface Guess {
   proximity?: number;
 }
 
-export type GameMode = 'unlimited' | 'daily' | 'practice' | 'capitals' | 'silhouette' | 'flags' | 'clues' | 'states';
+export type GameMode = 'unlimited' | 'daily' | 'practice' | 'capitals' | 'silhouette' | 'flags' | 'clues' | 'states' | 'routes' | 'higher-or-lower';
 
 export interface Capital {
   /** Capital city name. */

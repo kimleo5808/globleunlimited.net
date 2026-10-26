@@ -79,6 +79,49 @@ export function recordLoss(mode: GameMode): ModeStats {
   return s;
 }
 
+/** Record one run of a streak game (Higher or Lower): played counts runs,
+ *  wins counts correct answers, maxStreak keeps the longest run. */
+export function recordStreakRun(mode: GameMode, streak: number): ModeStats {
+  const s = getStats(mode);
+  s.played += 1;
+  s.wins += streak;
+  s.maxStreak = Math.max(s.maxStreak, streak);
+  save(mode, s);
+  return s;
+}
+
+// ---- Map Quiz: best result per region ----
+export interface MapQuizBest {
+  plays: number;
+  /** Best share of countries found on the first try, 0–100. */
+  accuracy: number;
+  /** Time of that best run, in seconds. */
+  seconds: number;
+}
+const MAP_QUIZ_KEY = 'globle:mapquiz';
+
+export function getMapQuizBests(): Record<string, MapQuizBest> {
+  if (!hasLS()) return {};
+  try {
+    return JSON.parse(localStorage.getItem(MAP_QUIZ_KEY) ?? '{}');
+  } catch {
+    return {};
+  }
+}
+
+/** Record a finished quiz. Higher accuracy wins; a tie goes to the faster run. */
+export function recordMapQuiz(region: string, accuracy: number, seconds: number): MapQuizBest {
+  const all = getMapQuizBests();
+  const prev = all[region];
+  const better = !prev || accuracy > prev.accuracy || (accuracy === prev.accuracy && seconds < prev.seconds);
+  const next = better ? { plays: (prev?.plays ?? 0) + 1, accuracy, seconds } : { ...prev, plays: prev.plays + 1 };
+  all[region] = next;
+  if (hasLS()) {
+    try { localStorage.setItem(MAP_QUIZ_KEY, JSON.stringify(all)); } catch { /* quota / private mode */ }
+  }
+  return next;
+}
+
 /** Win rate as a whole percentage, or null before the first round. */
 export function winRate(s: ModeStats): number | null {
   return s.played ? Math.round((s.wins / s.played) * 100) : null;

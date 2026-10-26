@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="560" viewBox="0 0 1000 560" role="img" aria-label="Bar chart of chokepoint countries: Egypt 31.4%, Sudan 26.5%, Russia 26.3%, Israel 26.1%, Türkiye 23.8%, Syria 21.7%, China 19.1%, France 18.1%, Algeria 17.8%, Spain 16.8%">
+  <rect width="1000" height="560" fill="#0E1C2E"/>
+  <rect x="16" y="16" width="968" height="528" fill="none" stroke="#F4C95D" stroke-opacity="0.3"/>
+  <text x="50" y="62" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#EAF2F8">Egypt sits on 31% of all shortest routes</text>
+  <text x="50" y="90" font-family="'Space Mono',ui-monospace,monospace" font-size="15" fill="#5E7891">share of the 8,430 shortest routes that pass through each country</text>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="135" text-anchor="end" fill="#EAF2F8">Egypt</text>
+    <rect x="300" y="120" width="540" height="21" fill="#C42D1C"/>
+    <text x="850" y="136" fill="#9DB2C6">31.4%</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="172" text-anchor="end" fill="#EAF2F8">Sudan</text>
+    <rect x="300" y="157" width="456" height="21" fill="#C42D1C"/>
+    <text x="766.4985712099235" y="173" fill="#9DB2C6">26.5%</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="209" text-anchor="end" fill="#EAF2F8">Russia</text>
+    <rect x="300" y="194" width="453" height="21" fill="#C42D1C"/>
+    <text x="762.6116714515764" y="210" fill="#9DB2C6">26.3%</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="246" text-anchor="end" fill="#EAF2F8">Israel</text>
+    <rect x="300" y="231" width="448" height="21" fill="#E8743B"/>
+    <text x="758.4148911055163" y="247" fill="#9DB2C6">26.1%</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="283" text-anchor="end" fill="#EAF2F8">Türkiye</text>
+    <rect x="300" y="268" width="410" height="21" fill="#E8743B"/>
+    <text x="719.5507665133678" y="284" fill="#9DB2C6">23.8%</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="320" text-anchor="end" fill="#EAF2F8">Syria</text>
+    <rect x="300" y="305" width="374" height="21" fill="#E8743B"/>
+    <text x="683.6169849374546" y="321" fill="#9DB2C6">21.7%</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="357" text-anchor="end" fill="#EAF2F8">China</text>
+    <rect x="300" y="342" width="328" height="21" fill="#E8743B"/>
+    <text x="638.4728734403984" y="358" fill="#9DB2C6">19.1%</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="394" text-anchor="end" fill="#EAF2F8">France</text>
+    <rect x="300" y="379" width="312" height="21" fill="#E8743B"/>
+    <text x="621.5677981013208" y="395" fill="#9DB2C6">18.1%</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="431" text-anchor="end" fill="#EAF2F8">Algeria</text>
+    <rect x="300" y="416" width="306" height="21" fill="#E8743B"/>
+    <text x="615.8771998349766" y="432" fill="#9DB2C6">17.8%</text>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="15">
+    <text x="288" y="468" text-anchor="end" fill="#EAF2F8">Spain</text>
+    <rect x="300" y="453" width="289" height="21" fill="#E8743B"/>
+    <text x="598.8367418753207" y="469" fill="#9DB2C6">16.8%</text>
+  </g>
+  <text x="50" y="524" font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#5E7891">Betweenness on the land-border network, every pair of routeable countries · globleunlimited.net</text>
+</svg>
