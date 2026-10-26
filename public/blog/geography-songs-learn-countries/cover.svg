@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="Cover: Geography Songs — a globe with a musical staff curving around it and notes landing on country names">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#15304d"/><stop offset="100%" stop-color="#0B1622"/>
+    </radialGradient>
+    <clipPath id="ball"><circle cx="330" cy="330" r="170"/></clipPath>
+  </defs>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g stroke="#F4C95D" stroke-opacity="0.07" fill="none">
+    <path d="M0 105H1200M0 210H1200M0 315H1200M0 420H1200M0 525H1200"/>
+    <path d="M150 0V630M300 0V630M450 0V630M600 0V630M750 0V630M900 0V630M1050 0V630"/>
+  </g>
+  <rect x="24" y="24" width="1152" height="582" fill="none" stroke="#F4C95D" stroke-opacity="0.35"/>
+  <rect x="32" y="32" width="1136" height="566" fill="none" stroke="#F4C95D" stroke-opacity="0.15"/>
+
+  <!-- globe -->
+  <circle cx="330" cy="330" r="170" fill="#1B3350" stroke="#F4C95D" stroke-width="2"/>
+  <g clip-path="url(#ball)" fill="none" stroke="#F4C95D" stroke-opacity="0.35">
+    <ellipse cx="330" cy="330" rx="170" ry="62"/>
+    <ellipse cx="330" cy="330" rx="62" ry="170"/>
+    <ellipse cx="330" cy="330" rx="120" ry="170"/>
+    <path d="M160 330H500M175 245H485M175 415H485"/>
+  </g>
+  <!-- a South America-ish landmass -->
+  <path clip-path="url(#ball)" d="M330 222 L372 240 L404 262 L398 300 L376 330 L364 372 L346 410 L330 452 L318 430 L312 392 L300 352 L290 312 L296 270 Z" fill="#2E5A7C" stroke="#F4C95D" stroke-width="1.5"/>
+
+  <!-- staff curving round the globe -->
+  <g fill="none" stroke="#EAF2F8" stroke-opacity="0.55" stroke-width="1.6">
+    <path d="M120 470 C 260 560, 520 540, 640 420"/>
+    <path d="M120 482 C 260 572, 520 552, 640 432"/>
+    <path d="M120 494 C 260 584, 520 564, 640 444"/>
+    <path d="M120 506 C 260 596, 520 576, 640 456"/>
+    <path d="M120 518 C 260 608, 520 588, 640 468"/>
+  </g>
+  <!-- notes -->
+  <g fill="#F4C95D" stroke="#F4C95D" stroke-width="3">
+    <ellipse cx="200" cy="525" rx="9" ry="7" transform="rotate(-20 200 525)"/><path d="M208 522V478" fill="none"/>
+    <ellipse cx="300" cy="548" rx="9" ry="7" transform="rotate(-20 300 548)"/><path d="M308 545V501" fill="none"/>
+    <ellipse cx="410" cy="545" rx="9" ry="7" transform="rotate(-20 410 545)"/><path d="M418 542V498" fill="none"/>
+    <ellipse cx="510" cy="512" rx="9" ry="7" transform="rotate(-20 510 512)"/><path d="M518 509V465" fill="none"/>
+    <path d="M418 498 L518 465" fill="none"/>
+    <ellipse cx="600" cy="452" rx="9" ry="7" transform="rotate(-20 600 452)"/><path d="M608 449V405 Q 622 418 616 432" fill="none"/>
+  </g>
+  <g font-family="'Space Mono',ui-monospace,monospace" font-size="13" fill="#9DB2C6" text-anchor="middle">
+    <text x="208" y="470">PERU</text>
+    <text x="300" y="590">CHILE</text>
+    <text x="410" y="590">BRAZIL</text>
+    <text x="518" y="456">URUGUAY</text>
+  </g>
+
+  <text x="720" y="220" font-family="'Space Mono',ui-monospace,monospace" font-size="20" letter-spacing="5" fill="#F4C95D">MEMORY TRICKS</text>
+  <text x="720" y="292" font-family="Georgia,'Times New Roman',serif" font-size="64" fill="#EAF2F8">Geography</text>
+  <text x="720" y="366" font-family="Georgia,'Times New Roman',serif" font-size="64" fill="#EAF2F8">Songs</text>
+  <text x="720" y="420" font-family="Georgia,'Times New Roman',serif" font-size="24" font-style="italic" fill="#9DB2C6">Learn every country with music,</text>
+  <text x="720" y="452" font-family="Georgia,'Times New Roman',serif" font-size="24" font-style="italic" fill="#9DB2C6">then test it on the map</text>
+  <text x="720" y="540" font-family="'Space Mono',ui-monospace,monospace" font-size="15" letter-spacing="2" fill="#F4C95D" fill-opacity="0.8">GLOBLEUNLIMITED.NET</text>
+</svg>
