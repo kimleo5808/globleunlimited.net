@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 // highlighted one (Type), or explore (Learn). Each region page passes its id;
 // outlines and facts load from /assets/data/map-quiz/{region}.json.
 interface Props {
-  region: 'world' | 'africa' | 'europe' | 'us-states';
+  region: 'world' | 'africa' | 'asia' | 'europe' | 'north-america' | 'south-america' | 'oceania' | 'us-states';
 }
 const { region } = Astro.props;
 
@@ -13,7 +13,11 @@ const { region } = Astro.props;
 const QUIZZES = [
   ['world', 'World', '/map-quiz/'],
   ['africa', 'Africa', '/map-quiz/africa/'],
+  ['asia', 'Asia', '/map-quiz/asia/'],
   ['europe', 'Europe', '/map-quiz/europe/'],
+  ['north-america', 'N. America', '/map-quiz/north-america/'],
+  ['south-america', 'S. America', '/map-quiz/south-america/'],
+  ['oceania', 'Oceania', '/map-quiz/oceania/'],
   ['us-states', 'US States', '/map-quiz/us-states/'],
 ] as const;
 const noun = region === 'us-states' ? 'state' : 'country';

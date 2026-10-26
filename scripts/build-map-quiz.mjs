@@ -71,14 +71,23 @@ const poolAliases = new Map(POOL.filter((c) => c.cca2).map((c) => [c.cca2, c.ali
  *  Natural Earth) is out of date for a fact panel. */
 const CAPITAL_FACT = {
   BI: 'Gitega (political), Bujumbura (economic)', // moved in 2019
+  BO: 'Sucre (constitutional), La Paz (seat of government)',
+  CO: 'Bogotá',
+  IL: 'Jerusalem (disputed)',
+  LK: 'Sri Jayawardenepura Kotte (official), Colombo (commercial)',
+  MY: 'Kuala Lumpur (government in Putrajaya)',
+  NR: 'Yaren (no official capital)',
+  PW: 'Ngerulmud',
 };
 
 /** Names people type that neither dataset lists: current official short
  *  forms and everyday abbreviations. */
 const EXTRA_ALIASES = {
   CV: ['cabo verde'], GM: ['the gambia'], CD: ['drc', 'congo kinshasa'], CG: ['congo brazzaville'],
-  BA: ['bosnia'], ST: ['sao tome'], TT: ['trinidad'], AG: ['antigua'], KN: ['st kitts', 'saint kitts'],
-  LC: ['st lucia'], VC: ['st vincent', 'saint vincent'], CF: ['car'], AE: ['uae'],
+  BA: ['bosnia'], ST: ['sao tome'], TT: ['trinidad'], AG: ['antigua'],
+  KN: ['st kitts', 'saint kitts', 'st kitts and nevis'], LC: ['st lucia'],
+  VC: ['st vincent', 'saint vincent', 'st vincent and the grenadines'], CF: ['car'], AE: ['uae'],
+  BS: ['the bahamas'], PG: ['png'], FM: ['fsm'],
 };
 
 function countryItem(w) {
@@ -89,7 +98,7 @@ function countryItem(w) {
     ...(EXTRA_ALIASES[w.cca2] ?? []),
   ]);
   aliases.delete(normalize(name));
-  const caps = CAPITALS.filter((c) => c.cca2 === w.cca2).map((c) => c.name);
+  const caps = CAPITALS.filter((c) => c.cca2 === w.cca2).map((c) => c.name.replace(/\s+/g, ' '));
   const facts = [
     ['Capital', CAPITAL_FACT[w.cca2] ?? (caps.length ? caps.join(' / ') : (w.capital ?? []).join(' / ') || '—')],
     ['Area', `${fmt(w.area)} km²`],
@@ -128,7 +137,7 @@ const REGIONS = {
     width: 820, height: 860,
     projection: () => geoAzimuthalEqualArea().rotate([-18, -2]),
     members: () => MEMBERS.filter((w) => quizRegion(w) === 'africa'),
-    bleed: 0.55,
+    bleed: true,
   },
   europe: {
     label: 'Europe',
@@ -139,13 +148,57 @@ const REGIONS = {
     // Russia spans eleven time zones; fitting to it would shrink the Balkans
     // to specks. Russia runs off the east edge of the map.
     fitExclude: ['RU'],
-    bleed: 0.55,
+    bleed: true,
+  },
+  // The next four fit to hand-picked [lon, lat] extremes: fitting to each
+  // member's largest polygon would cut off Alaska, Papua or the Line Islands.
+  asia: {
+    label: 'Asia',
+    res: '50m',
+    width: 1000, height: 760,
+    projection: () => geoAzimuthalEqualArea().rotate([-88, -26]),
+    members: () => MEMBERS.filter((w) => quizRegion(w) === 'asia'),
+    fitPoints: [[26, 40], [44, 12], [54, 12.5], [69, 55.4], [123, 53.5], [146, 44], [141, -9.5], [120, -11], [73, -0.7], [95, 6]],
+    bleed: true,
+  },
+  'north-america': {
+    label: 'North America',
+    res: '50m',
+    width: 900, height: 880,
+    projection: () => geoAzimuthalEqualArea().rotate([100, -45]),
+    members: () => MEMBERS.filter((w) => quizRegion(w) === 'north-america'),
+    fitPoints: [[-168, 66], [-156, 71.4], [-70, 83.1], [-52.6, 47.5], [-59.5, 13], [-61.5, 10], [-78, 7.2], [-92, 14.5], [-117, 32.5], [-125, 49]],
+    bleed: true,
+  },
+  'south-america': {
+    label: 'South America',
+    res: '50m',
+    width: 720, height: 900,
+    projection: () => geoAzimuthalEqualArea().rotate([60, 20]),
+    members: () => MEMBERS.filter((w) => quizRegion(w) === 'south-america'),
+    fitPoints: [[-81.3, -4.7], [-71.7, 12.5], [-60, 8.5], [-51.6, 4.4], [-34.8, -7.2], [-48, -26], [-67.3, -55.9], [-75.6, -50]],
+    bleed: true,
+  },
+  oceania: {
+    label: 'Oceania',
+    res: '50m',
+    width: 1000, height: 660,
+    projection: () => geoAzimuthalEqualArea().rotate([-170, 15]),
+    members: () => MEMBERS.filter((w) => quizRegion(w) === 'oceania'),
+    fitPoints: [[113, -22], [153.6, -28.6], [146, -43.6], [166.4, -46.6], [178.5, -37.7], [134.1, 7.5], [169, 14.6], [-150.2, 1.9], [-151.8, -11.4], [-171.8, -14], [-175.4, -21.4]],
+    // Kiribati's largest island is Kiritimati, 3,300 km east of Tarawa; the
+    // ring goes where people look for it, on the capital.
+    ringAt: { KI: [173.0, 1.4] },
+    bleed: true,
   },
 };
 
+/** The widest-for-its-height frame the game expects: 72vh tall on a
+ *  1366x657 laptop screen, about 1,100 px across. */
+const MIN_ASPECT = 0.42;
 // `bleed`: on screens wider than the map the game shows more geography to
-// either side instead of letterboxing, so the paths run that fraction of the
-// width past each side edge. Printables clip back to the frame.
+// either side instead of letterboxing, so the paths run past each side edge
+// far enough to fill a MIN_ASPECT frame. Printables clip back to the frame.
 
 /** Ring radius (map units) for countries too small to click at full view. */
 const RING_PX = 9;
@@ -159,14 +212,17 @@ function buildRegion(key, def) {
   const featureOf = new Map();
   for (const f of features) {
     const w = byCcn3.get(String(Number(f.id)));
-    if (w) featureOf.set(w.cca2, f);
+    // 1:50m gives Ashmore and Cartier Islands Australia's code: keep the larger.
+    if (w && !(geoArea(featureOf.get(w.cca2) ?? f) > geoArea(f))) featureOf.set(w.cca2, f);
   }
 
   const projection = def.projection();
   const pad = 8;
-  const bleedX = def.width * (def.bleed ?? 0);
+  const bleedX = def.bleed ? Math.max(0, (def.height / MIN_ASPECT - def.width) / 2) : 0;
   const fitTo = def.fitSphere
     ? { type: 'Sphere' }
+    : def.fitPoints
+    ? { type: 'MultiPoint', coordinates: def.fitPoints }
     : collection(members.filter((w) => !(def.fitExclude ?? []).includes(w.cca2) && featureOf.has(w.cca2)).map((w) => mainland(featureOf.get(w.cca2))));
   projection.fitExtent([[pad, pad], [def.width - pad, def.height - pad]], fitTo).clipExtent([[-bleedX, 0], [def.width + bleedX, def.height]]);
   const path = geoPath(projection);
@@ -185,6 +241,7 @@ function buildRegion(key, def) {
     } else {
       [cx, cy] = projection([w.latlng[1], w.latlng[0]]) ?? [NaN, NaN];
     }
+    if (def.ringAt?.[w.cca2]) [cx, cy] = projection(def.ringAt[w.cca2]);
     if (!Number.isFinite(cx) || cx < 0 || cy < 0 || cx > def.width || cy > def.height) {
       // A member outside the frame (none expected) would be unplayable.
       throw new Error(`${key}: ${item.name} falls outside the map`);
@@ -268,13 +325,16 @@ function printables(data) {
 
   // A country takes its number inside when its outline has room for one at
   // print size; the rest go to margin columns on their side of the map,
-  // spread so no two labels touch.
+  // spread so no two labels touch. North America splits further east, so
+  // Belize and El Salvador take the empty Pacific margin rather than leader
+  // lines across the Caribbean.
+  const split = ox + data.width * k * (data.region === 'north-america' ? 0.6 : 0.5);
   const inside = [], left = [], right = [];
   for (const it of order) {
     const big = it.d && !it.ring && it.bw * k >= 22 && it.bh * k >= 14;
     const [x, y] = P(it.cx, it.cy);
     if (big) inside.push({ it, x, y });
-    else (x < map.x + map.w / 2 ? left : right).push({ it, x, y });
+    else (x < split ? left : right).push({ it, x, y });
   }
   const spread = (list, top, bottom, gap = 19) => {
     list.sort((a, b) => a.y - b.y);

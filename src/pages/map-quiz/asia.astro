@@ -1,0 +1,218 @@
+---
+import MapQuizLayout from '../../layouts/MapQuizLayout.astro';
+
+// Counts and facts come from scripts/build-map-quiz.mjs (world-countries,
+// Natural Earth 1:50m, World Bank 2024 population).
+const faqs: Array<[string, string]> = [
+  ['How many countries are in the Asia map quiz?', 'All 46 UN member states in Asia. Russia and Cyprus are in the Europe quiz, and Taiwan and Palestine are drawn on the map but not asked, which is why other lists often say 48.'],
+  ['What is the hardest country to find in the Asia map quiz?', 'The Maldives, Singapore and Bahrain, which are all under 800 km². Each one has a tap ring, so you click the ring instead of hunting for a dot. After those, most misses come from the Gulf states and the Caucasus.'],
+  ['Is the Asia map quiz free?', 'Yes. Click, Type and Learn modes are free with no account, and your best accuracy and time are saved in your browser.'],
+  ['Which Asian countries are landlocked?', 'Twelve: Afghanistan, Armenia, Bhutan, Kyrgyzstan, Laos, Mongolia, Nepal, Tajikistan and Uzbekistan, plus Azerbaijan, Kazakhstan and Turkmenistan, whose only coast is on the Caspian Sea, which has no outlet to the ocean.'],
+  ['Can I print a map of Asia to practise?', 'Yes. The free worksheet numbers all 46 countries from north to south, with blank lines for the names and a separate answer key.'],
+  ['Does the quiz accept old names like Burma or Turkey?', 'Yes. Type mode accepts Burma for Myanmar, Turkey for Türkiye and East Timor for Timor-Leste, as well as short forms such as UAE.'],
+];
+const howTo: Array<[string, string]> = [
+  ['Read the name', 'The bar above the map names one Asian country at a time.'],
+  ['Click it', 'Click or tap it on the map; the Maldives, Singapore and Bahrain have tap rings.'],
+  ['Learn from misses', 'A wrong click shows which country you hit; three misses reveal the answer.'],
+  ['Finish all 46', 'Work across the continent and check your accuracy and time.'],
+];
+---
+
+<MapQuizLayout
+  region="asia"
+  title="Asia Map Quiz – All 46 Countries, Free & Printable"
+  description="Find all 46 countries on our free Asia map quiz, from Türkiye to Japan. Click, type and learn modes, tap rings for tiny states, and a printable worksheet."
+  h1="Asia Map Quiz"
+  sub="Click the country we name — all 46 countries, no sign-up, <strong>free printable worksheet</strong>."
+  faqs={faqs}
+  gameDescription="A free Asia map quiz covering all 46 countries, with click, type and learn modes."
+  howTo={howTo}
+>
+  <h2>How the Asia Map Quiz Works</h2>
+  <p>
+    <strong>The Asia map quiz names one country at a time, and you find it on the map.</strong> A
+    first-try answer turns green, a country you find after a miss turns amber, and after three wrong
+    clicks the quiz shows you where it was. Every miss tells you which country you actually clicked,
+    so confusing Kuwait with Qatar teaches you both of them.
+  </p>
+  <p>
+    Asia is the biggest map of any continent quiz, so the zoom matters. Scroll or pinch to zoom in on
+    the Gulf or Southeast Asia, drag to move around, and use the reset button to see the whole
+    continent again. Type mode reverses the test: it highlights a country and you type its name.
+    Learn mode turns scoring off and shows each country’s capital, area, population and sub-region
+    when you tap it.
+  </p>
+
+  <h2>How Many Countries Are in Asia?</h2>
+  <p>
+    <strong>The Asia map quiz asks for 46 countries: every UN member state that the open
+    world-countries dataset places in Asia.</strong> Lists elsewhere often say 48, and the gap comes
+    down to a few border cases. Russia stretches across Asia but has its capital and most of its
+    people in Europe, so it is in our <a href="/map-quiz/europe/">Europe map quiz</a>. Cyprus is an
+    EU member and is counted there too. Taiwan and Palestine are drawn on the map but not asked,
+    because neither is a UN member state.
+  </p>
+  <p>
+    Even without Russia, Asia is enormous. The 46 countries in the quiz cover about 32 million km²
+    and are home to about 4.8 billion people, close to three in every five people on Earth. India
+    and China each have more than 1.4 billion; Brunei, the smallest population, has under half a
+    million.
+  </p>
+
+  <h2>Asia by Sub-region</h2>
+  <p>
+    Forty-six names are easier in five groups. Learn mode shows each country’s group, so you can
+    study one at a time before you run the full Asia map quiz.
+  </p>
+  <h3>Western Asia (16)</h3>
+  <p>
+    Armenia, Azerbaijan, Bahrain, Georgia, Iraq, Israel, Jordan, Kuwait, Lebanon, Oman, Qatar, Saudi
+    Arabia, Syria, Türkiye, the United Arab Emirates and Yemen. The largest group and the source of
+    most mistakes: the Caucasus in the north, the Levant along the Mediterranean, and the Gulf states
+    around the Arabian Peninsula.
+  </p>
+  <h3>Southern Asia (9)</h3>
+  <p>
+    Afghanistan, Bangladesh, Bhutan, India, Iran, the Maldives, Nepal, Pakistan and Sri Lanka. India
+    is the anchor. Nepal and Bhutan sit on its northern border with China, Bangladesh is almost
+    surrounded by it, and Sri Lanka and the Maldives lie off its southern tip.
+  </p>
+  <h3>South-Eastern Asia (11)</h3>
+  <p>
+    Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, the Philippines, Singapore, Thailand,
+    Timor-Leste and Vietnam. In the Asia map quiz, half of them are on the mainland and half are
+    islands. Indonesia alone has more
+    than 17,000 islands and the Philippines more than 7,000.
+  </p>
+  <h3>Eastern Asia (5)</h3>
+  <p>
+    China, Japan, Mongolia, North Korea and South Korea. The easiest group. Mongolia is the one
+    people forget: it is wedged between Russia and China and is the most thinly populated country in
+    the world, with about 3.5 million people on 1.56 million km².
+  </p>
+  <h3>Central Asia (5)</h3>
+  <p>
+    Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan and Uzbekistan. All five are landlocked.
+    Kazakhstan is the largest landlocked country in the world, and Uzbekistan is one of only two
+    countries, with Liechtenstein, that are surrounded entirely by other landlocked countries.
+  </p>
+
+  <h2>The Hardest Countries to Find in the Asia Map Quiz</h2>
+  <ul>
+    <li><strong>The Maldives, Singapore and Bahrain.</strong> Each is under 800 km², smaller than
+      many cities. The Maldives is a chain of about 1,200 coral islands south-west of India,
+      Singapore sits on the southern tip of the Malay Peninsula, and Bahrain is an island off the
+      Saudi coast. All three have tap rings in the Asia map quiz.</li>
+    <li><strong>The Gulf states.</strong> Kuwait, Saudi Arabia, Bahrain, Qatar, the UAE and Oman
+      line the Persian Gulf in that order, heading south-east from Iraq. Qatar is the peninsula; Bahrain is the island
+      to its west.</li>
+    <li><strong>The Levant.</strong> Lebanon, Israel, Jordan and Syria are small and packed together
+      on the eastern Mediterranean. Lebanon is the narrow strip between Syria and Israel.</li>
+    <li><strong>The Caucasus.</strong> Georgia sits on the Black Sea, Azerbaijan on the Caspian, and
+      Armenia is landlocked between them, south of Georgia.</li>
+    <li><strong>Brunei and Timor-Leste.</strong> Brunei is two small pieces on the north coast of
+      Borneo, surrounded by Malaysia. Timor-Leste is the eastern half of the island of Timor; the
+      western half belongs to Indonesia.</li>
+  </ul>
+
+  <h2>Memory Tricks for the Map of Asia</h2>
+  <ol>
+    <li><strong>Count the stans.</strong> Seven countries end in -stan: the five in Central Asia plus
+      Afghanistan and Pakistan. They form a block running south from Kazakhstan to the Arabian Sea, and
+      the Asia map quiz asks for all seven.</li>
+    <li><strong>Follow the Mekong.</strong> It flows from China through or along Myanmar, Laos,
+      Thailand and Cambodia to Vietnam, so it threads mainland Southeast Asia together.</li>
+    <li><strong>Put India in the middle.</strong> Pakistan to the west, Nepal and Bhutan to the north,
+      Bangladesh to the east, Sri Lanka to the south. Five neighbours placed with one landmark.</li>
+    <li><strong>Learn the three islands that are shared.</strong> Borneo is split between Indonesia,
+      Malaysia and Brunei; New Guinea between Indonesia and Papua New Guinea; and Timor between
+      Indonesia and Timor-Leste.</li>
+    <li><strong>Save the Gulf for last.</strong> Once the rest of the Asia map quiz is green, the
+      small states round the Gulf are easier because there are fewer places left to look.</li>
+  </ol>
+
+  <h2>Asia’s Largest Countries by Area and Population</h2>
+  <p>
+    <strong>China is the largest country in this Asia map quiz at 9.7 million km², and India has the
+    most people.</strong> India overtook China in 2023, and the World Bank’s 2024 figures put it at
+    1.45 billion to China’s 1.41 billion.
+  </p>
+  <table class="cmp">
+    <thead><tr><th>Rank</th><th>Largest by area</th><th>Most people (2024)</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>China — 9.71 million km²</td><td>India — 1.45 billion</td></tr>
+      <tr><td>2</td><td>India — 3.29 million km²</td><td>China — 1.41 billion</td></tr>
+      <tr><td>3</td><td>Kazakhstan — 2.72 million km²</td><td>Indonesia — 283 million</td></tr>
+      <tr><td>4</td><td>Saudi Arabia — 2.15 million km²</td><td>Pakistan — 251 million</td></tr>
+      <tr><td>5</td><td>Indonesia — 1.90 million km²</td><td>Bangladesh — 174 million</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Kazakhstan and Saudi Arabia are huge but hold about 21 and 35 million people. Bangladesh is the
+    opposite: about 174 million people in 148,000 km², one of the most crowded countries in the world.
+    Pairs like these come up often in <a href="/higher-or-lower/">Higher or Lower: Countries</a>.
+  </p>
+
+  <h2>Asian Capitals That Catch People Out</h2>
+  <p>
+    The Asia map quiz asks for countries, but Learn mode shows every capital, and many are not the
+    biggest city. Türkiye’s capital is Ankara, not Istanbul. Kazakhstan’s is Astana, not Almaty;
+    Myanmar’s is Naypyidaw, not Yangon; Pakistan’s is Islamabad, not Karachi; and Vietnam’s is
+    Hanoi, not Ho Chi Minh City. The UAE is governed from Abu Dhabi rather than Dubai. Sri Lanka’s
+    official capital is Sri Jayawardenepura Kotte, next to the commercial capital, Colombo, and
+    Malaysia’s government works from Putrajaya although Kuala Lumpur is the capital. To practise
+    these on a globe, try our <a href="/capitals/">capital cities game</a>.
+  </p>
+
+  <h2>Asian Countries That Changed Their Names</h2>
+  <p>
+    Older maps and quiz sites use names that have since changed. The Asia map quiz uses current
+    names, and Type mode accepts the old ones listed here:
+  </p>
+  <ul>
+    <li><strong>Türkiye</strong> asked the UN to use this spelling in 2022. Type “Turkey” and it still
+      counts.</li>
+    <li><strong>Myanmar</strong> replaced Burma as the official English name in 1989. Both work in
+      Type mode.</li>
+    <li><strong>Timor-Leste</strong>, also called East Timor, became independent in 2002 and is one
+      of the newest countries in Asia.</li>
+    <li><strong>Sri Lanka</strong> was Ceylon until 1972, and <strong>Thailand</strong> was Siam until
+      1939.</li>
+    <li><strong>Kazakhstan’s capital</strong> was renamed Nur-Sultan in 2019 and changed back to
+      Astana in 2022.</li>
+  </ul>
+
+  <h2>Using the Asia Map Quiz in Class</h2>
+  <p>
+    Asia is a lot for one lesson, so split it by sub-region. Show one group in Learn mode on the
+    board, then have students play the Asia map quiz in Click mode until that group is green. Central
+    Asia and Eastern Asia make a good first lesson; Western Asia deserves one of its own. No accounts
+    are needed, and Retry missed at the end of a run gives each student their own short list to
+    practise.
+  </p>
+
+  <h2>Printable Asia Map Worksheet</h2>
+  <p>
+    The free <a href="/assets/printables/asia-worksheet.svg" target="_blank" rel="noopener">Asia
+    worksheet</a> numbers all 46 countries from north to south, with blank lines alongside and a
+    separate <a href="/assets/printables/asia-answers.svg" target="_blank" rel="noopener">answer
+    key</a>. The Gulf states, the Levant and the smallest islands are numbered in the margin with
+    leader lines. It is laid out for A4 landscape, prints fine on US Letter, and works well as a
+    follow-up to the Asia map quiz.
+  </p>
+
+  <Fragment slot="after">
+    <h2>More Map Quizzes</h2>
+    <p>
+      Russia and Cyprus are in the <a href="/map-quiz/europe/">Europe map quiz</a>, and Papua New
+      Guinea is in the <a href="/map-quiz/oceania/">Oceania map quiz</a>. For every country at once,
+      try the <a href="/map-quiz/">world map quiz</a>, or connect two Asian countries over land in
+      <a href="/routes/">Globle Routes</a>.
+    </p>
+    <p class="byline">
+      Written by the Globle Unlimited team. Country list and sizes from the open world-countries
+      dataset; outlines from Natural Earth (1:50m); populations from the World Bank (2024).
+    </p>
+  </Fragment>
+</MapQuizLayout>

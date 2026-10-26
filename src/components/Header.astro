@@ -223,6 +223,16 @@ const inGames = path === '/unlimited' || GAME_MENU.some((group) => group.links.s
   }
   .games-all { grid-column: 1 / -1; border-top: 1px solid var(--line); border-radius: 0 0 var(--radius-sm) var(--radius-sm); padding-top: var(--space-3); }
 
+  /* The panel hangs from the right edge of the Games button, so it narrows
+     with the window instead of running off the left side; once it is one
+     column it can be taller than the screen and scrolls. */
+  @media (max-width: 1040px) {
+    .games-panel { grid-template-columns: repeat(2, minmax(170px, auto)); }
+  }
+  @media (max-width: 720px) {
+    .games-panel { grid-template-columns: 1fr; max-height: calc(100vh - 90px); overflow-y: auto; }
+  }
+
   @media (max-width: 560px) {
     .brand-logo { height: 30px; }
     .mode-link { padding: var(--space-1) var(--space-2); }

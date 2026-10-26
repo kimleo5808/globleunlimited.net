@@ -31,7 +31,7 @@ export const GAME_MODES = [
   { href: '/clues/', key: 'clue', name: 'Globle Clues', img: '/assets/svg/games/countryle.svg', blurb: 'Deduce the country from six attribute clues — no map required.' },
   { href: '/states/', key: 'usstates', name: 'Globle States', img: '/assets/svg/games/statele.svg', blurb: 'Guess the US state from its outline — all 50 states.' },
   { href: '/higher-or-lower/', key: 'hol', name: 'Higher or Lower', img: '/assets/svg/games/higher-or-lower.svg', blurb: 'Which country has more people? Keep the streak going.' },
-  { href: '/map-quiz/', key: 'mapquiz', name: 'Map Quiz', img: '/assets/svg/games/map-quiz.svg', blurb: 'Click every country on the map — world, Africa, Europe or the US states.' },
+  { href: '/map-quiz/', key: 'mapquiz', name: 'Map Quiz', img: '/assets/svg/games/map-quiz.svg', blurb: 'Click every country on the map — the whole world, one continent or the US states.' },
   { href: '/capitals/', key: 'capital', name: 'Globle Capitals', img: '/assets/svg/games/capitals.svg', blurb: 'Find the mystery capital city on the interactive globe.' },
   { href: '/practice/', key: 'practice', name: 'Practice Mode', img: '/assets/svg/games/practice.svg', blurb: 'Relaxed, unlimited rounds with no streak pressure.' },
 ] as const;
@@ -62,9 +62,18 @@ export const GAME_MENU = [
     links: [
       { href: '/higher-or-lower/', label: 'Higher or Lower' },
       { href: '/map-quiz/', label: 'World Map Quiz' },
-      { href: '/map-quiz/africa/', label: 'Africa Map Quiz' },
-      { href: '/map-quiz/europe/', label: 'Europe Map Quiz' },
       { href: '/map-quiz/us-states/', label: 'US States Map Quiz' },
+    ],
+  },
+  {
+    label: 'Continent quizzes',
+    links: [
+      { href: '/map-quiz/africa/', label: 'Africa Map Quiz' },
+      { href: '/map-quiz/asia/', label: 'Asia Map Quiz' },
+      { href: '/map-quiz/europe/', label: 'Europe Map Quiz' },
+      { href: '/map-quiz/north-america/', label: 'North America Map Quiz' },
+      { href: '/map-quiz/south-america/', label: 'South America Map Quiz' },
+      { href: '/map-quiz/oceania/', label: 'Oceania Map Quiz' },
     ],
   },
 ] as const;

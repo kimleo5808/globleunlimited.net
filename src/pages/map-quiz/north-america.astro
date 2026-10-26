@@ -1,0 +1,210 @@
+---
+import MapQuizLayout from '../../layouts/MapQuizLayout.astro';
+
+// Counts and facts come from scripts/build-map-quiz.mjs (world-countries,
+// Natural Earth 1:50m, World Bank 2024 population).
+const faqs: Array<[string, string]> = [
+  ['How many countries are in North America?', 'Twenty-three: Canada, the United States and Mexico, the seven countries of Central America, and thirteen island nations in the Caribbean. The North America map quiz asks for all of them.'],
+  ['Are Central America and the Caribbean part of North America?', 'Yes. Geographers usually count everything north of the Panama–Colombia border as North America, including Central America and the Caribbean islands, and this quiz follows that rule.'],
+  ['What is the smallest country in North America?', 'Saint Kitts and Nevis, at about 261 km² and fewer than 50,000 people. It is the smallest country in the Americas by both area and population.'],
+  ['Is Greenland in the North America map quiz?', 'It is drawn on the map but not asked, because it is part of the Kingdom of Denmark. The same goes for Puerto Rico, a US territory, and the French islands of Guadeloupe and Martinique.'],
+  ['Is the North America map quiz free?', 'Yes. Every mode is free with no account, and your best accuracy and time are saved in your browser.'],
+  ['Can I print a map of North America?', 'Yes. The free worksheet numbers all 23 countries, with blank lines for the names and a separate answer key.'],
+];
+const howTo: Array<[string, string]> = [
+  ['Read the name', 'The bar above the map names one North American country at a time.'],
+  ['Click it', 'Click or tap it on the map; the small Caribbean islands have tap rings.'],
+  ['Learn from misses', 'A wrong click shows which country you hit; three misses reveal the answer.'],
+  ['Finish all 23', 'Work from Canada down to Trinidad and check your accuracy and time.'],
+];
+---
+
+<MapQuizLayout
+  region="north-america"
+  title="North America Map Quiz – All 23 Countries, Free & Printable"
+  description="Find all 23 countries on our free North America map quiz: Canada to Panama plus every Caribbean island nation. Tap rings, type mode and a printable map."
+  h1="North America Map Quiz"
+  sub="Click the country we name — Canada to Panama and the Caribbean, <strong>free printable worksheet</strong>."
+  faqs={faqs}
+  gameDescription="A free North America map quiz covering all 23 countries, including Central America and the Caribbean, with click, type and learn modes."
+  howTo={howTo}
+>
+  <h2>How the North America Map Quiz Works</h2>
+  <p>
+    <strong>The North America map quiz names a country, and you click it on the map.</strong> Get it
+    first time and it turns green; find it after a miss and it turns amber; miss three times and the
+    quiz shows you where it is before moving on. A wrong click is never wasted, because the quiz tells
+    you which country you hit instead.
+  </p>
+  <p>
+    The map in the North America map quiz runs from the Arctic islands of Canada down to Panama and across the Caribbean to
+    Trinidad and Tobago. Zoom in with the buttons, the scroll wheel or a pinch to separate the small
+    islands, and drag to move around. Type mode highlights a country for you to name, and Learn mode
+    shows each country’s capital, area and population when you tap it.
+  </p>
+
+  <h2>How Many Countries Are in North America?</h2>
+  <p>
+    <strong>North America has 23 countries, and the North America map quiz asks for every one.</strong>
+    They fall into three groups of very different sizes: three large mainland countries, seven in
+    Central America and thirteen island nations in the Caribbean. Panama is the last of them; its
+    border with Colombia is where South America begins, so Colombia is in our
+    <a href="/map-quiz/south-america/">South America map quiz</a> instead.
+  </p>
+  <p>
+    Several places on the map are drawn but not asked because they are not independent countries.
+    Greenland, the largest island in the world, is part of the Kingdom of Denmark. Puerto Rico is a US
+    territory, and Guadeloupe and Martinique are part of France. Bermuda, the Cayman Islands and the
+    Turks and Caicos Islands belong to the United Kingdom.
+  </p>
+
+  <h2>The Three Parts of North America</h2>
+  <h3>Canada, the United States and Mexico (3)</h3>
+  <p>
+    These three cover more than 95% of the land in the North America map quiz. Canada is the
+    second-largest country in the world and has the longest coastline of any country; its border with
+    the United States, at about 8,900 km, is the longest between two countries anywhere. Mexico
+    borders the United States to the north and Guatemala and Belize to the south. For the 50 states
+    themselves, try our <a href="/map-quiz/us-states/">US states map quiz</a>.
+  </p>
+  <h3>Central America (7)</h3>
+  <p>
+    Belize, Costa Rica, El Salvador, Guatemala, Honduras, Nicaragua and Panama, on the narrow strip of
+    land between Mexico and Colombia. Guatemala has the most people, about 18 million; Nicaragua is
+    the largest by area; El Salvador is the smallest and the only one with no Caribbean coast. Belize
+    is the only Central American country where English is the official language.
+  </p>
+  <h3>The Caribbean (13)</h3>
+  <p>
+    Antigua and Barbuda, the Bahamas, Barbados, Cuba, Dominica, the Dominican Republic, Grenada,
+    Haiti, Jamaica, Saint Kitts and Nevis, Saint Lucia, Saint Vincent and the Grenadines, and
+    Trinidad and Tobago. Cuba is the largest by far. Haiti and the Dominican Republic share the island
+    of Hispaniola, Haiti taking the western third. The rest are small, and seven of them get tap rings
+    in the North America map quiz because they are too small to click at full size.
+  </p>
+
+  <h2>Finding the Lesser Antilles</h2>
+  <p>
+    <strong>The hardest part of the North America map quiz is the arc of small islands east of Puerto
+    Rico.</strong> Six countries sit in a curved chain, and learning their order from north to south
+    solves most of the problem:
+  </p>
+  <ol>
+    <li><strong>Saint Kitts and Nevis</strong>, the smallest country in the Americas at about 261 km².</li>
+    <li><strong>Antigua and Barbuda</strong>, just to the east.</li>
+    <li><strong>Dominica</strong>, past the French island of Guadeloupe. Not to be confused with the
+      Dominican Republic, which is on Hispaniola.</li>
+    <li><strong>Saint Lucia</strong>, south of the French island of Martinique.</li>
+    <li><strong>Saint Vincent and the Grenadines</strong>, a main island and a string of small ones
+      reaching south.</li>
+    <li><strong>Grenada</strong>, at the southern end of the Grenadines.</li>
+  </ol>
+  <p>
+    Two more are easy to place once the chain is fixed. Barbados sits on its own to the east of the
+    chain, the most easterly of the Caribbean islands, and Trinidad and Tobago lies just off the coast
+    of Venezuela at the southern end.
+  </p>
+
+  <h2>Memory Tricks for Central America</h2>
+  <p>
+    Central America is where most mainland mistakes in the North America map quiz happen: seven
+    countries on a strip of land that is only about 50 km wide at its narrowest, in Panama.
+  </p>
+  <ol>
+    <li><strong>Learn the order down the isthmus.</strong> Roughly north-west to south-east: Guatemala
+      and Belize, El Salvador and Honduras, then Nicaragua, Costa Rica and Panama. The initials G, B,
+      E, H, N, C, P make an easy sentence; invent your own.</li>
+    <li><strong>Belize faces the Caribbean, El Salvador the Pacific.</strong> Each has only one coast,
+      and they are on opposite sides of Guatemala.</li>
+    <li><strong>Honduras is the big one in the middle.</strong> It touches Guatemala, El Salvador and
+      Nicaragua, with a long Caribbean coast and a short stretch on the Pacific.</li>
+    <li><strong>Panama bends sideways.</strong> It runs east to west, an S-shape linking Costa Rica to
+      Colombia, with the canal near the middle.</li>
+  </ol>
+
+  <h2>Common Mix-ups in the North America Map Quiz</h2>
+  <p>
+    Most wrong answers in the North America map quiz come from a handful of pairs. Learn which side
+    of each pair is which and your accuracy jumps:
+  </p>
+  <ul>
+    <li><strong>Dominica and the Dominican Republic.</strong> Dominica is a small island in the
+      Lesser Antilles, about 750 km². The Dominican Republic is the eastern two-thirds of Hispaniola
+      and has more than 11 million people.</li>
+    <li><strong>Haiti and the Dominican Republic.</strong> Haiti is the western part of Hispaniola,
+      the side nearest Cuba and Jamaica.</li>
+    <li><strong>The Bahamas and the Turks and Caicos Islands.</strong> The Bahamas is the long
+      scatter of islands between Florida and Cuba. The Turks and Caicos, at the south-eastern end of
+      the same chain, is a British territory and is not asked.</li>
+    <li><strong>Costa Rica and Panama.</strong> Costa Rica is the one that touches Nicaragua; Panama
+      is the one that touches Colombia.</li>
+    <li><strong>El Salvador and Honduras.</strong> El Salvador is the small country on the Pacific
+      side; Honduras is larger and lies to its north and east.</li>
+  </ul>
+
+  <h2>The Largest and Most Populous Countries</h2>
+  <p>
+    <strong>About 604 million people live in the 23 countries of the North America map quiz, and more
+    than half of them in the United States.</strong>
+  </p>
+  <table class="cmp">
+    <thead><tr><th>Rank</th><th>Largest by area</th><th>Most people (2024)</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Canada — 9.98 million km²</td><td>United States — 340 million</td></tr>
+      <tr><td>2</td><td>United States — 9.4–9.8 million km²</td><td>Mexico — 131 million</td></tr>
+      <tr><td>3</td><td>Mexico — 1.96 million km²</td><td>Canada — 41 million</td></tr>
+      <tr><td>4</td><td>Nicaragua — 130,000 km²</td><td>Guatemala — 18 million</td></tr>
+      <tr><td>5</td><td>Honduras — 112,000 km²</td><td>Haiti — 12 million</td></tr>
+    </tbody>
+  </table>
+  <p>
+    Sources disagree about the size of the United States by more than 400,000 km², depending on how
+    much coastal and Great Lakes water they count; either way it comes second to Canada. The gap
+    after the top three is huge: Nicaragua, fourth by area, is less than a tenth the size of Mexico.
+    Pairs like these turn up in <a href="/higher-or-lower/">Higher or Lower: Countries</a>.
+  </p>
+
+  <h2>Capitals Worth Knowing</h2>
+  <p>
+    The North America map quiz asks for countries, and Learn mode adds each capital. A few are
+    commonly mixed up. Canada’s capital is Ottawa, not Toronto, and Belize’s is Belmopan, a planned
+    city that replaced Belize City in 1970. Honduras is governed from Tegucigalpa. In the Caribbean,
+    Kingston is the capital of Jamaica but Kingstown is the capital of Saint Vincent and the
+    Grenadines, and Saint John’s, the capital of Antigua and Barbuda, shares its name with the
+    capital of Newfoundland in Canada. When you know them, try the
+    <a href="/capitals/">capital cities game</a>.
+  </p>
+
+  <h2>Using the North America Map Quiz in Class</h2>
+  <p>
+    The quiz needs no accounts, so a class can start straight away. Teach it in three lessons that
+    match the three groups: the big three and Central America first, then the larger Caribbean
+    islands, then the Lesser Antilles with the map zoomed in. Students can play the North America map
+    quiz in Click mode after each lesson, then use Retry missed to drill only the countries they got
+    wrong.
+  </p>
+
+  <h2>Printable North America Map Worksheet</h2>
+  <p>
+    The free <a href="/assets/printables/north-america-worksheet.svg" target="_blank" rel="noopener">North
+    America worksheet</a> numbers all 23 countries from north to south, with blank lines alongside
+    and a separate <a href="/assets/printables/north-america-answers.svg" target="_blank"
+    rel="noopener">answer key</a>. The Caribbean islands are numbered in the margin with leader
+    lines, so each one has room for its number. It is laid out for A4 landscape and prints fine on US
+    Letter.
+  </p>
+
+  <Fragment slot="after">
+    <h2>More Map Quizzes</h2>
+    <p>
+      Carry on south with the <a href="/map-quiz/south-america/">South America map quiz</a>, try the
+      <a href="/map-quiz/us-states/">US states map quiz</a>, or take on all 193 countries in the
+      <a href="/map-quiz/">world map quiz</a>. To practise land borders, connect two countries in
+      <a href="/routes/">Globle Routes</a>.
+    </p>
+    <p class="byline">
+      Written by the Globle Unlimited team. Country list and sizes from the open world-countries
+      dataset; outlines from Natural Earth (1:50m); populations from the World Bank (2024).
+    </p>
+  </Fragment>
+</MapQuizLayout>
